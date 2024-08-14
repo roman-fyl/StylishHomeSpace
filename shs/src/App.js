@@ -12,11 +12,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <div>
           <Routes>
             <Route path="/" element={<HomePage />} />
           </Routes>
-        </div>
       </Router>
     </Provider>
   );
