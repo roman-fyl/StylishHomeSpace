@@ -1,15 +1,16 @@
 
 import React from "react";
+
+import Header from "../HomePage/Header/Header";
+
+
+
 import "./HomePage.scss";
 
 const HomePage = () => {
     return (
        <div className="wrapper">
-         <header className="header">
-           <div className="container">
-            <h1>Hello World</h1>
-           </div>
-        </header>
+    <Header />
         <nav>
            <div className="container">
            <ul>
@@ -21,7 +22,7 @@ const HomePage = () => {
         </nav>
         <main className="main">
            <div className="container">
-           <section className="section">1</section>
+           <section className="section"></section>
             <section className="section">2</section>
             <section className="section">3</section>
             <section className="section">4</section>
