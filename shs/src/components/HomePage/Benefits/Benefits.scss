@@ -1,0 +1,43 @@
+@import "../../../_reset.scss";
+@import "../../../_vars.scss";
+
+
+.benefits {
+  padding: 6px 0;
+    background-color: $primary-color;
+    &_block {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      img {
+          width: 30px !important;
+          margin-right: 10px;
+          &:hover {
+            transform: scale(1.1);
+          }
+      }
+    }
+    &_content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      &:hover {
+          color: $primary-color-hover-text;
+      }
+    }
+    &_benefit {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      color: $primary-color-text;
+      font-size: 16px;
+      &:hover {
+          color: $primary-color-hover-text;
+          transition: all .2s linear;
+        }
+    }
+    img {
+      width: 50px;
+    }
+  }

@@ -1,0 +1,74 @@
+@import "../../_reset";
+@import "../../_vars";
+
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  width: 80%;
+  padding: 20px 0;
+  margin: 0 auto;
+  border: 1px solid gray;
+  &_header, &_benefits, &_main-slider {
+    width: 80%;
+    padding: 5px 0;
+    // border: 1px solid red;
+    margin: 0 auto;
+  }
+}
+
+.main {
+  flex: 1 1 auto;
+}
+.section {
+  flex: 1 1 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+.header {
+  &_menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; 
+     color: $primary-color;
+      li {
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        &:last-child, &:first-child {
+          a {
+            color: #ffffff;
+            background: red;
+            padding: 5px;
+            border: 1px solid white;
+
+            &:hover {
+              background: white;
+              border: 1px solid red;
+              color: red;
+            }
+           
+        }
+        }
+        &:hover {
+          a {
+            transition: all .2s linear;
+            color: #3e3930;
+          }
+        }
+        a {
+          color: $primary-color;
+        }
+        }
+        
+    }
+  }
