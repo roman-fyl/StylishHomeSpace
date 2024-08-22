@@ -2,6 +2,8 @@
 import React from "react";
 
 import Header from "../HomePage/Header/Header";
+import Benefits from "../HomePage/Benefits/Benefits";
+import MainSlider from "../HomePage/MainSlider/MainSlider"
 
 
 
@@ -13,16 +15,25 @@ const HomePage = () => {
     <Header />
         <nav>
            <div className="container">
-           <ul>
-                <li><a href="#">Link 1</a></li>
-                <li><a href="#">Link 2</a></li>
-                <li><a href="#">Link 3</a></li>
+           <ul className="header_menu">
+                <li><a href="#">Flash Sales</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">Rebates</a></li>
             </ul>
            </div>
         </nav>
+        <Benefits />
         <main className="main">
            <div className="container">
-           <section className="section"></section>
+           <section className="section">
+            <MainSlider />
+           </section>
             <section className="section">2</section>
             <section className="section">3</section>
             <section className="section">4</section>

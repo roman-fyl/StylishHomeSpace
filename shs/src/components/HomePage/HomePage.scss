@@ -12,10 +12,10 @@
   padding: 20px 0;
   margin: 0 auto;
   border: 1px solid gray;
-  &_header {
+  &_header, &_benefits, &_main-slider {
     width: 80%;
     padding: 5px 0;
-    border: 1px solid red;
+    // border: 1px solid red;
     margin: 0 auto;
   }
 }
@@ -33,3 +33,42 @@
   color: white;
   text-align: center;
 }
+.header {
+  &_menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; 
+     color: $primary-color;
+      li {
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        &:last-child, &:first-child {
+          a {
+            color: #ffffff;
+            background: red;
+            padding: 5px;
+            border: 1px solid white;
+
+            &:hover {
+              background: white;
+              border: 1px solid red;
+              color: red;
+            }
+           
+        }
+        }
+        &:hover {
+          a {
+            transition: all .2s linear;
+            color: #3e3930;
+          }
+        }
+        a {
+          color: $primary-color;
+        }
+        }
+        
+    }
+  }
