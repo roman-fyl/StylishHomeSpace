@@ -5,6 +5,7 @@ import Header from "../HomePage/Header/Header";
 import Benefits from "../HomePage/Benefits/Benefits";
 import MainSlider from "../HomePage/MainSlider/MainSlider";
 import BannersGroup from "../HomePage/Banners/BannersGroup";
+import FlashOffers from "../HomePage/FlashOffers/FlashOffers";
 
 
 
@@ -37,9 +38,11 @@ const HomePage = () => {
             <MainSlider />
            </section>
             <section className="section">
-         {/* <BannersGroup /> */}
+         <BannersGroup />
             </section>
-            <section className="section"></section>
+            <section className="section">
+               <FlashOffers />
+            </section>
             <section className="section"></section>
            </div>
         </main>

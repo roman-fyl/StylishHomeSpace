@@ -1,6 +1,6 @@
 import React from "react";
 
-import logo from '../../../assets/images/logo-no-bg.png'
+import logo from '../../../assets/images/logo-no-bg.png';
 import iconLogo from '../../../assets/images/icon-call64.png';
 import iconLocation from '../../../assets/images/icon-location64.png';
 import iconLogIn from '../../../assets/images/icon-log-in64.png';

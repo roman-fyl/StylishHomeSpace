@@ -7,65 +7,62 @@
       justify-content: space-between; 
       align-items: center; 
       width: 100%;
-      flex-wrap: wrap;
-      .slides {
-        // display: flex;
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      }
-      .slide {
-        display: none;
-        width: 100%;
-        transition: opacity 0.5s ease-in-out;
-        &.active {
-          display: block;
-        }
-        .img {
-          width: 100%;
-          height: auto;
-          object-fit: cover;
-        }
-      }
-      .slider-content {
-        display: flex;
-        transition: transform 0.5s ease;
-        justify-content: center; 
-        width: 100%;
-      }
-      
-      .slide.active {
-        opacity: 1;
-      }
+      flex-direction: row;
+      column-gap: 50px;
     }
   }
-
-  .navigation {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+      .banner {
+        &_content {
+          display: flex;
+          transition: transform 0.5s ease;
+          justify-content: center; 
+          width: 100%;
+          position: relative;
+        }
+        &_slides {
+          display: flex;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        }
+        &_slide {
+          display: none;
+          width: 100%;
+          transition: opacity 0.5s ease-in-out;
+          &.active {
+            display: block;
+            opacity: 1;
+          }
+          img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+          }
+        }
+        &_navigation {
+          position: absolute;
+          bottom: 10px;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          .bar {
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 50%;
+          }
+          
+          .bar.active {
+            background: #333;
+          }
+        }
+      }
+ 
   
-  .bar {
-    width: 10px;
-    height: 10px;
-    background: #ccc;
-    margin: 0 5px;
-    cursor: pointer;
-    border-radius: 50%;
-  }
-  
-  .bar.active {
-    background: #333;
-  }
   
   
-  
-  .bar.active {
-    background: #333;
-  }
 
 .banner_1 .slide,
 .banner_2 .slide,

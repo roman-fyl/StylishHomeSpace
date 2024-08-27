@@ -21,12 +21,12 @@ const Banner = ({ images, autoSlideInterval }) => {
   };
 
   return (
-      <div className="banner-content">
-        <div className="slides">
+      <div className="banner_content">
+        <div className="banner_slides">
           {images.map((image, index) => (
             <div
               key={index}
-              className={`slide ${currentSlide === index + 1 ? "active" : ""}`}
+              className={`banner_slide ${currentSlide === index + 1 ? "active" : ""}`}
             >
               <a href="#">
                 <img src={image.src} alt={image.alt} />
@@ -34,7 +34,7 @@ const Banner = ({ images, autoSlideInterval }) => {
             </div>
           ))}
         </div>
-        <div className="navigation">
+        <div className="banner_navigation">
           {images.map((_, index) => (
             <label
               key={index}

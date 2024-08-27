@@ -22,14 +22,14 @@ const Slider = ({ images, autoSlideInterval }) => {
 
   return (
       <div className="main_slider">
-      <div className="slider-content">
+      <div className="slider_content">
         <div className="slides">
           {images.map((image, index) => (
             <div
               key={index}
               className={`slide ${currentSlide === index + 1 ? "active" : ""}`}
             >
-              <a href="#">
+              <a href="">
                 <img src={image.src} alt={image.alt} />
               </a>
             </div>

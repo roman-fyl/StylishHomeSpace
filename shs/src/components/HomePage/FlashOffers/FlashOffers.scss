@@ -1,0 +1,23 @@
+
+
+.main {
+   &_flash_offers {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    row-gap: 50px;
+    a {
+        width: 100%;
+    }
+   } 
+}
+
+.flash_offer {
+   &_block {
+    width: 100%;
+    img {
+        width: 100%;
+    }
+   }
+}
