@@ -1,9 +1,11 @@
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import Header from "../HomePage/Header/Header";
 import Benefits from "../HomePage/Benefits/Benefits";
-import MainSlider from "../HomePage/MainSlider/MainSlider"
+import MainSlider from "../HomePage/MainSlider/MainSlider";
+import BannersGroup from "../HomePage/Banners/BannersGroup";
+
 
 
 
@@ -34,9 +36,11 @@ const HomePage = () => {
            <section className="section">
             <MainSlider />
            </section>
-            <section className="section">2</section>
-            <section className="section">3</section>
-            <section className="section">4</section>
+            <section className="section">
+         {/* <BannersGroup /> */}
+            </section>
+            <section className="section"></section>
+            <section className="section"></section>
            </div>
         </main>
         <footer className="footer">
