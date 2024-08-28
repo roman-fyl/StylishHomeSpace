@@ -21,7 +21,7 @@ const Slider = ({ images, autoSlideInterval }) => {
   };
 
   return (
-      <div className="main_slider">
+      <div className="slider_main">
       <div className="slider_content">
         <div className="slides">
           {images.map((image, index) => (

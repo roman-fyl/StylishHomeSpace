@@ -7,7 +7,7 @@ import "./FlashOffers.scss";
 
 const FlashOffers = () => {
 return (
-    <div className="main_flash_offers">
+    <div className="flash_offers_main">
          <a href="#"><div className="flash_offer_block"><img src={flashoffer1}></img></div></a>
          <a href="#"><div className="flash_offer_block"><img src={flashoffer2}></img></div></a>
 

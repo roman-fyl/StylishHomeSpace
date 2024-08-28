@@ -1,7 +1,7 @@
 
 
-.main {
-   &_flash_offers {
+   .flash_offers {
+   &_main {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -10,8 +10,8 @@
     a {
         width: 100%;
     }
+   }
    } 
-}
 
 .flash_offer {
    &_block {

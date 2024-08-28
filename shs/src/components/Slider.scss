@@ -1,16 +1,13 @@
 @import '../_reset.scss';
 @import '../_vars.scss';
 
-.main {
-  &_slider {
+  .slider {
+    &_main {
     position: relative;
-    // width: 100%;
-    // height: 100%;
-    // max-width: 1200px;
     overflow: hidden;
     margin: 0 auto;
+    }
   }
-}
 .slides {
   display: flex;
   position: relative;

@@ -1,17 +1,15 @@
 
 
-.main {
-    &_banner {
-      position: relative;
-      display: flex;
-      justify-content: space-between; 
-      align-items: center; 
-      width: 100%;
-      flex-direction: row;
-      column-gap: 50px;
-    }
-  }
       .banner {
+        &_main {
+          position: relative;
+          display: flex;
+          justify-content: space-between; 
+          align-items: center; 
+          width: 100%;
+          flex-direction: row;
+          column-gap: 50px;
+        }
         &_content {
           display: flex;
           transition: transform 0.5s ease;

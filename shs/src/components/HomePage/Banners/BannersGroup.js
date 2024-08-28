@@ -8,7 +8,7 @@ import "./BannersGroup.scss";
 
 const BannersGroup = () => {
 return (
-    <div className="main_banner">
+    <div className="banner_main">
 <Banner_1 />
 <Banner_2 />
 <Banner_3 />

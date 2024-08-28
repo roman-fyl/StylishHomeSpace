@@ -6,6 +6,7 @@ import Benefits from "../HomePage/Benefits/Benefits";
 import MainSlider from "../HomePage/MainSlider/MainSlider";
 import BannersGroup from "../HomePage/Banners/BannersGroup";
 import FlashOffers from "../HomePage/FlashOffers/FlashOffers";
+import BestSelling from "./BestSelling/BestSelling";
 
 
 
@@ -43,6 +44,13 @@ const HomePage = () => {
             <section className="section">
                <FlashOffers />
             </section>
+            <section className="section">
+               <BestSelling />
+            </section>
+            <section className="section"></section>
+            <section className="section"></section>
+            <section className="section"></section>
+            <section className="section"></section>
             <section className="section"></section>
            </div>
         </main>

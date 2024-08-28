@@ -64,7 +64,7 @@
         &:hover {
           a {
             transition: all .2s linear;
-            color: #3e3930;
+            color: $primary-color-hover-link;
           }
         }
         a {
