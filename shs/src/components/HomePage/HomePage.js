@@ -7,6 +7,11 @@ import MainSlider from "../HomePage/MainSlider/MainSlider";
 import BannersGroup from "../HomePage/Banners/BannersGroup";
 import FlashOffers from "../HomePage/FlashOffers/FlashOffers";
 import BestSelling from "./BestSelling/BestSelling";
+import NewArrivals from "./NewArrivals/NewArrivals";
+import Trends from "../HomePage/Trends/Trends";
+import DailyDeals from "../HomePage/DailyDeals/DailyDeals";
+import Outlets from "../HomePage/Outlets/Outlets";
+
 
 
 
@@ -47,10 +52,19 @@ const HomePage = () => {
             <section className="section">
                <BestSelling />
             </section>
-            <section className="section"></section>
-            <section className="section"></section>
-            <section className="section"></section>
-            <section className="section"></section>
+            <section className="section">
+            <Trends />
+            </section>
+            <section className="section">
+               <NewArrivals />
+            </section>
+            <section className="section">
+               <DailyDeals />
+            </section>
+            <section className="section">
+               <Outlets />
+            </section>
+            
             <section className="section"></section>
            </div>
         </main>

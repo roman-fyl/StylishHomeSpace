@@ -1,0 +1,157 @@
+
+.bestselling_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 1 15%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    min-height: 500px;
+    width: 250px;
+    background-color: #fff;
+    &:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+      }
+  }
+
+.item {
+    &_description {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+          padding-top: 15px;
+          height: 100%;
+          flex: 1 1 auto;
+    }
+    &_image {
+      height: 230px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      width: 100%;
+      flex: 0 0 auto; 
+      margin-top: auto;
+     img {
+      max-width: 100%;
+      max-height: 230px;
+      object-fit: contain;
+     }
+    }
+    &_brand-logos {
+      display: flex;
+      justify-content: center;
+      height: 50px;
+      align-items: center;
+      a {
+        display: flex;
+        height:100%; 
+        img {
+          padding: 5px 0;
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+        }
+      }
+    
+    }
+  
+    &_title {
+      font: $font-small;
+      text-wrap: wrap;
+      width: 200px;
+      min-height: 100px;
+      text-align: left;
+      flex: 1 1 auto;
+      margin-top: 5px;
+    }
+    &_rating {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: center;
+      color: green;
+      font: $font-x-small;
+      padding-bottom: 5px;
+    }
+    &_pricing {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      margin-top: 10px;
+    }
+    &_price {
+      font: $font-regular;
+      color: red;
+    }
+    &_old-price {
+      del {
+          color: $primary-color;
+      }
+    }
+    &_actions {
+      padding: 10px 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      a {
+        color: #fff !important;
+        padding: 10px 15px;
+        text-align: center;
+        text-transform: capitalize;
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 5px;
+        background: $button-addToCart;
+        transition: box-shadow 0.2s ease-in-out;
+        
+      }
+      .item_add-to-cart {
+        background: $button-addToCart;
+        &:hover {
+          background: $primary-color-hover-link;
+        }
+      }
+      .item_quick-but {
+        background: $button-buyNow;
+        &:hover {
+          background: $primary-color-hover-link;
+        }
+      }
+    }
+  }
+
+  
+
+
+//   <li className="bestselling_item" data-id="#">
+//   <span className="item_image"><a href="#" > <img src={bestseller2} alt="Bestselling product 1"/></a>
+//   </span>
+//   <div className="item_description">
+//     <span className="item_brand-logos">
+//      <a href="#" className="item_brand-logo">
+//      <img src={logo2} alt="logo1"></img>
+//      </a>
+//     </span>
+//    <a href="#" className="item_title"> <h3 className="item_title">
+//       30" Single Electric Wall Oven, 4.59 cu. ft. Capacity
+//     </h3></a>
+//     <span className="item_rating"> <span className="item_rate">4.7</span></span>
+//     <span className="item_pricing">
+//       <span className="item_old-price">
+//         <del>$4999</del>
+//       </span>
+//       <span className="item_price">$2999</span>
+//     </span>
+//     <div className="item_actions">
+//       <a href="#" className="item_add-to-cart">
+//         Add to Cart
+//       </a>
+//       <a href="#" className="item_quick-but">
+//         Buy
+//       </a>
+//     </div>
+//   </div>
+// </li>
