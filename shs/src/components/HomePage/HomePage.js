@@ -11,6 +11,7 @@ import NewArrivals from "./NewArrivals/NewArrivals";
 import Trends from "../HomePage/Trends/Trends";
 import DailyDeals from "../HomePage/DailyDeals/DailyDeals";
 import Outlets from "../HomePage/Outlets/Outlets";
+import Footer from "../HomePage/Footer/Footer";
 
 
 
@@ -68,11 +69,7 @@ const HomePage = () => {
             <section className="section"></section>
            </div>
         </main>
-        <footer className="footer">
-        <div className="container"><p>&copy; 2024.All rights reserved.</p>
-        <nav></nav>
-        </div>
-        </footer>
+       <Footer />
        </div>
     );
 }
