@@ -1,0 +1,26 @@
+import React from "react";
+import "./HeaderMenu.scss";
+
+const HeaderMenu = () => {
+
+
+return (
+     <nav>
+           <div className="container">
+           <ul className="header_menu">
+                <li><a href="#">Flash Sales</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">ITEM</a></li>
+                <li><a href="#">Rebates</a></li>
+            </ul>
+           </div>
+        </nav>     
+)
+}
+
+export default HeaderMenu;

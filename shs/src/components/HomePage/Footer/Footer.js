@@ -52,7 +52,7 @@ return (
             <div className="footer_subscription_block">
                 <p>Subscribe to our newsletter and be the first to know about our updates</p>
                 <form action="/submit" method="post" className="footer_subscription_form">
-                  <input type="email" class="email__field" tabindex="10" name="email" placeholder="Enter your email"
+                  <input type="email" className="email__field" tabindex="10" name="email" placeholder="Enter your email"
                     minlength="5" maxlength="30" id="navtag-sigup" />
                   <input type="submit" class="footer_button__submit" value="Subscribe" />
                 </form>
@@ -60,6 +60,9 @@ return (
         </div>
         <div className="footer_copyright">
             <p>SHS &copy; 2024</p>
+            <a href="/privacy-policy.html">Privacy Policy</a>
+            <a href="/terms-conditions.html">Terms & Conditions</a>
+
           </div>
         </div>
     </footer>

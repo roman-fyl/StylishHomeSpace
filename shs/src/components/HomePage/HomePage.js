@@ -1,8 +1,7 @@
 
 import React, {useEffect, useState} from "react";
+import Layout from "../../Layout";
 
-import Header from "../HomePage/Header/Header";
-import Benefits from "../HomePage/Benefits/Benefits";
 import MainSlider from "../HomePage/MainSlider/MainSlider";
 import BannersGroup from "../HomePage/Banners/BannersGroup";
 import FlashOffers from "../HomePage/FlashOffers/FlashOffers";
@@ -11,7 +10,6 @@ import NewArrivals from "./NewArrivals/NewArrivals";
 import Trends from "../HomePage/Trends/Trends";
 import DailyDeals from "../HomePage/DailyDeals/DailyDeals";
 import Outlets from "../HomePage/Outlets/Outlets";
-import Footer from "../HomePage/Footer/Footer";
 
 
 
@@ -22,24 +20,7 @@ import "./HomePage.scss";
 const HomePage = () => {
     return (
        <div className="wrapper">
-    <Header />
-        <nav>
-           <div className="container">
-           <ul className="header_menu">
-                <li><a href="#">Flash Sales</a></li>
-                <li><a href="#">ITEM</a></li>
-                <li><a href="#">ITEM</a></li>
-                <li><a href="#">ITEM</a></li>
-                <li><a href="#">ITEM</a></li>
-                <li><a href="#">ITEM</a></li>
-                <li><a href="#">ITEM</a></li>
-                <li><a href="#">ITEM</a></li>
-                <li><a href="#">Rebates</a></li>
-            </ul>
-           </div>
-        </nav>
-        <Benefits />
-        <main className="main">
+         <Layout>
            <div className="container">
            <section className="section">
             <MainSlider />
@@ -68,8 +49,7 @@ const HomePage = () => {
             
             <section className="section"></section>
            </div>
-        </main>
-       <Footer />
+       </Layout>
        </div>
     );
 }
