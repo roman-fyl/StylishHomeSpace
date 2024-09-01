@@ -2,3 +2,92 @@
 @import "../../_reset.scss";
 @import "../../_vars.scss";
 
+
+.privacy {
+    &_description {
+        font:$font-x-small;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        // align-items: center;
+        h1 {
+            font-family: $mainFont;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        p {
+            font:$font-x-small;
+            margin-bottom: 15px;
+            text-indent: 30px;
+            text-align: justify;
+        }
+        h4 {
+            font:$font-x-small;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-bottom: 10px;
+        }
+        ul {
+            li {
+                list-style:initial;
+                margin-left: 30px;
+                }
+        }
+        ol {
+            li {
+                list-style: decimal;
+                margin-left: 30px;
+                }
+        }
+    }
+}
+
+.terms {
+    
+    &_description {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        // align-items: center;
+        span {
+            font:$font-x-small;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: justify;
+        }
+        h3 {
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        h4 {
+            font: $font-x-small;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+        p {
+            font:$font-x-small;
+            margin-bottom: 15px;
+            text-indent: 30px;
+            text-align: justify;
+        }
+    
+        ul {
+            li {
+                font:$font-x-small;
+                list-style:initial;
+                margin-left: 30px;
+                }
+        }
+        ol {
+            li {
+                font:$font-x-small;
+                list-style: decimal;
+                margin-left: 30px;
+                }
+        }
+
+    }
+}
+
+

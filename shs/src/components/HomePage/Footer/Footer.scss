@@ -81,11 +81,14 @@ footer {
         margin-top: 40px;
     
         p, a {
-            color: $footer-gray;
+            color: $footer-gray !important;
             font: $font-link;
         }
-        a:visited {
-            color: $footer-gray !important;
+        a {
+            &:hover {
+                color: $footer-gray !important;
+                text-decoration: underline;
+            }
         }
     }
 }
