@@ -1,0 +1,31 @@
+@import "../../../_vars.scss";
+@import "../../../_item.scss";
+
+h2 {
+  font: $font-title !important;
+  color: $primary-color;
+  margin: 20px 0;
+}
+
+.bestselling {
+  &_main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    // border: 1px solid gray;
+    width: 100%;
+    // flex-wrap: wrap;
+  }
+  &_items {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 20px 0;
+   width: 100%;
+  }
+}

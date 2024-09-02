@@ -1,0 +1,93 @@
+
+
+      .banner {
+        &_main {
+          position: relative;
+          display: flex;
+          justify-content: space-between; 
+          align-items: center; 
+          width: 100%;
+          flex-direction: row;
+          column-gap: 50px;
+        }
+        &_content {
+          display: flex;
+          transition: transform 0.5s ease;
+          justify-content: center; 
+          width: 100%;
+          position: relative;
+        }
+        &_slides {
+          display: flex;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        }
+        &_slide {
+          display: none;
+          width: 100%;
+          transition: opacity 0.5s ease-in-out;
+          &.active {
+            display: block;
+            opacity: 1;
+          }
+          img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+          }
+        }
+        &_navigation {
+          position: absolute;
+          bottom: 10px;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          .bar {
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 50%;
+          }
+          
+          .bar.active {
+            background: #333;
+          }
+        }
+      }
+ 
+  
+  
+  
+
+.banner_1 .slide,
+.banner_2 .slide,
+.banner_3 .slide {
+  transition: all 0.6s ease;
+}
+
+.banner_1 #banner1:checked ~ .slide1,
+.banner_1 #banner2:checked ~ .slide2,
+.banner_1 #banner3:checked ~ .slide3,
+.banner_1 #banner4:checked ~ .slide4 {
+  margin-left: 0;
+  // Adjust the margin to show the active slide
+}
+
+.banner_2 #banner1:checked ~ .slide1,
+.banner_2 #banner2:checked ~ .slide2,
+.banner_2 #banner3:checked ~ .slide3,
+.banner_2 #banner4:checked ~ .slide4 {
+  margin-left: 0;
+  // Adjust the margin to show the active slide
+}
+
+.banner_3 #banner1:checked ~ .slide1,
+.banner_3 #banner2:checked ~ .slide2,
+.banner_3 #banner3:checked ~ .slide3,
+.banner_3 #banner4:checked ~ .slide4 {
+  margin-left: 0;
+  // Adjust the margin to show the active slide
+}
