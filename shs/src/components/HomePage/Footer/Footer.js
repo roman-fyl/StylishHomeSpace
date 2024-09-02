@@ -1,5 +1,6 @@
 
 import React from "react";
+import {Link} from "react-router-dom";
 import logoFooter from "../../../assets/images/logo-no-bg.png";
 import icon_fb from "../../../assets/images/icon-sm-facebook.png";
 import icon_x from "../../../assets/images/icon-sm-x.png";
@@ -16,7 +17,8 @@ return (
         <div className="footer_content">
             <div className="footer_logo_block">
             <div className="footer_logo">
-            <a href="#"><img src={logoFooter} alt="Main Logo Footer"></img></a>
+            <Link to ="/">
+            <img src={logoFooter} alt="Main Logo Footer"></img></Link>
             </div>
            
             </div>
@@ -29,24 +31,24 @@ return (
             </div>
             <nav className="footer_links_block">
                 <ul className="footer_links_group">
-                <li className="footer_links_link"><a href="#">Lorem</a></li>
-                <li className="footer_links_link"><a href="#">Lorem Ispum</a></li>
-                <li className="footer_links_link"><a href="#">Lorem Lorem</a></li>
+                <li className="footer_links_link"><Link to="/contact-us.html">Contact Us</Link></li>
+                <li className="footer_links_link"><Link to="/faqs.html">FAQs</Link></li>
+                <li className="footer_links_link"><Link to="/warranty.html">Warranty</Link></li>
                 </ul>
                 <ul className="footer_links_group">
-                <li className="footer_links_link"><a href="#">Lorem</a></li>
-                <li className="footer_links_link"><a href="#">Lorem Ispum</a></li>
-                <li className="footer_links_link"><a href="#">Lorem Lorem</a></li>
+                <li className="footer_links_link"><Link to="/returns-exchanges.html">Returns & Exchanges</Link></li>
+                <li className="footer_links_link"><Link to="/shipping-information.html">Shipping Information</Link></li>
+                <li className="footer_links_link"><Link to="/order-tracking.html">Order Tracking</Link></li>
                 </ul>
                 <ul className="footer_links_group">
-                <li className="footer_links_link"><a href="#">Lorem</a></li>
-                <li className="footer_links_link"><a href="#">Lorem Ispum</a></li>
-                <li className="footer_links_link"><a href="#">Lorem Lorem</a></li>
+                <li className="footer_links_link"><Link to="/my-account.html">My Account</Link></li>
+                <li className="footer_links_link"><Link to="/loyalty-program.html">Loyalty Program</Link></li>
+                <li className="footer_links_link"><Link to="/sign-in.html">Sign In / Register</Link></li>
                 </ul>
                 <ul className="footer_links_group">
-                <li className="footer_links_link"><a href="#">Lorem</a></li>
-                <li className="footer_links_link"><a href="#">Lorem Ispum</a></li>
-                <li className="footer_links_link"><a href="#">Lorem Lorem</a></li>
+                <li className="footer_links_link"><Link to="/about-us.html">About Us</Link></li>
+                <li className="footer_links_link"><Link to="/special-offers.html">Special Offers</Link></li>
+                <li className="footer_links_link"><Link to="/financing.html">Financing</Link></li>
                 </ul>
             </nav>
             <div className="footer_subscription_block">
@@ -60,9 +62,10 @@ return (
         </div>
         <div className="footer_copyright">
             <p>SHS &copy; 2024</p>
-            <a href="/privacy-policy.html">Privacy Policy</a>
-            <a href="/terms-conditions.html">Terms & Conditions</a>
 
+<Link to="/privacy-policy.html">Privacy Policy</Link>  
+<Link to="/terms-conditions.html">Terms & Conditions</Link>
+<Link to="/cookie-policy.html">Cookie Policy</Link>
           </div>
         </div>
     </footer>
