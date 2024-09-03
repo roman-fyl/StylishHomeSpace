@@ -16,10 +16,88 @@ const ReturnsExchanges = () => {
           <h1>Returns & Exchanges</h1>
           <p>September 01, 2024</p>
           
+          <section className="section">
+    <h3>General Return & Exchange Rules</h3>
+    <h4>Return/Exchange Window:</h4>
+    <p>Standard: Must be reported within 14 days of the delivery date.
+        No Returns/Exchanges: _.</p>
+</section>
 <section className="section">
-    <h4>COPPA Compliance Disclosure:</h4>
-    <p>This Privacy Policy presumes that your website is not directed at children under the age of 13 and does not knowingly collect personal identifiable information from them or allow others to do the same through your site. If this is not true for your website or online service and you do collect such information (or allow others to do so), please be aware that you must be compliant with all COPPA regulations and guidelines in order to avoid violations which could lead to law enforcement actions, including civil penalties.</p>
-    <p>In order to be fully compliant with COPPA your website or online service must fulfill other requirements such as: (i) posting a privacy policy which describes not only your practices, but also the practices of any others collecting personal information on your site or service — for example, plug-ins or ad networks; (ii) include a prominent link to your privacy policy anywhere you collect personal information from children; (iii) include a description of parental rights (e.g. that you won't require a child to disclose more information than is reasonably necessary, that they can review their child's personal information, direct you to delete it, and refuse to allow any further collection or use of the child's information, and the procedures to exercise their rights); (iv) give parents "direct notice" of your information practices before collecting information from their children; and (v) obtain the parents' "verifiable consent" before collecting, using or disclosing personal information from a child. For more information on the definition of these terms and how to make sure your website or online service is fully compliant with COPPA please visit https://www.ftc.gov/tips-advice/business-center/guidance/childrens-online-privacy-protection-rule-six-step-compliance. FormSwift and its subsidiaries are in no way responsible for determining whether or not your company is in fact compliant with COPPA and takes no responsibility for the use you make of this Privacy Policy or for any potential liability your company may face in relation to any COPPA compliance issues.</p>
+    <h4>Restocking Fee:</h4>
+    <p>A minimum 5% restocking fee applies to all returns and exchanges.
+        Refer to the brand-specific restocking fees listed below.</p>
+</section>
+<section className="section">
+    <h4>Cancellation or Refusal:</h4>
+    <p>If you cancel or refuse an order after it has shipped, a restocking fee will be charged.</p>
+</section>
+<section className="section">
+    <h4>Incorrect Shipping Information:</h4>
+    <p>If incorrect address or phone number leads to delivery failure, you will be responsible for the restocking fee.</p>
+</section>
+<section className="section">
+    <h4>Product Condition:</h4>
+    <p>Only uninstalled, unused products in original packaging (including box and pallet) are eligible for returns and exchanges.
+        No returns/exchanges for products without original packaging or that have been used/installed.</p>
+</section>
+<section className="section">
+    <h4>Restocking Fees by Brand</h4>
+    <p>ZLINE, Thor Kitchen, Kucht, Fotile, KubeBath: 15%</p>
+</section>
+<section className="section">
+    <h4>Non-Returnable/Non-Exchangeable Products</h4>
+    <p>Modified products.
+        Products not in resalable condition.
+        Products without an Order Number.
+        Products without original packaging.
+        Installed, used, or plugged-in items.
+        Accessories (e.g., range hood extensions, trim kits, filters).
+        Air conditioners, special order merchandise, and commercial laundry equipment.</p>
+</section>
+<section className="section">
+    <h3>Inspection Upon Delivery</h3>
+    <h4>Check Your Product:</h4>
+    <p>Inspect your product thoroughly before signing for delivery. Look for both internal and external damage.</p>
+</section>
+<section className="section">
+    <h4>Report Damage Immediately:</h4>
+    <p>If you notice damage, refuse the delivery, take photos, and notify the delivery driver.
+        Contact us at (111) 123 4567 or email support@stylishhomespace.com immediately.
+        If you discover damage after delivery, report it within 24 hours.</p>
+</section>
+<section className="section">
+    <h3>Defective Merchandise</h3>
+    <h4>Immediate Defects:</h4>
+    <p>Report defective products within 24 hours of receipt. For defects found after 24 hours, contact the product’s manufacturer directly for service. Manufacturer contact info is in the product literature.</p>
+</section>
+<section className="section">
+    <h4>Warranty Requirements:</h4>
+    <p>Most products include a one-year parts and labor warranty. Some manufacturers may require a service call to diagnose issues before authorizing returns/replacements.</p>
+</section>
+<section className="section">
+    <h3>Warranty Information</h3>
+    <h4>Warranty Voidance:</h4>
+    <p>Warranty is void if a residential appliance is installed in a commercial location or taken outside the continental United States. SHS follows manufacturer warranties and policies.</p>
+</section>
+<section className="section">
+    <h3>Return Authorization & Refunds</h3>
+    <h4>Return Authorization (RA):</h4>
+    <p>Contact customer service to receive an RA number for returns. Returns without an RA will not be accepted.</p>
+</section>
+<section className="section">
+    <h4>Shipping Costs:</h4>
+    <p>Shipping and handling charges to and from the warehouse are non-refundable. Returns must be shipped back prepaid using the original method of shipment.</p>
+</section>
+<section className="section">
+    <h4>Refunds:</h4>
+    <p>Refunds to the original payment method will be issued within 90 days. After 90 days, store credit will be provided. Refunds are processed after inspection and approval of returned/exchanged products.</p>
+</section>
+<section className="section">
+    <h4>Important Notes</h4>
+    <p>Returns must be in brand-new condition with all packaging, product literature, and blank warranty cards enclosed.
+        Items moved from their original delivery location cannot be returned.
+        Contact the manufacturer for missing or damaged parts that are covered under warranty.
+        SHS reserves the right to refuse returns for any reason.</p>
 </section>
         </div>
       </div>
