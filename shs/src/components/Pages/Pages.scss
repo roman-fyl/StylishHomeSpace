@@ -90,4 +90,24 @@
     }
 }
 
-
+.faq {
+    h3 {
+        font: $font-small;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 30px;
+    }
+    h4 {
+        font: $font-x-small;
+        font-weight: 700;
+        text-decoration: none;
+        text-indent: 0px;
+    }
+    section {
+        border-radius: 5px;
+        padding: 5px;
+        border: 1px solid $primary-color;
+        margin: 10px 0;
+        background-color: $primary-color-text;
+    }
+}
