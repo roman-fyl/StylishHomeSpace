@@ -11,7 +11,7 @@ const FAQAccountManagement = () => {
   return (
     <div className="faq">
       {/* <section className="section"> */}
-    <h3>Account Management</h3>
+    <h3>Have Questions About Account Management?</h3>
 {/* </section> */}
 <section className="section">
     <h4>How do I create an account?</h4>

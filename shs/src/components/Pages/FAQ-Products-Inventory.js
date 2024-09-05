@@ -11,7 +11,7 @@ const FAQProductsInventory = () => {
 
   return (
     <div className="faq">
-    <h3>Products & Inventory</h3>
+    <h3>Have Questions About Products & Inventory?</h3>
 <section className="section">
     <h4>How do I find specific products on your website?</h4>
     <p>Use the search bar at the top of the page to enter keywords, product names, or item numbers. You can also browse by category or use filters to narrow down your search.</p>

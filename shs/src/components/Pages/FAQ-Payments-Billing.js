@@ -11,7 +11,7 @@ const FAQPaymentsBilling = () => {
 
   return (
     <div className="faq">
-    <h3>Payments & Billing</h3>
+    <h3>Have Questions About Payments & Billing?</h3>
 <section className="section">
     <h4>How can I update my payment information?</h4>
     <p>You can update your payment information in the "Payment Methods" section of your account settings. Here, you can add, edit, or remove credit/debit cards and other payment options.</p>

@@ -11,7 +11,7 @@ const FAQTechnicalIssues = () => {
 
   return (
     <div className="faq">
-     <h3>Technical Issues</h3>
+     <h3>Have Questions About Technical Issues?</h3>
 <section className="section">
     <h4>What should I do if I forget my password?</h4>
     <p>Click the "Forgot Password" link on the login page. Enter your email address, and we’ll send you instructions to reset your password.</p>

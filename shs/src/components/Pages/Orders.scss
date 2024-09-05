@@ -1,0 +1,62 @@
+@import "../../vars";
+
+.order {
+    &_summary {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 50px 0;
+        span {
+            position: relative;
+            margin: 20px 0;
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                height: 2px;
+                background-color: black;
+                width: 100%;  
+            }
+        }
+    }
+    &_steps {
+        display: flex;
+        flex-direction: column;
+        margin: 100px 0;
+
+        li {
+            margin: 5px 0;
+        }
+    }
+    &_step {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        span {
+            margin-right: 40px;
+        }
+        &_date {
+            width: 200px;
+        }
+        &_status {
+            min-width: 200px;
+            font-weight: 700;
+        }
+        &_comments {
+            min-width: 200px;
+            font-style: italic;
+            font-weight: 300;
+        }
+    }
+}
+.logo {
+    &_icon {
+        &_status {
+            width: 30px;
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

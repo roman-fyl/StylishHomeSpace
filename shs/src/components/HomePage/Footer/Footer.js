@@ -32,7 +32,7 @@ return (
             <nav className="footer_links_block">
                 <ul className="footer_links_group">
                 {/* <li className="footer_links_link"><Link to="/contact-us.html">Contact Us</Link></li> */}
-                <li className="footer_links_link"><Link to="/faqs.html">FAQs</Link></li>
+                {/* <li className="footer_links_link"><Link to="/faqs.html">FAQs</Link></li> */}
                 {/* <li className="footer_links_link"><Link to="/warranty.html">Warranty</Link></li> */}
                 </ul>
                 <ul className="footer_links_group">

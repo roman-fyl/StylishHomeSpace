@@ -11,7 +11,7 @@ const FAQSecurityPrivacy = () => {
 
   return (
     <div className="faq">
-      <h3>Security & Privacy</h3>
+      <h3>Have Questions About Security & Privacy?</h3>
 <section className="section">
     <h4>How do you protect my personal information?</h4>
     <p>We use advanced encryption and security protocols to protect your personal information. Our privacy policy details how we handle and safeguard your data.</p>

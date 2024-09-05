@@ -11,7 +11,7 @@ const FAQReturnsRefunds = () => {
 
   return (
     <div className="faq">
-      <h3>Returns & Refunds</h3>
+      <h3>Have Questions About Returns & Refunds?</h3>
 <section className="section">
     <h4>What is your return policy?</h4>
     <p>Our return policy typically allows returns within 30 days of purchase, provided the item is in its original condition and packaging. Some restrictions may apply, so check the policy details on our website.</p>

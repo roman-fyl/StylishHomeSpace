@@ -10,7 +10,7 @@ const FAQOrders = () => {
 
   return (
     <div className="faq">
-   <h3>Orders</h3>
+   <h3>Have Questions About Orders?</h3>
 <section className="section">
     <h4>How do I place an order?</h4>
     <p>To place an order, browse the products on the website, select the items you want, and add them to your cart. Once you're ready, proceed to checkout, fill in your shipping and payment details, and confirm the order.</p>

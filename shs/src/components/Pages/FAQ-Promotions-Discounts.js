@@ -11,7 +11,7 @@ const FAQPromotionsDiscounts = () => {
 
   return (
     <div className="faq">
-       <h3>Promotions & Discounts</h3>
+       <h3>Have Questions About Promotions & Discounts?</h3>
 <section className="section">
     <h4>How do I find out about current promotions?</h4>
     <p>Current promotions are usually displayed on the homepage, in the "Promotions" section, or announced through our newsletter. Sign up to stay informed about the latest deals.</p>

@@ -11,7 +11,7 @@ const FAQWebsiteNavigation = () => {
 
   return (
     <div className="faq">
-     <h3>Website & Navigation</h3>
+     <h3>Have Questions About Website & Navigation?</h3>
 <section className="section">
     <h4>How do I search for products on your website?</h4>
     <p>Use the search bar at the top of the page to enter keywords, product names, or item numbers. You can also browse categories and use filters to refine your search results.</p>

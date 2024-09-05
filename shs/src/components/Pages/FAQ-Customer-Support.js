@@ -11,7 +11,7 @@ const FAQCustomerSupport = () => {
 
   return (
     <div className="faq">
-<h3>Customer Support</h3>
+<h3>Have Questions About Customer Support?</h3>
 <section className="section">
     <h4>How can I contact customer support?</h4>
     <p>You can contact customer support via phone, email, or live chat. The contact details are usually available on our "Contact Us" page.</p>

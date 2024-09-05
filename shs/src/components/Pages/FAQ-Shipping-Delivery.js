@@ -11,7 +11,7 @@ const FAQShippingDelivery = () => {
 
   return (
     <div className="faq">
-    <h3>Shipping & Delivery</h3>
+    <h3>Have Questions About Shipping & Delivery?</h3>
 <section className="section">
     <h4>What are your shipping options?</h4>
     <p>We offer several shipping options, including standard, expedited, and overnight shipping. The available options and costs will be displayed during checkout.</p>
