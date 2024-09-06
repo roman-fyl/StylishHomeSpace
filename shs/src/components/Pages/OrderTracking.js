@@ -14,7 +14,7 @@ const OrderTracking = () => {
   return (
     <Layout>
       <div className="container">
-        <div className="privacy_description">
+        <div className="privacy_description" id="profile-order-status">
           <h1>Order Tracking</h1>
           
 <section className="section">

@@ -23,6 +23,17 @@ import TermsConditions from "./components/Pages/TermsConditions";
 import Warranty from "./components/Pages/Warranty";
 import WhyBuyFromUs from "./components/Pages/WhyBuyFromUs";
 
+// import ProfileMain from "./components/Profile/ProfileMain";
+// import ProfileAddresses from "./components/Profile/ProfileAddresses";
+// import ProfileAffiliateProgram from './components/Profile/ProfileAffiliateProgram';
+// import ProfileLastVisitedItems from "./components/Profile/ProfileLastVisitedItems";
+// import ProfileLoyaltyPoints from "./components/Profile/ProfileLoyaltyPoints";
+// import ProfileOrderHistory from "./components/Profile/ProfileOrderHistory";
+// import ProfilePayments from './components/Profile/ProfilePayments';
+// import ProfileReturns from "./components/Profile/ProfileReturns";
+// import ProfileSubmittedTickets from './components/Profile/ProfileSubmittedTickets';
+// import ProfileWishlist from "./components/Profile/ProfileWishlist";
+
 import './App.scss';
 
 const App = () => {
@@ -50,6 +61,17 @@ const App = () => {
             <Route path="/services.html" element={<Services />} />
             <Route path="/payment-options.html" element={<PaymentOptions />} />
             <Route path="/why-buy-from-us.html" element={<WhyBuyFromUs />} />
+
+            {/* <Route path="/my-profile.html" element={<ProfileMain />} />
+            <Route path="/my-profile-address.html" element={<ProfileAddresses />} />
+            <Route path="/my-profile-affiliate.html" element={<ProfileAffiliateProgram />} />
+            <Route path="/my-profile-last-visited-items.html" element={<ProfileLastVisitedItems />} />
+            <Route path="/my-profile-loyalty.html" element={<ProfileLoyaltyPoints />} />
+            <Route path="/my-profile-order-history.html" element={<ProfileOrderHistory />} />
+            <Route path="/my-profile-payments.html" element={<ProfilePayments />} />
+            <Route path="/my-profile-returns.html" element={<ProfileReturns />} />
+            <Route path="/my-profile-submitted-tickets.html" element={<ProfileSubmittedTickets />} />
+            <Route path="/my-profile-wishlist.html" element={<ProfileWishlist />} /> */}
 
 
 

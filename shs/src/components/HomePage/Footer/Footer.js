@@ -38,7 +38,7 @@ return (
                 <ul className="footer_links_group">
                 {/* <li className="footer_links_link"><Link to="/returns-exchanges.html">Returns & Exchanges</Link></li> */}
                 {/* <li className="footer_links_link"><Link to="/shipping-information.html">Shipping Information</Link></li> */}
-                <li className="footer_links_link"><Link to="/order-tracking.html">Order Tracking</Link></li>
+                {/* <li className="footer_links_link"><Link to="/order-tracking.html">Order Tracking</Link></li> */}
                 </ul>
                 <ul className="footer_links_group">
                 <li className="footer_links_link"><Link to="/my-account.html">My Account</Link></li>

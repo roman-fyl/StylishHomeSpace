@@ -1,0 +1,48 @@
+@import "../../_vars.scss";
+
+.account {
+    &_description {
+        font: 400 16px "Lato", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        h1 {
+            font-family: "Lato", sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    }
+    &_content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        border: 1px solid gray;
+        &_main-block {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: start;
+        }
+        &_block {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            border: 1px solid gray;
+            align-items: start;
+            padding-left: 20px;
+            height: 700px;
+
+        }
+    }
+    &_quick {
+        &_links {
+            width: 300px;
+            border: 1px solid gray;
+        }
+        &_link {
+
+        }
+    }
+}
