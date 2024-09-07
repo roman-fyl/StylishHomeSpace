@@ -41,10 +41,13 @@ return (
           <a href="#profile-info">Profile Information</a>
         </li>
         <li className="account_quick_link">
-          <a href="#profile-addresses">Addresses</a>
+          <a href="#profile-addresses">Address</a>
         </li>
         <li className="account_quick_link">
-          <a href="#profile-payments">Payments</a>
+          <a href="#profile-last-visited-items">Recently Viewed</a>
+        </li>
+        <li className="account_quick_link">
+          <a href="#profile-wishlist">Wishlist</a>
         </li>
         <li className="account_quick_link">
           <a href="#profile-order-history">Order History</a>
@@ -56,35 +59,38 @@ return (
           <a href="#profile-returns">Returns</a>
         </li>
         <li className="account_quick_link">
-          <a href="#profile-wishlist">Wishlist</a>
+          <a href="#profile-affiliate-program">Affiliate Program</a>
         </li>
-        <li className="account_quick_link">
-          <a href="#profile-last-visited-items">Last Visited Items</a>
-        </li>
+       
         <li className="account_quick_link">
           <a href="#profile-loyalty-points">Loyalty Points</a>
         </li>
-        <li className="account_quick_link">
-          <a href="#profile-affiliate-program">Affiliate Program</a>
-        </li>
+      
         <li className="account_quick_link">
           <a href="#profile-submitted-tickets">Submitted Tickets</a>
         </li>
+        <li className="account_quick_link">
+          <a href="#profile-submitted-tickets">Logout</a>
+        </li>
+            {/* <li className="account_quick_link">
+          <a href="#profile-payments">Payments</a>
+        </li> */}
+        
       </ul>
     <div className="account_content_main-block">
         <ProfileMain />
         <ProfileAddresses />
-        <ProfileAffiliateProgram />
         <ProfileLastVisitedItems />
-        <ProfileLoyaltyPoints />
-        <ProfileOrderHistory />
-        <ProfilePayments />
-        <ProfileReturns />
-        <ProfileSubmittedTickets />
         <ProfileWishlist />
+        {/* <ProfilePayments /> */}
+        <ProfileOrderHistory />
+        <ProfileReturns />
+        <ProfileAffiliateProgram />
+        <ProfileLoyaltyPoints />
+        <ProfileSubmittedTickets />
     </div>
    </div>
-    {/* <div>Logout</div> */}
+   
     </div>
 )
 }

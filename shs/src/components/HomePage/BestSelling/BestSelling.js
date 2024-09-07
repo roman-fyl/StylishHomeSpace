@@ -14,8 +14,8 @@ const BestSelling = () => {
   return (
     <div className="bestselling_main">
       <h2>Best-Selling Products</h2>
-      <ul className="bestselling_items">
-        <li className="bestselling_item" data-id="#">
+      <ul className="card_items">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={bestseller3} alt="Bestselling product 1"/></a>
           </span>
           <div className="item_description">
@@ -45,7 +45,7 @@ const BestSelling = () => {
           </div>
         </li>
 
-        <li className="bestselling_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={bestseller2} alt="Bestselling product 1"/></a>
           </span>
           <div className="item_description">
@@ -77,7 +77,7 @@ const BestSelling = () => {
 
 
 
-        <li className="bestselling_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={bestseller1} alt="Bestselling product 1"/></a>
           </span>
           <div className="item_description">
@@ -107,7 +107,7 @@ const BestSelling = () => {
           </div>
         </li>
 
-        <li className="bestselling_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={bestseller2} alt="Bestselling product 1"/></a>
           </span>
           <div className="item_description">
@@ -139,7 +139,7 @@ const BestSelling = () => {
 
 
 
-        <li className="bestselling_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={bestseller3} alt="Bestselling product 1"/></a>
           </span>
           <div className="item_description">
@@ -171,7 +171,7 @@ const BestSelling = () => {
 
 
 
-        <li className="bestselling_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={bestseller2} alt="Bestselling product 1"/></a>
           </span>
           <div className="item_description">

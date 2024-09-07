@@ -1,5 +1,5 @@
 
-.bestselling_item {
+.card_item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,7 +126,7 @@
   
 
 
-//   <li className="bestselling_item" data-id="#">
+//   <li className="card_item" data-id="#">
 //   <span className="item_image"><a href="#" > <img src={bestseller2} alt="Bestselling product 1"/></a>
 //   </span>
 //   <div className="item_description">
