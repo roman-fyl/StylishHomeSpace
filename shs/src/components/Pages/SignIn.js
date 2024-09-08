@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import React from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Layout from "../../Layout";
 
 import "./Pages.scss";
-import { Link } from "react-router-dom";
 
 const SignIn = () => {
   useEffect(() => {
@@ -28,19 +28,23 @@ const SignIn = () => {
   <p><strong>Personalized Offers:</strong> Receive tailored offers and promotions based on your shopping preferences and history, ensuring you get deals that matter to you.</p>
 </section>
 <section className="section">
-<form className="search_tracking">
-<input type="email" className="sign_email" tabIndex="6" name="sign_email" placeholder="Enter Email"
+<form className="sign_form">
+<input type="email" className="sign_personal" tabIndex="6" name="sign_email" placeholder="Enter Email"
              minLength="5" maxLength="30" id="sign_email" />
 
-<input type="text" className="sign_name" tabIndex="7" name="sign_name" placeholder="Name"
+<input type="text" className="sign_personal" tabIndex="7" name="sign_name" placeholder="Name"
              minLength="2" maxLength="30" id="sign_name" />
 
-<input type="text" className="sign_lastName" tabIndex="8" name="sign_lastName" placeholder="Last Name"
+<input type="text" className="sign_personal" tabIndex="8" name="sign_lastName" placeholder="Last Name"
              minLength="3" maxLength="30" id="sign_lastName" />
 
-<input type="password" className="sign_password" tabIndex="9" name="sign_password" placeholder="Enter Password"
+<input type="password" className="sign_personal" tabIndex="9" name="sign_password" placeholder="Enter Password"
              minLength="5" maxLength="30" id="sign_password" />
-      <input type="submit" className="sign_submit" value="Continue" />
+
+<input type="password" className="sign_personal" tabIndex="10" name="sign_password_confirm" placeholder="Confirm Password"
+             minLength="5" maxLength="30" id="sign_password_confirm" />
+      
+      <Link to="/success.html" className="sign_submit">Continue</Link>
       </form>
 </section>
 <section className="section additional_terms">
@@ -49,8 +53,8 @@ const SignIn = () => {
 </section>
 <section className="section b2b_registration">
   <h3>Become a part of our B2B network</h3>
-  <p>Access exclusive trade discounts and enjoy additional perks when shopping online</p>
-  <Link to="/sign-up.html" className="sign_submit">Sign Up</Link>
+  <p>Access exclusive trade discounts, enjoy additional perks when shopping online, and take advantage of our affiliate program to earn rewards for referrals</p>
+  <Link to="/sign-up-professional.html" className="sign_submit">Sign Up</Link>
 </section>
         </div>
       </div>

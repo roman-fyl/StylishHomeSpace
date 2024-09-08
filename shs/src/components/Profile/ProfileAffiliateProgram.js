@@ -14,7 +14,7 @@ const ProfileAffiliateProgram = () => {
           <span><strong>Join Us Now and Start Earning Today</strong></span>
           </div>
           <div className="account_content_section element_affiliate">
-          <span><a href="">Sign Up</a></span>
+          <span><Link to="/sign-up-professional.html">Sign Up</Link></span>
           </div>
         </div>
     // </Layout>

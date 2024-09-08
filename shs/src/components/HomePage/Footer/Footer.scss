@@ -111,4 +111,7 @@ footer {
     background: #fff;
     transition: $transition;
     cursor: $cursor;
+    &:hover {
+        background-color: $primary-color-hover-text;
+    }
 }

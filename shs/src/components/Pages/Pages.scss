@@ -140,6 +140,7 @@
     }
 }
 
+
 .sign {
     &_benefits {
         margin: 0 auto;
@@ -151,7 +152,7 @@
             text-align: justify;
         }
     }
-    &_email, &_password, &_name, &_lastName {
+    &_b2b, &_personal {
         border: 1px solid $primary-color;
         font: 400 16px "Lato", sans-serif;
         padding: 10px 5px;
@@ -164,6 +165,7 @@
         color: #fff;
         width: 100px;
         padding: 10px 15px;
+        margin-top: 20px;
         text-align: center;
         text-transform: capitalize;
         border: 1px solid #fff;
@@ -174,6 +176,12 @@
         &:hover {
             background: $primary-color-hover-link;
         }
+    }
+    &_form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
 .additional {

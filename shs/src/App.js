@@ -18,10 +18,13 @@ import Services from "./components/Pages/Services";
 import ShippingInformation from "./components/Pages/ShippingInformation";
 import SignIn from "./components/Pages/SignIn";
 import SignUp from "./components/Pages/SignUp";
+import SignUpProfessional from "./components/Pages/SignUpB2B";
 import SpecialOffers from "./components/Pages/SpecialOffers";
 import TermsConditions from "./components/Pages/TermsConditions";
 import Warranty from "./components/Pages/Warranty";
 import WhyBuyFromUs from "./components/Pages/WhyBuyFromUs";
+import ThankYouPage from "./components/Pages/ThankYouPage";
+
 
 // import ProfileMain from "./components/Profile/ProfileMain";
 // import ProfileAddresses from "./components/Profile/ProfileAddresses";
@@ -55,12 +58,14 @@ const App = () => {
             <Route path="/loyalty-program.html" element={<LoyaltyProgram />} />
             <Route path="/sign-in.html" element={<SignIn />} />
             <Route path="/sign-up.html" element={<SignUp />} />
+            <Route path="/sign-up-professional.html" element={<SignUpProfessional />} />
             <Route path="/about-us.html" element={<AboutUs />} />
             <Route path="/special-offers.html" element={<SpecialOffers />} />
             <Route path="/financing.html" element={<Financing />} />
             <Route path="/services.html" element={<Services />} />
             <Route path="/payment-options.html" element={<PaymentOptions />} />
             <Route path="/why-buy-from-us.html" element={<WhyBuyFromUs />} />
+            <Route path="/success.html" element={<ThankYouPage />} />
 
             {/* <Route path="/my-profile.html" element={<ProfileMain />} />
             <Route path="/my-profile-address.html" element={<ProfileAddresses />} />
