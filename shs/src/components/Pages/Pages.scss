@@ -140,3 +140,94 @@
     }
 }
 
+.sign {
+    &_benefits {
+        margin: 0 auto;
+        h4 {
+            text-align: center;
+        }
+        p {
+            width: 600px;
+            text-align: justify;
+        }
+    }
+    &_email, &_password, &_name, &_lastName {
+        border: 1px solid $primary-color;
+        font: 400 16px "Lato", sans-serif;
+        padding: 10px 5px;
+        width: 600px;
+        border-radius: 2px;
+        margin: 10px 0;
+    }
+    &_submit {
+        font: 400 16px "Lato", sans-serif;
+        color: #fff;
+        width: 100px;
+        padding: 10px 15px;
+        text-align: center;
+        text-transform: capitalize;
+        border: 1px solid #fff;
+        border-radius: 2px;
+        background: $primary-color;
+        transition: $transition;
+        cursor: $cursor;
+        &:hover {
+            background: $primary-color-hover-link;
+        }
+    }
+}
+.additional {
+    &_terms {
+        p {
+         font-size: 12px !important;
+         width: 600px;
+         margin: 0 auto;
+         margin-bottom: 5px;
+         text-align: justify;
+         a {
+             text-decoration: underline;
+         }
+        }
+     }
+}
+.b2b {
+    &_registration {
+        h3 {
+            font-family: $mainFont;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px !important;
+            text-align: center;
+           
+        }
+        a {
+            color: $primary-color-text;
+            margin: 10px 0;
+            cursor: $cursor;
+            transition: $transition;
+            &:hover {
+                background-color: $primary-color-hover-link;
+            }
+
+        }
+        padding: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $primary-color;
+        color: $primary-color-text;
+     }
+}
+
+.existed_email {
+    display: flex;
+    // width: 600px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}

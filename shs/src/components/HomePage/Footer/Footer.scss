@@ -109,5 +109,6 @@ footer {
     border: 1px solid #fff;
     border-radius: 2px;
     background: #fff;
-    transition: box-shadow 0.2s ease-in-out;
+    transition: $transition;
+    cursor: $cursor;
 }
