@@ -2,13 +2,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import logoFooter from "../../../assets/images/logo-no-bg.png";
-import icon_fb from "../../../assets/images/icon-sm-facebook.png";
-import icon_x from "../../../assets/images/icon-sm-x.png";
-import icon_youtube from "../../../assets/images/icon-sm-youtube.png";
-import icon_instagram from "../../../assets/images/icon-sm-instagram.png";
-import icon_whatsapp from "../../../assets/images/icon-sm-whatsapp.png";
 
 import "./Footer.scss";
+import SocialMediaComponent from "../../Pages/SocialMediaComponent";
 
 const Footer = () => {
 return (
@@ -22,17 +18,11 @@ return (
             </div>
            
             </div>
-            <div className="footer_social_media_block">
-            <a href="#"><img src={icon_x} alt="#"></img></a>
-            <a href="#"><img src={icon_fb} alt="#"></img></a>
-            <a href="#"><img src={icon_youtube} alt="#"></img></a>
-            <a href="#"><img src={icon_instagram} alt="#"></img></a>
-            <a href="#"><img src={icon_whatsapp} alt="#"></img></a>
-            </div>
+            <SocialMediaComponent />
             <nav className="footer_links_block">
                 <ul className="footer_links_group">
                 {/* <li className="footer_links_link"><Link to="/contact-us.html">Contact Us</Link></li> */}
-                {/* <li className="footer_links_link"><Link to="/faqs.html">FAQs</Link></li> */}
+                <li className="footer_links_link"><Link to="/faqs.html">FAQs</Link></li>
                 {/* <li className="footer_links_link"><Link to="/warranty.html">Warranty</Link></li> */}
                 </ul>
                 <ul className="footer_links_group">
@@ -41,9 +31,9 @@ return (
                 {/* <li className="footer_links_link"><Link to="/order-tracking.html">Order Tracking</Link></li> */}
                 </ul>
                 <ul className="footer_links_group">
-                <li className="footer_links_link"><Link to="/my-account.html">My Account</Link></li>
-                <li className="footer_links_link"><Link to="/loyalty-program.html">Loyalty Program</Link></li>
-                <li className="footer_links_link"><Link to="/sign-in.html">Sign In / Register</Link></li>
+                {/* <li className="footer_links_link"><Link to="/my-account.html">My Account</Link></li> */}
+                {/* <li className="footer_links_link"><Link to="/loyalty-program.html">Loyalty Program</Link></li> */}
+                {/* <li className="footer_links_link"><Link to="/sign-in.html">Sign In / Register</Link></li> */}
                 </ul>
                 <ul className="footer_links_group">
                 <li className="footer_links_link"><Link to="/about-us.html">About Us</Link></li>

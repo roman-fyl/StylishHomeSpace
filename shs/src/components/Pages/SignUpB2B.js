@@ -18,7 +18,7 @@ const SignUpB2B = () => {
           <section className="existed_email">
       <p>email</p>
       </section>
-      <section className="section sign_benefits">
+      <section className="section sign_b2b_benefits">
   <h4>Why You Should Be a Part of B2B Community</h4>
   <p>Become a member of our exclusive B2B program and enjoy discounted pricing on our brands. Simply complete the application form below, and we'll get back to you within 2-3 business days. As part of the registration, you'll be asked to sign in or create an SHS shopping account.</p>
   <p><strong>To finalize your application, please have the following ready:</strong>
