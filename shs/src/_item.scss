@@ -66,6 +66,9 @@
       text-align: left;
       flex: 1 1 auto;
       margin-top: 5px;
+      &:hover {
+        color: $primary-color-hover-link;
+      }
     }
     &_rating {
       display: flex;

@@ -14,7 +14,6 @@ const ShippingInformation = () => {
       <div className="container">
         <div className="privacy_description">
           <h1>Shipping Information</h1>
-          <p>September 01, 2024</p>
           
           <section className="section">
     <h4>Free Shipping</h4>

@@ -1,4 +1,4 @@
-import React from'react';
+import React, {useState, useEffect} from'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store/stores/store';
@@ -24,6 +24,7 @@ import TermsConditions from "./components/Pages/TermsConditions";
 import Warranty from "./components/Pages/Warranty";
 import WhyBuyFromUs from "./components/Pages/WhyBuyFromUs";
 import ThankYouPage from "./components/Pages/ThankYouPage";
+import ProductPage from "./components/ProductPage/ProductPage.js";
 
 
 // import ProfileMain from "./components/Profile/ProfileMain";
@@ -40,6 +41,7 @@ import ThankYouPage from "./components/Pages/ThankYouPage";
 import './App.scss';
 
 const App = () => {
+
   return (
     <Provider store={store}>
       <Router>
@@ -66,6 +68,7 @@ const App = () => {
             <Route path="/payment-options.html" element={<PaymentOptions />} />
             <Route path="/why-buy-from-us.html" element={<WhyBuyFromUs />} />
             <Route path="/success.html" element={<ThankYouPage />} />
+            <Route path="/item.html" element={<ProductPage />} />
 
             {/* <Route path="/my-profile.html" element={<ProfileMain />} />
             <Route path="/my-profile-address.html" element={<ProfileAddresses />} />

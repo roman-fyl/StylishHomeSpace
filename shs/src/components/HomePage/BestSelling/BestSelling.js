@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 import bestseller1 from "../../../assets/db/images/items/sku_01_01.png";
 import bestseller2 from "../../../assets/db/images/items/sku_01_02.png";
@@ -16,7 +18,7 @@ const BestSelling = () => {
       <h2>Best-Selling Products</h2>
       <ul className="card_items">
         <li className="card_item" data-id="#">
-          <span className="item_image"><a href="#" > <img src={bestseller3} alt="Bestselling product 1"/></a>
+          <span className="item_image"><Link to="/item.html"><img src={bestseller3} alt="Bestselling product 1"/></Link>
           </span>
           <div className="item_description">
             <span className="item_brand-logos">

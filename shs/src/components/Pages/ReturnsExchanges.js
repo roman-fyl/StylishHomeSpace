@@ -13,11 +13,8 @@ const ReturnsExchanges = () => {
     <Layout>
       <div className="container">
         <div className="privacy_description">
-          <h1>Returns & Exchanges</h1>
-          <p>September 01, 2024</p>
-          
+          <h1>Returns & Exchanges</h1>          
           <section className="section">
-    <h3>General Return & Exchange Rules</h3>
     <h4>Return/Exchange Window:</h4>
     <p>Standard: Must be reported within 14 days of the delivery date.
         No Returns/Exchanges: _.</p>
