@@ -48,7 +48,69 @@
             }
         }
         &_category {
-         
+         border: 1px solid gray;
+         min-height: 300px;
+         width: 100%;
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         justify-content: space-between;
+        }
+        &_slider {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        &_slider {
+            border: 1px solid gray;
+            width: 35%;
+        }
+        &_tags {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid gray;
+            // width: 7%;
+            margin: 0 10px;
+            padding: 0 10px;
+
+            li {
+                margin-bottom: 10px;
+               img {
+                width: 65px;
+               }
+               &:last-child {
+                margin-bottom: 0;
+               }
+            }
+        }
+        &_brief {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            border: 1px solid gray;
+            margin: 0 20px;
+            padding: 0 30px;
+            width: 50%;
+            row-gap: 15px;
+            p, li {
+                font: $font-small;
+            }
+            h1 {
+                font: $font-regular;
+                color: $primary-color;
+                margin-bottom: 20px;
+            }
+        }
+        &_price {
+            margin: 0 10px;
+            padding: 0 10px;
+            width: 300px;
+            border: 1px solid gray;
+            // width: 10%;
         }
     }
     &_page {
@@ -59,6 +121,129 @@
             height: 1px;
             background-color: $primary-color;
             margin-bottom: 10px;
+        }
+    }
+    &_category {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+}
+
+.slider {
+    
+    &_menu {
+        width: 370px;
+        height: 370px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        img {
+            max-width: 330px;
+            max-height: 330px;
+            object-fit: contain;
+            margin: 20px 0 ;
+        }
+    }
+    &_content {
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        justify-content: space-between;
+        img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: contain;
+            opacity: .5;
+            cursor: $cursor;
+            &:nth-child(1), &:nth-last-child(1) {
+                opacity: 1;
+
+            }
+        }
+    }
+    .prev_arrow,
+    .next_arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+
+  }
+
+  .prev_arrow {
+    left: -60px;  
+  }
+
+  .next_arrow {
+    right: -60px;  
+  }
+
+  .prev_arrow:hover,
+  .next_arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.item {
+    &_description {
+        &_logo {
+            img {
+                width: 100px;
+               
+            }
+        }
+        &_block {
+            &_logo {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                text-transform: uppercase;
+                column-gap: 20px;
+                color: red;
+                font: $font-small;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+        }
+        &_important {
+            li {
+                font: $font-small;
+                font-weight: 700;
+            }
+        }
+        &_rate {
+            font: $font-small;
+            span {
+                margin-right: 5px;
+            }
+        }
+        &_model {
+            font: $font-small;
+            color: $primary-color;
+        }
+        &_warranty {
+            font: $font-small;
+        }
+        &_additional-options {
+            img {
+                width: 35px;
+                margin-right: 20px;
+                transition: $transition;
+                cursor: $cursor;
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
         }
     }
 }

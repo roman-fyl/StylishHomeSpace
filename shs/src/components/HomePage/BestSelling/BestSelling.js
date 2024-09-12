@@ -27,7 +27,7 @@ const BestSelling = () => {
              </a>
             </span>
            <a href="#" className="item_title"> <h3 className="item_title">
-              30" Single Electric Wall Oven, 4.59 cu. ft. Capacity
+           GE Smart Window Air Conditioner - 350 Sq. Ft. 8000 BTU  - White
             </h3></a>
             <span className="item_rating"> <span className="item_rate">4.7</span></span>
             <span className="item_pricing">
