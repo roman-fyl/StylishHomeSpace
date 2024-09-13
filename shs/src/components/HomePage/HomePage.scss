@@ -28,6 +28,9 @@
 .section {
   flex: 1 1 auto;
   margin: 25px 0;
+  &_slider {
+    margin-bottom: 25px;
+  }
 }
 
   h2 {

@@ -87,7 +87,7 @@
     }
     &_price {
       font: $font-regular;
-      color: red;
+      color: $primary-color-attention;
     }
     &_old-price {
       del {

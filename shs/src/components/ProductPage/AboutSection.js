@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
+import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
 
 
 import arrowUp from "../../assets/images/arrow-up.png";
@@ -34,8 +35,8 @@ return (
     <div className="slider_menu">
         <img src={image1} alt="image1"></img>
     </div>
-    <div className="slider_content">
-    <img src={arrowBack} className="prev_arrow"></img>
+    <div className="slider_images">
+    <img src={arrowBack} className="prev_arrow" alt="1"></img>
     {/* <img src={image1} alt="image1"></img> */}
     <img src={image2} alt="image2"></img>
     <img src={image3} alt="image3"></img>
@@ -71,12 +72,44 @@ return (
         <img src={itemSaveWishList} alt=""></img>
         <img src={itemShare} alt=""></img>
         </div>
+    <div className="item_description_colors">
+        <h3 className="item_description_selected">Stainless Steel</h3>
+       <div className="item_description_colors_options">
+       <img src={image2} alt="image2" className="colors_option"></img>
+        <img src={image3} alt="image3" className="colors_option"></img>
+        <img src={image4} alt="image4" className="colors_option"></img>
+        <img src={image5} alt="image5" className="colors_option"></img>
+       </div>
+    </div>
 
 
     </div>
 <div className="product_description_price">
-    <p className="item_description_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus quam vel velit malesuada, at semper libero fermentum. Sed vel sapien euismod, tempus metus ac, dignissim nunc. Nulla facilisi. Nulla facilisi. Nulla facilisi.</p>
-    <span className="item_description_rate"></span>
+<div className="price_list"><span>Was</span><span>$499</span></div>
+<div className="price_discounts"><span>Save:</span><span>$100</span></div>
+<div className="price_current"><span>Now</span><span>$399</span></div>
+<div className="price_quantity_items">
+    <QuantityInCart />
+</div>
+<div className="price_coupon">
+    <a href="">Click to activate coupon</a>
+</div>
+
+    <form className="price_financing">
+        <label>
+            <input type="radio" className="price_financing_options" name="financing" value="6-month" />
+            <span>$66.5/m</span><span>6-Month Financing</span>
+        </label>
+        <label>
+            <input type="radio" className="price_financing_options" name="financing" value="12-month" />
+            <span>$33.35/m</span><span>12-Month Financing</span>
+        </label>
+        <label>
+            <input type="radio" className="price_financing_options" name="financing" value="pay-full" checked />
+            <span>Pay in Full</span>
+        </label>
+    </form>
+    <div className="product_actions"><a href="#" className="item_add-to-cart">Add to Cart</a><a href="#" className="item_quick-but">Buy</a></div>
 </div>
 
 

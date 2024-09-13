@@ -22,7 +22,7 @@ const HomePage = () => {
        <div className="wrapper">
          <Layout>
            <div className="container">
-           <section className="section">
+           <section className="section_slider">
             <MainSlider />
            </section>
             <section className="section">
