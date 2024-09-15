@@ -14,8 +14,8 @@ const Outlets = () => {
   return (
     <div className="outlets_main">
       <h2>Outlets</h2>
-      <ul className="outlets_items">
-        <li className="outlets_item" data-id="#">
+      <ul className="card_items">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={newitem1} alt="outlets product 1"/></a>
           </span>
           <div className="item_description">
@@ -45,7 +45,7 @@ const Outlets = () => {
           </div>
         </li>
 
-        <li className="outlets_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={newitem2} alt="outlets product 1"/></a>
           </span>
           <div className="item_description">
@@ -75,7 +75,7 @@ const Outlets = () => {
           </div>
         </li>
 
-        <li className="outlets_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={newitem3} alt="outlets product 1"/></a>
           </span>
           <div className="item_description">
@@ -105,7 +105,7 @@ const Outlets = () => {
           </div>
         </li>
 
-        <li className="outlets_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={newitem1} alt="outlets product 1"/></a>
           </span>
           <div className="item_description">
@@ -135,7 +135,7 @@ const Outlets = () => {
           </div>
         </li>
 
-        <li className="outlets_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={newitem3} alt="outlets product 1"/></a>
           </span>
           <div className="item_description">
@@ -165,7 +165,7 @@ const Outlets = () => {
           </div>
         </li>
 
-        <li className="outlets_item" data-id="#">
+        <li className="card_item" data-id="#">
           <span className="item_image"><a href="#" > <img src={newitem2} alt="outlets product 1"/></a>
           </span>
           <div className="item_description">

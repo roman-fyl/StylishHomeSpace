@@ -60,7 +60,7 @@ return (
         <span className="item_description_logo"><img src={brandLogo} alt="brandLogo"/></span>
         <span className="item_description_dealer-info">authorized dealer</span>
     </div>
-    <p className="item_description_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus quam vel velit malesuada, at semper libero fermentum. Sed vel sapien euismod, tempus metus ac, dignissim nunc. Nulla facilisi. Nulla facilisi. Nulla facilisi.</p>
+    <p className="item_description_text">The GE AHY08LZ is a smart window air conditioner designed for medium-sized rooms up to 350 square feet. It provides 8,000 BTU of cooling power, comes with built-in Wi-Fi, and can be controlled through the SmartHQ app, allowing for remote operation. This model is ENERGY STAR® certified, ensuring energy efficiency, and has a sleek white finish</p>
     <ul className="item_description_important">
         <li>8000 BTU</li>
         <li>350 sq.ft</li>
