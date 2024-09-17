@@ -34,7 +34,7 @@ return (
         <li><Link to="about" smooth={true} duration={500}>About</Link></li>
         <li><Link to="features" smooth={true} duration={500}>Features</Link></li>
         <li><Link to="specifications" smooth={true} duration={500}>Specifications</Link></li>
-        <li><Link to="promotions" smooth={true} duration={500}>Promotions</Link></li>
+        <li><Link to="promotions" smooth={true} duration={500} className="important">Promotions</Link></li>
         <li><Link to="care-maintenance" smooth={true} duration={500}>Care & Maintenance</Link></li>
         <li><Link to="reviews" smooth={true} duration={500}>Reviews</Link></li>
         <li><Link to="installation" smooth={true} duration={500}>Installation</Link></li>

@@ -44,7 +44,12 @@
             text-decoration: underline;
             color: $primary-color;
           }
+          
         }
+      }
+      .important {
+        color: $primary-color-attention;
+        font-weight: 700;
       }
     }
     &_category {

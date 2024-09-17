@@ -33,12 +33,12 @@ return (
 <section className="product_category">
 <div className="product_description_slider">
     <div className="slider_menu">
-        <img src={image1} alt="image1"></img>
+        <img src={image2} alt="image1"></img>
     </div>
     <div className="slider_images">
     <img src={arrowBack} className="prev_arrow" alt="1"></img>
     {/* <img src={image1} alt="image1"></img> */}
-    <img src={image2} alt="image2"></img>
+    <img src={image1} alt="image2"></img>
     <img src={image3} alt="image3"></img>
     <img src={image4} alt="image4"></img>
     <img src={image5} alt="image5"></img>
@@ -57,7 +57,7 @@ return (
 <div className="product_description_brief">
     <h1> GE Smart Window Air Conditioner - 350 Sq. Ft. 8000 BTU - White</h1>
     <div className="item_description_block_logo">
-        <span className="item_description_logo"><img src={brandLogo} alt="brandLogo"/></span>
+        <span className="item_description_logo"><Link to="/ge-appliances.html"><img src={brandLogo} alt="brandLogo"/></Link></span>
         <span className="item_description_dealer-info">authorized dealer</span>
     </div>
     <p className="item_description_text">The GE AHY08LZ is a smart window air conditioner designed for medium-sized rooms up to 350 square feet. It provides 8,000 BTU of cooling power, comes with built-in Wi-Fi, and can be controlled through the SmartHQ app, allowing for remote operation. This model is ENERGY STAR® certified, ensuring energy efficiency, and has a sleek white finish</p>

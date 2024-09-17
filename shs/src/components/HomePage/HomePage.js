@@ -46,8 +46,6 @@ const HomePage = () => {
             <section className="section">
                <Outlets />
             </section>
-            
-            <section className="section"></section>
            </div>
        </Layout>
        </div>

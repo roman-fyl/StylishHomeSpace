@@ -2,8 +2,9 @@ import React, {useState, useEffect} from'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store/stores/store';
-import HomePage from "./components/HomePage/HomePage";
 
+import ScrollToTop from "./components/ScrollToTop";
+import HomePage from "./components/HomePage/HomePage";
 import AboutUs from "./components/Pages/AboutUs";
 import ContactUs from "./components/Pages/ContactUs";
 import FAQs from "./components/Pages/FAQs";
@@ -25,6 +26,7 @@ import Warranty from "./components/Pages/Warranty";
 import WhyBuyFromUs from "./components/Pages/WhyBuyFromUs";
 import ThankYouPage from "./components/Pages/ThankYouPage";
 import ProductPage from "./components/ProductPage/ProductPage.js";
+import BrandPage from "./components/BrandPage/BrandPage.js";
 
 
 // import ProfileMain from "./components/Profile/ProfileMain";
@@ -45,6 +47,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
+        <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/privacy-policy.html" element={<PrivacyPolicy />} />
@@ -69,6 +72,7 @@ const App = () => {
             <Route path="/why-buy-from-us.html" element={<WhyBuyFromUs />} />
             <Route path="/success.html" element={<ThankYouPage />} />
             <Route path="/item.html" element={<ProductPage />} />
+            <Route path="/ge-appliances.html" element={<BrandPage />} />
 
             {/* <Route path="/my-profile.html" element={<ProfileMain />} />
             <Route path="/my-profile-address.html" element={<ProfileAddresses />} />
