@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import logoFooter from "../../../assets/images/logo-no-bg.png";
 
@@ -7,6 +7,9 @@ import "./Footer.scss";
 import SocialMediaComponent from "../../Pages/SocialMediaComponent";
 
 const Footer = () => {
+    useEffect(() => {
+        document.title = 'Stylish Home Space';
+      }, []);
 return (
     <footer class="footer">
         <div className="container">

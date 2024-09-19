@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Link} from 'react-router-dom';
 
 import logo from '../../../assets/images/logo-no-bg.png';
@@ -12,6 +12,9 @@ import iconCart from '../../../assets/images/icon-cart64.png';
 import "./Header.scss"
 
 const Header = () => {
+    useEffect(() => {
+        document.title = 'Stylish Home Space';
+      }, []);
 return (
     <header className="header">
     <div className="container_header">
