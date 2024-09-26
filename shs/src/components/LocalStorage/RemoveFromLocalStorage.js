@@ -1,5 +1,5 @@
 
-export const removeFromLocalStarage = (key) => {
+export const removeFromLocalStorage = (key) => {
     try {
         localStorage.removeItem(key);
         console.log(localStorage.removeItem(key));

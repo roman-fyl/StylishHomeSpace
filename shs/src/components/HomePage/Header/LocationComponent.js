@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
+import {apiKeyLocation} from "../../../store/api/Location";
 import {setZipCode, setError} from "../../../store/actions/locationActions";
 
 import {setLocalStorage} from "../../LocalStorage/SetLocaStorage";
@@ -8,7 +9,7 @@ import { getFromLocalStorage } from "../../LocalStorage/getFromLocalStorage";
 
 const LocationComponent = () => {
   const dispatch = useDispatch();
-  const zipCode = useSelector((state) => state.location.zipCode); // Adjust for location key
+  const zipCode = useSelector((state) => state.location.zipCode);
   const error = useSelector((state) => state.location.error);
 
   useEffect(() => {
@@ -24,8 +25,7 @@ const LocationComponent = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
 
-          const apiKey = "AIzaSyCro6SAfp82q3bK7HSn5LDPPuxT0N94p-s";
-          const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+          const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKeyLocation}`;
 
           axios
             .get(geocodeUrl)
@@ -36,10 +36,10 @@ const LocationComponent = () => {
                   component.types.includes("postal_code")
                 );
 
-                console.log("ZIP Component: ", zip); // Log the ZIP code component
+                console.log("ZIP Component: ", zip);
 
                 if (zip) {
-                  dispatch(setZipCode(zip.long_name)); // Dispatch Redux action to set ZIP code
+                  dispatch(setZipCode(zip.long_name));
                 } else {
                   dispatch(setError("ZIP code not found."));
                 }
