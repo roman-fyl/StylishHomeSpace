@@ -6,6 +6,7 @@ export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
 
+
 export const addToCart = (product) => ({
     type: ADD_TO_CART,
     payload: product,
@@ -29,3 +30,4 @@ export const userLogin = (user) => ({
 export const userLogout = () => ({
     type: USER_LOGOUT,
 });
+
