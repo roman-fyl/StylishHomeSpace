@@ -24,7 +24,7 @@ const OrderTracking = () => {
              minlength="9" maxlength="20" id="search_tracking_number" />
            <input type="email" className="search_tracking_email" tabIndex="6" name="search_tracking_email" placeholder="Enter Email*"
              minlength="5" maxlength="30" id="search_tracking_email" />
-      <input type="submit" class="search_tracking_submit" value="Search"></input>
+      <input type="submit" className="search_tracking_submit" value="Search"></input>
       </form>
 </section>
 <section className="section">

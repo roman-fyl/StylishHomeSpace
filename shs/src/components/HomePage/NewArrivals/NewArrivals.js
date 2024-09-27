@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import {setData} from "../../../store/reducers/dataSlice";
 
 import newitem1 from "../../../assets/db/images/items/sku_01_04.png";
 import newitem2 from "../../../assets/db/images/items/sku_01_05.png";
@@ -9,8 +11,17 @@ import logo2 from "../../../assets/db/images/brand-logos/fulgor_milano_white.png
 import logo3 from "../../../assets/db/images/brand-logos/ge_white.png";
 
 import "./NewArrivals.scss";
+import data from "../../../assets/db/items.json"
 
 const NewArrivals = () => {
+const dispatch = useDispatch();
+const dbData = useSelector((state) => state.data)
+console.log(dbData); 
+
+useEffect(() => {
+  dispatch(setData(data))
+},[dispatch])
+
   return (
     <div className="newArrivals_main">
       <h2>New Arrivals</h2>

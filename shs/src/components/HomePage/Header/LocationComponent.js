@@ -66,7 +66,7 @@ const LocationComponent = () => {
     }
   }, [dispatch]);
 
-  console.log(zipCode);
+  // console.log(zipCode);
 
   useEffect(() => {
     if (zipCode) {

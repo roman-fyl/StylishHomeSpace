@@ -28,7 +28,7 @@ const SetLocationManually = ({onClose}) => {
       dispatch(setZipCode(inputZipCode));
       setLocalStorage("Customer_zipCode", inputZipCode);
       setIsInputVisible(false);
-      console.log(inputZipCode);
+      // console.log(inputZipCode);
       if (onClose) onClose();
     } else {
       dispatch(setError(""));
@@ -47,7 +47,7 @@ const SetLocationManually = ({onClose}) => {
           type="text"
           value={inputZipCode} 
           onChange={handleZipCodeChange}
-          placeholder="Zip"
+          placeholder="Enter Zip"
         />
       </label>
     </form>

@@ -11,7 +11,7 @@ const Footer = () => {
         document.title = 'Stylish Home Space';
       }, []);
 return (
-    <footer class="footer">
+    <footer className="footer">
         <div className="container">
         <div className="footer_content">
             <div className="footer_logo_block">
@@ -47,9 +47,9 @@ return (
             <div className="footer_subscription_block">
                 <p>Subscribe to our newsletter and be the first to know about our updates</p>
                 <form action="/submit" method="post" className="footer_subscription_form">
-                  <input type="email" className="email__field" tabindex="10" name="email" placeholder="Enter your email"
-                    minlength="5" maxlength="30" id="navtag-sigup" />
-                  <input type="submit" class="footer_button__submit" value="Subscribe" />
+                  <input type="email" className="email__field" tabIndex="10" name="email" placeholder="Enter your email"
+                    minLength="5" maxLength="30" id="navtag-sigup" />
+                  <input type="submit" className="footer_button__submit" value="Subscribe" />
                 </form>
             </div>
         </div>

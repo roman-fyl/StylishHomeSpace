@@ -57,10 +57,10 @@ const AboutUs = () => {
 <Link to="/faqs.html">Privacy & Security</Link>
 </div>
 </section>
-<section class="section">
+<section className="section">
         <ContactUsComponent />
 </section>
-<section class="section">
+<section className="section">
 <div className="privacy_description">
   <h1>Contact us or follow us on social media for the latest updates, promotions, and home styling tips</h1>
           
