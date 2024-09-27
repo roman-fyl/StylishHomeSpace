@@ -3,9 +3,9 @@ import {SET_ZIP_CODE, SET_LOCATION_ERROR} from "../actions/locationActions";
 
 
 const initialState = {
-    latitude: null,
-    longitude: null,
-    zipCode: null,
+    latitude: "",
+    longitude: "",
+    zipCode: "",
     error: null,
 };
 

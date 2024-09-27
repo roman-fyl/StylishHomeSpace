@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {apiKeyLocation} from "../../../store/api/Location";
@@ -11,12 +11,15 @@ const LocationComponent = () => {
   const dispatch = useDispatch();
   const zipCode = useSelector((state) => state.location.zipCode);
   const error = useSelector((state) => state.location.error);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
 
     const storedZipCode = getFromLocalStorage("Customer_zipCode");
+
     if (storedZipCode) {
       dispatch(setZipCode(storedZipCode));
+      setIsLoading(false);
       return
     }
 
@@ -46,13 +49,16 @@ const LocationComponent = () => {
               } else {
                 dispatch(setError("No results found."));
               }
+              setIsLoading(false);
             })
             .catch((err) => {
               dispatch(setError("Error with reverse geocoding: " + err.message));
+              setIsLoading(false);
             });
         },
         (err) => {
           dispatch(setError(err.message));
+          setIsLoading(false);
         }
       );
     } else {
@@ -68,16 +74,18 @@ const LocationComponent = () => {
     }
   }, [zipCode]);
 
-  return (
-<span>
-{error ? (
+   return (
+    <span>
+      {error ? (
         <p>Error: {error}</p>
+      ) : isLoading ? (
+        <p className="header_location_loading">Loading...</p>
       ) : zipCode ? (
         <p>{zipCode}</p>
       ) : (
         <p className="header_location_error">Update</p>
       )}
-</span>
+    </span>
   );
 };
 

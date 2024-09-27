@@ -30,6 +30,7 @@
       flex-direction: column;
       color: $primary-color-text;
       font-size: 16px;
+      position: relative;
       &:hover {
           color: $primary-color-hover-text;
       }
@@ -40,6 +41,18 @@
       &_error {
         color: $footer-color;
         font-weight: 700;
+      }
+      &_form {
+        position: absolute;
+        top: 0;
+        width: 100px;
+        background-color: $primary-color;
+        border-radius: 2px;
+        input {
+          padding: 10px 5px;
+          width: 100%;
+
+        }
       }
     }
     &_account {
