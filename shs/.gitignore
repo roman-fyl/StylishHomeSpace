@@ -6,6 +6,7 @@
 .pnp.js
 src/store/api/
 src/assets/db/
+/public
 
 
 # next.js

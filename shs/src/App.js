@@ -27,7 +27,9 @@ import WhyBuyFromUs from "./components/Pages/WhyBuyFromUs";
 import ThankYouPage from "./components/Pages/ThankYouPage";
 import ProductPage from "./components/ProductPage/ProductPage";
 import BrandPage from "./components/BrandPage/BrandPage";
-import CategoryPage from "./components/CategoryPage/CategoryPage"
+import CategoryPage from "./components/CategoryPage/CategoryPage";
+import ProductDetails from "./components/ProductPage/ProductDetails";
+
 
 
 // import ProfileMain from "./components/Profile/ProfileMain";
@@ -75,7 +77,7 @@ const App = () => {
             <Route path="/item.html" element={<ProductPage />} />
             <Route path="/ge-appliances.html" element={<BrandPage />} />
             <Route path="/category.html" element={<CategoryPage />} />
-
+            <Route path="/:sku.html" element={<ProductDetails />} />
 
             {/* <Route path="/my-profile.html" element={<ProfileMain />} />
             <Route path="/my-profile-address.html" element={<ProfileAddresses />} />
