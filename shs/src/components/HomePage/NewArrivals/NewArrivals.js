@@ -59,7 +59,9 @@ const GenerateOldPrice = (price, percentage) => {
              </span>
              <span className="item_price">${item.price}</span>
            </span>
-           <div className="item_actions">
+         </div>
+         </Link>  
+         <div className="item_actions">
              <a href="#" className="item_add-to-cart">
                Add to Cart
              </a>
@@ -67,7 +69,6 @@ const GenerateOldPrice = (price, percentage) => {
                Buy
              </a>
            </div>
-         </div></Link>
        </li>
        ))}
       </ul>

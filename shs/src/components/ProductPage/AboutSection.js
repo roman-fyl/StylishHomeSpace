@@ -97,15 +97,15 @@ return (
 
     <form className="price_financing">
         <label>
-            <input type="radio" className="price_financing_options" name="financing" value="6-month" />
+            <input type="radio" className="price_financing_options" name="financing"  />
             <span>$66.5/m</span><span>6-Month Financing</span>
         </label>
         <label>
-            <input type="radio" className="price_financing_options" name="financing" value="12-month" />
+            <input type="radio" className="price_financing_options" name="financing"  />
             <span>$33.35/m</span><span>12-Month Financing</span>
         </label>
         <label>
-            <input type="radio" className="price_financing_options" name="financing" value="pay-full" checked />
+            <input type="radio" className="price_financing_options" name="financing"  />
             <span>Pay in Full</span>
         </label>
     </form>

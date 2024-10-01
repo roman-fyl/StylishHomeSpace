@@ -6,6 +6,8 @@
   flex-wrap: wrap;
   padding: 0;
   margin: 0;
+  color: $primary-color-light;
+  font: $font-x-small;
   img {
     width: 20px;
   }
@@ -523,7 +525,7 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-content: flex-start;
     flex-wrap: wrap;
     gap: 30px;
