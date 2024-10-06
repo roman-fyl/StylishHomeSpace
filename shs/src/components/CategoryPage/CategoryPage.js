@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import Layout from "../../Layout";
 
-import BreadcrumbComponent from "../ProductPage/BreadcrumbComponent";
 import CategorySlider from "./CategorySlider";
 
 import brandLogo from "../../assets/db/images/brand-logos/ge_white.png";
@@ -33,7 +32,6 @@ return (
    <Layout>
      <div className="container">
     <div className="category-page_content">
-    <BreadcrumbComponent />
    <div className="category-header_block">
     <CategorySlider />
  <div>

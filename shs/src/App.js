@@ -28,7 +28,6 @@ import ThankYouPage from "./components/Pages/ThankYouPage";
 import ProductPage from "./components/ProductPage/ProductPage";
 import BrandPage from "./components/BrandPage/BrandPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
-import ProductDetails from "./components/ProductPage/ProductDetails";
 
 
 
@@ -74,10 +73,10 @@ const App = () => {
             <Route path="/payment-options.html" element={<PaymentOptions />} />
             <Route path="/why-buy-from-us.html" element={<WhyBuyFromUs />} />
             <Route path="/success.html" element={<ThankYouPage />} />
-            <Route path="/item.html" element={<ProductPage />} />
-            <Route path="/ge-appliances.html" element={<BrandPage />} />
+            <Route path="/item/:sku.html" element={<ProductPage />} /> {/* For items */}
             <Route path="/category.html" element={<CategoryPage />} />
-            <Route path="/:sku.html" element={<ProductDetails />} />
+            <Route path="/brand/:brandName.html" element={<BrandPage />} /> {/* For brands */}
+
 
             {/* <Route path="/my-profile.html" element={<ProfileMain />} />
             <Route path="/my-profile-address.html" element={<ProfileAddresses />} />

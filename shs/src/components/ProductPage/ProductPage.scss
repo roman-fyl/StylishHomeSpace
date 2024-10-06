@@ -78,7 +78,7 @@
       height: 530px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      // justify-content: space-between;
       align-items: center;
       // border: 1px solid gray;
       // width: 7%;
@@ -275,7 +275,7 @@
   }
   &_installation {
     span {
-        margin-left: 15px;
+        // margin-left: 15px;
     }
   }
   &_warranties {
@@ -511,6 +511,7 @@
         margin-bottom: 5px;
       }
       &_options {
+        display: flex;
         img {
           cursor: $cursor;
           opacity: 0.8;
@@ -575,8 +576,13 @@
     align-items: flex-start;
     padding: 5px;
     margin-top: 20px;
-    span {
+    span, del {
       margin-right: 20px;
+      font: $font-small;
+      color: $primary-color;
+    }
+    del {
+      margin-right: 0px;
       font: $font-small;
       color: $primary-color;
     }
@@ -589,7 +595,7 @@
     background-color: $primary-color-attention;
     padding: 5px;
     span {
-      margin-right: 20px;
+      margin-right: 0px;
       font: $font-small;
       color: $primary-color-text;
     }
@@ -601,7 +607,7 @@
     align-items: flex-start;
     padding: 5px;
     span {
-      margin-right: 20px;
+      margin-right: 0px;
       font: $font-regular;
       color: $primary-color-success;
       font-weight: 700;
