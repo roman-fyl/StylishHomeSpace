@@ -16,11 +16,14 @@ const BrandPage = () => {
   const [error, setError] = useState(null);
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
   
+  
   useEffect(() => {
     console.log(productData);
 
     const fetchedProducts = productData.filter(product => product.brandText.toLowerCase() === brandName.toLowerCase());
     console.log("Fetched Products: ", fetchedProducts);
+    const fetchedLogo = productData.filter(product => product.brandLogo === brandLogo);
+    console.log("Fetched Products: ", fetchedLogo);
     
     if (fetchedProducts.length > 0) {
       setProducts(fetchedProducts);
@@ -61,7 +64,7 @@ const BrandPage = () => {
       <div className="container">
         <div className="brand-page_content">
           <div className="brand-page_main-logo">
-            <img src={brandLogo} alt={`${products[0]?.brandText || 'Brand'} logo`} />
+          <img src={products[0]?.brandLogo} alt={`${products[0]?.brandText || 'Brand'} logo`} />
           </div>
           <section className="section brand-page_categories">
             <ul className="brand-page_list">
