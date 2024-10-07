@@ -73,7 +73,7 @@ const App = () => {
             <Route path="/payment-options.html" element={<PaymentOptions />} />
             <Route path="/why-buy-from-us.html" element={<WhyBuyFromUs />} />
             <Route path="/success.html" element={<ThankYouPage />} />
-            <Route path="/item/:sku.html" element={<ProductPage />} /> {/* For items */}
+            <Route path="/item/:sku.html" element={<ProductPage />} />
             <Route path="/category.html" element={<CategoryPage />} />
             <Route path="/brand/:brandName.html" element={<BrandPage />} />
 
