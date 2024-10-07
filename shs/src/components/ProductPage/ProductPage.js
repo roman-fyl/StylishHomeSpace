@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink, Element } from "react-scroll";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Layout from "../../Layout";
 
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
@@ -19,35 +18,30 @@ import productData from "../../assets/db/items.json";
 
 const ProductPage = () => {
   const { sku } = useParams();
+  const cleanSKU = sku.replace('.html', '');
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   
+  useEffect(() => {
+    console.log('SKU:', cleanSKU); 
+    document.title = cleanSKU.toUpperCase();
+    
+
+    const fetchedProduct = productData.find(item => item.SKU.toLowerCase() === cleanSKU.toLowerCase());
+
+    if (fetchedProduct) {
+      setProduct(fetchedProduct);
+      setError(null);
+    } else {
+      setError("Product not found");
+    }
+
+
+  },[cleanSKU]);
 
   const GenerateOldPrice = (price, percentage) => {
     return price * (1 + percentage / 100);
   };
-
-  useEffect(() => {
-    const fetchedProduct = productData.find((item) => item.SKU === sku);
-
-    if (fetchedProduct) {
-      setProduct(fetchedProduct);
-      document.title = `Product Details - ${sku}`;
-      console.log(sku)
-    } else {
-      setError("Product not found");
-      document.title = "Product Not Found";
-    }
-  }, [sku]); 
-  
-  
-  
-  
-
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
 
   if (!product) {
     return <div>Loading...</div>;

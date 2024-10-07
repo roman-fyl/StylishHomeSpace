@@ -11,15 +11,15 @@ import "./BrandPage.scss";
 
 const BrandPage = () => {
   const { brandName } = useParams();
-  const cleanBrandName = brandName.replace('.html', ''); // Remove the .html part
+  const cleanBrandName = brandName.replace('.html', '');
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
 
   useEffect(() => {
-    console.log('Brand Name:', cleanBrandName); // Debugging brandName
+    console.log('Brand Name:', cleanBrandName); 
+    document.title = cleanBrandName.toUpperCase();
 
-    // Fetching products matching the brand name
     const fetchedProducts = productData.filter(product => 
       product.brandText.toLowerCase() === cleanBrandName.toLowerCase()
     );
@@ -28,38 +28,12 @@ const BrandPage = () => {
       setProducts(fetchedProducts);
       setError(null);
     } else {
-      setProducts([]); // Ensure products is empty on no match
+      setProducts([]);
       setError("Products not found");
     }
   }, [cleanBrandName]);
 
-  // Title management based on product state and error
-  useEffect(() => {
-    const currentTitle = document.title;
-    
-    if (error) {
-      document.title = "Error Loading Products"; // Title on error
-    } else if (products.length > 0) {
-      document.title = cleanBrandName.toUpperCase(); // Title with brand name
-    } else {
-      document.title = `${cleanBrandName.toUpperCase()} - Loading...`; // Title during loading
-    }
 
-    // Check if the title has changed
-    if (document.title !== currentTitle) {
-      console.log('Document title set to:', document.title); // Debugging title setting
-    }
-  }, [products, error, cleanBrandName]);
-
-  // Error handling
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  // Loading state
-  if (products.length === 0) {
-    return <div>Loading...</div>;
-  }
 
   const showItems = () => {
     setDisplayedItemCount((prevCount) => prevCount + 6);
