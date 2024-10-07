@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Layout from "../../Layout";
-import brandLogo from "../../assets/db/images/brand-logos/ge_white.png";
 import gastop from "../../assets/db/images/items/GE/categories/gastop.png";
 import laundryPair from "../../assets/db/images/items/GE/categories/laundry-pair.png";
 import range from "../../assets/db/images/items/GE/categories/range.png";
@@ -12,34 +11,52 @@ import "./BrandPage.scss";
 
 const BrandPage = () => {
   const { brandName } = useParams();
+  const cleanBrandName = brandName.replace('.html', ''); // Remove the .html part
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
-  
-  
-  useEffect(() => {
-    console.log(productData);
 
-    const fetchedProducts = productData.filter(product => product.brandText.toLowerCase() === brandName.toLowerCase());
-    console.log("Fetched Products: ", fetchedProducts);
-    const fetchedLogo = productData.filter(product => product.brandLogo === brandLogo);
-    console.log("Fetched Products: ", fetchedLogo);
-    
+  useEffect(() => {
+    console.log('Brand Name:', cleanBrandName); // Debugging brandName
+
+    // Fetching products matching the brand name
+    const fetchedProducts = productData.filter(product => 
+      product.brandText.toLowerCase() === cleanBrandName.toLowerCase()
+    );
+
     if (fetchedProducts.length > 0) {
       setProducts(fetchedProducts);
+      setError(null);
     } else {
+      setProducts([]); // Ensure products is empty on no match
       setError("Products not found");
     }
+  }, [cleanBrandName]);
 
-    if (brandName) {
-      document.title = brandName.toUpperCase();
+  // Title management based on product state and error
+  useEffect(() => {
+    const currentTitle = document.title;
+    
+    if (error) {
+      document.title = "Error Loading Products"; // Title on error
+    } else if (products.length > 0) {
+      document.title = cleanBrandName.toUpperCase(); // Title with brand name
+    } else {
+      document.title = `${cleanBrandName.toUpperCase()} - Loading...`; // Title during loading
     }
-  }, [brandName]);
 
+    // Check if the title has changed
+    if (document.title !== currentTitle) {
+      console.log('Document title set to:', document.title); // Debugging title setting
+    }
+  }, [products, error, cleanBrandName]);
+
+  // Error handling
   if (error) {
     return <div>Error: {error}</div>;
   }
 
+  // Loading state
   if (products.length === 0) {
     return <div>Loading...</div>;
   }
@@ -53,18 +70,15 @@ const BrandPage = () => {
     return price * (1 + percentage / 100);
   };
 
-  // Assuming you want to filter by a specific group (e.g., "newArrival")
-
   const filteredNewProducts = products.filter(item => item.group === "newArrival");
   const filteredBestsellerProducts = products.filter(item => item.group === "bestseller");
-
 
   return (
     <Layout>
       <div className="container">
         <div className="brand-page_content">
           <div className="brand-page_main-logo">
-          <img src={products[0]?.brandLogo} alt={`${products[0]?.brandText || 'Brand'} logo`} />
+            <img src={products[0]?.brandLogo} alt={`${products[0]?.brandText || 'Brand'} logo`} />
           </div>
           <section className="section brand-page_categories">
             <ul className="brand-page_list">
@@ -78,7 +92,7 @@ const BrandPage = () => {
           </section>
           <section className="section">
             <div className="newArrivals_main">
-              <h2>Best-Selling Products</h2> {/* Update the title to reflect the brand */}
+              <h2>Best-Selling Products</h2>
               <ul className="card_items">
                 {filteredBestsellerProducts.slice(0, displayedItemCount).map((item, index) => (
                   <li className="card_item" data-id={index + 1} key={item.SKU}>
@@ -116,7 +130,7 @@ const BrandPage = () => {
           </section>
           <section className="section">
             <div className="newArrivals_main">
-              <h2>New Arrivals</h2> {/* Update the title to reflect the brand */}
+              <h2>New Arrivals</h2>
               <ul className="card_items">
                 {filteredNewProducts.slice(0, displayedItemCount).map((item, index) => (
                   <li className="card_item" data-id={index + 1} key={item.SKU}>
@@ -152,7 +166,6 @@ const BrandPage = () => {
               <div className="items_more"><span onClick={showItems}>Explore More</span></div>
             </div>
           </section>
-
         </div>
       </div>
     </Layout>

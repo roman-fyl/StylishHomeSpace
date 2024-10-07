@@ -75,7 +75,7 @@ const App = () => {
             <Route path="/success.html" element={<ThankYouPage />} />
             <Route path="/item/:sku.html" element={<ProductPage />} /> {/* For items */}
             <Route path="/category.html" element={<CategoryPage />} />
-            <Route path="/brand/:brandName.html" element={<BrandPage />} /> {/* For brands */}
+            <Route path="/brand/:brandName.html" element={<BrandPage />} />
 
 
             {/* <Route path="/my-profile.html" element={<ProfileMain />} />

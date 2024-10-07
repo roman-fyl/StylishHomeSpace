@@ -18,9 +18,10 @@ import arrowBack from "../../assets/images/arrow-back.png";
 import productData from "../../assets/db/items.json";
 
 const ProductPage = () => {
-  const { sku, category, brand } = useParams();
+  const { sku } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
+  
 
   const GenerateOldPrice = (price, percentage) => {
     return price * (1 + percentage / 100);
@@ -28,21 +29,21 @@ const ProductPage = () => {
 
   useEffect(() => {
     const fetchedProduct = productData.find((item) => item.SKU === sku);
-    console.log("Fetched product: ", fetchedProduct);
-
-    const fetchedCategory = productData.find((item) => item.group === category);
-    console.log("Fetched category: ", fetchedCategory);
-
- 
 
     if (fetchedProduct) {
       setProduct(fetchedProduct);
+      document.title = `Product Details - ${sku}`;
+      console.log(sku)
     } else {
       setError("Product not found");
+      document.title = "Product Not Found";
     }
+  }, [sku]); 
+  
+  
+  
+  
 
-    document.title = `Product Details - SKU: ${sku}`;
-  }, [sku]);
 
   if (error) {
     return <div>Error: {error}</div>;
