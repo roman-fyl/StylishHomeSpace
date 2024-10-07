@@ -5,11 +5,9 @@ import Layout from "../../Layout";
 import MainSlider from "../HomePage/MainSlider/MainSlider";
 import BannersGroup from "../HomePage/Banners/BannersGroup";
 import FlashOffers from "../HomePage/FlashOffers/FlashOffers";
-import BestSelling from "./BestSelling/BestSelling";
-import NewArrivals from "./NewArrivals/NewArrivals";
+import ItemSection from "./ItemSection/ItemSection";
 import Trends from "../HomePage/Trends/Trends";
 import DailyDeals from "../HomePage/DailyDeals/DailyDeals";
-import Outlets from "../HomePage/Outlets/Outlets";
 
 
 
@@ -22,7 +20,7 @@ const HomePage = () => {
        <div className="wrapper">
          <Layout>
            <div className="container">
-           <section className="section">
+           <section className="section_slider">
             <MainSlider />
            </section>
             <section className="section">
@@ -32,22 +30,21 @@ const HomePage = () => {
                <FlashOffers />
             </section>
             <section className="section">
-               <BestSelling />
+            <ItemSection category="bestseller" subject="Best-Selling Items" />
+               {/* <BestSelling /> */}
             </section>
             <section className="section">
             <Trends />
             </section>
             <section className="section">
-               <NewArrivals />
+               <ItemSection category="newArrival" subject="New Arrivals"/>
             </section>
             <section className="section">
                <DailyDeals />
             </section>
             <section className="section">
-               <Outlets />
+            <ItemSection category="outlet" subject="Outlets"/>
             </section>
-            
-            <section className="section"></section>
            </div>
        </Layout>
        </div>

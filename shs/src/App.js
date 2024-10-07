@@ -1,9 +1,10 @@
-import React from'react';
+import React, {useState, useEffect} from'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store/stores/store';
-import HomePage from "./components/HomePage/HomePage";
 
+import ScrollToTop from "./components/ScrollToTop";
+import HomePage from "./components/HomePage/HomePage";
 import AboutUs from "./components/Pages/AboutUs";
 import ContactUs from "./components/Pages/ContactUs";
 import FAQs from "./components/Pages/FAQs";
@@ -18,17 +19,37 @@ import Services from "./components/Pages/Services";
 import ShippingInformation from "./components/Pages/ShippingInformation";
 import SignIn from "./components/Pages/SignIn";
 import SignUp from "./components/Pages/SignUp";
+import SignUpProfessional from "./components/Pages/SignUpB2B";
 import SpecialOffers from "./components/Pages/SpecialOffers";
 import TermsConditions from "./components/Pages/TermsConditions";
 import Warranty from "./components/Pages/Warranty";
 import WhyBuyFromUs from "./components/Pages/WhyBuyFromUs";
+import ThankYouPage from "./components/Pages/ThankYouPage";
+import ProductPage from "./components/ProductPage/ProductPage";
+import BrandPage from "./components/BrandPage/BrandPage";
+import CategoryPage from "./components/CategoryPage/CategoryPage";
+
+
+
+// import ProfileMain from "./components/Profile/ProfileMain";
+// import ProfileAddresses from "./components/Profile/ProfileAddresses";
+// import ProfileAffiliateProgram from './components/Profile/ProfileAffiliateProgram';
+// import ProfileLastVisitedItems from "./components/Profile/ProfileLastVisitedItems";
+// import ProfileLoyaltyPoints from "./components/Profile/ProfileLoyaltyPoints";
+// import ProfileOrderHistory from "./components/Profile/ProfileOrderHistory";
+// import ProfilePayments from './components/Profile/ProfilePayments';
+// import ProfileReturns from "./components/Profile/ProfileReturns";
+// import ProfileSubmittedTickets from './components/Profile/ProfileSubmittedTickets';
+// import ProfileWishlist from "./components/Profile/ProfileWishlist";
 
 import './App.scss';
 
 const App = () => {
+
   return (
     <Provider store={store}>
       <Router>
+        <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/privacy-policy.html" element={<PrivacyPolicy />} />
@@ -44,12 +65,29 @@ const App = () => {
             <Route path="/loyalty-program.html" element={<LoyaltyProgram />} />
             <Route path="/sign-in.html" element={<SignIn />} />
             <Route path="/sign-up.html" element={<SignUp />} />
+            <Route path="/sign-up-professional.html" element={<SignUpProfessional />} />
             <Route path="/about-us.html" element={<AboutUs />} />
             <Route path="/special-offers.html" element={<SpecialOffers />} />
             <Route path="/financing.html" element={<Financing />} />
             <Route path="/services.html" element={<Services />} />
             <Route path="/payment-options.html" element={<PaymentOptions />} />
             <Route path="/why-buy-from-us.html" element={<WhyBuyFromUs />} />
+            <Route path="/success.html" element={<ThankYouPage />} />
+            <Route path="/item/:sku.html" element={<ProductPage />} /> {/* For items */}
+            <Route path="/category.html" element={<CategoryPage />} />
+            <Route path="/brand/:brandName.html" element={<BrandPage />} />
+
+
+            {/* <Route path="/my-profile.html" element={<ProfileMain />} />
+            <Route path="/my-profile-address.html" element={<ProfileAddresses />} />
+            <Route path="/my-profile-affiliate.html" element={<ProfileAffiliateProgram />} />
+            <Route path="/my-profile-last-visited-items.html" element={<ProfileLastVisitedItems />} />
+            <Route path="/my-profile-loyalty.html" element={<ProfileLoyaltyPoints />} />
+            <Route path="/my-profile-order-history.html" element={<ProfileOrderHistory />} />
+            <Route path="/my-profile-payments.html" element={<ProfilePayments />} />
+            <Route path="/my-profile-returns.html" element={<ProfileReturns />} />
+            <Route path="/my-profile-submitted-tickets.html" element={<ProfileSubmittedTickets />} />
+            <Route path="/my-profile-wishlist.html" element={<ProfileWishlist />} /> */}
 
 
 

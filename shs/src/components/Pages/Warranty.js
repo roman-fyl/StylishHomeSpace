@@ -16,10 +16,23 @@ const Warranty = () => {
           <h1>Warranty</h1>
           <p>September 01, 2024</p>
           
+          <section className="section">
+    <h4>Manufacturer’s Warranty</h4>
+    <p>As an authorized dealer, SHS (Stylish Home Space) ensures that all appliances purchased from us are protected by the manufacturer's warranty. Most manufacturer warranties cover parts and labor for one year, but the duration and coverage may vary by manufacturer.</p>
+    <p>You will receive your warranty information either with your product or by mail shortly after delivery. Often, manufacturers require you to complete and mail a warranty form, which will specify when the warranty period starts—typically from the date of submission or purchase. For some products, you can find the warranty form on the product page.</p>
+</section>
 <section className="section">
-    <h4>COPPA Compliance Disclosure:</h4>
-    <p>This Privacy Policy presumes that your website is not directed at children under the age of 13 and does not knowingly collect personal identifiable information from them or allow others to do the same through your site. If this is not true for your website or online service and you do collect such information (or allow others to do so), please be aware that you must be compliant with all COPPA regulations and guidelines in order to avoid violations which could lead to law enforcement actions, including civil penalties.</p>
-    <p>In order to be fully compliant with COPPA your website or online service must fulfill other requirements such as: (i) posting a privacy policy which describes not only your practices, but also the practices of any others collecting personal information on your site or service — for example, plug-ins or ad networks; (ii) include a prominent link to your privacy policy anywhere you collect personal information from children; (iii) include a description of parental rights (e.g. that you won't require a child to disclose more information than is reasonably necessary, that they can review their child's personal information, direct you to delete it, and refuse to allow any further collection or use of the child's information, and the procedures to exercise their rights); (iv) give parents "direct notice" of your information practices before collecting information from their children; and (v) obtain the parents' "verifiable consent" before collecting, using or disclosing personal information from a child. For more information on the definition of these terms and how to make sure your website or online service is fully compliant with COPPA please visit https://www.ftc.gov/tips-advice/business-center/guidance/childrens-online-privacy-protection-rule-six-step-compliance. FormSwift and its subsidiaries are in no way responsible for determining whether or not your company is in fact compliant with COPPA and takes no responsibility for the use you make of this Privacy Policy or for any potential liability your company may face in relation to any COPPA compliance issues.</p>
+    <h4>Extended Warranties</h4>
+    <p>SHS offers extended warranties through a third party companies. These extended warranties cover parts and labor for up to five years (excluding commercial products, sinks, faucets, and a few other items). Unlike most manufacturer extended warranties, which only cover parts, the Protection Plan extends both parts and labor coverage. To purchase a Protection Plan, click the Logo on the product page and select the plan that best fits your needs.</p>
+</section>
+<section className="section">
+    <h4>Important Warranty Tips</h4>
+    <ul>
+        <li>Avoid Alterations: Never make aftermarket modifications to your appliances, as these can void your warranty. Manufacturers typically outline what constitutes warranty voidance in their agreements.</li>
+        <li>Keep Documentation: Always save copies of your warranty documents and original proof of purchase. These are essential for receiving warranty service.</li>
+        <li>Regular Maintenance: Perform light maintenance on your appliances to keep them in good condition. While you hope never to need it, having a warranty provides peace of mind.</li>
+    </ul>
+    <p>For more information or to address any warranty-related questions, please contact our customer service team.</p>
 </section>
         </div>
       </div>

@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Link} from 'react-router-dom';
+import LocationComponent from "./LocationComponent";
+import SetLocationManually from "./SetLocationManually";
 
 import logo from '../../../assets/images/logo-no-bg.png';
 import iconLogo from '../../../assets/images/icon-call64.png';
@@ -12,6 +14,16 @@ import iconCart from '../../../assets/images/icon-cart64.png';
 import "./Header.scss"
 
 const Header = () => {
+const [isFormVisible, setFormVisible] = useState(false);
+
+    useEffect(() => {
+        document.title = 'Stylish Home Space';
+      }, []);
+
+      const handleCloseForm = () => {
+        setFormVisible(false); 
+      };
+
 return (
     <header className="header">
     <div className="container_header">
@@ -21,11 +33,12 @@ return (
     </Link>
      <form>
            <input type="text" className="search_field" tabIndex="2" name="search" placeholder="What you're looking for?"
-             minlength="3" maxlength="30" id="search" />
+             minLength="3" maxLength="30" id="search" />
      </form>
          <a href="tel:8001234567"><div className="header_block"><img src={iconLogo}></img><span className="header_call"><span>1-800-123-4567</span></span></div></a>
-         <a href="#"><div className="header_block"><img src={iconLocation}></img><span className="header_location">Delivering to<span>Austin, 78717</span><span>Update?</span></span></div></a>
-         <Link to="/order-tracking.html"><div className="header_block"><img src={iconOrderStatus}></img><span className="header_call"><span>Order Status</span></span></div></Link>
+         <div className="header_block" onClick={() => setFormVisible(!isFormVisible)}><img src={iconLocation}></img><span className="header_location">Delivering to<LocationComponent />
+         {isFormVisible && (<SetLocationManually onClose={handleCloseForm} />)}</span></div>
+         <Link to="/order-tracking.html"><div className="header_block"><img src={iconOrderStatus}></img><span className="header_call"><span>Order Tracking</span></span></div></Link>
          <Link to="/sign-in.html"><div className="header_block"><img src={iconLogIn}></img><span className="header_account"><span>Hello, <span>Roman</span></span><span>SIGN IN</span></span></div></Link>
          <a href="#"><div className="header_block"><img src={iconCart}></img><span className="header_call"></span></div></a>
      </div>

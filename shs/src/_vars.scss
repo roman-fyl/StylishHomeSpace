@@ -1,9 +1,13 @@
 $primary-color: #7E7563;
+$primary-color-light: #817e76;
 $primary-font: Helvetica, sans-serif;
 $primary-color-text: #FBFBF8;
 $primary-color-hover-text: #D4D3CC;
-$primary-color-hover-link: #3e3930;
+$primary-color-hover-link: #5f574a;
 $footer-color: #000000;
+$primary-color-attention: red;
+$primary-color-success: rgb(0, 175, 0);
+
 $footer-gray: #b3b3b3;
 $mainFont:  "Lato", sans-serif;
 
@@ -17,4 +21,7 @@ $font-link: 300 14px $mainFont;
 $button-buyNow: #7E7563;
 $button-addToCart: #7E7563;
 
-$transition: .2s ease-in-out;
+$transition: all 0.2s ease-in-out;
+$cursor: pointer;
+$box-shadow: 0 0 5px rgba(52, 3, 3, 0.25);
+$box-shadow-hover: 0 0 10px rgba(0, 0, 0, 0.25);

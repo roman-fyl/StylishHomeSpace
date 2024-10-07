@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Link} from'react-router-dom';
 import iconOrderStatus from '../../../assets/images/icon-order-status64.png';
-
 
 import "./Benefits.scss"
 
 const Benefits = () => {
+    useEffect(() => {
+        document.title = 'Why Buy From Us';
+      }, []);
 return (
     <div className="benefits">
     <div className="container_benefits">

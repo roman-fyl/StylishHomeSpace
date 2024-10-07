@@ -4,7 +4,20 @@
 /node_modules
 /.pnp
 .pnp.js
+src/store/api/
+src/assets/db/
+/public
 
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# vercel
+.vercel
 # testing
 /coverage
 

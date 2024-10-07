@@ -1,17 +1,17 @@
 
-.bestselling_item {
+.card_item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     flex: 0 1 15%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    box-shadow: $box-shadow;
     padding: 15px;
     min-height: 500px;
     width: 250px;
     background-color: #fff;
     &:hover {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        box-shadow: $box-shadow-hover;
       }
   }
 
@@ -39,14 +39,11 @@
       object-fit: contain;
      }
     }
-    &_brand-logos {
+    &_brand-logo {
       display: flex;
       justify-content: center;
       height: 50px;
       align-items: center;
-      a {
-        display: flex;
-        height:100%; 
         img {
           padding: 5px 0;
           max-width: 100%;
@@ -54,7 +51,6 @@
           width: auto;
           height: auto;
         }
-      }
     
     }
   
@@ -66,6 +62,9 @@
       text-align: left;
       flex: 1 1 auto;
       margin-top: 5px;
+      &:hover {
+        color: $primary-color-hover-link;
+      }
     }
     &_rating {
       display: flex;
@@ -84,7 +83,7 @@
     }
     &_price {
       font: $font-regular;
-      color: red;
+      color: $primary-color-attention;
     }
     &_old-price {
       del {
@@ -126,7 +125,7 @@
   
 
 
-//   <li className="bestselling_item" data-id="#">
+//   <li className="card_item" data-id="#">
 //   <span className="item_image"><a href="#" > <img src={bestseller2} alt="Bestselling product 1"/></a>
 //   </span>
 //   <div className="item_description">
