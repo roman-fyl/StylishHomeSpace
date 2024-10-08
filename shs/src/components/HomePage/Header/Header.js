@@ -16,10 +16,6 @@ import "./Header.scss"
 const Header = () => {
 const [isFormVisible, setFormVisible] = useState(false);
 
-    useEffect(() => {
-        document.title = 'Stylish Home Space';
-      }, []);
-
       const handleCloseForm = () => {
         setFormVisible(false); 
       };

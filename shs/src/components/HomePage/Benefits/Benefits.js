@@ -5,9 +5,9 @@ import iconOrderStatus from '../../../assets/images/icon-order-status64.png';
 import "./Benefits.scss"
 
 const Benefits = () => {
-    useEffect(() => {
-        document.title = 'Why Buy From Us';
-      }, []);
+    // useEffect(() => {
+    //     document.title = 'Why Buy From Us';
+    //   }, []);
 return (
     <div className="benefits">
     <div className="container_benefits">
