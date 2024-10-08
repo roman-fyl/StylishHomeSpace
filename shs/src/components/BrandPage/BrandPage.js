@@ -45,6 +45,8 @@ const BrandPage = () => {
     return price * (1 + percentage / 100);
   };
 
+  const categories = [...new Set(products.map(item => item.category))];
+
   const filteredNewProducts = products.filter(item => item.group === "newArrival");
   const filteredBestsellerProducts = products.filter(item => item.group === "bestseller");
 
@@ -56,12 +58,14 @@ const BrandPage = () => {
             <img src={products[0]?.brandLogo} alt={`${products[0]?.brandText || 'Brand'} logo`} />
           </div>
           <section className="section brand-page_categories">
-            <ul className="brand-page_list">
-              <li className="brand-page_category"><Link to="/"><img src={gastop} alt="Gastop" /></Link></li>
-              <li className="brand-page_category"><Link to="/"><img src={laundryPair} alt="Laundry Pair" /></Link></li>
-              <li className="brand-page_category"><Link to="/"><img src={range} alt="Range" /></Link></li>
-              <li className="brand-page_category"><Link to="/"><img src={refrigerator} alt="Refrigerator" /></Link></li>
-              <li className="brand-page_category"><Link to="/"><img src={wallOven} alt="Wall Oven" /></Link></li>
+          <ul className="brand-page_list">
+              {categories.map((category, index) => (
+                <li className="brand-page_category" key={index}>
+                  <Link to={`/category/${category}`}>
+                    <img src="#" alt={category} />
+                  </Link>
+                </li>
+              ))}
             </ul>
             <div className="items_more"><Link to="/shop-all">Shop All</Link></div>
           </section>

@@ -23,38 +23,24 @@ const ProductPage = () => {
   const [error, setError] = useState(null);
   console.log("URL Parameters:", useParams());
 
-  // useEffect(() => {
-  //   setProduct(null);
-    
-  //   if (!skuText) return;
-  
-  //   const fetchedProduct = productData.find(
-  //     item => item.sku.toLowerCase() === skuText.toLowerCase()
-  //   );
-  
-  //   if (fetchedProduct) {
-  //     setProduct(fetchedProduct);
-  //     setError(null);
-  //   } else {
-  //     setError("Product not found");
-  //   }
-  
-  //   document.title = `Product Details - SKU: ${skuText}`;
-  
-  // }, [skuText]);
-
   useEffect(() => {
-    document.title = `Product Details - ${skuText.toUpperCase()}`;
-    console.log(document.title);
-
-    const fetchedProduct = productData.find(item => item.sku.toLowerCase() === skuText.toLowerCase());
-    console.log("Fetched product: ", fetchedProduct);
-
+    setProduct(null);
+    
+    if (!skuText) return;
+  
+    const fetchedProduct = productData.find(
+      item => item.sku.toLowerCase() === skuText.toLowerCase()
+    );
+  
     if (fetchedProduct) {
       setProduct(fetchedProduct);
+      setError(null);
     } else {
       setError("Product not found");
     }
+  
+    document.title = `Product Details - ${skuText.toUpperCase()}`;
+  
   }, [skuText]);
 
   if (error) {
