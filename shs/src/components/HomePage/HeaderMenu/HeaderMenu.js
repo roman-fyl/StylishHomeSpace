@@ -2,9 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./HeaderMenu.scss";
 
 const HeaderMenu = () => {
-     useEffect(() => {
-          document.title = 'Stylish Home Space';
-        }, []);
+
 
 return (
      <nav>

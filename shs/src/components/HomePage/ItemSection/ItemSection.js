@@ -2,36 +2,27 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
 import "./ItemSection.scss";
-import data from "../../../assets/db/items.json"; // Load the data directly
+import data from "../../../assets/db/items.json"; 
 
 const ItemSection = ({ category = null, subject = null, brand = null }) => {
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
 
-  // Log the incoming props to debug the filters
-  // console.log("Category:", category);
-  // console.log("Brand:", brand);
 
-  // Start with full data and filter based on the provided category and brand
-  let filteredData = [...data];  // Clone the data to avoid mutation
+  let filteredData = [...data]; 
 
-  // Filter by brand if provided
   if (brand) {
     filteredData = filteredData.filter(item => item.brandText === brand);
     console.log("Filtered by brand:", filteredData);
   }
 
-  // Filter by category if provided (on top of the brand filter if applied)
   if (category) {
     filteredData = filteredData.filter(item => item.group === category);
-    // console.log("Filtered by category:", filteredData);
   }
 
-  // Function to show more items on clicking 'Explore More'
   const showItems = () => {
     setDisplayedItemCount((prevCount) => prevCount + 6);
   };
 
-  // Function to generate the old price based on a percentage
   const GenerateOldPrice = (price, percentage) => {
     return price * (1 + percentage / 100);
   };
@@ -41,8 +32,8 @@ const ItemSection = ({ category = null, subject = null, brand = null }) => {
       <h2>{subject}</h2>
       <ul className="card_items">
         {filteredData.slice(0, displayedItemCount).map((item, index) => (
-          <li className="card_item" data-id={index + 1} key={item.SKU}>
-            <Link to={`/item/${item.SKU}.html`}>
+          <li className="card_item" data-id={index + 1} key={item.sku}>
+            <Link to={`/item/${item.sku}`}>
               <span className="item_image">
                 <img src={item.imageSlider[0]?.imageSliderLink} alt={`${category || 'product'}`} />
               </span>

@@ -52,30 +52,30 @@ const App = () => {
         <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/privacy-policy.html" element={<PrivacyPolicy />} />
-            <Route path="/terms-conditions.html" element={<TermsConditions />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
 
-            <Route path="/contact-us.html" element={<ContactUs />} />
-            <Route path="/faqs.html" element={<FAQs />} />
-            <Route path="/warranty.html" element={<Warranty />} />
-            <Route path="/returns-exchanges.html" element={<ReturnsExchanges />} />
-            <Route path="/shipping-information.html" element={<ShippingInformation />} />
-            <Route path="/order-tracking.html" element={<OrderTracking />} />
-            <Route path="/my-account.html" element={<MyAccount />} />
-            <Route path="/loyalty-program.html" element={<LoyaltyProgram />} />
-            <Route path="/sign-in.html" element={<SignIn />} />
-            <Route path="/sign-up.html" element={<SignUp />} />
-            <Route path="/sign-up-professional.html" element={<SignUpProfessional />} />
-            <Route path="/about-us.html" element={<AboutUs />} />
-            <Route path="/special-offers.html" element={<SpecialOffers />} />
-            <Route path="/financing.html" element={<Financing />} />
-            <Route path="/services.html" element={<Services />} />
-            <Route path="/payment-options.html" element={<PaymentOptions />} />
-            <Route path="/why-buy-from-us.html" element={<WhyBuyFromUs />} />
-            <Route path="/success.html" element={<ThankYouPage />} />
-            <Route path="/item/:sku.html" element={<ProductPage />} />
-            <Route path="/category.html" element={<CategoryPage />} />
-            <Route path="/brand/:brandName.html" element={<BrandPage />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/warranty" element={<Warranty />} />
+            <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
+            <Route path="/shipping-information" element={<ShippingInformation />} />
+            <Route path="/order-tracking" element={<OrderTracking />} />
+            <Route path="/my-account" element={<MyAccount />} />
+            <Route path="/loyalty-program" element={<LoyaltyProgram />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/sign-up-professional" element={<SignUpProfessional />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/special-offers" element={<SpecialOffers />} />
+            <Route path="/financing" element={<Financing />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/payment-options" element={<PaymentOptions />} />
+            <Route path="/why-buy-from-us" element={<WhyBuyFromUs />} />
+            <Route path="/success" element={<ThankYouPage />} />
+            <Route path="/item/:skuText" element={<ProductPage />} />
+            <Route path="/category" element={<CategoryPage />} />
+            <Route path="/brand/:brandName" element={<BrandPage />} />
 
 
             {/* <Route path="/my-profile.html" element={<ProfileMain />} />

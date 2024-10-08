@@ -6,23 +6,24 @@ import laundryPair from "../../assets/db/images/items/GE/categories/laundry-pair
 import range from "../../assets/db/images/items/GE/categories/range.png";
 import refrigerator from "../../assets/db/images/items/GE/categories/refrigerator.png";
 import wallOven from "../../assets/db/images/items/GE/categories/wall-oven.png";
-import productData from "../../assets/db/items.json";
+import data from "../../assets/db/items.json";
 import "./BrandPage.scss";
 
 const BrandPage = () => {
   const { brandName } = useParams();
-  const cleanBrandName = brandName.replace('.html', '');
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
 
   useEffect(() => {
-    console.log('Brand Name:', cleanBrandName); 
-    document.title = cleanBrandName.toUpperCase();
+    console.log('Brand Name:', brandName); 
+    document.title = brandName.toUpperCase();
+    console.log(document.title);
 
-    const fetchedProducts = productData.filter(product => 
-      product.brandText.toLowerCase() === cleanBrandName.toLowerCase()
-    );
+
+    const fetchedProducts = data.filter(product => 
+      product.brandText.toLowerCase() === brandName.toLowerCase()
+    )
 
     if (fetchedProducts.length > 0) {
       setProducts(fetchedProducts);
@@ -31,7 +32,7 @@ const BrandPage = () => {
       setProducts([]);
       setError("Products not found");
     }
-  }, [cleanBrandName]);
+  }, [brandName]);
 
 
 
@@ -40,7 +41,7 @@ const BrandPage = () => {
   };
 
   const GenerateOldPrice = (price, percentage) => {
-    if (typeof price !== "number" || price < 0) return 0; // Prevent negative prices
+    if (typeof price !== "number" || price < 0) return 0;
     return price * (1 + percentage / 100);
   };
 
@@ -69,8 +70,8 @@ const BrandPage = () => {
               <h2>Best-Selling Products</h2>
               <ul className="card_items">
                 {filteredBestsellerProducts.slice(0, displayedItemCount).map((item, index) => (
-                  <li className="card_item" data-id={index + 1} key={item.SKU}>
-                    <Link to={`/item/${item.SKU}.html`}>
+                  <li className="card_item" data-id={index + 1} key={item.sku}>
+                    <Link to={`/item/${item.sku}`}>
                       <span className="item_image">
                         <img src={item.imageSlider[0]?.imageSliderLink} alt={`${item.description.short || 'product'}`} />
                       </span>
@@ -107,8 +108,8 @@ const BrandPage = () => {
               <h2>New Arrivals</h2>
               <ul className="card_items">
                 {filteredNewProducts.slice(0, displayedItemCount).map((item, index) => (
-                  <li className="card_item" data-id={index + 1} key={item.SKU}>
-                    <Link to={`/item/${item.SKU}.html`}>
+                  <li className="card_item" data-id={index + 1} key={item.sku}>
+                    <Link to={`/item/${item.sku}.html`}>
                       <span className="item_image">
                         <img src={item.imageSlider[0]?.imageSliderLink} alt={`${item.description.short || 'product'}`} />
                       </span>

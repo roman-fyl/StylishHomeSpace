@@ -7,9 +7,7 @@ import "./Footer.scss";
 import SocialMediaComponent from "../../Pages/SocialMediaComponent";
 
 const Footer = () => {
-    useEffect(() => {
-        document.title = 'Stylish Home Space';
-      }, []);
+
 return (
     <footer className="footer">
         <div className="container">

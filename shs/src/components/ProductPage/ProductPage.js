@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link as ScrollLink, Element } from "react-scroll";
 import { Link, useParams } from "react-router-dom";
 import Layout from "../../Layout";
+import productData from "../../assets/db/items.json";
+
 
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
 import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
@@ -14,30 +16,55 @@ import "./ProductPage.scss";
 import arrowUp from "../../assets/images/arrow-up.png";
 import arrowBack from "../../assets/images/arrow-back.png";
 
-import productData from "../../assets/db/items.json";
 
 const ProductPage = () => {
-  const { sku } = useParams();
-  const cleanSKU = sku.replace('.html', '');
+  const { skuText } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
-  
-  useEffect(() => {
-    console.log('SKU:', cleanSKU); 
-    document.title = cleanSKU.toUpperCase();
-    
+  console.log("URL Parameters:", useParams());
 
-    const fetchedProduct = productData.find(item => item.SKU.toLowerCase() === cleanSKU.toLowerCase());
+  // useEffect(() => {
+  //   setProduct(null);
+    
+  //   if (!skuText) return;
+  
+  //   const fetchedProduct = productData.find(
+  //     item => item.sku.toLowerCase() === skuText.toLowerCase()
+  //   );
+  
+  //   if (fetchedProduct) {
+  //     setProduct(fetchedProduct);
+  //     setError(null);
+  //   } else {
+  //     setError("Product not found");
+  //   }
+  
+  //   document.title = `Product Details - SKU: ${skuText}`;
+  
+  // }, [skuText]);
+
+  useEffect(() => {
+    document.title = `Product Details - ${skuText.toUpperCase()}`;
+    console.log(document.title);
+
+    const fetchedProduct = productData.find(item => item.sku.toLowerCase() === skuText.toLowerCase());
+    console.log("Fetched product: ", fetchedProduct);
 
     if (fetchedProduct) {
       setProduct(fetchedProduct);
-      setError(null);
     } else {
       setError("Product not found");
     }
+  }, [skuText]);
 
-
-  },[cleanSKU]);
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+  
+  
 
   const GenerateOldPrice = (price, percentage) => {
     return price * (1 + percentage / 100);
@@ -66,7 +93,7 @@ const ProductPage = () => {
             <Link to="/subType">{product.subType}</Link>
           </li>
           <li className="breadcrumbs_item">
-            {product.brandText} - {product.SKU}
+            {product.brandText} - {product.sku}
           </li>
         </ul>
         <nav>
@@ -139,22 +166,22 @@ const ProductPage = () => {
                   className="prev_arrow"
                   alt="Arrow Back"
                 ></img>
-                {/* <img src={product.imageSlider[0].imageSliderLink} alt={product.SKU}></img>     */}
+                {/* <img src={product.imageSlider[0].imageSliderLink} alt={product.sku}></img>     */}
                 <img
                   src={product.imageSlider[1].imageSliderLink}
-                  alt={product.SKU}
+                  alt={product.sku}
                 ></img>
                 <img
                   src={product.imageSlider[2].imageSliderLink}
-                  alt={product.SKU}
+                  alt={product.sku}
                 ></img>
                 <img
                   src={product.imageSlider[3].imageSliderLink}
-                  alt={product.SKU}
+                  alt={product.sku}
                 ></img>
                 <img
                   src={product.imageSlider[4].imageSliderLink}
-                  alt={product.SKU}
+                  alt={product.sku}
                 ></img>
                 <img src={arrowUp} className="Arrow Up"></img>
               </div>
@@ -164,7 +191,7 @@ const ProductPage = () => {
                 <li key={index}>
                   <img
                     src={tag.iconLink}
-                    alt={`${tag.value} ${product.SKU}`}
+                    alt={`${tag.value} ${product.sku}`}
                   ></img>
                 </li>
               ))}
@@ -176,7 +203,7 @@ const ProductPage = () => {
 
               <div className="item_description_block_logo">
                 <span className="item_description_logo">
-                <Link to={`/brand/${product.brandText.toLowerCase()}.html`}>
+                <Link to={`/brand/${product.brandText.toLowerCase()}`}>
                     <img src={product.brandLogo} alt="brandLogo" />
                   </Link>
                 </span>
@@ -196,7 +223,7 @@ const ProductPage = () => {
               </div>
               <div className="item_description_model">
                 <span>Model: </span>
-                <span>{product.SKU}</span>
+                <span>{product.sku}</span>
               </div>
               <div className="item_description_warranty">
                 Warranty: <span>{product.warranty[0].term}</span>
@@ -539,10 +566,10 @@ const ProductPage = () => {
             <div className="product_shipping-returns">
               <ul className="product_shipping-returns_list">
                 <li className="product_shipping-return">
-                  <strong>Shipping:</strong><span>Read more here <Link to="/shipping-information.html">Shipping</Link></span>
+                  <strong>Shipping:</strong><span>Read more here <Link to="/shipping-information">Shipping</Link></span>
                 </li>
                 <li className="product_shipping-return">
-                  <strong>Returns:</strong><span>Read more here <Link to="/returns-exchanges.html">Returns</Link></span>
+                  <strong>Returns:</strong><span>Read more here <Link to="/returns-exchanges">Returns</Link></span>
                 </li>
               </ul>
             </div>

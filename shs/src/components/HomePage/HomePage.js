@@ -16,6 +16,11 @@ import DailyDeals from "../HomePage/DailyDeals/DailyDeals";
 import "./HomePage.scss";
 
 const HomePage = () => {
+
+     useEffect(() => {
+          document.title = 'Stylish Home Space';
+        }, []);
+
     return (
        <div className="wrapper">
          <Layout>
