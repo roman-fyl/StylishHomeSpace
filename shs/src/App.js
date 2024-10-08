@@ -74,7 +74,7 @@ const App = () => {
             <Route path="/why-buy-from-us" element={<WhyBuyFromUs />} />
             <Route path="/success" element={<ThankYouPage />} />
             <Route path="/item/:skuText" element={<ProductPage />} />
-            <Route path="/category" element={<CategoryPage />} />
+            <Route path="/category/:categoryName" element={<CategoryPage />} />
             <Route path="/brand/:brandName" element={<BrandPage />} />
 
 
