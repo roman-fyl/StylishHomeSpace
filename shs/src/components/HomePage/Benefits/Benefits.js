@@ -12,11 +12,11 @@ return (
     <div className="benefits">
     <div className="container_benefits">
      <div className="benefits_content">
-    <Link to="/why-buy-from-us.html"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>Price Match Guarantee</span></span></div></Link>
-     <Link to="/why-buy-from-us.html"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>24/7 Customer Support</span></span></div></Link>
-     <Link to="/why-buy-from-us.html"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>Flexible Payment Options</span></span></div></Link>
-     <Link to="/why-buy-from-us.html"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>Nationwide Delivery</span></span></div></Link>
-     <Link to="/why-buy-from-us.html"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>In-Stock Items</span></span></div></Link>
+    <Link to="/why-buy-from-us"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>Price Match Guarantee</span></span></div></Link>
+     <Link to="/why-buy-from-us"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>24/7 Customer Support</span></span></div></Link>
+     <Link to="/why-buy-from-us"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>Flexible Payment Options</span></span></div></Link>
+     <Link to="/why-buy-from-us"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>Nationwide Delivery</span></span></div></Link>
+     <Link to="/why-buy-from-us"><div className="benefits_block"><img src={iconOrderStatus}></img><span className="benefits_benefit"><span>In-Stock Items</span></span></div></Link>
 
      </div>
     </div>

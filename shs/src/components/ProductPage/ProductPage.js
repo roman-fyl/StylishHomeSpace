@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink, Element } from "react-scroll";
 import { Link, useParams } from "react-router-dom";
-import Layout from "../../Layout";
 import productData from "../../assets/db/items.json";
 
 
@@ -61,7 +60,6 @@ const ProductPage = () => {
   }
 
   return (
-    <Layout>
       <div className="container">
         <ul className="breadcrumbs">
           <li className="breadcrumbs_item">
@@ -561,7 +559,6 @@ const ProductPage = () => {
             </div>
           </section>        </Element>
       </div>
-    </Layout>
   );
 };
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import Layout from "../../Layout";
 import gastop from "../../assets/db/images/items/GE/categories/gastop.png";
 import laundryPair from "../../assets/db/images/items/GE/categories/laundry-pair.png";
 import range from "../../assets/db/images/items/GE/categories/range.png";
@@ -51,7 +50,6 @@ const BrandPage = () => {
   const filteredBestsellerProducts = products.filter(item => item.group === "bestseller");
 
   return (
-    <Layout>
       <div className="container">
         <div className="brand-page_content">
           <div className="brand-page_main-logo">
@@ -147,7 +145,6 @@ const BrandPage = () => {
           </section>
         </div>
       </div>
-    </Layout>
   );
 };
 

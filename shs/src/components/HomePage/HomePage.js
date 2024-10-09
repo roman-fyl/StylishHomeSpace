@@ -23,7 +23,6 @@ const HomePage = () => {
 
     return (
        <div className="wrapper">
-         <Layout>
            <div className="container">
            <section className="section_slider">
             <MainSlider />
@@ -51,7 +50,6 @@ const HomePage = () => {
             <ItemSection type="outlet" subject="Outlets"/>
             </section>
            </div>
-       </Layout>
        </div>
     );
 }

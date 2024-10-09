@@ -11,11 +11,9 @@ const MyAccount = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
          <Profile />
       </div>
-    </Layout>
   );
 };
 

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import { Link, useParams } from "react-router-dom";
-import Layout from "../../Layout";
 import data from "../../assets/db/items.json";
 
 
@@ -40,7 +39,6 @@ const CategoryPage = () => {
       },[categoryName]);
 
 return (
-   <Layout>
      <div className="container">
     <div className="category-page_content">
    <div className="category-header_block">
@@ -214,7 +212,6 @@ return (
         </section>
     </div>
      </div>
-   </Layout>
 )
 }
 

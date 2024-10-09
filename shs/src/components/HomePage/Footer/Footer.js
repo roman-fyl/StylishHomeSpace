@@ -22,24 +22,24 @@ return (
             <SocialMediaComponent />
             <nav className="footer_links_block">
                 <ul className="footer_links_group">
-                <li className="footer_links_link"><Link to="/contact-us.html">Contact Us</Link></li>
-                <li className="footer_links_link"><Link to="/faqs.html">FAQs</Link></li>
-                <li className="footer_links_link"><Link to="/warranty.html">Warranty</Link></li>
+                <li className="footer_links_link"><Link to="/contact-us">Contact Us</Link></li>
+                <li className="footer_links_link"><Link to="/faqs">FAQs</Link></li>
+                <li className="footer_links_link"><Link to="/warranty">Warranty</Link></li>
                 </ul>
                 <ul className="footer_links_group">
-                <li className="footer_links_link"><Link to="/returns-exchanges.html">Returns & Exchanges</Link></li>
-                <li className="footer_links_link"><Link to="/shipping-information.html">Shipping Information</Link></li>
-                <li className="footer_links_link"><Link to="/order-tracking.html">Order Tracking</Link></li>
+                <li className="footer_links_link"><Link to="/returns-exchanges">Returns & Exchanges</Link></li>
+                <li className="footer_links_link"><Link to="/shipping-information">Shipping Information</Link></li>
+                <li className="footer_links_link"><Link to="/order-tracking">Order Tracking</Link></li>
                 </ul>
                 <ul className="footer_links_group">
-                <li className="footer_links_link"><Link to="/my-account.html">My Account</Link></li>
-                <li className="footer_links_link"><Link to="/loyalty-program.html">Loyalty Program</Link></li>
-                <li className="footer_links_link"><Link to="/sign-in.html">Sign In / Register</Link></li>
+                <li className="footer_links_link"><Link to="/my-account">My Account</Link></li>
+                <li className="footer_links_link"><Link to="/loyalty-program">Loyalty Program</Link></li>
+                <li className="footer_links_link"><Link to="/sign-in">Sign In / Register</Link></li>
                 </ul>
                 <ul className="footer_links_group">
-                <li className="footer_links_link"><Link to="/about-us.html">About Us</Link></li>
-                <li className="footer_links_link"><Link to="/special-offers.html">Special Offers</Link></li>
-                {/* <li className="footer_links_link"><Link to="/financing.html">Financing</Link></li> */}
+                <li className="footer_links_link"><Link to="/about-us">About Us</Link></li>
+                <li className="footer_links_link"><Link to="/special-offers">Special Offers</Link></li>
+                {/* <li className="footer_links_link"><Link to="/financing">Financing</Link></li> */}
                 </ul>
             </nav>
             <div className="footer_subscription_block">
@@ -54,9 +54,9 @@ return (
         <div className="footer_copyright">
             <p>SHS &copy; 2024</p>
 
-<Link to="/privacy-policy.html">Privacy Policy</Link>  
-<Link to="/terms-conditions.html">Terms & Conditions</Link>
-<Link to="/cookie-policy.html">Cookie Policy</Link>
+<Link to="/privacy-policy">Privacy Policy</Link>  
+<Link to="/terms-conditions">Terms & Conditions</Link>
+<Link to="/cookie-policy">Cookie Policy</Link>
           </div>
         </div>
     </footer>

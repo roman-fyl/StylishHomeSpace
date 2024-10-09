@@ -14,7 +14,6 @@ const SpecialOffers = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
       <div className="personal_offers_block">
           <h1>We have found several more exclusive deals tailored for you</h1>
@@ -28,7 +27,6 @@ const SpecialOffers = () => {
          <SpecialOfferCategoryComponent />
         </div>
       </div>
-    </Layout>
   );
 };
 

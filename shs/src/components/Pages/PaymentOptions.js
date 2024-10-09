@@ -10,7 +10,6 @@ const PaymentOptions = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <div className="privacy_description">
           <h1>PaymentOptions</h1>
@@ -23,7 +22,6 @@ const PaymentOptions = () => {
 </section>
         </div>
       </div>
-    </Layout>
   );
 };
 

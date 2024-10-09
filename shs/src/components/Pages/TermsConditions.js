@@ -11,7 +11,6 @@ const TermsConditions = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <div className="terms_description">
           <p>Last Updated: 09/01/2024.</p>
@@ -254,7 +253,6 @@ const TermsConditions = () => {
 </section>
         </div>
       </div>
-    </Layout>
   );
 };
 

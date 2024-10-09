@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store/stores/store';
 
 import ScrollToTop from "./components/ScrollToTop";
+import Layout from "./Layout"; 
 import HomePage from "./components/HomePage/HomePage";
 import AboutUs from "./components/Pages/AboutUs";
 import ContactUs from "./components/Pages/ContactUs";
@@ -29,32 +30,20 @@ import ProductPage from "./components/ProductPage/ProductPage";
 import BrandPage from "./components/BrandPage/BrandPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 
-
-
-// import ProfileMain from "./components/Profile/ProfileMain";
-// import ProfileAddresses from "./components/Profile/ProfileAddresses";
-// import ProfileAffiliateProgram from './components/Profile/ProfileAffiliateProgram';
-// import ProfileLastVisitedItems from "./components/Profile/ProfileLastVisitedItems";
-// import ProfileLoyaltyPoints from "./components/Profile/ProfileLoyaltyPoints";
-// import ProfileOrderHistory from "./components/Profile/ProfileOrderHistory";
-// import ProfilePayments from './components/Profile/ProfilePayments';
-// import ProfileReturns from "./components/Profile/ProfileReturns";
-// import ProfileSubmittedTickets from './components/Profile/ProfileSubmittedTickets';
-// import ProfileWishlist from "./components/Profile/ProfileWishlist";
-
 import './App.scss';
 
 const App = () => {
-
   return (
     <Provider store={store}>
       <Router>
         <ScrollToTop />
+
+        {/* Layout component around all routes */}
+        <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
-
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/warranty" element={<Warranty />} />
@@ -76,25 +65,12 @@ const App = () => {
             <Route path="/item/:skuText" element={<ProductPage />} />
             <Route path="/category/:categoryName" element={<CategoryPage />} />
             <Route path="/brand/:brandName" element={<BrandPage />} />
-
-
-            {/* <Route path="/my-profile.html" element={<ProfileMain />} />
-            <Route path="/my-profile-address.html" element={<ProfileAddresses />} />
-            <Route path="/my-profile-affiliate.html" element={<ProfileAffiliateProgram />} />
-            <Route path="/my-profile-last-visited-items.html" element={<ProfileLastVisitedItems />} />
-            <Route path="/my-profile-loyalty.html" element={<ProfileLoyaltyPoints />} />
-            <Route path="/my-profile-order-history.html" element={<ProfileOrderHistory />} />
-            <Route path="/my-profile-payments.html" element={<ProfilePayments />} />
-            <Route path="/my-profile-returns.html" element={<ProfileReturns />} />
-            <Route path="/my-profile-submitted-tickets.html" element={<ProfileSubmittedTickets />} />
-            <Route path="/my-profile-wishlist.html" element={<ProfileWishlist />} /> */}
-
-
-
           </Routes>
+        </Layout>
+        
       </Router>
     </Provider>
   );
-}
+};
 
 export default App;

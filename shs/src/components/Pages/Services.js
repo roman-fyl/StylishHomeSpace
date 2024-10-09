@@ -10,7 +10,6 @@ const Services = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <div className="privacy_description">
           <h1>Services</h1>
@@ -23,7 +22,6 @@ const Services = () => {
 </section>
         </div>
       </div>
-    </Layout>
   );
 };
 

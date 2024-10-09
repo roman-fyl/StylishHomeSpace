@@ -10,7 +10,6 @@ const Warranty = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <div className="privacy_description">
           <h1>Warranty</h1>
@@ -36,7 +35,6 @@ const Warranty = () => {
 </section>
         </div>
       </div>
-    </Layout>
   );
 };
 
