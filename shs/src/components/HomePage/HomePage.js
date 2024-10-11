@@ -34,20 +34,20 @@ const HomePage = () => {
                <FlashOffers />
             </section>
             <section className="section">
-            <ItemSection type="bestseller" subject="Best-Selling Items" />
+            <ItemSection group="bestseller" subject="Best-Selling Items" />
                {/* <BestSelling /> */}
             </section>
             <section className="section">
             <Trends />
             </section>
             <section className="section">
-               <ItemSection type="newArrival" subject="New Arrivals"/>
+               <ItemSection group="newArrival" subject="New Arrivals"/>
             </section>
             <section className="section">
                <DailyDeals />
             </section>
             <section className="section">
-            <ItemSection type="outlet" subject="Outlets"/>
+            <ItemSection group="outlet" subject="Outlets"/>
             </section>
            </div>
        </div>

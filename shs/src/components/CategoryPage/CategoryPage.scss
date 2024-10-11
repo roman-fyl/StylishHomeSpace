@@ -73,7 +73,7 @@
         align-items: center;
         margin-top: 40px;
     }
-    &_list {
+    &_all {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
@@ -83,6 +83,17 @@
         gap: 30px;
         margin: 20px 0;
         width: 100%;
+        &_list {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: flex-start;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+            width: 100%;
+        }
         }
     &_category {
         font: $font-small;

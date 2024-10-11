@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import "./ItemSection.scss";
 import data from "../../../assets/db/items.json"; 
 
-const ItemSection = ({ type = null, subject = null, brand = null, department = null }) => {
+const ItemSection = ({ group = null, subject = null, brand = null, category = null }) => {
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
 
 
@@ -15,11 +15,11 @@ const ItemSection = ({ type = null, subject = null, brand = null, department = n
     console.log("Filtered by brand:", filteredData);
   }
 
-  if (type) {
-    filteredData = filteredData.filter(item => item.group === type);
+  if (group) {
+    filteredData = filteredData.filter(item => item.group === group);
   }
-  if (department) {
-    filteredData = filteredData.filter(item => item.department === department);
+  if (category) {
+    filteredData = filteredData.filter(item => item.category === category);
   }
 
   const showItems = () => {
@@ -38,7 +38,7 @@ const ItemSection = ({ type = null, subject = null, brand = null, department = n
           <li className="card_item" data-id={index + 1} key={item.sku}>
             <Link to={`/item/${item.sku}`}>
               <span className="item_image">
-                <img src={item.imageSlider[0]?.imageSliderLink} alt={`${type || 'product'}`} />
+                <img src={item.imageSlider[0]?.imageSliderLink} alt={`${group || 'product'}`} />
               </span>
               <div className="item_description">
                 <span className="item_brand-logo">
