@@ -59,6 +59,10 @@
           width: 100px;
         }
       }
+      p {
+        text-transform: uppercase;
+        text-align: center;
+      }
       &:hover {
         box-shadow: $box-shadow-hover;
       }

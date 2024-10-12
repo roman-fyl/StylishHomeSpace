@@ -65,14 +65,12 @@ const CategoryPage = () => {
         <div className="category-header_block">
           <CategorySlider />
           <div>
-  <h2>Popular Items</h2>
+  <h2>Most-Visited Categories</h2>
   <ul className="category-content_all_list">
     {products
-      // Ensure uniqueness for popular items
       .filter((product, index, self) =>
-        self.findIndex(p => p.subType === product.subType) === index
-      )
-      // Limit to the first 6 unique products
+        self.findIndex(p => p.subType === product.subType) === index)
+      .sort(() => Math.random() - 0.5)
       .slice(0, 6)
       .map((product, index) => (
         <li className="category-header_popular_item" key={index}>
@@ -86,15 +84,13 @@ const CategoryPage = () => {
 
         </div>
         <section className="section category-content_categories">
-          <ul className="category-content_all">
-            <li className="category-content_category"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={laundryPair} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={range} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={refrigerator} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={wallOven} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
+        <ul className="category-content_all">
+          {products.filter((product, index, self) =>
+          self.findIndex(p => p.subCategory === product.subCategory) === index)
+          .map((product, index) => (
+            <li className="category-content_category" key={index}>
+              <Link to="/">{product.subCategory}</Link></li>
+          ))}
           </ul>
           <div className="items_more"><a href="#">Shop All</a></div>
         </section>

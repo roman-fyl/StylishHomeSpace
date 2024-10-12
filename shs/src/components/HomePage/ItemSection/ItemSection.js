@@ -34,7 +34,7 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
     <div className="newArrivals_main">
       <h2>{subject}</h2>
       <ul className="card_items">
-        {filteredData.slice(0, displayedItemCount).map((item, index) => (
+        {filteredData .sort(() => Math.random() - 0.5).slice(0, displayedItemCount).map((item, index) => (
           <li className="card_item" data-id={index + 1} key={item.sku}>
             <Link to={`/item/${item.sku}`}>
               <span className="item_image">
