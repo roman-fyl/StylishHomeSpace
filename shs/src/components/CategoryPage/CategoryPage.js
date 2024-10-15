@@ -6,24 +6,20 @@ import data from "../../assets/db/items.json";
 import CategorySlider from "./CategorySlider";
 import ItemSection from "../HomePage/ItemSection/ItemSection";
 
-
-import gastop from "../../assets/db/images/items/GE/categories/gastop.png";
-import laundryPair from "../../assets/db/images/items/GE/categories/laundry-pair.png";
-import range from "../../assets/db/images/items/GE/categories/range.png";
-import refrigerator from "../../assets/db/images/items/GE/categories/refrigerator.png";
-import wallOven from "../../assets/db/images/items/GE/categories/wall-oven.png";
-
 import "./CategoryPage.scss";
 
 
 const CategoryPage = () => {
-  const { categoryName } = useParams(); // Get category name from URL
+  const { categoryName } = useParams();
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
+  const [uniqueFeatures, setUniqueFeatures] = useState([]);
+  const [groupedProducts, setGroupedProducts] = useState({});
+
+
 
   useEffect(() => {
-    // Filter products by category
     const filteredProducts = data.filter(
       (product) => product.category.toLowerCase() === categoryName.toLowerCase()
     );
@@ -36,6 +32,37 @@ const CategoryPage = () => {
       setError("No products found for this category.");
     }
   }, [categoryName]);
+
+  useEffect(() => {
+    const featuresSet = new Set();
+    products.forEach((product) => {
+      product.description?.options?.forEach((option) => {
+        if (option.option === "Features") {
+          option.meanings.forEach((feature) => {
+            featuresSet.add(feature.value);
+          });
+        }
+      });
+    });
+      setUniqueFeatures(Array.from(featuresSet));
+  }, [products]);
+
+  useEffect(() => {
+    const grouped = products.reduce((acc, product) => {
+      if (!acc[product.subCategory]) {
+        acc[product.subCategory] = new Set(); 
+      }
+      acc[product.subCategory].add(product.subType); 
+      return acc;
+    }, {});
+
+    const groupedArray = Object.keys(grouped).reduce((acc, key) => {
+      acc[key] = Array.from(grouped[key]);
+      return acc;
+    }, {});
+
+    setGroupedProducts(groupedArray);
+  }, [products]);
 
   const showItems = () => {
     setDisplayedItemCount((prevCount) => prevCount + 6);
@@ -101,37 +128,42 @@ const CategoryPage = () => {
           <ul className="category-navigation_list important">
             <li className="category-navigation_item"><Link to="/">In Stock</Link></li>
             <li className="category-navigation_item"><Link to="/">On Sale</Link></li>
-            <li className="category-navigation_item"><Link to="/">New Products</Link></li>
-            <li className="category-navigation_item"><Link to="/">Best Sellers</Link></li>
+            {products.filter((product, index, self) =>
+          self.findIndex(p => p.subType === product.subType) === index)
+          .map((product, index) => (
+            <li className="category-navigation_item" key={index}>
+              <Link to="/">{product.subType}</Link></li>
+          ))}
             <li className="category-navigation_item"><Link to="/">Limited Availability</Link></li>
           </ul>
           <ul className="category-navigation_list">
             <li title="99" className="category-navigation_title">Shop By Color</li>
-            <li className="category-navigation_item"><Link to="/">black</Link></li>
-            <li className="category-navigation_item"><Link to="/">white</Link></li>
-            <li className="category-navigation_item"><Link to="/">gray</Link></li>
-            <li className="category-navigation_item"><Link to="/">yellow</Link></li>
+            {products.filter((product, index, self) =>
+          self.findIndex(p => p.color === product.color) === index)
+          .map((product, index) => (
+            <li className="category-navigation_item" key={index}>
+              <Link to="/">{product.color}</Link></li>
+          ))}
           </ul>
           <ul className="category-navigation_list">
             <li title="99" className="category-navigation_title">Tailored for Your Convenience</li>
-            <li className="category-navigation_item"><Link to="/">Smart</Link></li>
-            <li className="category-navigation_item"><Link to="/">Energy Saving</Link></li>
-            <li className="category-navigation_item"><Link to="/">Compact size</Link></li>
-            <li className="category-navigation_item"><Link to="/"></Link></li>
+            
+            {uniqueFeatures.length > 0 ? (
+          uniqueFeatures.map((feature, index) => (
+            <li  className="category-navigation_item" key={index}>{feature}</li>
+          ))
+        ) : (
+          <li>No features found</li>
+        )}  
           </ul>
           <ul className="category-navigation_list shop-by-brand">
             <li title="99" className="category-navigation_title">Shop By Brand</li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
+            {products.filter((product, index, self) =>
+          self.findIndex(p => p.brandText === product.brandText) === index)
+          .map((product, index) => (
+            <li className="category-navigation_item" key={index}>
+              <Link to="/">{product.brandText}</Link></li>
+          ))}
           </ul>
         </section>
         <section className="section">
@@ -139,104 +171,18 @@ const CategoryPage = () => {
         </section>
         <section className="category-subcategories_list">
           <ul className="category-subcategory">
-            <li className="category-subcategory_element">
-              <Link to="/">
-                <img src={gastop} alt="image"></img>
-                <ul>
-                  <li>Subcategory 1</li>
-                  <li>Subcategory 2</li>
-                  <li>Subcategory 3</li>
-                  <li>Subcategory 4</li>
-                  <li>Subcategory 5</li>
-                  <li>Subcategory 6</li>
-                  <li>Subcategory 7</li>
-                </ul>
-              </Link>
-            </li>
-            <li className="category-subcategory_element">
-              <Link to="/">
-                <img src={laundryPair} alt="image"></img>
-                <ul>
-                  <li>Subcategory 1</li>
-                  <li>Subcategory 2</li>
-                  <li>Subcategory 3</li>
-                  <li>Subcategory 4</li>
-                  <li>Subcategory 5</li>
-                  <li>Subcategory 6</li>
-                  <li>Subcategory 7</li>
-                </ul>
-              </Link>
-            </li>
-            <li className="category-subcategory_element">
-              <Link to="/">
-                <img src={range} alt="image"></img>
-                <ul>
-                  <li>Subcategory 1</li>
-                  <li>Subcategory 2</li>
-                  <li>Subcategory 3</li>
-                  <li>Subcategory 4</li>
-                  <li>Subcategory 5</li>
-                  <li>Subcategory 6</li>
-                  <li>Subcategory 7</li>
-                </ul>
-              </Link>
-            </li>
-            <li className="category-subcategory_element">
-              <Link to="/">
-                <img src={refrigerator} alt="image"></img>
-                <ul>
-                  <li>Subcategory 1</li>
-                  <li>Subcategory 2</li>
-                  <li>Subcategory 3</li>
-                  <li>Subcategory 4</li>
-                  <li>Subcategory 5</li>
-                  <li>Subcategory 6</li>
-                  <li>Subcategory 7</li>
-                </ul>
-              </Link>
-            </li>
-            <li className="category-subcategory_element">
-              <Link to="/">
-                <img src={wallOven} alt="image"></img>
-                <ul>
-                  <li>Subcategory 1</li>
-                  <li>Subcategory 2</li>
-                  <li>Subcategory 3</li>
-                  <li>Subcategory 4</li>
-                  <li>Subcategory 5</li>
-                  <li>Subcategory 6</li>
-                  <li>Subcategory 7</li>
-                </ul>
-              </Link>
-            </li>
-            <li className="category-subcategory_element">
-              <Link to="/">
-                <img src={gastop} alt="image"></img>
-                <ul>
-                  <li>Subcategory 1</li>
-                  <li>Subcategory 2</li>
-                  <li>Subcategory 3</li>
-                  <li>Subcategory 4</li>
-                  <li>Subcategory 5</li>
-                  <li>Subcategory 6</li>
-                  <li>Subcategory 7</li>
-                </ul>
-              </Link>
-            </li>
-            <li className="category-subcategory_element">
-              <Link to="/">
-                <img src={gastop} alt="image"></img>
-                <ul>
-                  <li>Subcategory 1</li>
-                  <li>Subcategory 2</li>
-                  <li>Subcategory 3</li>
-                  <li>Subcategory 4</li>
-                  <li>Subcategory 5</li>
-                  <li>Subcategory 6</li>
-                  <li>Subcategory 7</li>
-                </ul>
-              </Link>
-            </li>
+            {Object.keys(groupedProducts).map((subCategory, index) => (
+              <li className="category-subcategory_element" key={index}>
+                <Link to="/">
+                  {subCategory}
+                  <ul>
+                    {groupedProducts[subCategory].map((subType, idx) => (
+                      <li key={idx}>{subType}</li>
+                    ))}
+                  </ul>
+                </Link>
+              </li>
+            ))}
           </ul>
         </section>
       </div>
