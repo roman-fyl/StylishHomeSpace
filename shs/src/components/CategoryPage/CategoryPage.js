@@ -18,18 +18,24 @@ const CategoryPage = () => {
   const [groupedProducts, setGroupedProducts] = useState({});
 
 
-
   useEffect(() => {
-    const filteredProducts = data.filter(
-      (product) => product.category.toLowerCase() === categoryName.toLowerCase()
-    );
+    try {
+      if (typeof data !== "undefined" && Array.isArray(data)) {
+        const filteredProducts = data.filter(
+          (product) =>
+            product.category.toLowerCase() === categoryName.toLowerCase()
+        );
 
-    if (filteredProducts.length > 0) {
-      setProducts(filteredProducts);
-      setError(null);
-    } else {
-      setProducts([]);
-      setError("No products found for this category.");
+        if (filteredProducts.length > 0) {
+          setProducts(filteredProducts);
+        } else {
+          setError("No products found for this category.");
+        }
+      } else {
+        setError("Data is not available.");
+      }
+    } catch (err) {
+      setError("An error occurred while loading the data.");
     }
   }, [categoryName]);
 
