@@ -35,7 +35,6 @@ const HomePage = () => {
             </section>
             <section className="section">
             <ItemSection group="bestseller" subject="Best-Selling Items" />
-               {/* <BestSelling /> */}
             </section>
             <section className="section">
             <Trends />

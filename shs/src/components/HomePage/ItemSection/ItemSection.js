@@ -7,12 +7,10 @@ import data from "../../../assets/db/items.json";
 const ItemSection = ({ group = null, subject = null, brand = null, category = null }) => {
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
 
-
   let filteredData = [...data]; 
 
   if (brand) {
     filteredData = filteredData.filter(item => item.brandText === brand);
-    console.log("Filtered by brand:", filteredData);
   }
 
   if (group) {
@@ -34,42 +32,45 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
     <div className="newArrivals_main">
       <h2>{subject}</h2>
       <ul className="card_items">
-        {filteredData .sort(() => Math.random() - 0.5).slice(0, displayedItemCount).map((item, index) => (
-          <li className="card_item" data-id={index + 1} key={item.sku}>
-            <Link to={`/item/${item.sku}`}>
-              <span className="item_image">
-                <img src={item.imageSlider[0]?.imageSliderLink} alt={`${group || 'product'}`} />
-              </span>
-              <div className="item_description">
-                <span className="item_brand-logo">
-                  <img src={item.brandLogo} alt={item.brand} />
+        {filteredData
+          .sort(() => Math.random() - 0.5)
+          .slice(0, displayedItemCount)
+          .map((item, index) => (
+            <li className="card_item" data-id={index + 1} key={item.sku}>
+              <Link to={`/item/${item.sku}`}>
+                <span className="item_image">
+                  <img src={item.imageSlider[0]?.imageSliderLink} alt={`${group || 'product'}`} />
                 </span>
-                <h3 className="item_title">
-                  {item.description.short}
-                </h3>
-                <span className="item_rating">
-                  <span className="item_rate">{item.rate}</span>
-                  <span className="item_rate">{item.group}</span>
-                  <span className="item_rate">{item.brandText}</span>
-                </span>
-                <span className="item_pricing">
-                  <span className="item_old-price">
-                    <del>${GenerateOldPrice(parseFloat(item.price), 12.319).toFixed(2)}</del>
+                <div className="item_description">
+                  <span className="item_brand-logo">
+                    <img src={item.brandLogo} alt={item.brand} />
                   </span>
-                  <span className="item_price">${item.price}</span>
-                </span>
+                  <h3 className="item_title">
+                    {item.description.short}
+                  </h3>
+                  <span className="item_rating">
+                    <span className="item_rate">{item.rate}</span>
+                    <span className="item_rate">{item.group}</span>
+                    <span className="item_rate">{item.brandText}</span>
+                  </span>
+                  <span className="item_pricing">
+                    <span className="item_old-price">
+                      <del>${GenerateOldPrice(parseFloat(item.price), 12.319).toFixed(2)}</del>
+                    </span>
+                    <span className="item_price">${item.price}</span>
+                  </span>
+                </div>
+              </Link>  
+              <div className="item_actions">
+                <Link to={`/search?category=${category}&group=${group}`} className="item_add-to-cart">Shop More</Link>
+                <a href="#" className="item_quick-buy">Buy</a>
               </div>
-            </Link>  
-            <div className="item_actions">
-              <a href="#" className="item_add-to-cart">Add to Cart</a>
-              <a href="#" className="item_quick-buy">Buy</a>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))}
       </ul>
       <div className="items_more"><span onClick={showItems}>Explore More</span></div>
     </div>
   );
 };
 
-export default ItemSection;
+export default ItemSection; 

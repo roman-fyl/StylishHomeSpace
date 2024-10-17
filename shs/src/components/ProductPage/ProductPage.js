@@ -68,7 +68,7 @@ const ProductPage = () => {
             </Link>
           </li>
           <li className="breadcrumbs_item">
-            <Link to="/department">{product.department}</Link>
+            <Link to="/department">{product.category}</Link>
           </li>
           <li className="breadcrumbs_item">
             <Link to="/subCategory">{product.subCategory}</Link>

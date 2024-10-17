@@ -29,6 +29,7 @@ import ThankYouPage from "./components/Pages/ThankYouPage";
 import ProductPage from "./components/ProductPage/ProductPage";
 import BrandPage from "./components/BrandPage/BrandPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
+import SearchPage from "./components/SearchPage/SearchPage";
 
 import './App.scss';
 
@@ -65,6 +66,8 @@ const App = () => {
             <Route path="/item/:skuText" element={<ProductPage />} />
             <Route path="/category/:categoryName" element={<CategoryPage />} />
             <Route path="/brand/:brandName" element={<BrandPage />} />
+            <Route path="/search" element={<SearchPage />} />
+
           </Routes>
         </Layout>
         
