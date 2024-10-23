@@ -11,6 +11,7 @@ const SearchPage = ({
   smartFeatures = null,
   subCategory = null,
   subType = null,
+  color = null,
 }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -21,8 +22,9 @@ const SearchPage = ({
     smartFeatures: [],
     subCategories: [],
     subTypes: [],
+    colors: [],
   });
-  const [priceRange, setPriceRange] = useState({min: 0, max: 100000})
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,45 +36,70 @@ const SearchPage = ({
       setFilteredProducts(data);
     }
 
-    // Check if there are any filters in the URL and apply them
+    // Get filters from the URL
     const searchParams = new URLSearchParams(location.search);
-    const brands = searchParams.get("brands") ? searchParams.get("brands").split(",") : [];
-    const groups = searchParams.get("groups") ? searchParams.get("groups").split(",") : [];
-    const categories = searchParams.get("categories") ? searchParams.get("categories").split(",") : [];
-    const smartFeatures = searchParams.get("smartFeatures") ? searchParams.get("smartFeatures").split(",") : [];
-    const subCategories = searchParams.get("subCategories") ? searchParams.get("subCategories").split(",") : [];
-    const subTypes = searchParams.get("subTypes") ? searchParams.get("subTypes").split(",") : [];
-    const minPrice = searchParams.get("minPrice") ? parseFloat(searchParams.get("minPrice")) : 0;
-    const maxPrice = searchParams.get("maxPrice") ? parseFloat(searchParams.get("maxPrice")) : 100000;
+    const brands = searchParams.get("brands")
+      ? searchParams.get("brands").split(",")
+      : [];
+    const groups = searchParams.get("groups")
+      ? searchParams.get("groups").split(",")
+      : [];
+    const categories = searchParams.get("categories")
+      ? searchParams.get("categories").split(",")
+      : [];
+    const smartFeatures = searchParams.get("smartFeatures")
+      ? searchParams.get("smartFeatures").split(",")
+      : [];
+    const subCategories = searchParams.get("subCategories")
+      ? searchParams.get("subCategories").split(",")
+      : [];
+    const subTypes = searchParams.get("subTypes")
+      ? searchParams.get("subTypes").split(",")
+      : [];
+    const minPrice = searchParams.get("minPrice")
+      ? parseFloat(searchParams.get("minPrice"))
+      : 0;
+    const maxPrice = searchParams.get("maxPrice")
+      ? parseFloat(searchParams.get("maxPrice"))
+      : 100000;
+    const colors = searchParams.get("colors")
+      ? searchParams.get("colors").split(",")
+      : [];
+
     setPriceRange({ min: minPrice, max: maxPrice });
-
-
-    setSelectedFilters({ brands, groups, categories, smartFeatures, subCategories, subTypes });
+    setSelectedFilters({
+      brands,
+      groups,
+      categories,
+      smartFeatures,
+      subCategories,
+      subTypes,
+      colors,
+    });
   }, [location.search]);
 
   // Update the URL when filters are changed
   const updateURL = (filters) => {
     const searchParams = new URLSearchParams();
-    if (filters.brands.length > 0) {
+    if (filters.brands.length > 0)
       searchParams.set("brands", filters.brands.join(","));
-    }
-    if (filters.groups.length > 0) {
+    if (filters.groups.length > 0)
       searchParams.set("groups", filters.groups.join(","));
-    }
-    if (filters.categories.length > 0) {
+    if (filters.categories.length > 0)
       searchParams.set("categories", filters.categories.join(","));
-    }
-    if (filters.smartFeatures.length > 0) {
+    if (filters.smartFeatures.length > 0)
       searchParams.set("smartFeatures", filters.smartFeatures.join(","));
-    }
-    if (filters.subCategories.length > 0) {
+    if (filters.subCategories.length > 0)
       searchParams.set("subCategories", filters.subCategories.join(","));
-    }
-    if (filters.subTypes.length > 0) {
+    if (filters.subTypes.length > 0)
       searchParams.set("subTypes", filters.subTypes.join(","));
-    }
+    if (filters.colors.length > 0)
+      searchParams.set("colors", filters.subTypes.join(","));
     searchParams.set("minPrice", filters.priceRange.min);
-    searchParams.set("maxPrice", filters.priceRange.max === Infinity ? '' : filters.priceRange.max);
+    searchParams.set(
+      "maxPrice",
+      filters.priceRange.max === Infinity ? "" : filters.priceRange.max
+    );
 
     navigate(`?${searchParams.toString()}`);
   };
@@ -97,6 +124,7 @@ const SearchPage = ({
       smartFeatures: [],
       subCategories: [],
       subTypes: [],
+      colors: [],
     });
     setPriceRange({ min: 0, max: 100000 });
     navigate(location.pathname); // Reset URL by removing query parameters
@@ -115,31 +143,64 @@ const SearchPage = ({
   useEffect(() => {
     let updatedProducts = products;
 
-    if (brand) {
+    // Apply filters from selectedFilters
+    if (selectedFilters.brands.length > 0) {
+      updatedProducts = updatedProducts.filter((product) =>
+        selectedFilters.brands.includes(product.brandText)
+      );
+    } else if (brand) {
       updatedProducts = updatedProducts.filter(
         (product) => product.brandText === brand
       );
     }
 
-    if (group) {
+    if (selectedFilters.groups.length > 0) {
+      updatedProducts = updatedProducts.filter((product) =>
+        selectedFilters.groups.includes(product.group)
+      );
+    } else if (group) {
       updatedProducts = updatedProducts.filter(
         (product) => product.group === group
       );
     }
 
-    if (category) {
+    if (selectedFilters.categories.length > 0) {
+      updatedProducts = updatedProducts.filter((product) =>
+        selectedFilters.categories.includes(product.category)
+      );
+    } else if (category) {
       updatedProducts = updatedProducts.filter(
         (product) => product.category === category
       );
     }
-    if (subCategory) {
+
+    if (selectedFilters.subCategories.length > 0) {
+      updatedProducts = updatedProducts.filter((product) =>
+        selectedFilters.subCategories.includes(product.subCategory)
+      );
+    } else if (subCategory) {
       updatedProducts = updatedProducts.filter(
         (product) => product.subCategory === subCategory
       );
     }
-    if (subType) {
+
+    if (selectedFilters.subTypes.length > 0) {
+      updatedProducts = updatedProducts.filter((product) =>
+        selectedFilters.subTypes.includes(product.subType)
+      );
+    } else if (subType) {
       updatedProducts = updatedProducts.filter(
         (product) => product.subType === subType
+      );
+    }
+
+    if (selectedFilters.colors.length > 0) {
+      updatedProducts = updatedProducts.filter((product) =>
+        selectedFilters.colors.includes(product.color)
+      );
+    } else if (color) {
+      updatedProducts = updatedProducts.filter(
+        (product) => product.color === color
       );
     }
 
@@ -151,36 +212,7 @@ const SearchPage = ({
       });
     }
 
-    // Apply brand filter
-    if (selectedFilters.brands.length > 0) {
-      updatedProducts = updatedProducts.filter((product) =>
-        selectedFilters.brands.includes(product.brandText)
-      );
-    }
-
-    // Apply group filter
-    if (selectedFilters.groups.length > 0) {
-      updatedProducts = updatedProducts.filter((product) =>
-        selectedFilters.groups.includes(product.group)
-      );
-    }
-
-    // Apply category filter
-    if (selectedFilters.categories.length > 0) {
-      updatedProducts = updatedProducts.filter((product) =>
-        selectedFilters.categories.includes(product.category)
-      );
-    }
-    if (selectedFilters.subCategories.length > 0) {
-      updatedProducts = updatedProducts.filter((product) =>
-        selectedFilters.subCategories.includes(product.subCategory)
-      );
-    }
-    if (selectedFilters.subTypes.length > 0) {
-      updatedProducts = updatedProducts.filter((product) =>
-        selectedFilters.subTypes.includes(product.subType)
-      );
-    }
+    // Apply price filter
     updatedProducts = updatedProducts.filter((product) => {
       const price = parseFloat(product.price);
       return price >= priceRange.min && price <= priceRange.max;
@@ -193,10 +225,10 @@ const SearchPage = ({
     group,
     brand,
     category,
-    smartFeatures,
     subCategory,
     subType,
-    priceRange
+    priceRange,
+    color,
   ]);
 
   const uniqueBrands = Array.from(
@@ -214,7 +246,9 @@ const SearchPage = ({
   const uniqueSubTypes = Array.from(
     new Set(products.map((product) => product.subType))
   );
-
+  const uniqueColors = Array.from(
+    new Set(products.map((product) => product.color))
+  );
 
   const GenerateOldPrice = (price, percentage) => {
     return price * (1 + percentage / 100);
@@ -228,16 +262,34 @@ const SearchPage = ({
             <img src={homepageLogo} alt="Home" />
           </Link>
         </li>
-        <li className="breadcrumbs_item">
-          <Link to="/category">Department</Link>
-        </li>
-        <li className="breadcrumbs_item">
-          <Link to="/subCategory">SubCategory</Link>
-        </li>
-        <li className="breadcrumbs_item">
-          <Link to="/subType">SubType</Link>
-        </li>
-        <li className="breadcrumbs_item">BrandText - SKU</li>
+        {selectedFilters.categories.length > 0 && (
+          <li className="breadcrumbs_item">
+            <Link to={`?categories=${selectedFilters.categories.join(",")}`}>
+              {selectedFilters.categories.join(", ")}
+            </Link>
+          </li>
+        )}
+        {selectedFilters.subCategories.length > 0 && (
+          <li className="breadcrumbs_item">
+            <Link
+              to={`?subCategories=${selectedFilters.subCategories.join(",")}`}
+            >
+              {selectedFilters.subCategories.join(", ")}
+            </Link>
+          </li>
+        )}
+        {selectedFilters.subTypes.length > 0 && (
+          <li className="breadcrumbs_item">
+            <Link to={`?subTypes=${selectedFilters.subTypes.join(",")}`}>
+              {selectedFilters.subTypes.join(", ")}
+            </Link>
+          </li>
+        )}
+        {filteredProducts.length > 0 && (
+          <li className="breadcrumbs_item">
+            {filteredProducts.length} Results
+          </li>
+        )}
       </ul>
 
       <div className="search_container">
@@ -297,7 +349,9 @@ const SearchPage = ({
                       onChange={() =>
                         handleFilterChange("subCategories", subCategory)
                       }
-                      checked={selectedFilters.subCategories.includes(subCategory)}
+                      checked={selectedFilters.subCategories.includes(
+                        subCategory
+                      )}
                     />
                     <label htmlFor={`subCategory-checkbox-${index}`}>
                       {subCategory}
@@ -316,9 +370,7 @@ const SearchPage = ({
                       className="category-navigation_item"
                       id={`category-checkbox-${index}`}
                       value={subType}
-                      onChange={() =>
-                        handleFilterChange("subTypes", subType)
-                      }
+                      onChange={() => handleFilterChange("subTypes", subType)}
                       checked={selectedFilters.subTypes.includes(subType)}
                     />
                     <label htmlFor={`subType-checkbox-${index}`}>
@@ -329,28 +381,46 @@ const SearchPage = ({
               </form>
             </div>
             <div className="search_filters_filter">
-  <h4>Filter by Price</h4>
-  <div>
-    <label htmlFor="min-price">Min Price:</label>
-    <input
-      type="number"
-      id="min-price"
-      name="min"
-      value={priceRange.min}
-      onChange={handlePriceRangeChange}
-    />
-  </div>
-  <div>
-    <label htmlFor="max-price">Max Price:</label>
-    <input
-      type="number"
-      id="max-price"
-      name="max"
-      value={priceRange.max === Infinity ? '' : priceRange.max}
-      onChange={handlePriceRangeChange}
-    />
-  </div>
-</div>
+              <h4>Filter by Color</h4>
+              <form>
+                {uniqueColors.map((color, index) => (
+                  <span key={index}>
+                    <input
+                      type="checkbox"
+                      className="category-navigation_item"
+                      id={`category-checkbox-${index}`}
+                      value={color}
+                      onChange={() => handleFilterChange("colors", color)}
+                      checked={selectedFilters.colors.includes(color)}
+                    />
+                    <label htmlFor={`subType-checkbox-${index}`}>{color}</label>
+                  </span>
+                ))}
+              </form>
+            </div>
+            <div className="search_filters_filter">
+              <h4>Filter by Price</h4>
+              <div>
+                <label htmlFor="min-price">Min Price:</label>
+                <input
+                  type="number"
+                  id="min-price"
+                  name="min"
+                  value={priceRange.min}
+                  onChange={handlePriceRangeChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="max-price">Max Price:</label>
+                <input
+                  type="number"
+                  id="max-price"
+                  name="max"
+                  value={priceRange.max === Infinity ? "" : priceRange.max}
+                  onChange={handlePriceRangeChange}
+                />
+              </div>
+            </div>
             <div className="search_filters_filter">
               <h4>Smart Features</h4>
               <form>
@@ -409,9 +479,6 @@ const SearchPage = ({
             <div className="search_filters_filter">
               <h4>Change View</h4>
             </div>
-            <div className="search_filters_filter">
-              <h4>({filteredProducts.length})</h4>
-            </div>
           </div>
           <ul className="card_items">
             {filteredProducts.length > 0 ? (
@@ -434,6 +501,7 @@ const SearchPage = ({
                       <span className="item_rating">
                         <span className="item_rate">{product.rate}</span>
                         <span className="item_rate">{product.group}</span>
+                        <span className="item_rate">{product.color}</span>
                         <span className="item_rate">{product.brandText}</span>
                       </span>
                       <span className="item_pricing">

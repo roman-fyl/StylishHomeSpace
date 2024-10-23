@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import "./ItemSection.scss";
 import data from "../../../assets/db/items.json"; 
 
-const ItemSection = ({ group = null, subject = null, brand = null, category = null }) => {
+const ItemSection = ({ group = null, subject = null, brand = null, category = null, smartFeatures = null, subCategory = null, subType = null }) => {
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
+  const navigate = useNavigate(); // Use useNavigate to navigate programmatically
 
   let filteredData = [...data]; 
 
@@ -20,8 +20,26 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
     filteredData = filteredData.filter(item => item.category === category);
   }
 
-  const showItems = () => {
-    setDisplayedItemCount((prevCount) => prevCount + 6);
+  const handleClick = (event) => {
+    const group = event.target.dataset.group;
+    const category = event.target.dataset.category;
+    const brand = event.target.dataset.brand;
+    const smartFeatures = event.target.dataset.smartfeatures;
+    const subCategory = event.target.dataset.subcategory;
+    const subType = event.target.dataset.subtype;
+
+    // Create a params object, filtering out null or undefined values
+    const params = new URLSearchParams();
+
+    if (group) params.set('groups', group);
+    if (category) params.set('categories', category);
+    if (brand) params.set('brands', brand);
+    if (smartFeatures) params.set('smartFeatures', smartFeatures);
+    if (subCategory) params.set('subCategories', subCategory);
+    if (subType) params.set('subTypes', subType);
+
+    // Navigate to the search page with the dynamic parameters
+    navigate(`/search?${params.toString()}`);
   };
 
   const GenerateOldPrice = (price, percentage) => {
@@ -39,7 +57,7 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
             <li className="card_item" data-id={index + 1} key={item.sku}>
               <Link to={`/item/${item.sku}`}>
                 <span className="item_image">
-                  <img src={item.imageSlider[0]?.imageSliderLink} alt={`${group || 'product'}`} />
+                  <img src={item.imageSlider[0]?.imageSliderLink} alt={`${item.description.short || 'product'}`} />
                 </span>
                 <div className="item_description">
                   <span className="item_brand-logo">
@@ -51,6 +69,7 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
                   <span className="item_rating">
                     <span className="item_rate">{item.rate}</span>
                     <span className="item_rate">{item.group}</span>
+                    <span className="item_rate">{item.color}</span>
                     <span className="item_rate">{item.brandText}</span>
                   </span>
                   <span className="item_pricing">
@@ -68,9 +87,21 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
             </li>
           ))}
       </ul>
-      <div className="items_more"><span onClick={showItems}>Explore More</span></div>
+      <div className="items_more">
+        <span 
+          data-group={group} 
+          data-category={category} 
+          data-brand={brand}
+          data-smartfeatures={smartFeatures}
+          data-subcategory={subCategory}
+          data-subtype={subType}
+          onClick={handleClick}
+        >
+          Explore More
+        </span>
+      </div>
     </div>
   );
 };
 
-export default ItemSection; 
+export default ItemSection;

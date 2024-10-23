@@ -7,12 +7,52 @@ import ItemSection from "../HomePage/ItemSection/ItemSection";
 
 import "./CategoryPage.scss";
 
-const CategoryPage = () => {
+const CategoryPage = ({ group = null, subject = null, brand = null, category = null, smartFeatures = null, subCategory = null, subType = null, color = null }) => {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [uniqueFeatures, setUniqueFeatures] = useState([]);
   const [groupedProducts, setGroupedProducts] = useState({});
+
+  let filteredData = [...data]; 
+
+  if (brand) {
+    filteredData = filteredData.filter(item => item.brandText === brand);
+  }
+
+  if (group) {
+    filteredData = filteredData.filter(item => item.group === group);
+  }
+  
+  if (category) {
+    filteredData = filteredData.filter(item => item.category === category);
+  }
+  if (color) {
+    filteredData = filteredData.filter(item => item.color === color);
+  }
+
+  // Function to generate query parameters for links
+  const generateQueryParams = (additionalParams = {}) => {
+    const params = new URLSearchParams();
+
+    if (group) params.set('groups', group);
+    if (category) params.set('categories', category);
+    if (brand) params.set('brands', brand);
+    if (smartFeatures) params.set('smartFeatures', smartFeatures);
+    if (subCategory) params.set('subCategories', subCategory);
+    if (subType) params.set('subTypes', subType);
+    if (color) params.set('colors', color);
+
+
+    // Add any additional params passed
+    Object.keys(additionalParams).forEach(key => {
+        if (additionalParams[key]) {  // Only add if it has a value
+            params.set(key, additionalParams[key]);
+        }
+    });
+
+    return params.toString();
+};
 
   useEffect(() => {
     try {
@@ -81,7 +121,7 @@ const CategoryPage = () => {
                 .slice(0, 6)
                 .map((product, index) => (
                   <li className="category-header_popular_item" key={index}>
-                    <Link to="/">
+                    <Link to={`/search?${generateQueryParams({ categories: product.category, subTypes: product.subType })}`}>
                       <p>{product.subType}</p>
                     </Link>
                   </li>
@@ -102,7 +142,10 @@ const CategoryPage = () => {
               self.findIndex(p => p.subType === product.subType) === index)
               .map((product, index) => (
                 <li className="category-navigation_item" key={index}>
-                  <Link to="/">{product.subType}</Link></li>
+                  <Link to={`/search?${generateQueryParams({ categories: product.category, subTypes: product.subType })}`}>
+                    {product.subType}
+                  </Link>
+                </li>
               ))}
             <li className="category-navigation_item"><Link to="/">Limited Availability</Link></li>
           </ul>
@@ -113,21 +156,17 @@ const CategoryPage = () => {
               self.findIndex(p => p.color === product.color) === index)
               .map((product, index) => (
                 <li className="category-navigation_item" key={index}>
-                  <Link to="/">{product.color}</Link></li>
+                  <Link to={`/search?${generateQueryParams({ categories: product.category, colors: product.color })}`}>
+                    {product.color}
+                  </Link>
+                </li>
               ))}
           </ul>
 
           <ul className="category-navigation_list">
-            <li title="99" className="category-navigation_title">Tailored for Your Convenience</li>
+    <li title="99" className="category-navigation_title">Tailored for Your Convenience</li>
+</ul>
 
-            {uniqueFeatures.length > 0 ? (
-              uniqueFeatures.map((feature, index) => (
-                <li className="category-navigation_item" key={index}>{feature}</li>
-              ))
-            ) : (
-              <li>No features found</li>
-            )}
-          </ul>
 
           <ul className="category-navigation_list shop-by-brand">
             <li title="99" className="category-navigation_title">Shop By Brand</li>
@@ -135,7 +174,10 @@ const CategoryPage = () => {
               self.findIndex(p => p.brandText === product.brandText) === index)
               .map((product, index) => (
                 <li className="category-navigation_item" key={index}>
-                  <Link to="/">{product.brandText}</Link></li>
+                  <Link to={`/search?${generateQueryParams({ categories: product.category, brands: product.brandText })}`}>
+                    {product.brandText}
+                  </Link>
+                </li>
               ))}
           </ul>
         </section>
@@ -144,11 +186,13 @@ const CategoryPage = () => {
           <ul className="category-subcategory">
             {Object.keys(groupedProducts).map((subCategory, index) => (
               <li className="category-subcategory_element" key={index}>
-                <Link to="/">
+                <Link to={`/search?${generateQueryParams({ subCategories: subCategory })}`}>
                   {subCategory}
                   <ul>
                     {groupedProducts[subCategory].map((subType, idx) => (
-                      <li key={idx}>{subType}</li>
+                      <li key={idx}>
+                        <Link to={`/search?${generateQueryParams({subCategories : subCategory, subTypes : subType})}`}>{subType}</Link>
+                        </li>
                     ))}
                   </ul>
                 </Link>

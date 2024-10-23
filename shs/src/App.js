@@ -67,7 +67,6 @@ const App = () => {
             <Route path="/category/:categoryName" element={<CategoryPage />} />
             <Route path="/brand/:brandName" element={<BrandPage />} />
             <Route path="/search" element={<SearchPage />} />
-
           </Routes>
         </Layout>
         

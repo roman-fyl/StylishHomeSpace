@@ -3,7 +3,6 @@ import { Link as ScrollLink, Element } from "react-scroll";
 import { Link, useParams } from "react-router-dom";
 import productData from "../../assets/db/items.json";
 
-
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
 import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
 import itemShare from "../../assets/images/icon-share.png";
@@ -15,12 +14,10 @@ import "./ProductPage.scss";
 import arrowUp from "../../assets/images/arrow-up.png";
 import arrowBack from "../../assets/images/arrow-back.png";
 
-
 const ProductPage = () => {
   const { skuText } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
-  console.log("URL Parameters:", useParams());
 
   useEffect(() => {
     setProduct(null);
@@ -48,38 +45,45 @@ const ProductPage = () => {
   if (!product) {
     return <div>Loading...</div>;
   }
-  
-  
 
   const GenerateOldPrice = (price, percentage) => {
     return price * (1 + percentage / 100);
   };
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
-
   return (
       <div className="container">
-        <ul className="breadcrumbs">
-          <li className="breadcrumbs_item">
-            <Link to="/">
-              <img src={homepageLogo}></img>
-            </Link>
-          </li>
-          <li className="breadcrumbs_item">
-            <Link to="/department">{product.category}</Link>
-          </li>
-          <li className="breadcrumbs_item">
-            <Link to="/subCategory">{product.subCategory}</Link>
-          </li>
-          <li className="breadcrumbs_item">
-            <Link to="/subType">{product.subType}</Link>
-          </li>
-          <li className="breadcrumbs_item">
-            {product.brandText} - {product.sku}
-          </li>
-        </ul>
+ <ul className="breadcrumbs">
+  <li className="breadcrumbs_item">
+    <Link to="/">
+      <img src={homepageLogo} alt="Homepage" />
+    </Link>
+  </li>
+  {product.category && (
+    <li className="breadcrumbs_item">
+      <Link to={`/search?categories=${product.category}`}>
+        {product.category}
+      </Link>
+    </li>
+  )}
+  {product.subCategory && (
+    <li className="breadcrumbs_item">
+      <Link to={`/search?subCategories=${product.subCategory}`}>
+        {product.subCategory}
+      </Link>
+    </li>
+  )}
+  {product.subType && (
+    <li className="breadcrumbs_item">
+      <Link to={`/search?subTypes=${product.subType}`}>
+        {product.subType}
+      </Link>
+    </li>
+  )}
+  <li className="breadcrumbs_item">
+    {product.brandText} - {product.sku}
+  </li>
+</ul>
+
         <nav>
           <ul className="product_description_categories">
             <li>
