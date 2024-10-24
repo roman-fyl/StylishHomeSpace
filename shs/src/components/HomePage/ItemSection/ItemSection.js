@@ -46,6 +46,10 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
     return price * (1 + percentage / 100);
   };
 
+  const calculateDiscountedAmount = (price, percentage) => {
+    const oldPrice = GenerateOldPrice(price, percentage);
+    return oldPrice - price
+  }
   return (
     <div className="newArrivals_main">
       <h2>{subject}</h2>
@@ -76,6 +80,7 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
                     <span className="item_old-price">
                       <del>${GenerateOldPrice(parseFloat(item.price), 12.319).toFixed(2)}</del>
                     </span>
+                    <div>${parseFloat(calculateDiscountedAmount(item.price, 12.319)).toFixed(2)}</div>
                     <span className="item_price">${item.price}</span>
                   </span>
                 </div>

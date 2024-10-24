@@ -15,6 +15,8 @@ const SearchPage = ({
 }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [sortOption, setSortOption] = useState("");
+  const [shuffled, setShuffled] = useState(false)
   const [selectedFilters, setSelectedFilters] = useState({
     brands: [],
     groups: [],
@@ -254,6 +256,53 @@ const SearchPage = ({
     return price * (1 + percentage / 100);
   };
 
+  const calculateDiscountedAmount = (price, percentage) => {
+    const oldPrice = GenerateOldPrice(price, percentage);
+    return oldPrice - price
+  }
+  
+  const handleSortChange = (e) => {
+    setSortOption(e.target.value);
+    setShuffled(false); // Reset shuffle flag when sort option changes
+  };
+
+    // Sorting products when the sortOption changes
+    useEffect(() => {
+      if (filteredProducts.length > 0) {
+        let sortedProducts = [...filteredProducts];
+    
+        switch (sortOption) {
+          case "priceLowToHigh":
+            sortedProducts.sort((a, b) => a.price - b.price);
+            setShuffled(false); // Reset shuffle flag
+            break;
+          case "priceHighToLow":
+            sortedProducts.sort((a, b) => b.price - a.price);
+            setShuffled(false); // Reset shuffle flag
+            break;
+            case "bestSeller":
+              sortedProducts.sort((a, b) => b.rate - a.rate);
+              setShuffled(false); // Reset shuffle flag
+              break;          
+            case "sortDiscount":
+              sortedProducts.sort((a, b) => calculateDiscountedAmount(b.price, 12.319) - calculateDiscountedAmount(a.price, 12.319));
+              setShuffled(false); // Reset shuffle flag
+              break;
+          case "mostVisited":
+            if (!shuffled) {
+              // Only shuffle once
+              sortedProducts.sort(() => Math.random() - 0.5);
+              setShuffled(true); // Mark as shuffled
+            }
+            break;
+          default:
+            break;
+        }
+    
+        setFilteredProducts(sortedProducts);
+      }
+    }, [sortOption, filteredProducts, shuffled]);
+
   return (
     <div className="container">
       <ul className="breadcrumbs">
@@ -262,30 +311,29 @@ const SearchPage = ({
             <img src={homepageLogo} alt="Home" />
           </Link>
         </li>
-        {selectedFilters.categories.length > 0 && (
+        {selectedFilters.categories.length > 0 && selectedFilters.categories.length < 2 && (
           <li className="breadcrumbs_item">
             <Link to={`?categories=${selectedFilters.categories.join(",")}`}>
               {selectedFilters.categories.join(", ")}
             </Link>
           </li>
         )}
-        {selectedFilters.subCategories.length > 0 && (
+        {selectedFilters.subCategories.length > 0 && selectedFilters.subCategories.length < 2 && (
           <li className="breadcrumbs_item">
             <Link
-              to={`?subCategories=${selectedFilters.subCategories.join(",")}`}
-            >
+              to={`?subCategories=${selectedFilters.subCategories.join(",")}`}>
               {selectedFilters.subCategories.join(", ")}
             </Link>
           </li>
         )}
-        {selectedFilters.subTypes.length > 0 && (
+        {selectedFilters.subTypes.length > 0 && selectedFilters.subTypes.length < 2 && (
           <li className="breadcrumbs_item">
             <Link to={`?subTypes=${selectedFilters.subTypes.join(",")}`}>
               {selectedFilters.subTypes.join(", ")}
             </Link>
           </li>
         )}
-        {filteredProducts.length > 0 && (
+        {filteredProducts.length > 0 && filteredProducts.length < 2 && (
           <li className="breadcrumbs_item">
             {filteredProducts.length} Results
           </li>
@@ -474,7 +522,17 @@ const SearchPage = ({
               </form>
             </div>
             <div className="search_filters_filter">
-              <h4>Sort</h4>
+              <div className="sort-options">
+        <label htmlFor="sort"><strong>Sort by:</strong></label>
+        <select id="sort" value={sortOption} onChange={handleSortChange}>
+          <option value="">Select</option>
+          <option value="sortDiscount">Sort By Discount</option>
+          <option value="priceLowToHigh">Price: Low to High</option>
+          <option value="priceHighToLow">Price: High to Low</option>
+          <option value="bestSeller">Best Sellers</option>
+          <option value="mostVisited">Most Visited</option>
+        </select>
+      </div>
             </div>
             <div className="search_filters_filter">
               <h4>Change View</h4>
@@ -506,13 +564,9 @@ const SearchPage = ({
                       </span>
                       <span className="item_pricing">
                         <span className="item_old-price">
-                          <del>
-                            $
-                            {GenerateOldPrice(
-                              parseFloat(product.price),
-                              12.319
-                            ).toFixed(2)}
+                          <del>${GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(2)}
                           </del>
+                          <div>${parseFloat(calculateDiscountedAmount(product.price, 12.319)).toFixed(2)}</div>
                         </span>
                         <span className="item_price">${product.price}</span>
                       </span>

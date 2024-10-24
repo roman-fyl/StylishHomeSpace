@@ -8,10 +8,10 @@ import Slide4 from "../../../assets/images/Slides/slide4.png";
 
 const MainSlider = () => {
   const images = [
-    { src: Slide1, alt: "Slide 1" },
-    { src: Slide2, alt: "Slide 2" },
-    { src: Slide3, alt: "Slide 3" },
-    { src: Slide4, alt: "Slide 4" },
+    { src: Slide1, alt: "Slide 1", link: "search?groups=bestseller" },
+    { src: Slide2, alt: "Slide 2", link: "item/X2dj9" },
+    { src: Slide3, alt: "Slide 3", link: null },
+    { src: Slide4, alt: "Slide 4", link: null },
   ];
 
   return <Slider images={images} autoSlideInterval={3000} />;
