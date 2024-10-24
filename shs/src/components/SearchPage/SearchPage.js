@@ -266,42 +266,68 @@ const SearchPage = ({
     setShuffled(false); // Reset shuffle flag when sort option changes
   };
 
-    // Sorting products when the sortOption changes
-    useEffect(() => {
-      if (filteredProducts.length > 0) {
-        let sortedProducts = [...filteredProducts];
-    
-        switch (sortOption) {
-          case "priceLowToHigh":
-            sortedProducts.sort((a, b) => a.price - b.price);
-            setShuffled(false); // Reset shuffle flag
-            break;
-          case "priceHighToLow":
-            sortedProducts.sort((a, b) => b.price - a.price);
-            setShuffled(false); // Reset shuffle flag
-            break;
-            case "bestSeller":
-              sortedProducts.sort((a, b) => b.rate - a.rate);
-              setShuffled(false); // Reset shuffle flag
-              break;          
-            case "sortDiscount":
-              sortedProducts.sort((a, b) => calculateDiscountedAmount(b.price, 12.319) - calculateDiscountedAmount(a.price, 12.319));
-              setShuffled(false); // Reset shuffle flag
-              break;
-          case "mostVisited":
-            if (!shuffled) {
-              // Only shuffle once
-              sortedProducts.sort(() => Math.random() - 0.5);
-              setShuffled(true); // Mark as shuffled
-            }
-            break;
-          default:
-            break;
-        }
-    
-        setFilteredProducts(sortedProducts);
-      }
-    }, [sortOption, filteredProducts, shuffled]);
+  const filteredAndSortedProducts = products
+  .filter((product) => {
+    // Apply filters dynamically here
+
+    // Filter by brand
+    if (selectedFilters.brands.length > 0 && !selectedFilters.brands.includes(product.brandText)) {
+      return false;
+    }
+
+    // Filter by group
+    if (selectedFilters.groups.length > 0 && !selectedFilters.groups.includes(product.group)) {
+      return false;
+    }
+
+    // Filter by category
+    if (selectedFilters.categories.length > 0 && !selectedFilters.categories.includes(product.category)) {
+      return false;
+    }
+
+    // Filter by subCategory
+    if (selectedFilters.subCategories.length > 0 && !selectedFilters.subCategories.includes(product.subCategory)) {
+      return false;
+    }
+
+    // Filter by subType
+    if (selectedFilters.subTypes.length > 0 && !selectedFilters.subTypes.includes(product.subType)) {
+      return false;
+    }
+
+    // Filter by color
+    if (selectedFilters.colors.length > 0 && !selectedFilters.colors.includes(product.color)) {
+      return false;
+    }
+
+    // Apply price range filter
+    const price = parseFloat(product.price);
+    if (price < priceRange.min || price > priceRange.max) {
+      return false;
+    }
+
+    return true;
+  })
+  .sort((a, b) => {
+    // Apply sorting here
+    switch (sortOption) {
+      case "priceLowToHigh":
+        return a.price - b.price;
+      case "priceHighToLow":
+        return b.price - a.price;
+      case "bestSeller":
+        return b.rate - a.rate;
+      case "sortDiscount":
+        return (
+          calculateDiscountedAmount(b.price, 12.319) -
+          calculateDiscountedAmount(a.price, 12.319)
+        );
+      case "mostVisited":
+        return Math.random() - 0.5; // Shuffle items for "Most Visited"
+      default:
+        return 0;
+    }
+  });
 
   return (
     <div className="container">
@@ -333,7 +359,7 @@ const SearchPage = ({
             </Link>
           </li>
         )}
-        {filteredProducts.length > 0 && filteredProducts.length < 2 && (
+        {filteredProducts.length > 0 && (
           <li className="breadcrumbs_item">
             {filteredProducts.length} Results
           </li>
@@ -539,53 +565,56 @@ const SearchPage = ({
             </div>
           </div>
           <ul className="card_items">
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product, index) => (
-                <li className="card_item" data-id={index + 1} key={product.sku}>
-                  <Link to={`/item/${product.sku}`}>
-                    <span className="item_image">
-                      <img
-                        src={product.imageSlider[0]?.imageSliderLink}
-                        alt={`${product.title}`}
-                      />
-                    </span>
-                    <div className="item_description">
-                      <span className="item_brand-logo">
-                        <img src={product.brandLogo} alt={product.brand} />
-                      </span>
-                      <h3 className="item_title">
-                        {product.description.short}
-                      </h3>
-                      <span className="item_rating">
-                        <span className="item_rate">{product.rate}</span>
-                        <span className="item_rate">{product.group}</span>
-                        <span className="item_rate">{product.color}</span>
-                        <span className="item_rate">{product.brandText}</span>
-                      </span>
-                      <span className="item_pricing">
-                        <span className="item_old-price">
-                          <del>${GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(2)}
-                          </del>
-                          <div>${parseFloat(calculateDiscountedAmount(product.price, 12.319)).toFixed(2)}</div>
-                        </span>
-                        <span className="item_price">${product.price}</span>
-                      </span>
-                    </div>
-                  </Link>
-                  <div className="item_actions">
-                    <a href="#" className="item_add-to-cart">
-                      Add to Cart
-                    </a>
-                    <a href="#" className="item_quick-buy">
-                      Buy
-                    </a>
+    {filteredAndSortedProducts.length > 0 ? (
+      filteredAndSortedProducts.map((product, index) => (
+        <li className="card_item" data-id={index + 1} key={product.sku}>
+          <Link to={`/item/${product.sku}`}>
+            <span className="item_image">
+              <img
+                src={product.imageSlider[0]?.imageSliderLink}
+                alt={`${product.title}`}
+              />
+            </span>
+            <div className="item_description">
+              <span className="item_brand-logo">
+                <img src={product.brandLogo} alt={product.brand} />
+              </span>
+              <h3 className="item_title">{product.description.short}</h3>
+              <span className="item_rating">
+                <span className="item_rate">{product.rate}</span>
+                <span className="item_rate">{product.group}</span>
+                <span className="item_rate">{product.color}</span>
+                <span className="item_rate">{product.brandText}</span>
+              </span>
+              <span className="item_pricing">
+                <span className="item_old-price">
+                  <del>
+                    ${GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
+                      2
+                    )}
+                  </del>
+                  <div>
+                    ${parseFloat(calculateDiscountedAmount(product.price, 12.319)).toFixed(2)}
                   </div>
-                </li>
-              ))
-            ) : (
-              <p>No products match your selected filters.</p>
-            )}
-          </ul>
+                </span>
+                <span className="item_price">${product.price}</span>
+              </span>
+            </div>
+          </Link>
+          <div className="item_actions">
+            <a href="#" className="item_add-to-cart">
+              Add to Cart
+            </a>
+            <a href="#" className="item_quick-buy">
+              Buy
+            </a>
+          </div>
+        </li>
+      ))
+    ) : (
+      <p>No products match your selected filters.</p>
+    )}
+  </ul>
         </main>
       </div>
     </div>
