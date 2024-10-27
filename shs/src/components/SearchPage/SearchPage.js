@@ -16,7 +16,8 @@ const SearchPage = ({
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortOption, setSortOption] = useState("");
-  const [shuffled, setShuffled] = useState(false)
+  const [shuffled, setShuffled] = useState(false);
+  const [isListView, setIsListView] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     brands: [],
     groups: [],
@@ -233,6 +234,7 @@ const SearchPage = ({
     color,
   ]);
 
+
   const uniqueBrands = Array.from(
     new Set(products.map((product) => product.brandText))
   );
@@ -328,6 +330,9 @@ const SearchPage = ({
         return 0;
     }
   });
+  const toggleViewMode = () => {
+    setIsListView(!isListView);
+  };
 
   return (
     <div className="container">
@@ -527,7 +532,7 @@ const SearchPage = ({
           </div>
         </aside>
 
-        <main className="search_main_content">
+        <section className="search_main_content">
           <div className="search_filters">
             <div className="search_filters_filter">
               <h4>Filter by Brand</h4>
@@ -548,10 +553,9 @@ const SearchPage = ({
               </form>
             </div>
             <div className="search_filters_filter">
-              <div className="sort-options">
-        <label htmlFor="sort"><strong>Sort by:</strong></label>
-        <select id="sort" value={sortOption} onChange={handleSortChange}>
-          <option value="">Select</option>
+              <div className="search_filters">
+        <select id="sort" className="search_filters_select" value={sortOption} onChange={handleSortChange}>
+          <option value=""><strong>Select Sorting Options</strong></option>
           <option value="sortDiscount">Sort By Discount</option>
           <option value="priceLowToHigh">Price: Low to High</option>
           <option value="priceHighToLow">Price: High to Low</option>
@@ -561,61 +565,65 @@ const SearchPage = ({
       </div>
             </div>
             <div className="search_filters_filter">
-              <h4>Change View</h4>
+            <h4>Grid/List</h4>
+           <div className="switcher">
+           <input type="checkbox" id="switchView" onClick={toggleViewMode} />
+           <label for="switchView"></label>
+           </div>
             </div>
           </div>
-          <ul className="card_items">
-    {filteredAndSortedProducts.length > 0 ? (
-      filteredAndSortedProducts.map((product, index) => (
-        <li className="card_item" data-id={index + 1} key={product.sku}>
-          <Link to={`/item/${product.sku}`}>
-            <span className="item_image">
-              <img
-                src={product.imageSlider[0]?.imageSliderLink}
-                alt={`${product.title}`}
-              />
-            </span>
-            <div className="item_description">
-              <span className="item_brand-logo">
-                <img src={product.brandLogo} alt={product.brand} />
-              </span>
-              <h3 className="item_title">{product.description.short}</h3>
-              <span className="item_rating">
-                <span className="item_rate">{product.rate}</span>
-                <span className="item_rate">{product.group}</span>
-                <span className="item_rate">{product.color}</span>
-                <span className="item_rate">{product.brandText}</span>
-              </span>
-              <span className="item_pricing">
-                <span className="item_old-price">
-                  <del>
-                    ${GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
-                      2
-                    )}
-                  </del>
-                  <div>
-                    ${parseFloat(calculateDiscountedAmount(product.price, 12.319)).toFixed(2)}
+          {!isListView && (
+            <ul className="card_items">
+            {filteredAndSortedProducts.length > 0 ? (
+              filteredAndSortedProducts.map((product, index) => (
+                <li className="card_item" data-id={index + 1} key={product.sku}>
+                  <Link to={`/item/${product.sku}`}>
+                    <span className="item_image">
+                      <img
+                        src={product.imageSlider[0]?.imageSliderLink}
+                        alt={`${product.title}`}
+                      />
+                    </span>
+                    <div className="item_description">
+                      <span className="item_brand-logo">
+                        <img src={product.brandLogo} alt={product.brand} />
+                      </span>
+                      <h3 className="item_title">{product.description.short}</h3>
+                      <span className="item_rating">
+                        <span className="item_rate">{product.rate}</span>
+                        <span className="item_rate">{product.group}</span>
+                        <span className="item_rate">{product.color}</span>
+                        <span className="item_rate">{product.brandText}</span>
+                      </span>
+                      <span className="item_pricing">
+                        <span className="item_old-price">
+                          <del>
+                            ${GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
+                              2
+                            )}
+                          </del>
+                          <div>
+                            ${parseFloat(calculateDiscountedAmount(product.price, 12.319)).toFixed(2)}
+                          </div>
+                        </span>
+                        <span className="item_price">${product.price}</span>
+                      </span>
+                    </div>
+                  </Link>
+                  <div className="item_actions">
+                    <a href="#" className="item_add-to-cart">
+                      Add to Cart
+                    </a>
                   </div>
-                </span>
-                <span className="item_price">${product.price}</span>
-              </span>
-            </div>
-          </Link>
-          <div className="item_actions">
-            <a href="#" className="item_add-to-cart">
-              Add to Cart
-            </a>
-            <a href="#" className="item_quick-buy">
-              Buy
-            </a>
-          </div>
-        </li>
-      ))
-    ) : (
-      <p>No products match your selected filters.</p>
-    )}
-  </ul>
-        </main>
+                </li>
+              ))
+            ) : (
+              <p>No products match your selected filters.</p>
+            )}
+          </ul>
+          )}
+          {isListView && (<h2>ListMode</h2>)}
+        </section>
       </div>
     </div>
   );

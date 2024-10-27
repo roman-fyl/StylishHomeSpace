@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import "./ItemSection.scss";
 import data from "../../../assets/db/items.json"; 
 
 const ItemSection = ({ group = null, subject = null, brand = null, category = null, smartFeatures = null, subCategory = null, subType = null }) => {
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
-  const navigate = useNavigate(); // Use useNavigate to navigate programmatically
-
+  const navigate = useNavigate();
   let filteredData = [...data]; 
 
   if (brand) {
@@ -24,11 +23,10 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
     const group = event.target.dataset.group;
     const category = event.target.dataset.category;
     const brand = event.target.dataset.brand;
-    const smartFeatures = event.target.dataset.smartfeatures;
+    const smartFeatures = event.target.dataset.smartFeatures;
     const subCategory = event.target.dataset.subcategory;
     const subType = event.target.dataset.subtype;
 
-    // Create a params object, filtering out null or undefined values
     const params = new URLSearchParams();
 
     if (group) params.set('groups', group);
@@ -38,7 +36,6 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
     if (subCategory) params.set('subCategories', subCategory);
     if (subType) params.set('subTypes', subType);
 
-    // Navigate to the search page with the dynamic parameters
     navigate(`/search?${params.toString()}`);
   };
 
@@ -51,7 +48,7 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
     return oldPrice - price
   }
   return (
-    <div className="newArrivals_main">
+    <div className="item-section_main">
       <h2>{subject}</h2>
       <ul className="card_items">
         {filteredData
@@ -86,8 +83,9 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
                 </div>
               </Link>  
               <div className="item_actions">
-                <Link to={`/search?category=${category}&group=${group}`} className="item_add-to-cart">Shop More</Link>
-                <a href="#" className="item_quick-buy">Buy</a>
+              <Link to="#" className="item_add-to-cart">Add To Cart</Link>
+                {/* <Link to={`/search?category=${category}&group=${group}`} className="item_add-to-cart">Shop More</Link> */}
+                {/* <a href="#" className="item_quick-buy">Buy</a> */}
               </div>
             </li>
           ))}
