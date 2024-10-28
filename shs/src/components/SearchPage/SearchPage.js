@@ -588,7 +588,7 @@ const SearchPage = ({
                       <span className="item_brand-logo">
                         <img src={product.brandLogo} alt={product.brand} />
                       </span>
-                      <h3 className="item_title">{product.description.short}</h3>
+                      <h3 className="item_title">{`${product.brandText || ""} ${product.description?.options[0]?.meanings[0]?.value || ""} ${product.subType || ""} ${product.subCategory || ""} ${product.capacity || ""}`}</h3>
                       <span className="item_rating">
                         <span className="item_rate">{product.rate}</span>
                         <span className="item_rate">{product.group}</span>
@@ -622,7 +622,65 @@ const SearchPage = ({
             )}
           </ul>
           )}
-          {isListView && (<h2>ListMode</h2>)}
+          {isListView && (
+            <ul className="list_card_items">
+              {filteredAndSortedProducts.length > 0 ? (
+              filteredAndSortedProducts.map((product, index) => (
+                <li className="list_card_item" data-id={index + 1} key={product.sku}>
+                  <Link to={`/item/${product.sku}`}>
+                    <span className="list_item_image">
+                      <img
+                        src={product.imageSlider[0]?.imageSliderLink}
+                        alt={`${product.title}`}
+                      />
+                    </span>
+                  </Link>
+                  <div className="list_item_description">
+                    <div className="list_item_header">
+                    <span className="list_item_brand-logo">
+                        <img src={product.brandLogo} alt={product.brand} /></span>
+                        <ul className="list_item_tags">
+              {product.tags.map((tag, index) => (
+                <li key={index}>
+                  <img src={tag.iconLink} alt={`${tag.value} ${product.sku}`}
+                  ></img>
+                </li>
+              ))}
+            </ul>
+                </div>
+                <span className="list_item_sku">{product.sku}</span>
+                  <h3 className="list_item_subject">{`${product.brandText || ""} ${product.description?.options[0]?.meanings[0]?.value || ""} ${product.subType || ""} ${product.subCategory || ""} ${product.capacity || ""}`}</h3>
+                  <div className="list_item_additional">
+                    <span className="item_rate">{product.rate}</span>
+                    <span className="list_item_dealer-info">{product.autorizationDealer ? "AUTHORIZED DEALER" : ""}</span>
+                </div>
+                  </div>
+                  <div className="list_item_actions">
+                  <span className="list_item_pricing">
+                        <div className="list_item_old-price">
+                          <del>
+                            ${GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
+                              2
+                            )}
+                          </del>
+                          <span className="list_item_discount">
+                            ${parseFloat(calculateDiscountedAmount(product.price, 12.319)).toFixed(2)}
+                          </span>
+                        </div>
+                        <span className="item_price">${product.price}</span>
+                      </span>
+                    <a href="#" className="item_add-to-cart">
+                      Add to Cart
+                    </a>
+                    <Link to={`/item/${product.sku}`} className="item_add-to-cart">More Details</Link>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <p>No products match your selected filters.</p>
+            )}
+            </ul>
+          )}
         </section>
       </div>
     </div>

@@ -63,7 +63,6 @@
           width: auto;
           height: auto;
         }
-    
     }
   
     &_title {
@@ -74,9 +73,6 @@
       text-align: left;
       flex: 1 1 auto;
       margin-top: 5px;
-      &:hover {
-        color: $primary-color-hover-link;
-      }
     }
     &_rating {
       display: flex;
@@ -86,6 +82,9 @@
       color: green;
       font: $font-x-small;
       padding-bottom: 5px;
+    }
+    &_rate {
+      width: 60px;
     }
     &_pricing {
       display: flex;
