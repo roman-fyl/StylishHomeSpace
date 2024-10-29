@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../store/actions/cartActions';
+
 import "./ItemSection.scss";
 import data from "../../../assets/db/items.json"; 
 
 const ItemSection = ({ group = null, subject = null, brand = null, category = null, smartFeatures = null, subCategory = null, subType = null }) => {
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   let filteredData = [...data]; 
 
   if (brand) {
@@ -47,6 +51,11 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
     const oldPrice = GenerateOldPrice(price, percentage);
     return oldPrice - price
   }
+
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+    navigate('/cart');
+  };
   return (
     <div className="item-section_main">
       <h2>{subject}</h2>
@@ -83,8 +92,9 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
                 </div>
               </Link>  
               <div className="item_actions">
-              <Link to="#" className="item_add-to-cart">Add To Cart</Link>
-                {/* <Link to={`/search?category=${category}&group=${group}`} className="item_add-to-cart">Shop More</Link> */}
+              <button onClick={() => handleAddToCart(item)} className="item_add-to-cart">
+                  Add To Cart
+                </button>                {/* <Link to={`/search?category=${category}&group=${group}`} className="item_add-to-cart">Shop More</Link> */}
                 {/* <a href="#" className="item_quick-buy">Buy</a> */}
               </div>
             </li>

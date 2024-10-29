@@ -30,6 +30,7 @@ import ProductPage from "./components/ProductPage/ProductPage";
 import BrandPage from "./components/BrandPage/BrandPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import SearchPage from "./components/SearchPage/SearchPage";
+import CartComponent from './components/CartComponent/CartComponent';
 
 import './App.scss';
 
@@ -67,6 +68,8 @@ const App = () => {
             <Route path="/category/:categoryName" element={<CategoryPage />} />
             <Route path="/brand/:brandName" element={<BrandPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/cart" element={<CartComponent />} />
+
           </Routes>
         </Layout>
         
