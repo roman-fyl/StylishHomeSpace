@@ -18,12 +18,12 @@
     flex: 0 1 15%;
     box-shadow: $box-shadow;
     padding: 15px;
-    min-height: 500px;
+    min-height: 600px;
     width: 250px;
     background-color: #fff;
     &:hover {
-        box-shadow: $box-shadow-hover;
-      }
+      box-shadow: $box-shadow-hover;
+    }
   }
 }
 
@@ -69,7 +69,7 @@
       font: $font-small;
       text-wrap: wrap;
       width: 200px;
-      min-height: 100px;
+      height: 100px;
       text-align: left;
       flex: 1 1 auto;
       margin-top: 5px;
@@ -119,18 +119,29 @@
         transition: box-shadow 0.2s ease-in-out;
         
       }
-      .item_add-to-cart {
-        background: $button-addToCart;
-        width: 100%;
-        &:hover {
-          background: $primary-color-hover-link;
-        }
-      }
-      .item_quick-but {
-        background: $button-buyNow;
-        &:hover {
-          background: $primary-color-hover-link;
-        }
-      }
+      
+    }
+  }
+  .item_add-to-cart {
+    background: $button-addToCart;
+    width: 100%;
+    color: #fff !important;
+    padding: 10px 15px;
+    font: $font-x-small;
+    text-align: center;
+    text-transform: capitalize;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    background: $button-addToCart;
+    transition: box-shadow 0.2s ease-in-out;
+    cursor: $cursor;
+    &:hover {
+      background: $primary-color-hover-link;
+    }
+  }
+  .item_quick-but {
+    background: $button-buyNow;
+    &:hover {
+      background: $primary-color-hover-link;
     }
   }
