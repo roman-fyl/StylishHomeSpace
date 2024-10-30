@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../store/actions/cartActions';
+import {getSessionNumber} from "../../Sessions/getSessionNumber";
+import {setLocalStorage} from "../../LocalStorage/setLocalStorage";
+import {updateLocalStorage} from "../../LocalStorage/updateLocalStorage";
 
 import "./ItemSection.scss";
 import data from "../../../assets/db/items.json"; 
@@ -53,9 +56,16 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
   }
 
   const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
-    navigate('/cart');
-  };
+    const sessionNumber = getSessionNumber();
+    const itemToAdd = {
+        sku: item.sku,
+        quantity: 1,
+        session: sessionNumber,
+    };
+    updateLocalStorage('cartItems', itemToAdd);
+    dispatch(addToCart(itemToAdd));
+    navigate(`/cart?session=${sessionNumber}`); 
+};
   return (
     <div className="item-section_main">
       <h2>{subject}</h2>

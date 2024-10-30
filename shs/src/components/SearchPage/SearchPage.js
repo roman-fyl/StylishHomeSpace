@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {addToCart} from "../../store/actions/cartActions";
+import { getSessionNumber } from "../Sessions/getSessionNumber";
 import homepageLogo from "../../assets/images/icon-homepage.png";
 import data from "../../assets/db/items.json";
 import "./SearchPage.scss";
@@ -29,6 +32,7 @@ const SearchPage = ({
   });
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -334,6 +338,12 @@ const SearchPage = ({
     setIsListView(!isListView);
   };
 
+  const handleAddToCart = (item) => {
+    const sessionNumber = getSessionNumber();
+    dispatch(addToCart(item));
+    navigate(`/cart?session=${sessionNumber}`);
+};
+
   return (
     <div className="container">
       <ul className="breadcrumbs">
@@ -611,9 +621,9 @@ const SearchPage = ({
                     </div>
                   </Link>
                   <div className="item_actions">
-                    <a href="#" className="item_add-to-cart">
-                      Add to Cart
-                    </a>
+                  <button onClick={() => handleAddToCart(product)} className="item_add-to-cart">
+                  Add To Cart
+                </button>   
                   </div>
                 </li>
               ))

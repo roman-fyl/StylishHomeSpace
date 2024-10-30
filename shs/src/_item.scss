@@ -4,7 +4,6 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-    align-content: flex-start;
     flex-wrap: wrap;
     gap: 28px;
     margin: 20px 0;
@@ -21,6 +20,7 @@
     min-height: 600px;
     width: 250px;
     background-color: #fff;
+    position: relative; // Added to position the button at the bottom
     &:hover {
       box-shadow: $box-shadow-hover;
     }
@@ -30,44 +30,39 @@
 .item {
     &_description {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-          padding-top: 15px;
-          height: 100%;
-          flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 15px;
+    height: 100%;
+    flex: 1 1 auto;
     }
     &_image {
       height: 230px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      overflow: hidden;
-      width: 100%;
-      flex: 0 0 auto; 
-      margin-top: auto;
-     img {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    img {
       max-width: 100%;
       max-height: 230px;
       object-fit: contain;
-     }
+    }
     }
     &_brand-logo {
       display: flex;
       justify-content: center;
       height: 50px;
       align-items: center;
-        img {
-          padding: 5px 0;
-          max-width: 100%;
-          max-height: 100%;
-          width: auto;
-          height: auto;
-        }
+      img {
+        padding: 5px 0;
+        max-width: 100%;
+        max-height: 100%;
+      }
     }
   
     &_title {
       font: $font-small;
-      text-wrap: wrap;
       width: 200px;
       height: 100px;
       text-align: left;
@@ -77,14 +72,14 @@
     &_rating {
       display: flex;
       flex-direction: column;
-      align-items: end;
+      align-items: flex-end;
       justify-content: center;
       color: green;
       font: $font-x-small;
       padding-bottom: 5px;
     }
     &_rate {
-      width: 60px;
+      min-width: 60px;
     }
     &_pricing {
       display: flex;

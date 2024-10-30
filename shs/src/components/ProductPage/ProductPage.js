@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink, Element } from "react-scroll";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {addToCart} from "../../store/actions/cartActions";
+import {updateLocalStorage} from "../../components/LocalStorage/updateLocalStorage";
 import productData from "../../assets/db/items.json";
 
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
+import { getSessionNumber } from "../Sessions/getSessionNumber";
 import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
 import itemShare from "../../assets/images/icon-share.png";
 
@@ -14,10 +18,14 @@ import "./ProductPage.scss";
 import arrowUp from "../../assets/images/arrow-up.png";
 import arrowBack from "../../assets/images/arrow-back.png";
 
-const ProductPage = () => {
+const ProductPage = (customer = "id") => {
   const { skuText } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setProduct(null);
@@ -49,6 +57,21 @@ const ProductPage = () => {
   const GenerateOldPrice = (price, percentage) => {
     return price * (1 + percentage / 100);
   };
+
+  const handleAddToCart = (item) => {
+    const sessionNumber = getSessionNumber(); 
+    const itemToAdd = {
+        sku: item.sku,
+        quantity,
+        session: sessionNumber,
+    };
+    updateLocalStorage('cartItems', itemToAdd);
+    dispatch(addToCart(itemToAdd));
+    navigate(`/cart?session=${sessionNumber}`);
+};
+const handleQuantityChange = (newQuantity) => {
+  setQuantity(newQuantity);
+};
 
   return (
       <div className="container">
@@ -264,8 +287,10 @@ const ProductPage = () => {
                 <span>${product.price}</span>
               </div>
               <div className="price_quantity_items">
-                <QuantityInCart />
-              </div>
+              <QuantityInCart 
+                    quantity={quantity} 
+                    onQuantityChange={handleQuantityChange} 
+                />              </div>
               <div className="price_coupon">
                 <a href="">Click to activate coupon</a>
               </div>
@@ -303,9 +328,9 @@ const ProductPage = () => {
                 </label>
               </form>
               <div className="product_actions">
-                <a href="#" className="item_add-to-cart">
-                  Add to Cart
-                </a>
+              <button onClick={() => handleAddToCart(product)} className="item_add-to-cart">
+                  Add To Cart
+                </button>  
                 <a href="#" className="item_quick-but">
                   Buy
                 </a>
