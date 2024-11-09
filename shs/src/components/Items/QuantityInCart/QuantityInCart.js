@@ -17,7 +17,7 @@ const QuantityInCart = ({ quantity, onQuantityChange }) => {
     const handleInputChange = (e) => {
         const value = Number(e.target.value);
         if (onQuantityChange) {
-            onQuantityChange(value > 0 ? value : 1); // Ensure at least 1
+            onQuantityChange(value > 0 ? value : 1);
         }
     };
 
@@ -25,7 +25,7 @@ const QuantityInCart = ({ quantity, onQuantityChange }) => {
         <div className="quantity_selector">
             <button className="quantity_decrease" onClick={handleDecrease}>-</button>
             <input 
-                type="number" // Use number type for input
+                type="number"
                 value={quantity} 
                 className="quantity_input" 
                 onChange={handleInputChange} 

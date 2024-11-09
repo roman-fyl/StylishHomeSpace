@@ -31,7 +31,6 @@ const CategoryPage = ({ group = null, subject = null, brand = null, category = n
     filteredData = filteredData.filter(item => item.color === color);
   }
 
-  // Function to generate query parameters for links
   const generateQueryParams = (additionalParams = {}) => {
     const params = new URLSearchParams();
 
@@ -44,9 +43,8 @@ const CategoryPage = ({ group = null, subject = null, brand = null, category = n
     if (color) params.set('colors', color);
 
 
-    // Add any additional params passed
     Object.keys(additionalParams).forEach(key => {
-        if (additionalParams[key]) {  // Only add if it has a value
+        if (additionalParams[key]) { 
             params.set(key, additionalParams[key]);
         }
     });
@@ -61,6 +59,7 @@ const CategoryPage = ({ group = null, subject = null, brand = null, category = n
           (product) =>
             product.category.toLowerCase() === categoryName.toLowerCase()
         );
+        document.title = categoryName.toUpperCase();
 
         if (filteredProducts.length > 0) {
           setProducts(filteredProducts);

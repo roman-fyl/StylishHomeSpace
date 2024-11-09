@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../store/actions/cartActions';
-import {getSessionNumber} from "../../Sessions/getSessionNumber";
-import {setLocalStorage} from "../../LocalStorage/setLocalStorage";
-import {updateLocalStorage} from "../../LocalStorage/updateLocalStorage";
+import { getSessionNumber } from "../../Sessions/getSessionNumber";
+import { updateLocalStorage } from "../../LocalStorage/updateLocalStorage";
 
 import "./ItemSection.scss";
 import data from "../../../assets/db/items.json"; 
@@ -52,20 +51,24 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
 
   const calculateDiscountedAmount = (price, percentage) => {
     const oldPrice = GenerateOldPrice(price, percentage);
-    return oldPrice - price
+    return oldPrice - price;
   }
 
   const handleAddToCart = (item) => {
-    const sessionNumber = getSessionNumber();
+    const sessionNumber = getSessionNumber(); 
     const itemToAdd = {
         sku: item.sku,
         quantity: 1,
         session: sessionNumber,
     };
+
     updateLocalStorage('cartItems', itemToAdd);
+
     dispatch(addToCart(itemToAdd));
+
     navigate(`/cart?session=${sessionNumber}`); 
-};
+  };
+
   return (
     <div className="item-section_main">
       <h2>{subject}</h2>
@@ -102,10 +105,9 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
                 </div>
               </Link>  
               <div className="item_actions">
-              <button onClick={() => handleAddToCart(item)} className="item_add-to-cart">
+                <button onClick={() => handleAddToCart(item)} className="item_add-to-cart">
                   Add To Cart
-                </button>                {/* <Link to={`/search?category=${category}&group=${group}`} className="item_add-to-cart">Shop More</Link> */}
-                {/* <a href="#" className="item_quick-buy">Buy</a> */}
+                </button> 
               </div>
             </li>
           ))}
@@ -115,7 +117,7 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
           data-group={group} 
           data-category={category} 
           data-brand={brand}
-          data-smartfeatures={smartFeatures}
+          data-smartFeatures={smartFeatures}
           data-subcategory={subCategory}
           data-subtype={subType}
           onClick={handleClick}

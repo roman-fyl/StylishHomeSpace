@@ -2,11 +2,11 @@ import { getFromLocalStorage } from "../LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../LocalStorage/setLocalStorage";
 
 export const getSessionNumber = () => {
-    const currentSession = parseInt(getFromLocalStorage('abnd-session')) || 3010000;
+    const currentSession = parseInt(getFromLocalStorage('abnd-session'));
 
-    const newSessionNumber = currentSession + 1;
+    const sessionNumber = isNaN(currentSession) ? 3010000 : currentSession;
 
-    setLocalStorage('abnd-session', newSessionNumber);
+    setLocalStorage('abnd-session', sessionNumber);
 
-    return newSessionNumber;
+    return sessionNumber;
 };

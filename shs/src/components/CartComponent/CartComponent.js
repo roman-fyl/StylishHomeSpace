@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { removeFromCart, addToCart } from '../../store/actions/cartActions';
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
+import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
 
 const CartComponent = () => {
@@ -13,6 +14,10 @@ const CartComponent = () => {
     const navigate = useNavigate();
     const [session, setSession] = useState(null);
     const [quantities, setQuantities] = useState({});
+
+    useEffect(() => {
+        document.title = "Cart";
+    });
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
@@ -41,15 +46,19 @@ const CartComponent = () => {
 
     const handleQuantityChange = (itemId, newQuantity) => {
         console.log("Item ID:", itemId, "New Quantity:", newQuantity);
+        
         setQuantities(prev => ({
             ...prev,
-            [itemId]: newQuantity 
+            [itemId]: newQuantity
         }));
         
         const updatedItem = cartItems.find(item => item.id === itemId);
+
         if (updatedItem) {
             dispatch(addToCart({ ...updatedItem, quantity: newQuantity }, session));
         }
+
+        updateLocalStorage('cartItems', { ...updatedItem, quantity: newQuantity });
     };
 
     return (
@@ -57,7 +66,7 @@ const CartComponent = () => {
             <h2>Your Cart (Session ID: {session})</h2>
             {cartItems.length ? (
                 cartItems.map((item) => (
-                    <div key={item.id}>
+                    <div key={item.id} className="cart-item">
                         <span>{item.name} - ${item.price}</span>
                         <QuantityInCart 
                             quantity={quantities[item.id] || item.quantity}

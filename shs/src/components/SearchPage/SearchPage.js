@@ -43,7 +43,6 @@ const SearchPage = ({
       setFilteredProducts(data);
     }
 
-    // Get filters from the URL
     const searchParams = new URLSearchParams(location.search);
     const brands = searchParams.get("brands")
       ? searchParams.get("brands").split(",")
@@ -85,7 +84,6 @@ const SearchPage = ({
     });
   }, [location.search]);
 
-  // Update the URL when filters are changed
   const updateURL = (filters) => {
     const searchParams = new URLSearchParams();
     if (filters.brands.length > 0)
@@ -118,7 +116,7 @@ const SearchPage = ({
         : [...prevFilters[filterType], value];
 
       const updatedFilters = { ...prevFilters, [filterType]: updatedFilter };
-      updateURL({ ...updatedFilters, priceRange }); // Include price range in the URL update
+      updateURL({ ...updatedFilters, priceRange });
       return updatedFilters;
     });
   };
@@ -134,7 +132,7 @@ const SearchPage = ({
       colors: [],
     });
     setPriceRange({ min: 0, max: 100000 });
-    navigate(location.pathname); // Reset URL by removing query parameters
+    navigate(location.pathname);
   };
 
   const handlePriceRangeChange = (event) => {
@@ -144,13 +142,12 @@ const SearchPage = ({
       [name === "min" ? "min" : "max"]: value ? parseFloat(value) : 0,
     };
     setPriceRange(newPriceRange);
-    updateURL({ ...selectedFilters, priceRange: newPriceRange }); // Include updated price range
+    updateURL({ ...selectedFilters, priceRange: newPriceRange });
   };
 
   useEffect(() => {
     let updatedProducts = products;
 
-    // Apply filters from selectedFilters
     if (selectedFilters.brands.length > 0) {
       updatedProducts = updatedProducts.filter((product) =>
         selectedFilters.brands.includes(product.brandText)
@@ -211,7 +208,6 @@ const SearchPage = ({
       );
     }
 
-    // Apply smart features filter
     if (selectedFilters.smartFeatures.length > 0) {
       updatedProducts = updatedProducts.filter((product) => {
         const isSmart = product.smart === "Yes";
@@ -219,7 +215,6 @@ const SearchPage = ({
       });
     }
 
-    // Apply price filter
     updatedProducts = updatedProducts.filter((product) => {
       const price = parseFloat(product.price);
       return price >= priceRange.min && price <= priceRange.max;
@@ -269,44 +264,36 @@ const SearchPage = ({
   
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
-    setShuffled(false); // Reset shuffle flag when sort option changes
+    setShuffled(false);
   };
 
   const filteredAndSortedProducts = products
   .filter((product) => {
-    // Apply filters dynamically here
 
-    // Filter by brand
     if (selectedFilters.brands.length > 0 && !selectedFilters.brands.includes(product.brandText)) {
       return false;
     }
 
-    // Filter by group
     if (selectedFilters.groups.length > 0 && !selectedFilters.groups.includes(product.group)) {
       return false;
     }
 
-    // Filter by category
     if (selectedFilters.categories.length > 0 && !selectedFilters.categories.includes(product.category)) {
       return false;
     }
 
-    // Filter by subCategory
     if (selectedFilters.subCategories.length > 0 && !selectedFilters.subCategories.includes(product.subCategory)) {
       return false;
     }
 
-    // Filter by subType
     if (selectedFilters.subTypes.length > 0 && !selectedFilters.subTypes.includes(product.subType)) {
       return false;
     }
 
-    // Filter by color
     if (selectedFilters.colors.length > 0 && !selectedFilters.colors.includes(product.color)) {
       return false;
     }
 
-    // Apply price range filter
     const price = parseFloat(product.price);
     if (price < priceRange.min || price > priceRange.max) {
       return false;
@@ -315,7 +302,6 @@ const SearchPage = ({
     return true;
   })
   .sort((a, b) => {
-    // Apply sorting here
     switch (sortOption) {
       case "priceLowToHigh":
         return a.price - b.price;
@@ -329,7 +315,7 @@ const SearchPage = ({
           calculateDiscountedAmount(a.price, 12.319)
         );
       case "mostVisited":
-        return Math.random() - 0.5; // Shuffle items for "Most Visited"
+        return Math.random() - 0.5;
       default:
         return 0;
     }
