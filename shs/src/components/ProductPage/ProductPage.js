@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink, Element } from "react-scroll";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {addToCart} from "../../store/actions/cartActions";
-import {updateLocalStorage} from "../../components/LocalStorage/updateLocalStorage";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/actions/cartActions";
+import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
+
 import productData from "../../assets/db/items.json";
 
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
@@ -18,33 +19,33 @@ import "./ProductPage.scss";
 import arrowUp from "../../assets/images/arrow-up.png";
 import arrowBack from "../../assets/images/arrow-back.png";
 
-const ProductPage = (customer = "id") => {
+const ProductPage = () => {
   const { skuText } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [payment, setPayment] = useState("Pay in Full");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     setProduct(null);
-    
+
     if (!skuText) return;
-  
+
     const fetchedProduct = productData.find(
       item => item.sku.toLowerCase() === skuText.toLowerCase()
     );
-  
+
     if (fetchedProduct) {
       setProduct(fetchedProduct);
       setError(null);
     } else {
       setError("Product not found");
     }
-  
+
     document.title = `Product Details - ${skuText.toUpperCase()}`;
-  
   }, [skuText]);
 
   if (error) {
@@ -57,21 +58,49 @@ const ProductPage = (customer = "id") => {
   const GenerateOldPrice = (price, percentage) => {
     return price * (1 + percentage / 100);
   };
+  const handlePaymentChange = (e) => {
+    setPayment(e.target.value)
+  };
+
 
   const handleAddToCart = (item) => {
-    const sessionNumber = getSessionNumber(); 
+    const sessionNumber = getSessionNumber();
     const itemToAdd = {
-        sku: item.sku,
-        quantity,
-        session: sessionNumber,
+      group: item.group,
+      smart: item.smart,
+      category: item.category,
+      subCategory: item.subCategory,
+      subType: item.subType,
+      brandLogo: item.brandLogo,
+      color: item.color,
+      brandText: item.brandText,
+      capacity: item.capacity,
+      imageSlider: item.imageSlider[0].imageSliderLink,
+      imageAlt: item.imageSlider[0].Alt,
+      sku: item.sku,
+      autorizationDealer: item.autorizationDealer,
+      tags: item.tags,
+      title: item.title,
+      rate: item.rate,
+      price: item.price,
+      idN: item.idN,
+      warranty: item.warranty,
+      description: item.description,
+      maintenance: item.maintenance,
+      installation: item.installation,
+      quantity,
+      session: sessionNumber,
+      payment
     };
     updateLocalStorage('cartItems', itemToAdd);
-    dispatch(addToCart(itemToAdd));
+    dispatch(addToCart(itemToAdd, sessionNumber));
     navigate(`/cart?session=${sessionNumber}`);
-};
-const handleQuantityChange = (newQuantity) => {
-  setQuantity(newQuantity);
-};
+  };
+
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
+
 
   return (
       <div className="container">
@@ -262,80 +291,79 @@ const handleQuantityChange = (newQuantity) => {
               </div>
             </div>
             <div className="product_description_price">
-              <div className="price_list">
-                <span>Was</span>
-                <del>
-                  $
-                  {GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
-                    2
-                  )}
-                </del>
-              </div>
-              <div className="price_discounts">
-                <span>Save:</span>
-                <span>
-                  $
-                  {parseFloat(
-                    GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
-                      2
-                    ) - product.price
-                  ).toFixed(2)}
-                </span>
-              </div>
-              <div className="price_current">
-                <span>Now</span>
-                <span>${product.price}</span>
-              </div>
-              <div className="price_quantity_items">
-              <QuantityInCart 
-                    quantity={quantity} 
-                    onQuantityChange={handleQuantityChange} 
-                />              </div>
-              <div className="price_coupon">
-                <a href="">Click to activate coupon</a>
-              </div>
+      <div className="price_list">
+        <span>Was</span>
+        <del>
+          $
+          {GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(2)}
+        </del>
+      </div>
+      <div className="price_discounts">
+        <span>Save:</span>
+        <span>
+          $
+          {parseFloat(
+            GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(2) - product.price
+          ).toFixed(2)}
+        </span>
+      </div>
+      <div className="price_current">
+        <span>Now</span>
+        <span>${product.price}</span>
+      </div>
+      <div className="price_quantity_items">
+        <QuantityInCart 
+          quantity={quantity} 
+          onQuantityChange={handleQuantityChange} 
+        />
+      </div>
+      <div className="price_coupon">
+        <a href="">Click to activate coupon</a>
+      </div>
 
-              <form className="price_financing">
-                <label>
-                  <input
-                    type="radio"
-                    className="price_financing_options"
-                    name="financing"
-                  />
-                  <span>
-                    ${parseFloat((product.price / 6) * 1.1).toFixed(2)}
-                  </span>
-                  <span>6-Month Financing(+10%)</span>
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    className="price_financing_options"
-                    name="financing"
-                  />
-                  <span>
-                    ${parseFloat((product.price / 12) * 1.15).toFixed(2)}
-                  </span>
-                  <span>12-Month Financing(+15%)</span>
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    className="price_financing_options"
-                    name="financing"
-                  />
-                  <span>Pay in Full</span>
-                </label>
-              </form>
-              <div className="product_actions">
-              <button onClick={() => handleAddToCart(product)} className="item_add-to-cart">
-                  Add To Cart
-                </button>  
-                <a href="#" className="item_quick-but">
-                  Buy
-                </a>
-              </div>
-            </div>
+      <div className="price_financing">
+        <form>
+          <label>
+            <input
+              type="radio"
+              value="6-Month Financing (+10%)"
+              name="payment"
+              checked={payment === "6-Month Financing (+10%)"}
+              onChange={handlePaymentChange}
+            />
+            6-Month Financing (+10%)
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="12-Month Financing (+15%)"
+              name="payment"
+              checked={payment === "12-Month Financing (+15%)"}
+              onChange={handlePaymentChange}
+            />
+            12-Month Financing (+15%)
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Pay in Full"
+              name="payment"
+              checked={payment === "Pay in Full"}
+              onChange={handlePaymentChange}
+            />
+            Pay in Full
+          </label>
+        </form>
+      </div>
+      <div className="product_actions">
+        <button onClick={() => handleAddToCart(product)} className="item_add-to-cart">
+          Add To Cart
+        </button>  
+        <a href="#" className="item_quick-but">
+          Buy
+        </a>
+      </div>
+    </div>
           </section>
         </Element>
 

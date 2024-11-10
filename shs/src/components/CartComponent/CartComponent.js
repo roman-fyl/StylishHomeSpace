@@ -1,85 +1,107 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { removeFromCart, addToCart } from '../../store/actions/cartActions';
+import { removeFromCart, setCartItems } from "../../store/actions/cartActions";
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
-import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
+import "./CartComponent.scss";
 
 const CartComponent = () => {
-    const cartItems = useSelector(state => state.cart.items);
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const navigate = useNavigate();
-    const [session, setSession] = useState(null);
-    const [quantities, setQuantities] = useState({});
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [session, setSession] = useState(null);
 
-    useEffect(() => {
-        document.title = "Cart";
-    });
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    let sessionId = queryParams.get("session");
+  
+    if (!sessionId) {
+      sessionId = getFromLocalStorage("abnd-session") || Date.now();
+      setLocalStorage("abnd-session", sessionId);
+      queryParams.set("session", sessionId);
+      navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
+    }
+    setSession(sessionId);
+  
+    if (!cartItems.length) {
+      const storedCartItems = getFromLocalStorage("cartItems");
+      if (storedCartItems && storedCartItems.length > 0) {
+        dispatch(setCartItems(storedCartItems, sessionId));
+      }
+    }
+  }, [location, navigate, session, dispatch, cartItems.length]);
+  
 
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-        let sessionId = queryParams.get('session');
+  const handleRemove = (productId) => {
+    dispatch(removeFromCart(productId));
+  };
 
-        if (!sessionId) {
-            sessionId = getFromLocalStorage('abnd-session') || Date.now();
-            setLocalStorage('abnd-session', sessionId);
-            queryParams.set('session', sessionId);
-            navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
-        }
-        setSession(sessionId);
-    }, [location, navigate]);
-
-    useEffect(() => {
-        const initialQuantities = {};
-        cartItems.forEach(item => {
-            initialQuantities[item.id] = item.quantity;
-        });
-        setQuantities(initialQuantities);
-    }, [cartItems]);
-
-    const handleRemove = (productId) => {
-        dispatch(removeFromCart(productId));
-    };
-
-    const handleQuantityChange = (itemId, newQuantity) => {
-        console.log("Item ID:", itemId, "New Quantity:", newQuantity);
-        
-        setQuantities(prev => ({
-            ...prev,
-            [itemId]: newQuantity
-        }));
-        
-        const updatedItem = cartItems.find(item => item.id === itemId);
-
-        if (updatedItem) {
-            dispatch(addToCart({ ...updatedItem, quantity: newQuantity }, session));
-        }
-
-        updateLocalStorage('cartItems', { ...updatedItem, quantity: newQuantity });
-    };
-
-    return (
-        <div className='container'>
-            <h2>Your Cart (Session ID: {session})</h2>
-            {cartItems.length ? (
-                cartItems.map((item) => (
-                    <div key={item.id} className="cart-item">
-                        <span>{item.name} - ${item.price}</span>
-                        <QuantityInCart 
-                            quantity={quantities[item.id] || item.quantity}
-                            onQuantityChange={(newQuantity) => handleQuantityChange(item.id, newQuantity)} 
-                        />
-                        <button onClick={() => handleRemove(item.id)}>Remove</button>
-                    </div>
-                ))
-            ) : (
-                <p>No items in your cart.</p>
-            )}
-        </div>
+  const handleQuantityChange = (itemId, newQuantity) => {
+    const updatedCart = cartItems.map((item) => 
+      item.id === itemId ? { ...item, quantity: newQuantity } : item
     );
+  
+    dispatch(setCartItems(updatedCart, session));
+  
+    setLocalStorage("cartItems", updatedCart);
+  
+    console.log("Updated Cart:", updatedCart);
+  };
+
+  const totalAmount = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0).toFixed(2);
+
+  return (
+    <div className="container cart_container">
+      <h2>Your Cart (Session ID: {session})</h2>
+      <div className="cart_main">
+        <ul className="cart_elements">
+          {cartItems.length ? (
+            cartItems.map((item) => (
+              <li className="cart_element" key={item.id}>
+                <span className="cartItem_image">
+                  <img src={item.imageSlider} alt={item.imageAlt} />
+                </span>
+                <div className="cartItem_description">
+                  <span className="cartItem_sku">{item.sku}</span>
+                  <h3 className="cartItem_subject">{`${item.brandText} ${item.subType}`}</h3>
+                  <span>{item?.description?.short || "Q"}</span>
+                </div>
+                <QuantityInCart 
+                  quantity={item.quantity} 
+                  itemId={item.idN} 
+                  onQuantityChange={(newQuantity) => handleQuantityChange(item.id, newQuantity)}
+                />
+                <button onClick={() => handleRemove(item.id)}>Remove</button>
+                <div className="cartItem_pricing">
+                  <div className="cartItem_old-price">
+                    <del>${(parseFloat(item.price) * 1.12).toFixed(2)}</del>
+                    <span className="cartItem_discount">
+                      ${(parseFloat(item.price) * 0.88).toFixed(2)}
+                    </span>
+                  </div>
+                  <span className="item_price">${parseFloat(item.price).toFixed(2)}</span>
+                </div>
+              </li>
+            ))
+          ) : (
+            <p>No items in your cart.</p>
+          )}
+        </ul>
+        <div className="cart_summary">
+          <h3>Order Summary</h3>
+          <span className="total_price">
+            Total: ${totalAmount}
+          </span>
+        </div>
+      </div>
+      <div className="cart_additional">Additional Information</div>
+    </div>
+  );
 };
 
 export default CartComponent;

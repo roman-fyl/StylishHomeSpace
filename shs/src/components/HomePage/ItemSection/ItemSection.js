@@ -56,11 +56,35 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
 
   const handleAddToCart = (item) => {
     const sessionNumber = getSessionNumber(); 
+ 
     const itemToAdd = {
-        sku: item.sku,
-        quantity: 1,
-        session: sessionNumber,
+      group: item.group,
+      smart: item.smart,
+      category: item.category,
+      subCategory: item.subCategory,
+      subType: item.subType,
+      brandLogo: item.brandLogo,
+      color: item.color,
+      brandText: item.brandText,
+      capacity: item.capacity,
+      imageSlider: item.imageSlider[0].imageSliderLink,
+      imageAlt: item.imageSlider[0].Alt,
+      sku: item.sku,
+      autorizationDealer: item.autorizationDealer,
+      tags: item.tags,
+      title: item.title,
+      rate: item.rate,
+      price: item.price,
+      idN: item.idN,
+      warranty: item.warranty,
+      description: item.description,
+      maintenance: item.maintenance,
+      installation: item.installation,
+      quantity: 1,
+      session: sessionNumber,
+      payment: "Pay in Full"
     };
+
 
     updateLocalStorage('cartItems', itemToAdd);
 

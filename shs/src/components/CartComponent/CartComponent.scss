@@ -1,0 +1,126 @@
+@import "../../vars";
+
+.cart {
+  &_container {
+    h2 {
+      font: $font-regular !important;
+      color: $primary-color;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &_main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 25px 0;
+    flex-wrap: nowrap;
+  }
+  &_elements {
+    width: 100%;
+    min-height: 530px;
+    padding: 0 10px;
+    // box-shadow: $box-shadow;
+    padding: 0 25px 25px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &_element {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    box-shadow: $box-shadow;
+    padding: 15px;
+    min-height: 250px;
+    width: 100%;
+    background-color: #fff;
+    &:hover {
+      box-shadow: $box-shadow-hover;
+    }
+  }
+  &_summary {
+    min-height: 530px;
+    width: 320px;
+    padding: 0 10px;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: space-between;
+    padding: 25px;
+  }
+}
+
+.cartItem {
+  &_image {
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 230px;
+    flex: 0 0 auto;
+    margin-top: auto;
+
+    img {
+      max-width: 100%;
+      max-height: 230px;
+      object-fit: contain;
+    }
+  }
+  &_description {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  &_tags {
+    display: flex;
+    flex-direction: row;
+    img {
+      width: 40px;
+      margin: 0 15px;
+    }
+  }
+  &_sku {
+    margin: 5px 0;
+    font: $font-x-small;
+    color: $primary-color;
+  }
+  &_subject {
+    font: $font-small;
+    text-wrap: wrap;
+    min-height: 30px;
+    text-align: left;
+    margin-top: 5px;
+  }
+  &_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+  }
+  &_brand-logo {
+    display: flex;
+    justify-content: flex-start;
+    height: 50px;
+    align-items: flex-start;
+    width: 200px;
+    img {
+      padding: 5px 0;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+    }
+  }
+}

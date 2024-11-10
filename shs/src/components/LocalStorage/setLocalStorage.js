@@ -1,11 +1,8 @@
-
 export const setLocalStorage = (key, value) => {
     try {
-        const dataValue = JSON.stringify(value);
-        localStorage.setItem(key, dataValue);
-        // console.log(localStorage.setItem(key, dataValue));
+      const dataToSave = Array.isArray(value) ? value : [value];
+      localStorage.setItem(key, JSON.stringify(dataToSave));
+    } catch (error) {
+      console.error("Error setting to localStorage: ", error);
     }
-    catch (error) {
-        console.error("Error setLocalStorage: ", error);
-    }
-}
+  };
