@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { removeFromCart, setCartItems } from "../../store/actions/cartActions";
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
@@ -66,20 +66,40 @@ const CartComponent = () => {
             {cartItems.length ? (
               cartItems.map((item) => (
                 <li className="cart_element" key={item.id}>
+                  <div className="cartItem_image_element">
                   <span className="cartItem_image">
                     <img src={item.imageSlider} alt={item.imageAlt} />
                   </span>
+                  </div>
                   <div className="cartItem_description">
+                  <div className="cartItem_header">
+                    <span className="cartItem_brand-logo">
+                        <img src={item.brandLogo} alt={item.brand} /></span>
+                        <ul className="cartItem_tags">
+              {item.tags.map((tag, index) => (
+                <li key={index}>
+                  <img src={tag.iconLink} alt={`${tag.value} ${item.sku}`}
+                  ></img>
+                </li>
+              ))}
+            </ul>
+                </div>
                     <span className="cartItem_sku">{item.sku}</span>
+                    <Link to={`/item/${item.sku}`}>
                     <h3 className="cartItem_subject">{`${item.brandText} ${item.subType}`}</h3>
+                    </Link>
                     <span>{item?.description?.short || "Q"}</span>
                   </div>
+               <div className="cartItem_controls">
+               <div className="cartItem_controls_element">
                   <QuantityInCart 
                     quantity={item.quantity} 
                     itemId={item.idN} 
                     onQuantityChange={(newQuantity) => handleQuantityChange(item.id, newQuantity)}
                   />
                   <button onClick={() => handleRemove(item.idN)}>Remove</button>
+                  </div>
+               </div>
                   <div className="cartItem_pricing">
                     <div className="cartItem_old-price">
                       <del>${(parseFloat(item.price) * 1.12).toFixed(2)}</del>
