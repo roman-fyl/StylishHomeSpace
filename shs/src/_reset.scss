@@ -62,3 +62,22 @@ h6 {
   font-weight: inherit;
   font-size: inherit;
 }
+
+/* For Webkit browsers (Chrome, Safari) */
+.quantity_input::-webkit-outer-spin-button,
+.quantity_input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+.quantity_input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Optional: Remove the border (if you prefer to hide the input field styling) */
+.quantity_input {
+  appearance: none; /* Ensures consistency */
+  border: none;     /* Optional, remove border */
+  outline: none;    /* Optional, remove outline */
+}
