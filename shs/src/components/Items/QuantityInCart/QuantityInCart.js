@@ -11,14 +11,14 @@ const QuantityInCart = ({ quantity, itemId, onQuantityChange }) => {
     const handleIncrease = () => {
       const newQuantity = inputQuantity + 1;
       setInputQuantity(newQuantity);
-      onQuantityChange(newQuantity);  
+      onQuantityChange(itemId, newQuantity);  
     };
   
     const handleDecrease = () => {
       if (inputQuantity > 1) {
         const newQuantity = inputQuantity - 1;
         setInputQuantity(newQuantity);
-        onQuantityChange(newQuantity);  
+        onQuantityChange(itemId, newQuantity);  
       }
     };
   
@@ -26,7 +26,7 @@ const QuantityInCart = ({ quantity, itemId, onQuantityChange }) => {
       const value = Number(e.target.value);
       if (value > 0) {
         setInputQuantity(value);
-        onQuantityChange(value);
+        onQuantityChange(itemId, value);
       }
     };
   

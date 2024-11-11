@@ -45,7 +45,7 @@ const CartComponent = () => {
   
     const handleQuantityChange = (itemId, newQuantity) => {
       const updatedCart = cartItems.map((item) => 
-        item.id === itemId ? { ...item, quantity: newQuantity } : item
+        item.idN === itemId ? { ...item, quantity: newQuantity } : item
       );
     
       dispatch(setCartItems(updatedCart, session));
@@ -65,7 +65,7 @@ const CartComponent = () => {
           <ul className="cart_elements">
             {cartItems.length ? (
               cartItems.map((item) => (
-                <li className="cart_element" key={item.id}>
+                <li className="cart_element" key={item.idN}>
                   <div className="cartItem_image_element">
                   <span className="cartItem_image">
                     <img src={item.imageSlider} alt={item.imageAlt} />
@@ -95,7 +95,7 @@ const CartComponent = () => {
                   <QuantityInCart 
                     quantity={item.quantity} 
                     itemId={item.idN} 
-                    onQuantityChange={(newQuantity) => handleQuantityChange(item.id, newQuantity)}
+                    onQuantityChange={handleQuantityChange}
                   />
                   <button onClick={() => handleRemove(item.idN)}>Remove</button>
                   </div>
