@@ -4,18 +4,13 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/actions/cartActions";
 import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
-
 import productData from "../../assets/db/items.json";
-
-import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
+import QuantityItems from "./QuantityItems";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
 import itemShare from "../../assets/images/icon-share.png";
-
 import homepageLogo from "../../assets/images/icon-homepage.png";
-
 import "./ProductPage.scss";
-
 import arrowUp from "../../assets/images/arrow-up.png";
 import arrowBack from "../../assets/images/arrow-back.png";
 
@@ -25,17 +20,15 @@ const ProductPage = () => {
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [payment, setPayment] = useState("Pay in Full");
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     setProduct(null);
-
     if (!skuText) return;
 
     const fetchedProduct = productData.find(
-      item => item.sku.toLowerCase() === skuText.toLowerCase()
+      (item) => item.sku.toLowerCase() === skuText.toLowerCase()
     );
 
     if (fetchedProduct) {
@@ -55,13 +48,13 @@ const ProductPage = () => {
     return <div>Loading...</div>;
   }
 
-  const GenerateOldPrice = (price, percentage) => {
-    return price * (1 + percentage / 100);
-  };
   const handlePaymentChange = (e) => {
-    setPayment(e.target.value)
+    setPayment(e.target.value);
   };
 
+  const handleQuantityChangePP = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
 
   const handleAddToCart = (item) => {
     const sessionNumber = getSessionNumber();
@@ -88,18 +81,20 @@ const ProductPage = () => {
       description: item.description,
       maintenance: item.maintenance,
       installation: item.installation,
-      quantity,
+      quantity, 
       session: sessionNumber,
-      payment
+      payment,
     };
-    updateLocalStorage('cartItems', itemToAdd);
+    updateLocalStorage("cartItems", itemToAdd);
     dispatch(addToCart(itemToAdd, sessionNumber));
     navigate(`/cart?session=${sessionNumber}`);
   };
 
-  const handleQuantityChange = (newQuantity) => {
-    setQuantity(newQuantity);
+  const GenerateOldPrice = (price, percentage) => {
+    return price * (1 + percentage / 100);
   };
+
+
 
 
   return (
@@ -312,10 +307,10 @@ const ProductPage = () => {
         <span>${product.price}</span>
       </div>
       <div className="price_quantity_items">
-        <QuantityInCart 
-          quantity={quantity} 
-          onQuantityChange={handleQuantityChange} 
-        />
+      <QuantityItems
+        quantity={quantity}
+        onQuantityChange={handleQuantityChangePP}
+      />
       </div>
       <div className="price_coupon">
         <a href="">Click to activate coupon</a>
@@ -356,9 +351,9 @@ const ProductPage = () => {
         </form>
       </div>
       <div className="product_actions">
-        <button onClick={() => handleAddToCart(product)} className="item_add-to-cart">
+      <button onClick={() => handleAddToCart(product)} className="item_add-to-cart">
           Add To Cart
-        </button>  
+        </button> 
         <a href="#" className="item_quick-but">
           Buy
         </a>
@@ -484,7 +479,7 @@ const ProductPage = () => {
                     </li>
                   ))
                 ) : (
-                  <li>No maintenance information available.</li> // Optional: Message if no maintenance options exist
+                  <li>No maintenance information available.</li>
                 )}
 
               </ul>
@@ -568,12 +563,12 @@ const ProductPage = () => {
                 {product?.installation && product.installation.length > 0 ? (
                   product.installation.map((step, index) => (
                     <li className="product_installation" key={index}>
-                      <strong>Step {index + 1}:</strong> {/* You can customize this label as needed */}
+                      <strong>Step {index + 1}:</strong>
                       <span>{step.value}</span>
                     </li>
                   ))
                 ) : (
-                  <li>No installation instructions available.</li> // Fallback message if no installation steps exist
+                  <li>No installation instructions available.</li> 
                 )}
 
               </ul>

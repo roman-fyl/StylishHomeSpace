@@ -8,124 +8,123 @@ import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
 import "./CartComponent.scss";
 
 const CartComponent = () => {
-    const cartItems = useSelector((state) => state.cart.items);
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const navigate = useNavigate();
-    const [session, setSession] = useState(null);
-  
-    useEffect(() => {
-      const queryParams = new URLSearchParams(location.search);
-      let sessionId = queryParams.get("session");
-    
-      if (!sessionId) {
-        sessionId = getFromLocalStorage("abnd-session") || Date.now();
-        setLocalStorage("abnd-session", sessionId);
-        queryParams.set("session", sessionId);
-        navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    let sessionId = queryParams.get("session");
+
+    if (!sessionId) {
+      sessionId = getFromLocalStorage("abnd-session") || Date.now();
+      setLocalStorage("abnd-session", sessionId);
+      queryParams.set("session", sessionId);
+      navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
+    }
+    setSession(sessionId);
+
+    if (!cartItems.length) {
+      const storedCartItems = getFromLocalStorage("cartItems");
+      if (storedCartItems && storedCartItems.length > 0) {
+        dispatch(setCartItems(storedCartItems, sessionId));
       }
-      setSession(sessionId);
-    
-      if (!cartItems.length) {
-        const storedCartItems = getFromLocalStorage("cartItems");
-        if (storedCartItems && storedCartItems.length > 0) {
-          dispatch(setCartItems(storedCartItems, sessionId));
-        }
-      }
-    }, [location, navigate, session, dispatch, cartItems.length]);
-  
-    const handleRemove = (productId) => {
-      // Step 1: Dispatch remove action to Redux
-      dispatch(removeFromCart(productId));
-    
-      // Step 2: Update localStorage with the new cart items after removal
-      const updatedCartItems = cartItems.filter((item) => item.idN !== productId);
-      setLocalStorage("cartItems", updatedCartItems);
-    };
-  
-    const handleQuantityChange = (itemId, newQuantity) => {
-      const updatedCart = cartItems.map((item) => 
-        item.idN === itemId ? { ...item, quantity: newQuantity } : item
-      );
-    
-      dispatch(setCartItems(updatedCart, session));
-      setLocalStorage("cartItems", updatedCart);
-    
-      console.log("Updated Cart:", updatedCart);
-    };
-  
-    const totalAmount = cartItems.reduce((total, item) => {
+    }
+  }, [location, navigate, session, dispatch, cartItems.length]);
+
+  const handleRemove = (productId) => {
+    dispatch(removeFromCart(productId));
+
+    const updatedCartItems = cartItems.filter((item) => item.idN !== productId);
+    setLocalStorage("cartItems", updatedCartItems);
+  };
+
+  const handleQuantityInCart = (itemId, newQuantity) => {
+    const updatedCart = cartItems.map((item) =>
+      item.idN === itemId ? { ...item, quantity: newQuantity } : item
+    );
+
+    dispatch(setCartItems(updatedCart, session));
+    setLocalStorage("cartItems", updatedCart);
+
+    const totalAmount = updatedCart.reduce((total, item) => {
       return total + item.price * item.quantity;
     }, 0).toFixed(2);
-  
-    return (
-      <div className="container cart_container">
-        <h2>Your Cart (Session ID: {session})</h2>
-        <div className="cart_main">
-          <ul className="cart_elements">
-            {cartItems.length ? (
-              cartItems.map((item) => (
-                <li className="cart_element" key={item.idN}>
-                  <div className="cartItem_image_element">
+
+    console.log("Updated Total:", totalAmount);
+  };
+
+  const totalAmount = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0).toFixed(2);
+
+  return (
+    <div className="container cart_container">
+      <h2>Your Cart (Session ID: {session})</h2>
+      <div className="cart_main">
+        <ul className="cart_elements">
+          {cartItems.length ? (
+            cartItems.map((item) => (
+              <li className="cart_element" key={item.idN}>
+                <div className="cartItem_image_element">
                   <span className="cartItem_image">
                     <img src={item.imageSlider} alt={item.imageAlt} />
                   </span>
-                  </div>
-                  <div className="cartItem_description">
+                </div>
+                <div className="cartItem_description">
                   <div className="cartItem_header">
                     <span className="cartItem_brand-logo">
-                        <img src={item.brandLogo} alt={item.brand} /></span>
-                        <ul className="cartItem_tags">
-              {item.tags.map((tag, index) => (
-                <li key={index}>
-                  <img src={tag.iconLink} alt={`${tag.value} ${item.sku}`}
-                  ></img>
-                </li>
-              ))}
-            </ul>
-                </div>
-                    <span className="cartItem_sku">{item.sku}</span>
-                    <Link to={`/item/${item.sku}`}>
+                      <img src={item.brandLogo} alt={item.brand} />
+                    </span>
+                    <ul className="cartItem_tags">
+                      {item.tags.map((tag, index) => (
+                        <li key={index}>
+                          <img src={tag.iconLink} alt={`${tag.value} ${item.sku}`} />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <span className="cartItem_sku">{item.sku}</span>
+                  <Link to={`/item/${item.sku}`}>
                     <h3 className="cartItem_subject">{`${item.brandText} ${item.subType}`}</h3>
-                    </Link>
-                    <span>{item?.description?.short || "Q"}</span>
+                  </Link>
+                  <span>{item?.description?.short || "Q"}</span>
+                </div>
+                <div className="cartItem_controls">
+                  <div className="cartItem_controls_element">
+                    <QuantityInCart
+                      quantity={item.quantity}
+                      itemId={item.idN}
+                      onQuantityChange={handleQuantityInCart}
+                    />
+                    <button onClick={() => handleRemove(item.idN)}>Remove</button>
                   </div>
-               <div className="cartItem_controls">
-               <div className="cartItem_controls_element">
-                  <QuantityInCart 
-                    quantity={item.quantity} 
-                    itemId={item.idN} 
-                    onQuantityChange={handleQuantityChange}
-                  />
-                  <button onClick={() => handleRemove(item.idN)}>Remove</button>
+                </div>
+                <div className="cartItem_pricing">
+                  <div className="cartItem_old-price">
+                    <del>${(parseFloat(item.price) * 1.12).toFixed(2)}</del>
+                    <span className="cartItem_discount">
+                      ${(parseFloat(item.price) * 0.88).toFixed(2)}
+                    </span>
                   </div>
-               </div>
-                  <div className="cartItem_pricing">
-                    <div className="cartItem_old-price">
-                      <del>${(parseFloat(item.price) * 1.12).toFixed(2)}</del>
-                      <span className="cartItem_discount">
-                        ${(parseFloat(item.price) * 0.88).toFixed(2)}
-                      </span>
-                    </div>
-                    <span className="item_price">${parseFloat(item.price).toFixed(2)}</span>
-                  </div>
-                </li>
-              ))
-            ) : (
-              <p>No items in your cart.</p>
-            )}
-          </ul>
-          <div className="cart_summary">
-            <h3>Order Summary</h3>
-            <span className="total_price">
-              Total: ${totalAmount}
-            </span>
-          </div>
+                  <span className="item_price">${parseFloat(item.price).toFixed(2)}</span>
+                </div>
+              </li>
+            ))
+          ) : (
+            <p>No items in the cart.</p>
+          )}
+        </ul>
+        <div className="cart_summary">
+          <h3>Order Summary</h3>
+          <div className="cart_total-amount">Total: ${totalAmount}</div>
+          <button className="checkout_button">Checkout</button>
         </div>
-        <div className="cart_additional">Additional Information</div>
       </div>
-    );
-  };
-  
+    </div>
+  );
+};
 
 export default CartComponent;

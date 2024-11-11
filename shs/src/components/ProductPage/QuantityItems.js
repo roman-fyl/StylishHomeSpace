@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./QuantityInCart.scss";
 
-const QuantityInCart = ({ quantity, itemId, onQuantityChange }) => {
+const QuantityItems = ({ quantity, onQuantityChange }) => {
   const [inputQuantity, setInputQuantity] = useState(quantity);
 
   useEffect(() => {
@@ -11,14 +10,14 @@ const QuantityInCart = ({ quantity, itemId, onQuantityChange }) => {
   const handleIncrease = () => {
     const newQuantity = inputQuantity + 1;
     setInputQuantity(newQuantity);
-    onQuantityChange(itemId, newQuantity); 
+    onQuantityChange(newQuantity);
   };
 
   const handleDecrease = () => {
     if (inputQuantity > 1) {
       const newQuantity = inputQuantity - 1;
       setInputQuantity(newQuantity);
-      onQuantityChange(itemId, newQuantity);
+      onQuantityChange(newQuantity);
     }
   };
 
@@ -26,26 +25,22 @@ const QuantityInCart = ({ quantity, itemId, onQuantityChange }) => {
     const value = Number(e.target.value);
     if (value > 0) {
       setInputQuantity(value);
-      onQuantityChange(itemId, value);
+      onQuantityChange(value);
     }
   };
 
   return (
     <div className="quantity_selector">
-      <button className="quantity_decrease" onClick={handleDecrease}>
-        -
-      </button>
+      <button className="quantity_decrease" onClick={handleDecrease}>-</button>
       <input
         type="number"
         value={inputQuantity}
         className="quantity_input"
         onChange={handleInputChange}
       />
-      <button className="quantity_increase" onClick={handleIncrease}>
-        +
-      </button>
+      <button className="quantity_increase" onClick={handleIncrease}>+</button>
     </div>
   );
 };
 
-export default QuantityInCart;
+export default QuantityItems;
