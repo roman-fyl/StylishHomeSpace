@@ -296,10 +296,7 @@ const ProductPage = () => {
       <div className="price_discounts">
         <span>Save:</span>
         <span>
-          $
-          {parseFloat(
-            GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(2) - product.price
-          ).toFixed(2)}
+          ${parseFloat(GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(2) - product.price).toFixed(2)}
         </span>
       </div>
       <div className="price_current">

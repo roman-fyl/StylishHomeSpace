@@ -5,14 +5,19 @@ import { removeFromCart, setCartItems } from "../../store/actions/cartActions";
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
+import {setZipCode, setError} from "../../store/actions/locationActions";
 import "./CartComponent.scss";
 
 const CartComponent = () => {
   const cartItems = useSelector((state) => state.cart.items);
+  const zipCode = useSelector((state) => state.location.zipCode);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const [session, setSession] = useState(null);
+  const [couponCode, setCouponCode] = useState("");
+  const [deliveryType, setDeliveryType] = useState("");
+  const [inputZipCode, setInputZipCode] = useState("");
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -56,9 +61,55 @@ const CartComponent = () => {
     console.log("Updated Total:", totalAmount);
   };
 
+  const totalOldAmount = cartItems.reduce((total, item) => {
+    const oldPrice = parseFloat(item.price) * 1.12;
+    return total + oldPrice * item.quantity;
+  }, 0).toFixed(2);
+
+  const totalDiscountedAmount = cartItems.reduce((total, item) => {
+    const oldPrice = parseFloat(item.price) * 1.12;
+    const discount = oldPrice - parseFloat(item.price); 
+    return total + discount * item.quantity;
+  }, 0).toFixed(2);
+
   const totalAmount = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0).toFixed(2);
+
+  const handleCouponSubmit = (e) => {
+    e.preventDefault();
+
+    if (couponCode.length >= 5 && couponCode.length <= 30) {
+      console.log("Coupon Code submitted:", couponCode);
+      setCouponCode("");
+    } else {
+      console.log("Coupon code must be between 5 and 30 characters.");
+    }
+  };
+
+  const handleZipCodeChange = (e) => {
+    const value = e.target.value;
+    if (/^\d{0,5}$/.test(value)) {
+      setInputZipCode(value);
+    }
+  };
+
+  const handleZipCodeSubmit = (e) => {
+    e.preventDefault();
+    if (inputZipCode.length === 5) {
+      dispatch(setZipCode(inputZipCode));
+      dispatch(setError(""));
+      console.log("Zip Code submitted:", inputZipCode);
+      setInputZipCode('');
+    } else {
+      setInputZipCode('');
+      dispatch(setError(""));
+    }
+  };
+
+  const handleTypeDelivery = (e) => {
+    setDeliveryType(e.target.value);
+  };
 
   return (
     <div className="container cart_container">
@@ -99,14 +150,14 @@ const CartComponent = () => {
                       itemId={item.idN}
                       onQuantityChange={handleQuantityInCart}
                     />
-                    <button onClick={() => handleRemove(item.idN)}>Remove</button>
+                    <button className="cart_button_remove" onClick={() => handleRemove(item.idN)}>Remove</button>
                   </div>
                 </div>
                 <div className="cartItem_pricing">
                   <div className="cartItem_old-price">
                     <del>${(parseFloat(item.price) * 1.12).toFixed(2)}</del>
                     <span className="cartItem_discount">
-                      ${(parseFloat(item.price) * 0.88).toFixed(2)}
+                      ${parseFloat((parseFloat(item.price) * 1.12).toFixed(2) - item.price).toFixed(2)}
                     </span>
                   </div>
                   <span className="item_price">${parseFloat(item.price).toFixed(2)}</span>
@@ -119,8 +170,66 @@ const CartComponent = () => {
         </ul>
         <div className="cart_summary">
           <h3>Order Summary</h3>
-          <div className="cart_total-amount">Total: ${totalAmount}</div>
-          <button className="checkout_button">Checkout</button>
+          <div className="cart_total">
+            <div className="cart_total_old-amount"><span>Was:</span><del>${totalOldAmount}</del></div>
+            <div className="cart_total_discounted-amount"><span>Savings:</span>${totalDiscountedAmount}</div>
+            <div className="cart_total_subtotal"><span>SubTotal:</span>${totalAmount}</div>
+            <form onSubmit={handleCouponSubmit} className="cart_form">
+              <input
+                type="text"
+                className="cart_field"
+                name="couponCode"
+                placeholder="Enter your coupon code"
+                minLength="5"
+                maxLength="30"
+                id="coupon-code"
+                value={couponCode}
+                onChange={(e) => setCouponCode(e.target.value)}
+                tabIndex="10"
+                required
+              />
+              <input type="submit" className="cart_button" value="Apply Coupon" />
+            </form>
+            <form onSubmit={handleZipCodeSubmit} className="cart_form">
+              <input
+                type="text"
+                className="cart_field"
+                name="zipCode"
+                placeholder="Enter your zip code"
+                id="zipCode"
+                value={inputZipCode}
+                onChange={handleZipCodeChange}
+                tabIndex="11"
+                required
+              />
+              <input type="submit" className="cart_button" value="Add Zip Code" />
+            </form>
+            <div className="cart_total_shipping"><span>Shipping to:</span><span>{zipCode}</span></div>
+            <form className="cart_form">
+              <label>
+                <input
+                  type="radio"
+                  value="In-Home Delivery"
+                  name="payment"
+                  checked={deliveryType === "In-Home Delivery"}
+                  onChange={handleTypeDelivery}
+                />
+                In-Home Delivery - $39.99
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="White Glove Delivery"
+                  name="payment"
+                  checked={deliveryType === "White Glove Delivery"}
+                  onChange={handleTypeDelivery}
+                />
+                White Glove Delivery - $69.99
+              </label>
+            </form>
+            <div className="cart_total_total-amount"><span>Total:</span>${totalAmount}</div>
+          </div>
+          <button className="cart_button">Checkout</button>
         </div>
       </div>
     </div>
