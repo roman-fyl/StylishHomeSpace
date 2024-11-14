@@ -5,24 +5,29 @@ import { removeFromCart, setCartItems } from "../../store/actions/cartActions";
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
-import {setZipCode, setError} from "../../store/actions/locationActions";
+import { setZipCode, setError } from "../../store/actions/locationActions";
+import { setCoupon, clearCoupon } from "../../store/actions/couponActions";
+
 import "./CartComponent.scss";
 
 const CartComponent = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const zipCode = useSelector((state) => state.location.zipCode);
+  const { discountAmount } = useSelector(state => state.coupon);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const [session, setSession] = useState(null);
   const [couponCode, setCouponCode] = useState("");
-  const [deliveryType, setDeliveryType] = useState("");
+  const [coupons, setCoupons] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
   const [inputZipCode, setInputZipCode] = useState("");
+  const [deliveryType, setDeliveryType] = useState("");
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     let sessionId = queryParams.get("session");
-
+  
     if (!sessionId) {
       sessionId = getFromLocalStorage("abnd-session") || Date.now();
       setLocalStorage("abnd-session", sessionId);
@@ -30,63 +35,90 @@ const CartComponent = () => {
       navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
     }
     setSession(sessionId);
-
+  
     if (!cartItems.length) {
       const storedCartItems = getFromLocalStorage("cartItems");
       if (storedCartItems && storedCartItems.length > 0) {
         dispatch(setCartItems(storedCartItems, sessionId));
       }
     }
+  
+    import("../../assets/db/coupons.json")
+      .then((data) => {
+        setCoupons(data.default || data);
+      })
+      .catch((error) => {
+        console.error("Error loading coupons:", error);
+      });
+  
+    const savedCoupon = getFromLocalStorage("couponDetails");
+    if (savedCoupon) {
+      const coupon = Array.isArray(savedCoupon) ? savedCoupon[0] : savedCoupon;
+      if (coupon) {
+        dispatch(setCoupon(coupon));
+        console.log(coupon); 
+      }
+    }
   }, [location, navigate, session, dispatch, cartItems.length]);
+  
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      const calculatedTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+      const discountedTotal = discountAmount ? calculatedTotal - discountAmount : calculatedTotal;
+      setTotalAmount(discountedTotal.toFixed(2));
+    };
+
+    calculateTotal();
+  }, [cartItems, discountAmount]);
 
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
-
     const updatedCartItems = cartItems.filter((item) => item.idN !== productId);
     setLocalStorage("cartItems", updatedCartItems);
   };
 
-  const handleQuantityInCart = (itemId, newQuantity) => {
-    const updatedCart = cartItems.map((item) =>
-      item.idN === itemId ? { ...item, quantity: newQuantity } : item
-    );
-
-    dispatch(setCartItems(updatedCart, session));
-    setLocalStorage("cartItems", updatedCart);
-
-    const totalAmount = updatedCart.reduce((total, item) => {
-      return total + item.price * item.quantity;
-    }, 0).toFixed(2);
-
-    console.log("Updated Total:", totalAmount);
-  };
-
-  const totalOldAmount = cartItems.reduce((total, item) => {
-    const oldPrice = parseFloat(item.price) * 1.12;
-    return total + oldPrice * item.quantity;
-  }, 0).toFixed(2);
-
-  const totalDiscountedAmount = cartItems.reduce((total, item) => {
-    const oldPrice = parseFloat(item.price) * 1.12;
-    const discount = oldPrice - parseFloat(item.price); 
-    return total + discount * item.quantity;
-  }, 0).toFixed(2);
-
-  const totalAmount = cartItems.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0).toFixed(2);
 
   const handleCouponSubmit = (e) => {
     e.preventDefault();
 
     if (couponCode.length >= 5 && couponCode.length <= 30) {
-      console.log("Coupon Code submitted:", couponCode);
-      setCouponCode("");
+      const matchingCoupon = coupons.find(coupon => coupon.code.trim() === couponCode.trim());
+
+      if (matchingCoupon) {
+        const calculatedTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        const newTotal = calculatedTotal - (matchingCoupon.discountAmount || 0);
+
+        if (newTotal >= matchingCoupon.minOrderValue) {
+          dispatch(setCoupon({
+            code: couponCode,
+            discountAmount: matchingCoupon.discountAmount
+          }));
+          setLocalStorage("couponDetails", {
+            code: couponCode,
+            discountAmount: matchingCoupon.discountAmount
+          });
+        } else {
+          console.log("Order total is below the minimum value for this coupon.");
+          dispatch(clearCoupon());
+        }
+      } else {
+        console.log("Coupon not found.");
+        dispatch(clearCoupon());
+      }
     } else {
       console.log("Coupon code must be between 5 and 30 characters.");
+      dispatch(clearCoupon());
     }
+    setCouponCode("");
   };
-
+  const handleQuantityInCart = (itemId, newQuantity) => {
+    const updatedCart = cartItems.map((item) =>
+      item.idN === itemId ? { ...item, quantity: newQuantity } : item
+    );
+    dispatch(setCartItems(updatedCart, session));
+    setLocalStorage("cartItems", updatedCart);
+  };
   const handleZipCodeChange = (e) => {
     const value = e.target.value;
     if (/^\d{0,5}$/.test(value)) {
@@ -110,6 +142,11 @@ const CartComponent = () => {
   const handleTypeDelivery = (e) => {
     setDeliveryType(e.target.value);
   };
+
+  const totalOldAmount = cartItems.reduce((total, item) => {
+    const oldPrice = parseFloat(item.price) * 1.12;
+    return total + oldPrice * item.quantity;
+  }, 0).toFixed(2);
 
   return (
     <div className="container cart_container">
@@ -172,7 +209,7 @@ const CartComponent = () => {
           <h3>Order Summary</h3>
           <div className="cart_total">
             <div className="cart_total_old-amount"><span>Was:</span><del>${totalOldAmount}</del></div>
-            <div className="cart_total_discounted-amount"><span>Savings:</span>${totalDiscountedAmount}</div>
+            <div className="cart_total_discounted-amount"><span>Savings:</span>${(totalOldAmount - totalAmount).toFixed(2)}</div>
             <div className="cart_total_subtotal"><span>SubTotal:</span>${totalAmount}</div>
             <form onSubmit={handleCouponSubmit} className="cart_form">
               <input
