@@ -13,7 +13,7 @@ import "./CartComponent.scss";
 const CartComponent = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const zipCode = useSelector((state) => state.location.zipCode);
-  const { discountAmount } = useSelector(state => state.coupon);
+  const { discountAmount, code: appliedCouponCode } = useSelector((state) => state.coupon);  
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -186,6 +186,15 @@ const CartComponent = () => {
     return total + oldPrice * item.quantity;
   }, 0).toFixed(2);
 
+  const handleRemoveCoupon = () => {
+    dispatch(clearCoupon());
+    setLocalStorage("couponDetails", null); 
+
+    // Recalculate total amount without discount
+    const calculatedTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    setTotalAmount(calculatedTotal.toFixed(2));
+  };
+
   return (
     <div className="container cart_container">
       <h2>Your Cart (Session ID: {session})</h2>
@@ -265,6 +274,10 @@ const CartComponent = () => {
               />
               <input type="submit" className="cart_button" value="Apply Coupon" />
             </form>
+            {discountAmount > 0 && appliedCouponCode && (
+        <div className="cart_total_coupon">Applied Coupon: {appliedCouponCode}
+        <button onClick={handleRemoveCoupon}>Remove Coupon</button>
+          </div>)}
             <form onSubmit={handleZipCodeSubmit} className="cart_form">
               <input
                 type="text"

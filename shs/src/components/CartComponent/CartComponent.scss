@@ -119,6 +119,19 @@
       flex-direction: row;
       justify-content: space-between;
     }
+    &_coupon {
+      display: flex;
+      font:$font-x-small;
+      button {
+        padding: 5px;
+        font:$font-x-small;
+        cursor: $cursor;
+        &:hover {
+            background-color: $primary-color-hover-link;
+            color: white;
+        }
+      }
+    }
   }
       &_form {
         width: 100%;
