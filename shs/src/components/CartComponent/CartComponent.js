@@ -27,7 +27,7 @@ const CartComponent = () => {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     let sessionId = queryParams.get("session");
-  
+
     if (!sessionId) {
       sessionId = getFromLocalStorage("abnd-session") || Date.now();
       setLocalStorage("abnd-session", sessionId);
@@ -35,14 +35,14 @@ const CartComponent = () => {
       navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
     }
     setSession(sessionId);
-  
+
     if (!cartItems.length) {
       const storedCartItems = getFromLocalStorage("cartItems");
       if (storedCartItems && storedCartItems.length > 0) {
         dispatch(setCartItems(storedCartItems, sessionId));
       }
     }
-  
+
     import("../../assets/db/coupons.json")
       .then((data) => {
         setCoupons(data.default || data);
@@ -50,34 +50,49 @@ const CartComponent = () => {
       .catch((error) => {
         console.error("Error loading coupons:", error);
       });
-  
+
     const savedCoupon = getFromLocalStorage("couponDetails");
     if (savedCoupon) {
       const coupon = Array.isArray(savedCoupon) ? savedCoupon[0] : savedCoupon;
       if (coupon) {
         dispatch(setCoupon(coupon));
-        console.log(coupon); 
+        console.log(coupon);
       }
     }
   }, [location, navigate, session, dispatch, cartItems.length]);
-  
 
   useEffect(() => {
+    if (!cartItems || cartItems.length === 0) {
+      setTotalAmount(0); 
+      return;
+    }
+
     const calculateTotal = () => {
-      const calculatedTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-      const discountedTotal = discountAmount ? calculatedTotal - discountAmount : calculatedTotal;
+      const calculatedTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+      let discountedTotal = calculatedTotal;
+      const validDiscountAmount = discountAmount || 0;
+      if (validDiscountAmount > 0) {
+        discountedTotal = calculatedTotal - validDiscountAmount;
+      }
+
       setTotalAmount(discountedTotal.toFixed(2));
     };
 
     calculateTotal();
-  }, [cartItems, discountAmount]);
+
+    if (cartItems.length === 0) {
+      dispatch(clearCoupon());
+      setLocalStorage("couponDetails", null);
+      console.log("Cart is empty, coupon removed.");
+    }
+  }, [cartItems, discountAmount, dispatch]);
 
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
     const updatedCartItems = cartItems.filter((item) => item.idN !== productId);
     setLocalStorage("cartItems", updatedCartItems);
   };
-
 
   const handleCouponSubmit = (e) => {
     e.preventDefault();
@@ -86,32 +101,44 @@ const CartComponent = () => {
       const matchingCoupon = coupons.find(coupon => coupon.code.trim() === couponCode.trim());
 
       if (matchingCoupon) {
-        const calculatedTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        const newTotal = calculatedTotal - (matchingCoupon.discountAmount || 0);
+        const calculatedTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+        let newTotal = calculatedTotal;
+
+        let appliedDiscountAmount = 0;
+
+        if (matchingCoupon.isPercentage) {
+          appliedDiscountAmount = (calculatedTotal * matchingCoupon.discountAmount) / 100;
+          newTotal = calculatedTotal - appliedDiscountAmount;
+        } else {
+          appliedDiscountAmount = matchingCoupon.discountAmount;
+          newTotal = calculatedTotal - appliedDiscountAmount;
+        }
 
         if (newTotal >= matchingCoupon.minOrderValue) {
           dispatch(setCoupon({
             code: couponCode,
-            discountAmount: matchingCoupon.discountAmount
+            discountAmount: appliedDiscountAmount,
+            isPercentage: matchingCoupon.isPercentage
           }));
+
           setLocalStorage("couponDetails", {
             code: couponCode,
-            discountAmount: matchingCoupon.discountAmount
+            discountAmount: appliedDiscountAmount,
+            isPercentage: matchingCoupon.isPercentage
           });
         } else {
-          console.log("Order total is below the minimum value for this coupon.");
           dispatch(clearCoupon());
         }
       } else {
-        console.log("Coupon not found.");
         dispatch(clearCoupon());
       }
     } else {
-      console.log("Coupon code must be between 5 and 30 characters.");
       dispatch(clearCoupon());
     }
+
     setCouponCode("");
   };
+
   const handleQuantityInCart = (itemId, newQuantity) => {
     const updatedCart = cartItems.map((item) =>
       item.idN === itemId ? { ...item, quantity: newQuantity } : item
@@ -119,6 +146,7 @@ const CartComponent = () => {
     dispatch(setCartItems(updatedCart, session));
     setLocalStorage("cartItems", updatedCart);
   };
+
   const handleZipCodeChange = (e) => {
     const value = e.target.value;
     if (/^\d{0,5}$/.test(value)) {
@@ -131,7 +159,6 @@ const CartComponent = () => {
     if (inputZipCode.length === 5) {
       dispatch(setZipCode(inputZipCode));
       dispatch(setError(""));
-      console.log("Zip Code submitted:", inputZipCode);
       setInputZipCode('');
     } else {
       setInputZipCode('');
