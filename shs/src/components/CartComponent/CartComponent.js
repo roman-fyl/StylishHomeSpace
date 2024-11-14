@@ -13,7 +13,7 @@ import "./CartComponent.scss";
 const CartComponent = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const zipCode = useSelector((state) => state.location.zipCode);
-  const { discountAmount, code: appliedCouponCode } = useSelector((state) => state.coupon);  
+  const { discountAmount, code: appliedCouponCode, minOrderValue } = useSelector((state) => state.coupon);  
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -190,7 +190,6 @@ const CartComponent = () => {
     dispatch(clearCoupon());
     setLocalStorage("couponDetails", null); 
 
-    // Recalculate total amount without discount
     const calculatedTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     setTotalAmount(calculatedTotal.toFixed(2));
   };
