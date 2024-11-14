@@ -266,7 +266,7 @@ const CartComponent = () => {
                 tabIndex="11"
                 required
               />
-              <input type="submit" className="cart_button" value="Add Zip Code" />
+              <input type="submit" className="cart_button" value={zipCode ? "Update Zip Code" : "Add Zip Code"} />
             </form>
             <div className="cart_total_shipping"><span>Shipping to:</span><span>{zipCode}</span></div>
             <form className="cart_form">
