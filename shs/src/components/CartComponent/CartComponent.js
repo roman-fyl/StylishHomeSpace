@@ -23,7 +23,10 @@ const CartComponent = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [inputZipCode, setInputZipCode] = useState("");
   const [deliveryType, setDeliveryType] = useState("");
+  const [isInitialLoad, setIsInitialLoad] = useState(true); 
 
+
+  
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     let sessionId = queryParams.get("session");
@@ -56,14 +59,19 @@ const CartComponent = () => {
       const coupon = Array.isArray(savedCoupon) ? savedCoupon[0] : savedCoupon;
       if (coupon) {
         dispatch(setCoupon(coupon));
-        console.log(coupon);
       }
     }
+    setIsInitialLoad(false); 
   }, [location, navigate, session, dispatch, cartItems.length]);
 
   useEffect(() => {
     if (!cartItems || cartItems.length === 0) {
-      setTotalAmount(0); 
+      setTotalAmount(0);
+
+      if (!isInitialLoad) {
+        setLocalStorage("couponDetails", null); 
+        dispatch(clearCoupon());
+      }
       return;
     }
 
@@ -80,18 +88,18 @@ const CartComponent = () => {
     };
 
     calculateTotal();
-
-    if (cartItems.length === 0) {
-      dispatch(clearCoupon());
-      setLocalStorage("couponDetails", null);
-      console.log("Cart is empty, coupon removed.");
-    }
-  }, [cartItems, discountAmount, dispatch]);
+  }, [cartItems, discountAmount, dispatch, isInitialLoad]);
 
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
     const updatedCartItems = cartItems.filter((item) => item.idN !== productId);
     setLocalStorage("cartItems", updatedCartItems);
+
+    if (updatedCartItems.length === 0) {
+      dispatch(clearCoupon());
+      setLocalStorage("couponDetails", null); 
+      console.log("Cart is empty, coupon removed.");
+    }
   };
 
   const handleCouponSubmit = (e) => {
@@ -128,12 +136,15 @@ const CartComponent = () => {
           });
         } else {
           dispatch(clearCoupon());
+          setLocalStorage("couponDetails", null); 
         }
       } else {
         dispatch(clearCoupon());
+        setLocalStorage("couponDetails", null);
       }
     } else {
       dispatch(clearCoupon());
+      setLocalStorage("couponDetails", null); 
     }
 
     setCouponCode("");
