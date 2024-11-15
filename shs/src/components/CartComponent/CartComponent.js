@@ -83,17 +83,18 @@ const CartComponent = () => {
     
       let discountedTotal = calculatedTotal;
       const validDiscountAmount = discountAmount || 0;
+      if (discountedTotal < minOrderValue) {
+        dispatch(clearCoupon());
+        setLocalStorage("couponDetails", null);
+        setNotification({ message: "Your order value is below the minimum required for this coupon, and it has been removed", type: 'error' });
+      
+      }
     
       if (validDiscountAmount > 0) {
         discountedTotal = calculatedTotal - validDiscountAmount;
-        if (discountedTotal < minOrderValue) {
-          dispatch(clearCoupon());
-          setLocalStorage("couponDetails", null);
-          setNotification({ message: "Your order value is below the minimum required for this coupon, and it has been removed", type: 'error' });
-        
-        }
+     
       }
-    
+ 
       if (appliedCouponCode) {
         const matchingCoupon = coupons.find(coupon => coupon.code.trim() === appliedCouponCode.trim());
     
@@ -109,7 +110,7 @@ const CartComponent = () => {
             newTotal = calculatedTotal - appliedDiscountAmount;
           }
     
-          if (newTotal >= matchingCoupon.minOrderValue) {
+          if (newTotal + appliedDiscountAmount >= matchingCoupon.minOrderValue) {
             dispatch(setCoupon({
               code: matchingCoupon.code,
               discountAmount: appliedDiscountAmount,
@@ -136,7 +137,7 @@ const CartComponent = () => {
       setTotalAmount(discountedTotal.toFixed(2));
     };
     
-
+    
     calculateTotal();
   }, [cartItems, discountAmount, dispatch, isInitialLoad]);
 
@@ -190,7 +191,7 @@ const CartComponent = () => {
         } else {
           dispatch(clearCoupon());
           setLocalStorage("couponDetails", null);
-          setNotification({ message: "Your order total is below the required minimum for this coupon", type: 'error' });
+          setNotification({ message: " 1 Your order total is below the required minimum for this coupon", type: 'error' });
         }
       } else {
         dispatch(clearCoupon());
