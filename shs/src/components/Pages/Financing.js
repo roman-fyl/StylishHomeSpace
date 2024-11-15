@@ -10,7 +10,6 @@ const Financing = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <div className="privacy_description">
           <h1>Financing</h1>
@@ -23,7 +22,6 @@ const Financing = () => {
 </section>
         </div>
       </div>
-    </Layout>
   );
 };
 

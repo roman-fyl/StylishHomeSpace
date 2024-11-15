@@ -1,0 +1,27 @@
+@import "../../vars";
+
+
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1000;
+    font: $font-x-small;
+  }
+  
+  .success {
+    background-color: $primary-color-success;
+  }
+  
+  .error {
+    background-color: $primary-color-attention;
+  }
+  
+  .info {
+    background-color: #2196f3;
+  }
+  

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import Layout from "../../Layout";
 import gastop from "../../assets/db/images/items/GE/categories/gastop.png";
 import laundryPair from "../../assets/db/images/items/GE/categories/laundry-pair.png";
 import range from "../../assets/db/images/items/GE/categories/range.png";
@@ -51,7 +50,6 @@ const BrandPage = () => {
   const filteredBestsellerProducts = products.filter(item => item.group === "bestseller");
 
   return (
-    <Layout>
       <div className="container">
         <div className="brand-page_content">
           <div className="brand-page_main-logo">
@@ -73,7 +71,7 @@ const BrandPage = () => {
             <div className="newArrivals_main">
               <h2>Best-Selling Products</h2>
               <ul className="card_items">
-                {filteredBestsellerProducts.slice(0, displayedItemCount).map((item, index) => (
+                {filteredBestsellerProducts .sort(() => Math.random() - 0.5).slice(0, displayedItemCount).map((item, index) => (
                   <li className="card_item" data-id={index + 1} key={item.sku}>
                     <Link to={`/item/${item.sku}`}>
                       <span className="item_image">
@@ -147,7 +145,6 @@ const BrandPage = () => {
           </section>
         </div>
       </div>
-    </Layout>
   );
 };
 

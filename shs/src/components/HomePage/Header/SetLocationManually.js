@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setZipCode, setError } from "../../../store/actions/locationActions";
-import { setLocalStorage } from "../../LocalStorage/SetLocaStorage";
+import { setLocalStorage } from "../../LocalStorage/setLocalStorage";
 import { getFromLocalStorage } from "../../LocalStorage/getFromLocalStorage";
 
 const SetLocationManually = ({onClose}) => {

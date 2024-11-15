@@ -23,7 +23,6 @@ const HomePage = () => {
 
     return (
        <div className="wrapper">
-         <Layout>
            <div className="container">
            <section className="section_slider">
             <MainSlider />
@@ -35,23 +34,21 @@ const HomePage = () => {
                <FlashOffers />
             </section>
             <section className="section">
-            <ItemSection type="bestseller" subject="Best-Selling Items" />
-               {/* <BestSelling /> */}
+            <ItemSection group="bestseller" subject="Best-Selling Items" />
             </section>
             <section className="section">
             <Trends />
             </section>
             <section className="section">
-               <ItemSection type="newArrival" subject="New Arrivals"/>
+               <ItemSection group="newArrival" subject="New Arrivals"/>
             </section>
             <section className="section">
                <DailyDeals />
             </section>
             <section className="section">
-            <ItemSection type="outlet" subject="Outlets"/>
+            <ItemSection group="outlet" subject="Outlets"/>
             </section>
            </div>
-       </Layout>
        </div>
     );
 }

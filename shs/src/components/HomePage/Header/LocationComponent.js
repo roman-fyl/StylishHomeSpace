@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {apiKeyLocation} from "../../../store/api/Location";
 import {setZipCode, setError} from "../../../store/actions/locationActions";
 
-import {setLocalStorage} from "../../LocalStorage/SetLocaStorage";
+import {setLocalStorage} from "../../LocalStorage/setLocalStorage";
 import { getFromLocalStorage } from "../../LocalStorage/getFromLocalStorage";
 
 const LocationComponent = () => {

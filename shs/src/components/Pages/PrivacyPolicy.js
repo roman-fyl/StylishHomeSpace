@@ -10,7 +10,6 @@ const PrivacyPolicy = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <div className="privacy_description">
           <h1>ONLINE PRIVACY POLICY AGREEMENT</h1>
@@ -467,7 +466,6 @@ const PrivacyPolicy = () => {
 </section>
         </div>
       </div>
-    </Layout>
   );
 };
 

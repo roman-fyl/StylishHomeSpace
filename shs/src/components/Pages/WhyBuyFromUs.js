@@ -11,11 +11,9 @@ const WhyBuyFromUs = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <WhyBuyFromUsComponent />
       </div>
-    </Layout>
   );
 };
 

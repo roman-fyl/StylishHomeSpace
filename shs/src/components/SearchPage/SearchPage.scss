@@ -1,0 +1,310 @@
+@import "../../_reset.scss";
+@import "../../_vars.scss";
+
+.search {
+  &_container {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+
+  &_aside {
+    width: 14vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-wrap: nowrap;
+    flex: 0 0 auto;
+    // border: 1px solid yellow;
+  }
+
+  &_main_content {
+    max-width: 69vw;
+    flex: 1 1 auto;
+  }
+
+  &_filters {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+
+    &_filter {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      form {
+        width: 40vw;
+        // border: 1px solid red;
+      }
+      h4 {
+        font: $font-x-small;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      input {
+        margin-right: 5px;
+        cursor: $cursor;
+      }
+      label {
+        font: $font-x-small;
+        margin-right: 20px;
+        cursor: $cursor;
+      }
+    }
+
+    &_clean {
+      padding: 10px 15px;
+    }
+    &_select {
+      font: $font-x-small;
+    }
+  }
+
+  &_aside {
+    .search {
+      &_filters {
+        flex-direction: row;
+
+        &_filter {
+          form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 90%;
+            span {
+              margin: 1px 0;
+              input,
+              label {
+                cursor: $cursor;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    button {
+      width: 150px;
+      color: #fff !important;
+      padding: 10px 15px;
+      text-align: center;
+      text-transform: capitalize;
+      border: 1px solid rgb(255, 255, 255);
+      border-radius: 5px;
+      background: $primary-color;
+      transition: $transition;
+      cursor: $cursor;
+      margin-bottom: 20px;
+      font: $font-x-small;
+
+      &:hover {
+        background: $primary-color-hover-link;
+      }
+    }
+  }
+}
+.switcher {
+  label {
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid $primary-color;
+
+    &::after {
+      content: "";
+      width: 24px;
+      height: 24px;
+      background-color: $primary-color;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s ease;
+    }
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input[type="checkbox"]:checked + label::after {
+    left: 23px;
+  }
+}
+.list {
+  &_card {
+    &_items {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      align-content: flex-start;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin: 20px 0;
+      width: 100%;
+    //   border: 1px solid red;
+    }
+    &_item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex: 1 1 auto;
+      box-shadow: $box-shadow;
+      padding: 15px;
+      min-height: 250px;
+      width: 100%;
+      background-color: #fff;
+      &:hover {
+        box-shadow: $box-shadow-hover;
+      }
+    }
+  }
+  &_item {
+    &_description {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+      // height: 100%;
+    flex: 1 1 auto;
+    //   border: 1px solid yellow;
+      width: 100%;
+    }
+    &_image {
+      height: 230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      width: 230px;
+      flex: 0 0 auto;
+      margin-top: auto;
+    //   border: 1px solid red;
+
+      img {
+        max-width: 100%;
+        max-height: 230px;
+        object-fit: contain;
+      }
+    }
+    &_actions {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 200px;
+      height: 100%;
+      row-gap: 10px;
+      a {
+        color: #fff !important;
+        padding: 10px 15px;
+        font: $font-x-small;
+        text-align: center;
+        text-transform: capitalize;
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 5px;
+        background: $button-addToCart;
+        transition: box-shadow 0.2s ease-in-out;
+      }
+      .item_add-to-cart {
+        background: $button-addToCart;
+        width: 100%;
+        &:hover {
+          background: $primary-color-hover-link;
+        }
+      }
+    }
+    &_header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+    }
+    &_brand-logo {
+        display: flex;
+        justify-content: flex-start;
+        height: 50px;
+        align-items: flex-start;
+        width: 200px;
+          img {
+            padding: 5px 0;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+          }
+      }
+    &_tags {
+        display: flex;
+        flex-direction: row;
+        img {
+            width: 40px;
+            margin: 0 15px;
+        }
+    }
+    &_sku {
+        margin: 5px 0;
+        font: $font-x-small;
+        color: $primary-color;
+    }
+    &_subject {
+        font: $font-small;
+        text-wrap: wrap;
+        min-height: 80px;
+        text-align: left;
+        margin-top: 5px;
+    }
+    &_additional {
+        display: flex;
+        flex-direction: row;
+        column-gap: 15px;
+        align-items: center;
+    }
+    &_dealer-info {
+        font: $font-x-small;
+        font-weight: 700;
+        color: red;
+    }
+    &_pricing {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        row-gap: 20px;
+        width: 100%;
+    }
+    &_old-price {
+        del {
+        font: $font-x-small;
+        color: $primary-color;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        font: $font-small;
+        color: $primary-color;
+        margin-bottom: 10px;
+        }
+    }
+    &_discount {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        font: $font-x-small;
+        background-color: red;
+        padding: 5px;
+        color: white;
+        width: 200px;
+    }
+  }
+}

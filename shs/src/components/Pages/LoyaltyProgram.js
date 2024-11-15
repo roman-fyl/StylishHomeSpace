@@ -11,7 +11,6 @@ const LoyaltyProgram = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <div className="privacy_description">
           <h1>Loyalty Program</h1>
@@ -24,7 +23,6 @@ const LoyaltyProgram = () => {
 </section>
         </div>
       </div>
-    </Layout>
   );
 };
 

@@ -1,6 +1,5 @@
 
-import {SET_ZIP_CODE, SET_LOCATION_ERROR} from "../actions/locationActions";
-
+import { SET_ZIP_CODE, SET_LOCATION_ERROR } from "../actions/locationActions";
 
 const initialState = {
     latitude: "",
@@ -15,16 +14,16 @@ const locationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 zipCode: action.payload,
-                error: null,
+                error: null, 
             };
-            case SET_LOCATION_ERROR:
+        case SET_LOCATION_ERROR:
             return {
                 ...state,
                 error: action.payload,
             };
-            default:
-                return state;
+        default:
+            return state;
     }
-}
+};
 
 export default locationReducer;

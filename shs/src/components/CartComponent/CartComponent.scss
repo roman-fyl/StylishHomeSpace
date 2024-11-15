@@ -1,0 +1,328 @@
+@import "../../vars.scss";
+@import "../../_reset.scss";
+
+
+
+.cart {
+  &_container {
+    h2 {
+      font: $font-regular !important;
+      color: $primary-color;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &_main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 25px 0;
+    flex-wrap: nowrap;
+  }
+  &_elements {
+    width: 100%;
+    min-height: 530px;
+    // padding: 0 10px;
+    // box-shadow: $box-shadow;
+    padding: 0 25px 25px 0;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+    align-items: center;
+  }
+  &_element {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex: 0 1 auto;
+    box-shadow: $box-shadow;
+    padding: 15px;
+    margin-bottom: 25px;
+    min-height: 200px;
+    width: 100%;
+    background-color: #fff;
+    &:hover {
+      box-shadow: $box-shadow-hover;
+    }
+  }
+  &_summary {
+    min-height: 530px;
+    width: 330px;
+    padding: 0 10px;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: space-between;
+    padding: 20px;
+    h3 {
+      font: $font-regular !important;
+      margin-bottom: 25px;
+    }
+  }
+  &_total {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    justify-content: space-between;
+    width: 100%;
+
+    &_old-amount {
+      display: flex;
+      justify-content: space-between;
+      margin-right: 0px;
+      font: $font-small;
+      color: $primary-color;
+    }
+
+    &_discounted-amount {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      background-color: $primary-color-attention;
+      padding: 5px;
+      font: $font-small;
+      color: $primary-color-text;
+    }
+    &_subtotal {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      font: $font-small;
+      font-weight: 700;
+    }
+    &_taxes {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      font: $font-small;
+    }
+    &_shipping {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      font: $font-small;
+    }
+
+    &_total-amount {
+      font: $font-regular;
+      color: $primary-color-success;
+      font-weight: 700;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    &_coupon {
+      display: flex;
+      font:$font-x-small;
+      button {
+        padding: 5px;
+        font:$font-x-small;
+        cursor: $cursor;
+        &:hover {
+            background-color: $primary-color-hover-link;
+            color: white;
+        }
+      }
+    }
+  }
+      &_form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        row-gap: 10px;
+        label {
+          width: 100%;
+          font: $font-x-small;
+          display: block;
+          position: relative;
+          margin: 10px 0;
+          span {
+            margin-right: 5px;
+          }
+          &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: gray;
+          }
+        }
+        input[type="radio"] {
+          margin-right: 10px;
+        }
+      }
+
+    &_field {
+      padding: 10px;
+      width: 100%;
+      border-radius: 2px;
+      font: $font-x-small;
+      margin-right: 10px;
+      border: 1px solid $primary-color;
+    }
+    &_button {
+      font: $font-x-small;
+      color: white;
+      padding: 10px 15px;
+      text-align: center;
+      text-transform: capitalize;
+      border-radius: 2px;
+      background: $primary-color;
+      transition: $transition;
+      cursor: $cursor;
+      &:hover {
+        background-color: $primary-color-hover-link;
+      }
+    }
+  &_button {
+    &_remove {
+      cursor: $cursor;
+    &:hover {
+        background-color: $primary-color-hover-link;
+    }
+    }
+  }
+}
+
+.cartItem {
+  &_image {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 150px;
+    flex: 0 0 auto;
+    // margin-top: auto;
+    &_element {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+      align-items: center;
+    }
+  }
+  &_description {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  &_tags {
+    display: flex;
+    flex-direction: row;
+    img {
+      height: 30px;
+      margin: 0 10px;
+    }
+  }
+  &_sku {
+    margin: 5px 0;
+    font: $font-x-small;
+    color: $primary-color;
+  }
+  &_subject {
+    font: $font-small;
+    text-wrap: wrap;
+    min-height: 30px;
+    text-align: left;
+    margin-top: 5px;
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+  &_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  &_brand-logo {
+    display: flex;
+    justify-content: flex-start;
+    height: 35px;
+    align-items: flex-start;
+    width: 200px;
+    img {
+      padding: 5px 0;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+    }
+  }
+  &_controls {
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    &_element {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      button {
+        color: #fff !important;
+        padding: 10px 15px;
+        font: $font-x-small;
+        text-align: center;
+        text-transform: capitalize;
+        border: 1px solid rgb(255, 255, 255);
+        background: $button-addToCart;
+        transition: box-shadow 0.2s ease-in-out;
+      }
+    }
+  }
+  &_pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    row-gap: 20px;
+    margin-left: 15px;
+  }
+  &_old-price {
+    del {
+      font: $font-x-small;
+      color: $primary-color;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      font: $font-small;
+      color: $primary-color;
+      margin-bottom: 10px;
+    }
+  }
+  &_discount {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font: $font-x-small;
+    background-color: red;
+    padding: 5px;
+    color: white;
+    width: 200px;
+  }
+}

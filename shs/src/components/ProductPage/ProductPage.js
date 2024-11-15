@@ -1,46 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink, Element } from "react-scroll";
-import { Link, useParams } from "react-router-dom";
-import Layout from "../../Layout";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/actions/cartActions";
+import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
 import productData from "../../assets/db/items.json";
-
-
-import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
+import QuantityItems from "./QuantityItems";
+import { getSessionNumber } from "../Sessions/getSessionNumber";
 import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
 import itemShare from "../../assets/images/icon-share.png";
-
 import homepageLogo from "../../assets/images/icon-homepage.png";
-
 import "./ProductPage.scss";
-
 import arrowUp from "../../assets/images/arrow-up.png";
 import arrowBack from "../../assets/images/arrow-back.png";
-
 
 const ProductPage = () => {
   const { skuText } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
-  console.log("URL Parameters:", useParams());
+  const [quantity, setQuantity] = useState(1);
+  const [payment, setPayment] = useState("Pay in Full");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setProduct(null);
-    
     if (!skuText) return;
-  
+
     const fetchedProduct = productData.find(
-      item => item.sku.toLowerCase() === skuText.toLowerCase()
+      (item) => item.sku.toLowerCase() === skuText.toLowerCase()
     );
-  
+
     if (fetchedProduct) {
       setProduct(fetchedProduct);
       setError(null);
     } else {
       setError("Product not found");
     }
-  
+
     document.title = `Product Details - ${skuText.toUpperCase()}`;
-  
   }, [skuText]);
 
   if (error) {
@@ -49,39 +47,90 @@ const ProductPage = () => {
   if (!product) {
     return <div>Loading...</div>;
   }
-  
-  
+
+  const handlePaymentChange = (e) => {
+    setPayment(e.target.value);
+  };
+
+  const handleQuantityChangePP = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
+
+  const handleAddToCart = (item) => {
+    const sessionNumber = getSessionNumber();
+    const itemToAdd = {
+      group: item.group,
+      smart: item.smart,
+      category: item.category,
+      subCategory: item.subCategory,
+      subType: item.subType,
+      brandLogo: item.brandLogo,
+      color: item.color,
+      brandText: item.brandText,
+      capacity: item.capacity,
+      imageSlider: item.imageSlider[0].imageSliderLink,
+      imageAlt: item.imageSlider[0].Alt,
+      sku: item.sku,
+      autorizationDealer: item.autorizationDealer,
+      tags: item.tags,
+      title: item.title,
+      rate: item.rate,
+      price: item.price,
+      idN: item.idN,
+      warranty: item.warranty,
+      description: item.description,
+      maintenance: item.maintenance,
+      installation: item.installation,
+      quantity, 
+      session: sessionNumber,
+      payment,
+    };
+    updateLocalStorage("cartItems", itemToAdd);
+    dispatch(addToCart(itemToAdd, sessionNumber));
+    navigate(`/cart?session=${sessionNumber}`);
+  };
 
   const GenerateOldPrice = (price, percentage) => {
     return price * (1 + percentage / 100);
   };
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+
+
 
   return (
-    <Layout>
       <div className="container">
-        <ul className="breadcrumbs">
-          <li className="breadcrumbs_item">
-            <Link to="/">
-              <img src={homepageLogo}></img>
-            </Link>
-          </li>
-          <li className="breadcrumbs_item">
-            <Link to="/department">{product.department}</Link>
-          </li>
-          <li className="breadcrumbs_item">
-            <Link to="/subCategory">{product.subCategory}</Link>
-          </li>
-          <li className="breadcrumbs_item">
-            <Link to="/subType">{product.subType}</Link>
-          </li>
-          <li className="breadcrumbs_item">
-            {product.brandText} - {product.sku}
-          </li>
-        </ul>
+ <ul className="breadcrumbs">
+  <li className="breadcrumbs_item">
+    <Link to="/">
+      <img src={homepageLogo} alt="Homepage" />
+    </Link>
+  </li>
+  {product.category && (
+    <li className="breadcrumbs_item">
+      <Link to={`/search?categories=${product.category}`}>
+        {product.category}
+      </Link>
+    </li>
+  )}
+  {product.subCategory && (
+    <li className="breadcrumbs_item">
+      <Link to={`/search?subCategories=${product.subCategory}`}>
+        {product.subCategory}
+      </Link>
+    </li>
+  )}
+  {product.subType && (
+    <li className="breadcrumbs_item">
+      <Link to={`/search?subTypes=${product.subType}`}>
+        {product.subType}
+      </Link>
+    </li>
+  )}
+  <li className="breadcrumbs_item">
+    {product.brandText} - {product.sku}
+  </li>
+</ul>
+
         <nav>
           <ul className="product_description_categories">
             <li>
@@ -237,78 +286,76 @@ const ProductPage = () => {
               </div>
             </div>
             <div className="product_description_price">
-              <div className="price_list">
-                <span>Was</span>
-                <del>
-                  $
-                  {GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
-                    2
-                  )}
-                </del>
-              </div>
-              <div className="price_discounts">
-                <span>Save:</span>
-                <span>
-                  $
-                  {parseFloat(
-                    GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
-                      2
-                    ) - product.price
-                  ).toFixed(2)}
-                </span>
-              </div>
-              <div className="price_current">
-                <span>Now</span>
-                <span>${product.price}</span>
-              </div>
-              <div className="price_quantity_items">
-                <QuantityInCart />
-              </div>
-              <div className="price_coupon">
-                <a href="">Click to activate coupon</a>
-              </div>
+      <div className="price_list">
+        <span>Was</span>
+        <del>
+          $
+          {GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(2)}
+        </del>
+      </div>
+      <div className="price_discounts">
+        <span>Save:</span>
+        <span>
+          ${parseFloat(GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(2) - product.price).toFixed(2)}
+        </span>
+      </div>
+      <div className="price_current">
+        <span>Now</span>
+        <span>${product.price}</span>
+      </div>
+      <div className="price_quantity_items">
+      <QuantityItems
+        quantity={quantity}
+        onQuantityChange={handleQuantityChangePP}
+      />
+      </div>
+      <div className="price_coupon">
+        <a href="">Click to activate coupon</a>
+      </div>
 
-              <form className="price_financing">
-                <label>
-                  <input
-                    type="radio"
-                    className="price_financing_options"
-                    name="financing"
-                  />
-                  <span>
-                    ${parseFloat((product.price / 6) * 1.1).toFixed(2)}
-                  </span>
-                  <span>6-Month Financing(+10%)</span>
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    className="price_financing_options"
-                    name="financing"
-                  />
-                  <span>
-                    ${parseFloat((product.price / 12) * 1.15).toFixed(2)}
-                  </span>
-                  <span>12-Month Financing(+15%)</span>
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    className="price_financing_options"
-                    name="financing"
-                  />
-                  <span>Pay in Full</span>
-                </label>
-              </form>
-              <div className="product_actions">
-                <a href="#" className="item_add-to-cart">
-                  Add to Cart
-                </a>
-                <a href="#" className="item_quick-but">
-                  Buy
-                </a>
-              </div>
-            </div>
+      <div className="price_financing">
+        <form>
+          <label>
+            <input
+              type="radio"
+              value="6-Month Financing (+10%)"
+              name="payment"
+              checked={payment === "6-Month Financing (+10%)"}
+              onChange={handlePaymentChange}
+            />
+            6-Month Financing (+10%)
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="12-Month Financing (+15%)"
+              name="payment"
+              checked={payment === "12-Month Financing (+15%)"}
+              onChange={handlePaymentChange}
+            />
+            12-Month Financing (+15%)
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Pay in Full"
+              name="payment"
+              checked={payment === "Pay in Full"}
+              onChange={handlePaymentChange}
+            />
+            Pay in Full
+          </label>
+        </form>
+      </div>
+      <div className="product_actions">
+      <button onClick={() => handleAddToCart(product)} className="item_add-to-cart">
+          Add To Cart
+        </button> 
+        <a href="#" className="item_quick-but">
+          Buy
+        </a>
+      </div>
+    </div>
           </section>
         </Element>
 
@@ -429,7 +476,7 @@ const ProductPage = () => {
                     </li>
                   ))
                 ) : (
-                  <li>No maintenance information available.</li> // Optional: Message if no maintenance options exist
+                  <li>No maintenance information available.</li>
                 )}
 
               </ul>
@@ -513,12 +560,12 @@ const ProductPage = () => {
                 {product?.installation && product.installation.length > 0 ? (
                   product.installation.map((step, index) => (
                     <li className="product_installation" key={index}>
-                      <strong>Step {index + 1}:</strong> {/* You can customize this label as needed */}
+                      <strong>Step {index + 1}:</strong>
                       <span>{step.value}</span>
                     </li>
                   ))
                 ) : (
-                  <li>No installation instructions available.</li> // Fallback message if no installation steps exist
+                  <li>No installation instructions available.</li> 
                 )}
 
               </ul>
@@ -561,7 +608,6 @@ const ProductPage = () => {
             </div>
           </section>        </Element>
       </div>
-    </Layout>
   );
 };
 

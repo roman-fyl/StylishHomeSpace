@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import "./Slider.scss";
@@ -29,9 +30,9 @@ const Slider = ({ images, autoSlideInterval }) => {
               key={index}
               className={`slide ${currentSlide === index + 1 ? "active" : ""}`}
             >
-              <a href="">
+              <Link to={image.link}>
                 <img src={image.src} alt={image.alt} />
-              </a>
+              </Link>
             </div>
           ))}
         </div>

@@ -12,11 +12,9 @@ const SignIn = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
       <SignInComponent />
       </div>
-    </Layout>
   );
 };
 

@@ -1,221 +1,207 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Layout from "../../Layout";
 import data from "../../assets/db/items.json";
-
 
 import CategorySlider from "./CategorySlider";
 import ItemSection from "../HomePage/ItemSection/ItemSection";
 
-
-import gastop from "../../assets/db/images/items/GE/categories/gastop.png";
-import laundryPair from "../../assets/db/images/items/GE/categories/laundry-pair.png";
-import range from "../../assets/db/images/items/GE/categories/range.png";
-import refrigerator from "../../assets/db/images/items/GE/categories/refrigerator.png";
-import wallOven from "../../assets/db/images/items/GE/categories/wall-oven.png";
-
 import "./CategoryPage.scss";
 
-
-const CategoryPage = () => {
+const CategoryPage = ({ group = null, subject = null, brand = null, category = null, smartFeatures = null, subCategory = null, subType = null, color = null }) => {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
-    const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
+  const [uniqueFeatures, setUniqueFeatures] = useState([]);
+  const [groupedProducts, setGroupedProducts] = useState({});
+
+  let filteredData = [...data]; 
+
+  if (brand) {
+    filteredData = filteredData.filter(item => item.brandText === brand);
+  }
+
+  if (group) {
+    filteredData = filteredData.filter(item => item.group === group);
+  }
+  
+  if (category) {
+    filteredData = filteredData.filter(item => item.category === category);
+  }
+  if (color) {
+    filteredData = filteredData.filter(item => item.color === color);
+  }
+
+  const generateQueryParams = (additionalParams = {}) => {
+    const params = new URLSearchParams();
+
+    if (group) params.set('groups', group);
+    if (category) params.set('categories', category);
+    if (brand) params.set('brands', brand);
+    if (smartFeatures) params.set('smartFeatures', smartFeatures);
+    if (subCategory) params.set('subCategories', subCategory);
+    if (subType) params.set('subTypes', subType);
+    if (color) params.set('colors', color);
 
 
-    useEffect(() => {
-        document.title = 'CATEGORY';
-        const fetchedProducts = data.filter(product => 
-          product.department.toLowerCase() === categoryName.toLowerCase()
-        )
-    
-        if (fetchedProducts.length > 0) {
-          setProducts(fetchedProducts);
-          setError(null);
-        } else {
-          setProducts([]);
-          setError("Products not found");
+    Object.keys(additionalParams).forEach(key => {
+        if (additionalParams[key]) { 
+            params.set(key, additionalParams[key]);
         }
-        console.Console.og(fetchedProducts)
-      },[categoryName]);
+    });
 
-return (
-   <Layout>
-     <div className="container">
-    <div className="category-page_content">
-   <div className="category-header_block">
-    <CategorySlider />
- <div>
-  <h2>Popular Categories</h2>
- <ul className="category-header_popular">
-      <li className="category-header_popular_item"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
-      <li className="category-header_popular_item"><Link to="/"><img src={laundryPair} alt="image"></img></Link></li>
-      <li className="category-header_popular_item"><Link to="/"><img src={range} alt="image"></img></Link></li>
-      <li className="category-header_popular_item"><Link to="/"><img src={refrigerator} alt="image"></img></Link></li>
-      <li className="category-header_popular_item"><Link to="/"><img src={wallOven} alt="image"></img></Link></li>
-      <li className="category-header_popular_item"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
-   </ul>
- </div>
-   </div>
-   <section className="section category-content_categories">
-            <ul className="category-content_list">
-            <li className="category-content_category"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={laundryPair} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={range} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={refrigerator} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={wallOven} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
-            <li className="category-content_category"><Link to="/"><img src={gastop} alt="image"></img></Link></li>
+    return params.toString();
+};
+
+  useEffect(() => {
+    try {
+      if (typeof data !== "undefined" && Array.isArray(data)) {
+        const filteredProducts = data.filter(
+          (product) =>
+            product.category.toLowerCase() === categoryName.toLowerCase()
+        );
+        document.title = categoryName.toUpperCase();
+
+        if (filteredProducts.length > 0) {
+          setProducts(filteredProducts);
+        } else {
+          setError("No products found for this category.");
+        }
+      } else {
+        setError("Data is not available.");
+      }
+    } catch (err) {
+      setError("An error occurred while loading the data.");
+    }
+  }, [categoryName]);
+
+  useEffect(() => {
+    const featuresSet = new Set();
+    products.forEach((product) => {
+      product.description?.options?.forEach((option) => {
+        if (option.option === "Features") {
+          option.meanings.forEach((feature) => {
+            featuresSet.add(feature.value);
+          });
+        }
+      });
+    });
+    setUniqueFeatures(Array.from(featuresSet));
+  }, [products]);
+
+  useEffect(() => {
+    const grouped = products.reduce((acc, product) => {
+      if (!acc[product.subCategory]) {
+        acc[product.subCategory] = new Set();
+      }
+      acc[product.subCategory].add(product.subType);
+      return acc;
+    }, {});
+
+    const groupedArray = Object.keys(grouped).reduce((acc, key) => {
+      acc[key] = Array.from(grouped[key]);
+      return acc;
+    }, {});
+
+    setGroupedProducts(groupedArray);
+  }, [products]);
+
+  return (
+    <div className="container">
+      <div className="category-page_content">
+        <div className="category-header_block">
+          <CategorySlider />
+          <div>
+            <h2>Most-Visited Categories</h2>
+            <ul className="category-content_all_list">
+              {products
+                .filter((product, index, self) =>
+                  self.findIndex(p => p.subType === product.subType) === index)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 6)
+                .map((product, index) => (
+                  <li className="category-header_popular_item" key={index}>
+                    <Link to={`/search?${generateQueryParams({ categories: product.category, subTypes: product.subType })}`}>
+                      <p>{product.subType}</p>
+                    </Link>
+                  </li>
+                ))}
             </ul>
-            <div className="items_more"><a href="#">Shop All</a></div>
+          </div>
+        </div>
+
+        <section className="section">
+          <ItemSection group="bestseller" subject="Best-Selling Items" category={categoryName} />
         </section>
+
         <section className="section category-navigation_lists">
-            <ul className="category-navigation_list important">
+          <ul className="category-navigation_list important">
             <li className="category-navigation_item"><Link to="/">In Stock</Link></li>
             <li className="category-navigation_item"><Link to="/">On Sale</Link></li>
-            <li className="category-navigation_item"><Link to="/">New Products</Link></li>
-            <li className="category-navigation_item"><Link to="/">Best Sellers</Link></li>
+            {products.filter((product, index, self) =>
+              self.findIndex(p => p.subType === product.subType) === index)
+              .map((product, index) => (
+                <li className="category-navigation_item" key={index}>
+                  <Link to={`/search?${generateQueryParams({ categories: product.category, subTypes: product.subType })}`}>
+                    {product.subType}
+                  </Link>
+                </li>
+              ))}
             <li className="category-navigation_item"><Link to="/">Limited Availability</Link></li>
-            </ul>
-            <ul className="category-navigation_list">
+          </ul>
+
+          <ul className="category-navigation_list">
             <li title="99" className="category-navigation_title">Shop By Color</li>
-            <li className="category-navigation_item"><Link to="/">black</Link></li>
-            <li className="category-navigation_item"><Link to="/">white</Link></li>
-            <li className="category-navigation_item"><Link to="/">gray</Link></li>
-            <li className="category-navigation_item"><Link to="/">yellow</Link></li>
-            </ul>
-            <ul className="category-navigation_list">
-            <li title="99" className="category-navigation_title">Tailored for Your Convenience</li>
-            <li className="category-navigation_item"><Link to="/">Smart</Link></li>
-            <li className="category-navigation_item"><Link to="/">Energy Saving</Link></li>
-            <li className="category-navigation_item"><Link to="/">Compact size</Link></li>
-            <li className="category-navigation_item"><Link to="/"></Link></li>
-            </ul>
-            <ul className="category-navigation_list shop-by-brand">
+            {products.filter((product, index, self) =>
+              self.findIndex(p => p.color === product.color) === index)
+              .map((product, index) => (
+                <li className="category-navigation_item" key={index}>
+                  <Link to={`/search?${generateQueryParams({ categories: product.category, colors: product.color })}`}>
+                    {product.color}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+
+          <ul className="category-navigation_list">
+    <li title="99" className="category-navigation_title">Tailored for Your Convenience</li>
+</ul>
+
+
+          <ul className="category-navigation_list shop-by-brand">
             <li title="99" className="category-navigation_title">Shop By Brand</li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-            <li className="category-navigation_item"><Link to="/">Lorem</Link></li>
-     </ul>
-        </section>
-        <section className="section">
-        <ItemSection category="bestseller" subject="Best-Selling Items" department="Home" />
-        </section>
-        <section className="category-subcategories_list">
-          <ul className="category-subcategory">
-          <li className="category-subcategory_element">
-            <Link to="/">
-            <img src={gastop} alt="image"></img>
-            <ul>
-              <li>Subcategory 1</li>
-              <li>Subcategory 2</li>
-              <li>Subcategory 3</li>
-              <li>Subcategory 4</li>
-              <li>Subcategory 5</li>
-              <li>Subcategory 6</li>
-              <li>Subcategory 7</li>
-            </ul>
-            </Link>
-          </li>
-          <li className="category-subcategory_element">
-            <Link to="/">
-            <img src={laundryPair} alt="image"></img>
-            <ul>
-              <li>Subcategory 1</li>
-              <li>Subcategory 2</li>
-              <li>Subcategory 3</li>
-              <li>Subcategory 4</li>
-              <li>Subcategory 5</li>
-              <li>Subcategory 6</li>
-              <li>Subcategory 7</li>
-            </ul>
-            </Link>
-          </li>
-          <li className="category-subcategory_element">
-            <Link to="/">
-            <img src={range} alt="image"></img>
-            <ul>
-              <li>Subcategory 1</li>
-              <li>Subcategory 2</li>
-              <li>Subcategory 3</li>
-              <li>Subcategory 4</li>
-              <li>Subcategory 5</li>
-              <li>Subcategory 6</li>
-              <li>Subcategory 7</li>
-            </ul>
-            </Link>
-          </li>
-          <li className="category-subcategory_element">
-            <Link to="/">
-            <img src={refrigerator} alt="image"></img>
-            <ul>
-              <li>Subcategory 1</li>
-              <li>Subcategory 2</li>
-              <li>Subcategory 3</li>
-              <li>Subcategory 4</li>
-              <li>Subcategory 5</li>
-              <li>Subcategory 6</li>
-              <li>Subcategory 7</li>
-            </ul>
-            </Link>
-          </li>
-          <li className="category-subcategory_element">
-            <Link to="/">
-            <img src={wallOven} alt="image"></img>
-            <ul>
-              <li>Subcategory 1</li>
-              <li>Subcategory 2</li>
-              <li>Subcategory 3</li>
-              <li>Subcategory 4</li>
-              <li>Subcategory 5</li>
-              <li>Subcategory 6</li>
-              <li>Subcategory 7</li>
-            </ul>
-            </Link>
-          </li>
-          <li className="category-subcategory_element">
-            <Link to="/">
-            <img src={gastop} alt="image"></img>
-            <ul>
-              <li>Subcategory 1</li>
-              <li>Subcategory 2</li>
-              <li>Subcategory 3</li>
-              <li>Subcategory 4</li>
-              <li>Subcategory 5</li>
-              <li>Subcategory 6</li>
-              <li>Subcategory 7</li>
-            </ul>
-            </Link>
-          </li>
-          <li className="category-subcategory_element">
-            <Link to="/">
-            <img src={gastop} alt="image"></img>
-            <ul>
-              <li>Subcategory 1</li>
-              <li>Subcategory 2</li>
-              <li>Subcategory 3</li>
-              <li>Subcategory 4</li>
-              <li>Subcategory 5</li>
-              <li>Subcategory 6</li>
-              <li>Subcategory 7</li>
-            </ul>
-            </Link>
-          </li>
+            {products.filter((product, index, self) =>
+              self.findIndex(p => p.brandText === product.brandText) === index)
+              .map((product, index) => (
+                <li className="category-navigation_item" key={index}>
+                  <Link to={`/search?${generateQueryParams({ categories: product.category, brands: product.brandText })}`}>
+                    {product.brandText}
+                  </Link>
+                </li>
+              ))}
           </ul>
         </section>
+
+        <section className="category-subcategories_list">
+          <ul className="category-subcategory">
+            {Object.keys(groupedProducts).map((subCategory, index) => (
+              <li className="category-subcategory_element" key={index}>
+                <Link to={`/search?${generateQueryParams({ subCategories: subCategory })}`}>
+                  {subCategory}
+                  <ul>
+                    {groupedProducts[subCategory].map((subType, idx) => (
+                      <li key={idx}>
+                        <Link to={`/search?${generateQueryParams({subCategories : subCategory, subTypes : subType})}`}>{subType}</Link>
+                        </li>
+                    ))}
+                  </ul>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
     </div>
-     </div>
-   </Layout>
-)
-}
+  );
+};
 
 export default CategoryPage;

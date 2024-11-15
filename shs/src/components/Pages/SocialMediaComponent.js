@@ -9,7 +9,6 @@ import icon_youtube from "../../assets/images/icon-sm-youtube-primary-color.png"
 import icon_instagram from "../../assets/images/icon-sm-instagram-primary-color.png";
 import icon_whatsapp from "../../assets/images/icon-sm-whatsapp-primary-color.png";
 
-// import "./Pages.scss";
 
 const SocialMediaComponent = () => {
  

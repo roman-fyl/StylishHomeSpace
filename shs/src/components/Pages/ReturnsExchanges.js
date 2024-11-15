@@ -10,7 +10,6 @@ const ReturnsExchanges = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <div className="privacy_description">
           <h1>Returns & Exchanges</h1>          
@@ -98,7 +97,6 @@ const ReturnsExchanges = () => {
 </section>
         </div>
       </div>
-    </Layout>
   );
 };
 

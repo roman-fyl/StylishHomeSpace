@@ -11,7 +11,6 @@ const SignUpB2B = () => {
   }, []);
 
   return (
-    <Layout>
       <div className="container">
         <div className="privacy_description">
           <h1>Become a part of our B2B network</h1>
@@ -63,7 +62,6 @@ const SignUpB2B = () => {
 </section>
         </div>
       </div>
-    </Layout>
   );
 };
 
