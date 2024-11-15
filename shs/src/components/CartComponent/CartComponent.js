@@ -7,6 +7,7 @@ import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
 import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
 import { setZipCode, setError } from "../../store/actions/locationActions";
 import { setCoupon, clearCoupon } from "../../store/actions/couponActions";
+import Notification from "../../components/Notification/Notification";
 
 import "./CartComponent.scss";
 
@@ -24,7 +25,7 @@ const CartComponent = () => {
   const [inputZipCode, setInputZipCode] = useState("");
   const [deliveryType, setDeliveryType] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true); 
-
+  const [notification, setNotification] = useState({ message: "", type: "" });
 
   
   useEffect(() => {
@@ -85,7 +86,9 @@ const CartComponent = () => {
         discountedTotal = calculatedTotal - validDiscountAmount;
         if (discountedTotal < minOrderValue) {
           dispatch(clearCoupon());
-          setLocalStorage("couponDetails", null);        
+          setLocalStorage("couponDetails", null);
+          setNotification({ message: "Your order value is below the minimum required for this coupon, and it has been removed", type: 'error' });
+        
         }
       }
     
@@ -123,7 +126,7 @@ const CartComponent = () => {
           } else {
             dispatch(clearCoupon());
             setLocalStorage("couponDetails", null);
-            alert("We're sorry, but your order total doesn't meet the minimum requirement for this coupon. Please add more items to your cart to apply this discount.");
+            setNotification({ message: "Your order does not meet the minimum spend for this coupon, and it has been removed", type: 'error' });
           }
         }
       }
@@ -143,22 +146,22 @@ const CartComponent = () => {
     if (updatedCartItems.length === 0) {
       dispatch(clearCoupon());
       setLocalStorage("couponDetails", null); 
-      console.log("Cart is empty, coupon removed.");
     }
   };
 
   const handleCouponSubmit = (e) => {
     e.preventDefault();
-
+  
+    setNotification({ message: "", type: "" });
+  
     if (couponCode.length >= 5 && couponCode.length <= 30) {
       const matchingCoupon = coupons.find(coupon => coupon.code.trim() === couponCode.trim());
-
+  
       if (matchingCoupon) {
         const calculatedTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
         let newTotal = calculatedTotal;
-
         let appliedDiscountAmount = 0;
-
+  
         if (matchingCoupon.isPercentage) {
           appliedDiscountAmount = (calculatedTotal * matchingCoupon.discountAmount) / 100;
           newTotal = calculatedTotal - appliedDiscountAmount;
@@ -166,7 +169,7 @@ const CartComponent = () => {
           appliedDiscountAmount = matchingCoupon.discountAmount;
           newTotal = calculatedTotal - appliedDiscountAmount;
         }
-
+  
         if (newTotal >= matchingCoupon.minOrderValue) {
           dispatch(setCoupon({
             code: couponCode,
@@ -174,29 +177,32 @@ const CartComponent = () => {
             isPercentage: matchingCoupon.isPercentage,
             minOrderValue: matchingCoupon.minOrderValue
           }));
-
+  
           setLocalStorage("couponDetails", {
             code: couponCode,
             discountAmount: appliedDiscountAmount,
             isPercentage: matchingCoupon.isPercentage,
             minOrderValue: matchingCoupon.minOrderValue
           });
+  
         } else {
           dispatch(clearCoupon());
-          setLocalStorage("couponDetails", null); 
-          alert("We're sorry, but your order total doesn't meet the minimum requirement for this coupon. Please add more items to your cart to apply this discount.");
+          setLocalStorage("couponDetails", null);
+          setNotification({ message: "Your order total is below the required minimum for this coupon", type: 'error' });
         }
       } else {
         dispatch(clearCoupon());
         setLocalStorage("couponDetails", null);
+        setNotification({ message: "This coupon code is invalid. Please check and try again", type: 'error' });
       }
     } else {
       dispatch(clearCoupon());
-      setLocalStorage("couponDetails", null); 
+      setLocalStorage("couponDetails", null);
     }
-
+  
     setCouponCode("");
   };
+  
 
   const handleQuantityInCart = (itemId, newQuantity) => {
     const updatedCart = cartItems.map((item) =>
@@ -321,6 +327,7 @@ const CartComponent = () => {
               />
               <input type="submit" className="cart_button" value="Apply Coupon" />
             </form>
+            {notification && <Notification message={notification.message} type={notification.type} />}
             {discountAmount > 0 && appliedCouponCode && (
         <div className="cart_total_coupon">Applied Coupon: {appliedCouponCode}
         <button onClick={handleRemoveCoupon}>Remove Coupon</button>
