@@ -82,8 +82,11 @@ const CartComponent = () => {
       const validDiscountAmount = discountAmount || 0;
       if (validDiscountAmount > 0) {
         discountedTotal = calculatedTotal - validDiscountAmount;
+        if(discountedTotal < minOrderValue) {
+          dispatch(clearCoupon());
+          setLocalStorage("couponDetails", null);        
+        }
       }
-
       setTotalAmount(discountedTotal.toFixed(2));
     };
 
@@ -126,17 +129,20 @@ const CartComponent = () => {
           dispatch(setCoupon({
             code: couponCode,
             discountAmount: appliedDiscountAmount,
-            isPercentage: matchingCoupon.isPercentage
+            isPercentage: matchingCoupon.isPercentage,
+            minOrderValue: matchingCoupon.minOrderValue
           }));
 
           setLocalStorage("couponDetails", {
             code: couponCode,
             discountAmount: appliedDiscountAmount,
-            isPercentage: matchingCoupon.isPercentage
+            isPercentage: matchingCoupon.isPercentage,
+            minOrderValue: matchingCoupon.minOrderValue
           });
         } else {
           dispatch(clearCoupon());
           setLocalStorage("couponDetails", null); 
+          alert("We're sorry, but your order total doesn't meet the minimum requirement for this coupon. Please add more items to your cart to apply this discount.");
         }
       } else {
         dispatch(clearCoupon());
