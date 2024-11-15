@@ -8,6 +8,8 @@ import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
 import { setZipCode, setError } from "../../store/actions/locationActions";
 import { setCoupon, clearCoupon } from "../../store/actions/couponActions";
 import Notification from "../../components/Notification/Notification";
+import { getSessionNumber } from "../Sessions/getSessionNumber";
+
 
 import "./CartComponent.scss";
 
@@ -30,7 +32,7 @@ const CartComponent = () => {
   
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    let sessionId = queryParams.get("session");
+    let sessionId = queryParams.get("session") || getSessionNumber();
 
     if (!sessionId) {
       sessionId = getFromLocalStorage("abnd-session") || Date.now();
