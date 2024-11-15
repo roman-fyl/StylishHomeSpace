@@ -89,7 +89,7 @@ const CartComponent = () => {
         setNotification({ message: "Your order value is below the minimum required for this coupon, and it has been removed", type: 'error' });
       
       }
-    
+    console.log("discountedTotal", discountedTotal)
       if (validDiscountAmount > 0) {
         discountedTotal = calculatedTotal - validDiscountAmount;
      
@@ -109,7 +109,7 @@ const CartComponent = () => {
             appliedDiscountAmount = matchingCoupon.discountAmount;
             newTotal = calculatedTotal - appliedDiscountAmount;
           }
-    
+    console.log("newTotal + appliedDiscountAmount", newTotal + appliedDiscountAmount)
           if (newTotal + appliedDiscountAmount >= matchingCoupon.minOrderValue) {
             dispatch(setCoupon({
               code: matchingCoupon.code,
@@ -172,8 +172,9 @@ const CartComponent = () => {
           appliedDiscountAmount = matchingCoupon.discountAmount;
           newTotal = calculatedTotal - appliedDiscountAmount;
         }
-  
-        if (newTotal >= matchingCoupon.minOrderValue) {
+        console.log("calculatedTotal", calculatedTotal)
+        console.log("New Total", newTotal)
+        if (calculatedTotal >= matchingCoupon.minOrderValue) {
           dispatch(setCoupon({
             code: couponCode,
             discountAmount: appliedDiscountAmount,
@@ -191,7 +192,7 @@ const CartComponent = () => {
         } else {
           dispatch(clearCoupon());
           setLocalStorage("couponDetails", null);
-          setNotification({ message: " 1 Your order total is below the required minimum for this coupon", type: 'error' });
+          setNotification({ message: "Your order total is below the required minimum for this coupon", type: 'error' });
         }
       } else {
         dispatch(clearCoupon());
