@@ -77,18 +77,60 @@ const CartComponent = () => {
 
     const calculateTotal = () => {
       const calculatedTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-
+    
       let discountedTotal = calculatedTotal;
       const validDiscountAmount = discountAmount || 0;
+    
       if (validDiscountAmount > 0) {
         discountedTotal = calculatedTotal - validDiscountAmount;
-        if(discountedTotal < minOrderValue) {
+        if (discountedTotal < minOrderValue) {
           dispatch(clearCoupon());
           setLocalStorage("couponDetails", null);        
         }
       }
+    
+      if (appliedCouponCode) {
+        const matchingCoupon = coupons.find(coupon => coupon.code.trim() === appliedCouponCode.trim());
+    
+        if (matchingCoupon) {
+          let newTotal = calculatedTotal;
+          let appliedDiscountAmount = 0;
+    
+          if (matchingCoupon.isPercentage) {
+            appliedDiscountAmount = (calculatedTotal * matchingCoupon.discountAmount) / 100;
+            newTotal = calculatedTotal - appliedDiscountAmount;
+          } else {
+            appliedDiscountAmount = matchingCoupon.discountAmount;
+            newTotal = calculatedTotal - appliedDiscountAmount;
+          }
+    
+          if (newTotal >= matchingCoupon.minOrderValue) {
+            dispatch(setCoupon({
+              code: matchingCoupon.code,
+              discountAmount: appliedDiscountAmount,
+              isPercentage: matchingCoupon.isPercentage,
+              minOrderValue: matchingCoupon.minOrderValue
+            }));
+    
+            setLocalStorage("couponDetails", {
+              code: matchingCoupon.code,
+              discountAmount: appliedDiscountAmount,
+              isPercentage: matchingCoupon.isPercentage,
+              minOrderValue: matchingCoupon.minOrderValue
+            });
+    
+            discountedTotal = newTotal;
+          } else {
+            dispatch(clearCoupon());
+            setLocalStorage("couponDetails", null);
+            alert("We're sorry, but your order total doesn't meet the minimum requirement for this coupon. Please add more items to your cart to apply this discount.");
+          }
+        }
+      }
+    
       setTotalAmount(discountedTotal.toFixed(2));
     };
+    
 
     calculateTotal();
   }, [cartItems, discountAmount, dispatch, isInitialLoad]);
