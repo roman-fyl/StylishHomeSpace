@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import store from './store/stores/store';
+import { getFromLocalStorage } from './components/LocalStorage/getFromLocalStorage';
 import { getSessionNumber } from './components/Sessions/getSessionNumber';
 import {setSessionId} from "./store/actions/sessionActions";
 
@@ -42,8 +43,17 @@ const App = () => {
 
   useEffect(() => {
     if (!sessionId) {
-      const newSessionId = getSessionNumber();
-      dispatch(setSessionId(newSessionId));
+      let localSessionId = sessionId;
+        if(!localSessionId) {
+          localSessionId = getFromLocalStorage("abnd-session");
+
+          if(!localSessionId) {
+            const newSessionId = getSessionNumber();
+            dispatch(setSessionId(newSessionId));
+          }
+        }
+
+      
     }
   }, [sessionId, dispatch]);
 

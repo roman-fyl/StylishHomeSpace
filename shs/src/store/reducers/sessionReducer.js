@@ -1,10 +1,11 @@
 import { SET_SESSION_ID } from "../actions/sessionActions";
-import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
 import { getSessionNumber } from "../../components/Sessions/getSessionNumber";
 
+const initialSessionId = getSessionNumber();
+
 const initialState = {
-  sessionId:  getSessionNumber(), 
+  sessionId: initialSessionId,
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -12,12 +13,14 @@ const sessionReducer = (state = initialState, action) => {
     case SET_SESSION_ID:
       const updatedSessionId = action.payload;
       setLocalStorage("abnd-session", updatedSessionId);
+
       return {
         ...state,
         sessionId: updatedSessionId,
       };
 
     default:
+      
       return state;
   }
 };

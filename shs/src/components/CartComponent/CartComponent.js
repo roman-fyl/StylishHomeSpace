@@ -9,6 +9,7 @@ import { setZipCode, setError } from "../../store/actions/locationActions";
 import { setCoupon, clearCoupon } from "../../store/actions/couponActions";
 import Notification from "../../components/Notification/Notification";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
+import { setSessionId} from "../../store/actions/sessionActions";
 
 
 import "./CartComponent.scss";
@@ -16,11 +17,11 @@ import "./CartComponent.scss";
 const CartComponent = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const zipCode = useSelector((state) => state.location.zipCode);
+  const sessionId = useSelector((state) => state.session.sessionId);
   const { discountAmount, code: appliedCouponCode, minOrderValue } = useSelector((state) => state.coupon);  
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [session, setSession] = useState(null);
   const [couponCode, setCouponCode] = useState("");
   const [coupons, setCoupons] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -32,23 +33,30 @@ const CartComponent = () => {
   
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    let sessionId = queryParams.get("session") || getSessionNumber();
-
-    if (!sessionId) {
-      sessionId = getFromLocalStorage("abnd-session") || Date.now();
-      setLocalStorage("abnd-session", sessionId);
-      queryParams.set("session", sessionId);
+    let localSessionId = sessionId;
+  
+    if (!localSessionId) {
+      localSessionId = getFromLocalStorage("abnd-session");
+      if (!localSessionId) {
+        localSessionId = getSessionNumber();  
+        setLocalStorage("abnd-session", localSessionId);
+      }
+    }
+  
+    if (queryParams.get("session") !== localSessionId) {
+      queryParams.set("session", localSessionId);
       navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
     }
-    setSession(sessionId);
-
+  
+    dispatch(setSessionId(localSessionId));
+  
     if (!cartItems.length) {
       const storedCartItems = getFromLocalStorage("cartItems");
       if (storedCartItems && storedCartItems.length > 0) {
-        dispatch(setCartItems(storedCartItems, sessionId));
+        dispatch(setCartItems(storedCartItems, localSessionId));
       }
     }
-
+  
     import("../../assets/db/coupons.json")
       .then((data) => {
         setCoupons(data.default || data);
@@ -56,7 +64,7 @@ const CartComponent = () => {
       .catch((error) => {
         console.error("Error loading coupons:", error);
       });
-
+  
     const savedCoupon = getFromLocalStorage("couponDetails");
     if (savedCoupon) {
       const coupon = Array.isArray(savedCoupon) ? savedCoupon[0] : savedCoupon;
@@ -64,8 +72,10 @@ const CartComponent = () => {
         dispatch(setCoupon(coupon));
       }
     }
-    setIsInitialLoad(false); 
-  }, [location, navigate, session, dispatch, cartItems.length]);
+  
+    setIsInitialLoad(false);  
+  }, [location, navigate, sessionId, dispatch, cartItems.length]);
+  
 
   useEffect(() => {
     if (!cartItems || cartItems.length === 0) {
@@ -89,7 +99,6 @@ const CartComponent = () => {
         setNotification({ message: "Your order value is below the minimum required for this coupon, and it has been removed", type: 'error' });
       
       }
-    // console.log("discountedTotal", discountedTotal)
       if (validDiscountAmount > 0) {
         discountedTotal = calculatedTotal - validDiscountAmount;
      
@@ -122,7 +131,8 @@ const CartComponent = () => {
               code: matchingCoupon.code,
               discountAmount: appliedDiscountAmount,
               isPercentage: matchingCoupon.isPercentage,
-              minOrderValue: matchingCoupon.minOrderValue
+              minOrderValue: matchingCoupon.minOrderValue,
+              session: sessionId
             });
     
             discountedTotal = newTotal;
@@ -139,7 +149,7 @@ const CartComponent = () => {
     
     
     calculateTotal();
-  }, [cartItems, discountAmount, dispatch, isInitialLoad]);
+  }, [location, navigate, sessionId, dispatch, cartItems.length]);
 
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
@@ -186,7 +196,8 @@ const CartComponent = () => {
             code: couponCode,
             discountAmount: appliedDiscountAmount,
             isPercentage: matchingCoupon.isPercentage,
-            minOrderValue: matchingCoupon.minOrderValue
+            minOrderValue: matchingCoupon.minOrderValue,
+            session: sessionId,
           });
   
         } else {
@@ -212,8 +223,8 @@ const CartComponent = () => {
     const updatedCart = cartItems.map((item) =>
       item.idN === itemId ? { ...item, quantity: newQuantity } : item
     );
-    dispatch(setCartItems(updatedCart, session));
-    console.log("updatedCart, session", updatedCart, session)
+    dispatch(setCartItems(updatedCart, sessionId));
+    console.log("updatedCart, session", updatedCart, sessionId)
     setLocalStorage("cartItems", updatedCart);
   };
 
@@ -255,7 +266,7 @@ const CartComponent = () => {
 
   return (
     <div className="container cart_container">
-      <h2>Your Cart (Session ID: {session})</h2>
+      <h2>Your Cart (Session ID: {sessionId})</h2>
       <div className="cart_main">
         <ul className="cart_elements">
           {cartItems.length ? (
