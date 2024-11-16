@@ -310,9 +310,9 @@ const ProductPage = () => {
         onQuantityChange={handleQuantityChangePP}
       />
       </div>
-      <div className="price_coupon">
+      {/* <div className="price_coupon">
         <a href="">Click to activate coupon</a>
-      </div>
+      </div> */}
 
       <div className="price_financing">
         <form>

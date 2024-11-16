@@ -29,6 +29,8 @@ const CartComponent = () => {
   const [deliveryType, setDeliveryType] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true); 
   const [notification, setNotification] = useState({ message: "", type: "" });
+  const [totalBeforeTaxCollected, setTotalBeforeTaxCollected] = useState("")
+
 
   
   useEffect(() => {
@@ -80,37 +82,37 @@ const CartComponent = () => {
   useEffect(() => {
     if (!cartItems || cartItems.length === 0) {
       setTotalAmount(0);
-
+  
       if (!isInitialLoad) {
-        setLocalStorage("couponDetails", null); 
+        setLocalStorage("couponDetails", null);
         dispatch(clearCoupon());
       }
       return;
     }
-
+  
     const calculateTotal = () => {
       const calculatedTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-    
+      
       let discountedTotal = calculatedTotal;
       const validDiscountAmount = discountAmount || 0;
+      
       if (discountedTotal < minOrderValue) {
         dispatch(clearCoupon());
         setLocalStorage("couponDetails", null);
         setNotification({ message: "Your order value is below the minimum required for this coupon, and it has been removed", type: 'error' });
-      
       }
+  
       if (validDiscountAmount > 0) {
         discountedTotal = calculatedTotal - validDiscountAmount;
-     
       }
- 
+  
       if (appliedCouponCode) {
         const matchingCoupon = coupons.find(coupon => coupon.code.trim() === appliedCouponCode.trim());
-    
+  
         if (matchingCoupon) {
           let newTotal = calculatedTotal;
           let appliedDiscountAmount = 0;
-    
+  
           if (matchingCoupon.isPercentage) {
             appliedDiscountAmount = (calculatedTotal * matchingCoupon.discountAmount) / 100;
             newTotal = calculatedTotal - appliedDiscountAmount;
@@ -118,7 +120,7 @@ const CartComponent = () => {
             appliedDiscountAmount = matchingCoupon.discountAmount;
             newTotal = calculatedTotal - appliedDiscountAmount;
           }
-    console.log("newTotal + appliedDiscountAmount", newTotal + appliedDiscountAmount)
+  
           if (newTotal + appliedDiscountAmount >= matchingCoupon.minOrderValue) {
             dispatch(setCoupon({
               code: matchingCoupon.code,
@@ -126,7 +128,7 @@ const CartComponent = () => {
               isPercentage: matchingCoupon.isPercentage,
               minOrderValue: matchingCoupon.minOrderValue
             }));
-    
+  
             setLocalStorage("couponDetails", {
               code: matchingCoupon.code,
               discountAmount: appliedDiscountAmount,
@@ -134,7 +136,7 @@ const CartComponent = () => {
               minOrderValue: matchingCoupon.minOrderValue,
               session: sessionId
             });
-    
+  
             discountedTotal = newTotal;
           } else {
             dispatch(clearCoupon());
@@ -143,13 +145,14 @@ const CartComponent = () => {
           }
         }
       }
-    
+  
       setTotalAmount(discountedTotal.toFixed(2));
+      setTotalBeforeTaxCollected(discountedTotal);
     };
-    
-    
+  
     calculateTotal();
-  }, [location, navigate, sessionId, dispatch, cartItems.length]);
+  }, [cartItems, appliedCouponCode, discountAmount, coupons, minOrderValue, dispatch, sessionId, isInitialLoad]);
+  
 
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
@@ -158,6 +161,8 @@ const CartComponent = () => {
 
     if (updatedCartItems.length === 0) {
       dispatch(clearCoupon());
+      setTotalBeforeTaxCollected(0);
+      setDeliveryType("");
       setLocalStorage("couponDetails", null); 
     }
   };
@@ -182,8 +187,10 @@ const CartComponent = () => {
           appliedDiscountAmount = matchingCoupon.discountAmount;
           newTotal = calculatedTotal - appliedDiscountAmount;
         }
-        console.log("calculatedTotal", calculatedTotal)
-        console.log("New Total", newTotal)
+  
+        // console.log("calculatedTotal", calculatedTotal);
+        // console.log("New Total", newTotal);
+  
         if (calculatedTotal >= matchingCoupon.minOrderValue) {
           dispatch(setCoupon({
             code: couponCode,
@@ -218,13 +225,13 @@ const CartComponent = () => {
     setCouponCode("");
   };
   
+  
 
   const handleQuantityInCart = (itemId, newQuantity) => {
     const updatedCart = cartItems.map((item) =>
       item.idN === itemId ? { ...item, quantity: newQuantity } : item
     );
     dispatch(setCartItems(updatedCart, sessionId));
-    console.log("updatedCart, session", updatedCart, sessionId)
     setLocalStorage("cartItems", updatedCart);
   };
 
@@ -247,9 +254,6 @@ const CartComponent = () => {
     }
   };
 
-  const handleTypeDelivery = (e) => {
-    setDeliveryType(e.target.value);
-  };
 
   const totalOldAmount = cartItems.reduce((total, item) => {
     const oldPrice = parseFloat(item.price) * 1.12;
@@ -262,6 +266,25 @@ const CartComponent = () => {
 
     const calculatedTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     setTotalAmount(calculatedTotal.toFixed(2));
+  };
+
+  const calculateShippingCost = (deliveryType) => {
+    switch(deliveryType) {
+      case "White Glove Delivery":
+        return 69.99;
+      case "In-Home Delivery":
+        return 39.99;
+      default:
+        return 0
+    }
+  }
+
+  const shippingCost = calculateShippingCost(deliveryType)
+  const totalBeforeTax = shippingCost + totalBeforeTaxCollected;
+  // console.log(totalBeforeTaxCollected)
+
+  const handleTypeDelivery = (e) => {
+    setDeliveryType(e.target.value);
   };
 
   return (
@@ -360,10 +383,21 @@ const CartComponent = () => {
                 tabIndex="11"
                 required
               />
-              <input type="submit" className="cart_button" value="Add Zip Code" />
+              <input type="submit" className="cart_button" value={zipCode ? "Update Zip Code" : "Add Zip Code"} />
             </form>
             <div className="cart_total_shipping"><span>Shipping to:</span><span>{zipCode}</span></div>
             <form className="cart_form">
+            <div className="cart_total_subtotal"><span>Select Shipping Options:</span></div>
+            <label>
+                <input
+                  type="radio"
+                  value="White Glove Delivery"
+                  name="payment"
+                  checked={deliveryType === "White Glove Delivery"}
+                  onChange={handleTypeDelivery}
+                />
+                White Glove Delivery - $69.99
+              </label>
               <label>
                 <input
                   type="radio"
@@ -374,18 +408,8 @@ const CartComponent = () => {
                 />
                 In-Home Delivery - $39.99
               </label>
-              <label>
-                <input
-                  type="radio"
-                  value="White Glove Delivery"
-                  name="payment"
-                  checked={deliveryType === "White Glove Delivery"}
-                  onChange={handleTypeDelivery}
-                />
-                White Glove Delivery - $69.99
-              </label>
             </form>
-            <div className="cart_total_total-amount"><span>Total:</span>${totalAmount}</div>
+            <div className="cart_total_total-amount"><span>Total Before Tax:</span>${totalBeforeTax}</div>
           </div>
           <button className="cart_button">Checkout</button>
         </div>
