@@ -5,6 +5,8 @@ import store from './store/stores/store';
 import { getFromLocalStorage } from './components/LocalStorage/getFromLocalStorage';
 import { getSessionNumber } from './components/Sessions/getSessionNumber';
 import {setSessionId} from "./store/actions/sessionActions";
+import {addCustomer, updateCustomer} from "./store/reducers/customerSlice";
+
 
 import ScrollToTop from "./components/ScrollToTop";
 import Layout from "./Layout"; 
@@ -40,22 +42,34 @@ import './App.scss';
 const App = () => {
   const dispatch = useDispatch();
   const sessionId = useSelector((state) => state.session.sessionId);
+  const customer = useSelector((state) => state.customer.customer);
 
   useEffect(() => {
     if (!sessionId) {
-      let localSessionId = sessionId;
-        if(!localSessionId) {
-          localSessionId = getFromLocalStorage("abnd-session");
+      let localSessionId = getFromLocalStorage("abnd-session");
 
-          if(!localSessionId) {
-            const newSessionId = getSessionNumber();
-            dispatch(setSessionId(newSessionId));
-          }
-        }
-
-      
+      if (!localSessionId) {
+        const newSessionId = getSessionNumber();
+        dispatch(setSessionId(newSessionId));
+      }
     }
-  }, [sessionId, dispatch]);
+
+    if (!customer) {
+      const storedCustomer = getFromLocalStorage('customer');
+      
+      if (!storedCustomer || storedCustomer.length === 0) {
+        // console.log("Hello");  // Log for debugging purposes
+      }
+
+      if (storedCustomer && storedCustomer.length > 0) {
+        dispatch(updateCustomer(storedCustomer));
+        console.log('Loaded customer from localStorage:', storedCustomer);
+      }
+    }
+
+    console.log("useEffect triggered:", { sessionId, customer });
+    // dispatch(addCustomer({ id: 1, name: 'John Doe' }));
+  }, [sessionId, dispatch, customer]);
 
 
   return (
