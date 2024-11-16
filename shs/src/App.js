@@ -39,15 +39,14 @@ import './App.scss';
 const App = () => {
   const dispatch = useDispatch();
   const sessionId = useSelector((state) => state.session.sessionId);
-  
-  
-  console.log("Session ID:", sessionId);
+
   useEffect(() => {
     if (!sessionId) {
-      const newSessionId = getSessionNumber(); 
-      dispatch(setSessionId(newSessionId)); 
+      const newSessionId = getSessionNumber();
+      dispatch(setSessionId(newSessionId));
     }
   }, [sessionId, dispatch]);
+
 
   return (
     <Router>
