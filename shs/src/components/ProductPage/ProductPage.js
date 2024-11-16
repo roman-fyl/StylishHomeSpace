@@ -54,6 +54,7 @@ const ProductPage = () => {
 
   const handleQuantityChangePP = (newQuantity) => {
     setQuantity(newQuantity);
+    
   };
 
   const handleAddToCart = (item) => {

@@ -89,7 +89,7 @@ const CartComponent = () => {
         setNotification({ message: "Your order value is below the minimum required for this coupon, and it has been removed", type: 'error' });
       
       }
-    console.log("discountedTotal", discountedTotal)
+    // console.log("discountedTotal", discountedTotal)
       if (validDiscountAmount > 0) {
         discountedTotal = calculatedTotal - validDiscountAmount;
      
@@ -213,6 +213,7 @@ const CartComponent = () => {
       item.idN === itemId ? { ...item, quantity: newQuantity } : item
     );
     dispatch(setCartItems(updatedCart, session));
+    console.log("updatedCart, session", updatedCart, session)
     setLocalStorage("cartItems", updatedCart);
   };
 

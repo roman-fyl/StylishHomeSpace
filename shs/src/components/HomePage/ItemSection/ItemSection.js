@@ -114,6 +114,7 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
                     {item.description.short}
                   </h3>
                   <span className="item_rating">
+                  <span className="item_rate">{item.sku}</span>
                     <span className="item_rate">{item.rate}</span>
                     <span className="item_rate">{item.group}</span>
                     <span className="item_rate">{item.color}</span>
