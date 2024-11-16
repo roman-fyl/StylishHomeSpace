@@ -35,6 +35,7 @@ const CartComponent = () => {
   
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
+
     let localSessionId = sessionId;
   
     if (!localSessionId) {
@@ -51,13 +52,19 @@ const CartComponent = () => {
     }
   
     dispatch(setSessionId(localSessionId));
+
   
     if (!cartItems.length) {
       const storedCartItems = getFromLocalStorage("cartItems");
       if (storedCartItems && storedCartItems.length > 0) {
         dispatch(setCartItems(storedCartItems, localSessionId));
+        // console.log(storedCartItems)
+        // console.log(storedDeliveryType)
+        // setDeliveryType(storedDeliveryType)
+
       }
     }
+  
   
     import("../../assets/db/coupons.json")
       .then((data) => {
@@ -72,12 +79,31 @@ const CartComponent = () => {
       const coupon = Array.isArray(savedCoupon) ? savedCoupon[0] : savedCoupon;
       if (coupon) {
         dispatch(setCoupon(coupon));
+        // console.log(savedCoupon)
       }
     }
   
     setIsInitialLoad(false);  
   }, [location, navigate, sessionId, dispatch, cartItems.length]);
   
+  useEffect(() => {
+    const storedDeliveryType = getFromLocalStorage("deliveryType");
+
+    if (storedDeliveryType && Array.isArray(storedDeliveryType)) {
+      setDeliveryType(storedDeliveryType[0]); 
+    } else if (storedDeliveryType) {
+      setDeliveryType(storedDeliveryType); 
+    }
+
+    // console.log("Loaded deliveryType from local storage:", storedDeliveryType);
+  }, []);
+
+  const handleTypeDelivery = (e) => {
+    const selectedType = e.target.value; 
+    setDeliveryType(selectedType); 
+    setLocalStorage("deliveryType", selectedType); 
+    console.log("Updated deliveryType:", selectedType);
+  };
 
   useEffect(() => {
     if (!cartItems || cartItems.length === 0) {
@@ -278,14 +304,11 @@ const CartComponent = () => {
         return 0
     }
   }
-
   const shippingCost = calculateShippingCost(deliveryType)
   const totalBeforeTax = shippingCost + totalBeforeTaxCollected;
   // console.log(totalBeforeTaxCollected)
 
-  const handleTypeDelivery = (e) => {
-    setDeliveryType(e.target.value);
-  };
+
 
   return (
     <div className="container cart_container">
