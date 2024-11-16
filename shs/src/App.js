@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { Provider, useSelector, useDispatch } from 'react-redux';
 import store from './store/stores/store';
+import { getSessionNumber } from './components/Sessions/getSessionNumber';
+import {setSessionId} from "./store/actions/sessionActions";
 
 import ScrollToTop from "./components/ScrollToTop";
 import Layout from "./Layout"; 
@@ -35,47 +37,59 @@ import CartComponent from './components/CartComponent/CartComponent';
 import './App.scss';
 
 const App = () => {
+  const dispatch = useDispatch();
+  const sessionId = useSelector((state) => state.session.sessionId);
+  
+  
+  console.log("Session ID:", sessionId);
+  useEffect(() => {
+    if (!sessionId) {
+      const newSessionId = getSessionNumber(); 
+      dispatch(setSessionId(newSessionId)); 
+    }
+  }, [sessionId, dispatch]);
+
   return (
-    <Provider store={store}>
-      <Router>
-        <ScrollToTop />
-
-        {/* Layout component around all routes */}
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-conditions" element={<TermsConditions />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/faqs" element={<FAQs />} />
-            <Route path="/warranty" element={<Warranty />} />
-            <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
-            <Route path="/shipping-information" element={<ShippingInformation />} />
-            <Route path="/order-tracking" element={<OrderTracking />} />
-            <Route path="/my-account" element={<MyAccount />} />
-            <Route path="/loyalty-program" element={<LoyaltyProgram />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/sign-up-professional" element={<SignUpProfessional />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/special-offers" element={<SpecialOffers />} />
-            <Route path="/financing" element={<Financing />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/payment-options" element={<PaymentOptions />} />
-            <Route path="/why-buy-from-us" element={<WhyBuyFromUs />} />
-            <Route path="/success" element={<ThankYouPage />} />
-            <Route path="/item/:skuText" element={<ProductPage />} />
-            <Route path="/category/:categoryName" element={<CategoryPage />} />
-            <Route path="/brand/:brandName" element={<BrandPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/cart" element={<CartComponent />} />
-
-          </Routes>
-        </Layout>
-        
-      </Router>
-    </Provider>
+    <Router>
+      <ScrollToTop />
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/warranty" element={<Warranty />} />
+          <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
+          <Route path="/shipping-information" element={<ShippingInformation />} />
+          <Route path="/order-tracking" element={<OrderTracking />} />
+          <Route path="/my-account" element={<MyAccount />} />
+          <Route path="/loyalty-program" element={<LoyaltyProgram />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-up-professional" element={<SignUpProfessional />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/special-offers" element={<SpecialOffers />} />
+          <Route path="/financing" element={<Financing />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/payment-options" element={<PaymentOptions />} />
+          <Route path="/why-buy-from-us" element={<WhyBuyFromUs />} />
+          <Route path="/success" element={<ThankYouPage />} />
+          <Route path="/item/:skuText" element={<ProductPage />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
+          <Route path="/brand/:brandName" element={<BrandPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/cart" element={<CartComponent />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 };
 
-export default App;
+const RootApp = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+export default RootApp;

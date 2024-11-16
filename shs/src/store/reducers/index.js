@@ -3,6 +3,7 @@ import locationReducer from './locationReducer';
 import dataReducer from "./dataSlice";
 import cartReducer from "./cartReducer"; 
 import couponReducer from "./couponReducer";
+import sessionReducer from "./sessionReducer";
 
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     data: dataReducer,
     cart: cartReducer,
     coupon: couponReducer,
+    session: sessionReducer, 
 });
 
 export default rootReducer;
