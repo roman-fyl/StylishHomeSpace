@@ -6,6 +6,7 @@ import { getFromLocalStorage } from './components/LocalStorage/getFromLocalStora
 import { getSessionNumber } from './components/Sessions/getSessionNumber';
 import {setSessionId} from "./store/actions/sessionActions";
 import {addCustomer, updateCustomer} from "./store/reducers/customerSlice";
+import {loadContent} from "./store/reducers/contentSlice";
 
 
 import ScrollToTop from "./components/ScrollToTop";
@@ -43,8 +44,11 @@ const App = () => {
   const dispatch = useDispatch();
   const sessionId = useSelector((state) => state.session.sessionId);
   const customer = useSelector((state) => state.customer.customer);
+  const content = useSelector((state) => state.content.pagesContent)
+
 
   useEffect(() => {
+    dispatch(loadContent())
     if (!sessionId) {
       let localSessionId = getFromLocalStorage("abnd-session");
 
@@ -67,9 +71,11 @@ const App = () => {
       }
     }
 
-    console.log("useEffect triggered:", { sessionId, customer });
+    // console.log("useEffect triggered:", { sessionId, customer });
     // dispatch(addCustomer({ id: 1, name: 'John Doe' }));
-  }, [sessionId, dispatch, customer]);
+    console.log("Content", content)
+
+  }, [content, sessionId, dispatch, customer]);
 
 
   return (

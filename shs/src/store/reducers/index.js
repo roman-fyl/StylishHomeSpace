@@ -5,6 +5,7 @@ import cartReducer from "./cartReducer";
 import couponReducer from "./couponReducer";
 import sessionReducer from "./sessionReducer";
 import customerReducer from "./customerSlice";
+import contentReducer from "./contentSlice";
 
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     coupon: couponReducer,
     session: sessionReducer,
     customer: customerReducer, 
+    content: contentReducer,
 });
 
 export default rootReducer;

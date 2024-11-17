@@ -1,10 +1,18 @@
 import React from "react";
+import {useSelector} from "react-redux";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Pages.scss";
 
 const SignInComponent = () => {
+  const content  = useSelector((state) => state.content.pagesContent);
+
+  const signBenefitsContent = Array.isArray(content) ? content.find(item => item.SignUpPage_benefits) : null;
+const signBenefitsPointsContent = Array.isArray(content) ? content.find(item => item.SignUpPage_benefitsPoints) : null;
+
+  const signBenefits = signBenefitsContent?.SignUpPage_benefits?.details || [];
+  const signBenefitsPoints = signBenefitsPointsContent?.SignUpPage_benefitsPoints?.categories || [];
 
   return (
         <div className="privacy_description ">
@@ -16,18 +24,15 @@ const SignInComponent = () => {
       
 <section className="section sign_benefits"><h4>Why You Should Be Subscribed</h4></section>
       <section className="section sign_benefits">
-  <p><strong>Access Exclusive Trade Discounts:</strong> Enjoy special trade discounts and pricing available only to account holders, helping you save more on your purchases.</p>
-  <p><strong>Access and Manage Your Personal Details:</strong> Easily update and manage your personal information and addresses all in one place, making your account management seamless and straightforward.</p>
-  <p><strong>Order History and Fast Tracking:</strong> Quickly view your complete order history and track the status of your orders with ease, ensuring you stay informed about your purchases.</p>
-  <p><strong>Loyalty Rewards:</strong> Earn rewards points with each purchase and keep track of your accumulated points, which can be redeemed for discounts, special offers, or exclusive benefits.</p>
-  <p><strong>Personalized Offers:</strong> Receive tailored offers and promotions based on your shopping preferences and history, ensuring you get deals that matter to you.</p>
+        {signBenefits.map((benefit, index) => (
+          <p key={index}><strong>{benefit.heading}:</strong>{benefit.description}</p>
+        ))}
+  
 </section>
 <section className="section sign_benefits_calc">
-<p><strong>Main Categories : </strong>Spend $10 = 1 point</p>
-<p><strong>Accessories : </strong>Spend $10 = 1.5 points</p>
-<p><strong>Services : </strong>Spend $10 = 2 points</p>
-<p><strong>Main Categories + Accessories + Services : </strong>(Earned) * 5%</p>
-
+{signBenefitsPoints.map((category, index) => (
+          <p key={index}><strong>{category.name}:</strong>{category.rule}</p>
+        ))}
 
 </section>
 <section className="section">
