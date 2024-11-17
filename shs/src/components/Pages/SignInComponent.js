@@ -1,11 +1,21 @@
-import React from "react";
-import {useSelector} from "react-redux";
-import { useEffect, useState } from "react";
+import React, {useState, useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
+import {addCustomer} from "../../store/reducers/customerSlice";
+import {setLocalStorage} from "../../components/LocalStorage/setLocalStorage";
 
 import "./Pages.scss";
 
 const SignInComponent = () => {
+  const dispatch = useDispatch();
+  const sessionId = useSelector((state) => state.session.sessionId)
+
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const content  = useSelector((state) => state.content.pagesContent);
 
   const signBenefitsContent = Array.isArray(content) ? content.find(item => item.SignUpPage_benefits) : null;
@@ -13,6 +23,23 @@ const signBenefitsPointsContent = Array.isArray(content) ? content.find(item => 
 
   const signBenefits = signBenefitsContent?.SignUpPage_benefits?.details || [];
   const signBenefitsPoints = signBenefitsPointsContent?.SignUpPage_benefitsPoints?.categories || [];
+
+ 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const customerData = {
+      email,
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+      sessionId,
+    }
+    dispatch(addCustomer([customerData]))
+  }
+
 
   return (
         <div className="privacy_description ">
@@ -36,23 +63,25 @@ const signBenefitsPointsContent = Array.isArray(content) ? content.find(item => 
 
 </section>
 <section className="section">
-<form className="sign_form">
+<form className="sign_form" onSubmit={handleSubmit}>
 <input type="email" className="sign_personal" tabIndex="6" name="sign_email" placeholder="Enter Email"
-             minLength="5" maxLength="30" id="sign_email" />
+             minLength="5" maxLength="30" id="sign_email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
 <input type="text" className="sign_personal" tabIndex="7" name="sign_name" placeholder="Name"
-             minLength="2" maxLength="30" id="sign_name" />
+             minLength="2" maxLength="30" id="sign_name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 
 <input type="text" className="sign_personal" tabIndex="8" name="sign_lastName" placeholder="Last Name"
-             minLength="3" maxLength="30" id="sign_lastName" />
+             minLength="3" maxLength="30" id="sign_lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
 
 <input type="password" className="sign_personal" tabIndex="9" name="sign_password" placeholder="Enter Password"
-             minLength="5" maxLength="30" id="sign_password" />
+             minLength="5" maxLength="30" id="sign_password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
 <input type="password" className="sign_personal" tabIndex="10" name="sign_password_confirm" placeholder="Confirm Password"
-             minLength="5" maxLength="30" id="sign_password_confirm" />
+             minLength="5" maxLength="30" id="sign_password_confirm" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
       
-      <Link to="/success.html" className="sign_submit">Continue</Link>
+      {/* <Link to="/success.html" className="sign_submit">Continue</Link> */}
+      <button type="submit" className="sign_submit">Continue</button>
+
       </form>
 </section>
 <section className="section additional_terms">

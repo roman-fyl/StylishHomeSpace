@@ -31,7 +31,6 @@ const CartComponent = () => {
   const [notification, setNotification] = useState({ message: "", type: "" });
   const [totalBeforeTaxCollected, setTotalBeforeTaxCollected] = useState("")
 
-
   
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);

@@ -4,7 +4,7 @@ import {setLocalStorage} from "../../components/LocalStorage/setLocalStorage";
 
 const initialState = {
     customer: Array.isArray(getFromLocalStorage('customer'))
-      ? getFromLocalStorage('customer')
+      ? getFromLocalStorage('customerData')
       : [],
   };
   
@@ -16,7 +16,7 @@ const initialState = {
         state.customer = Array.isArray(action.payload)
           ? action.payload
           : [action.payload];
-        setLocalStorage('customer', state.customer);
+        setLocalStorage('customerData', state.customer);
       },
       updateCustomer: (state, action) => {
         if (state.customer && Array.isArray(state.customer)) {
@@ -26,15 +26,15 @@ const initialState = {
           } else {
             state.customer.push(action.payload);
           }
-          setLocalStorage('customer', state.customer);
+          setLocalStorage('customerData', state.customer);
         } else {
           state.customer = [action.payload];
-          setLocalStorage('customer', state.customer);
+          setLocalStorage('customerData', state.customer);
         }
       },
       removeCustomer: (state) => {
         state.customer = [];
-        setLocalStorage('customer', []);
+        setLocalStorage('customerData', []);
       },
     },
   });
