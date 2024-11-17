@@ -3,7 +3,7 @@ import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalS
 import {setLocalStorage} from "../../components/LocalStorage/setLocalStorage";
 
 const initialState = {
-    customer: Array.isArray(getFromLocalStorage('customer'))
+    customer: Array.isArray(getFromLocalStorage('customerData'))
       ? getFromLocalStorage('customerData')
       : [],
   };

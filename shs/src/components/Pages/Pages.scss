@@ -215,23 +215,7 @@
       align-items: center;
     }
   }
-  &_submit {
-    font: 400 16px "Lato", sans-serif;
-    color: #fff;
-    width: 100px;
-    padding: 10px 15px;
-    margin-top: 20px;
-    text-align: center;
-    text-transform: capitalize;
-    border: 1px solid #fff;
-    border-radius: 2px;
-    background: $primary-color;
-    transition: $transition;
-    cursor: $cursor;
-    &:hover {
-      background: $primary-color-hover-link;
-    }
-  }
+  
   &_form {
     display: flex;
     flex-direction: column;
