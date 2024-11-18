@@ -4,7 +4,7 @@ import content from "../../assets/db/websiteData.json";
 const contentSlice = createSlice({
     name: 'content',
     initialState: {
-        pagesContent: {}
+        pagesContent: []
     },
     reducers: {
         loadContent: (state) => {

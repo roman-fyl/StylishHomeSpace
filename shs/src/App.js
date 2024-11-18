@@ -5,7 +5,7 @@ import store from './store/stores/store';
 import { getFromLocalStorage } from './components/LocalStorage/getFromLocalStorage';
 import { getSessionNumber } from './components/Sessions/getSessionNumber';
 import {setSessionId} from "./store/actions/sessionActions";
-import {addCustomer, updateCustomer} from "./store/reducers/customerSlice";
+import {updateCustomer} from "./store/reducers/customerSlice";
 import {loadContent} from "./store/reducers/contentSlice";
 
 
@@ -46,9 +46,12 @@ const App = () => {
   const customer = useSelector((state) => state.customer.customer);
   const content = useSelector((state) => state.content.pagesContent)
 
+  useEffect(() => {
+    dispatch(loadContent());
+  }, []);
 
   useEffect(() => {
-    dispatch(loadContent())
+    // dispatch(loadContent())
     if (!sessionId) {
       let localSessionId = getFromLocalStorage("abnd-session");
 

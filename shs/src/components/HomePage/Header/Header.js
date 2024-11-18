@@ -17,6 +17,7 @@ import "./Header.scss";
 const Header = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart || {});
+  const firstName = useSelector((state) => state)
   // console.log("Cart State:", cart); 
 
   const cartItems = cart.items || [];

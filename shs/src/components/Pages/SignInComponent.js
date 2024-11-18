@@ -12,10 +12,6 @@ const SignInComponent = () => {
   const content = useSelector((state) => state.content.pagesContent) || [];
   const sessionId = useSelector((state) => state.session.sessionId);
 
-  useEffect(() => {
-    dispatch(loadContent());
-  }, []);
-
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -30,9 +26,9 @@ const SignInComponent = () => {
   const [signInPassword, setSignInPassword] = useState("");
 
   const signBenefitsContent =
-    content.find((item) => item.SignUpPage_benefits) || {};
+  content.find((item) => item.SignUpPage_benefits) || {};
   const signBenefitsPointsContent =
-    content.find((item) => item.SignUpPage_benefitsPoints) || {};
+  content.find((item) => item.SignUpPage_benefitsPoints) || {};
 
   const signBenefits = signBenefitsContent?.SignUpPage_benefits?.details || [];
   const signBenefitsPoints =
