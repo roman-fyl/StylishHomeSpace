@@ -14,7 +14,7 @@ const SignInComponent = () => {
 
   useEffect(() => {
     dispatch(loadContent());
-  }, [content]);
+  }, []);
 
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -41,6 +41,11 @@ const SignInComponent = () => {
   const handleCheckEmailSubmit = (e) => {
     e.preventDefault();
 
+    if (!validateEmail(email)) {
+      alert("Invalid email address");
+      return; 
+    }
+
     const storedCustomerData = getFromLocalStorage("customerData");
 
     console.log("Stored customer data:", storedCustomerData);
@@ -57,16 +62,15 @@ const SignInComponent = () => {
 
       if (foundCustomer) {
         setFirstName(foundCustomer.firstName);
-        setEmailExists(true);
-        setSignUpForm(false);
-        setEmail("");
-        setCheckEmailForm(false)
-        setLoginForm(true)
-
+        setEmailExists(true);     
+        setSignUpForm(false);     
+        setCheckEmailForm(false);  
+        setLoginForm(true);       
       } else {
-        setEmailExists(false);
-        setSignUpForm(true);
-        setCheckEmailForm(false)
+        setEmailExists(false);     
+        setSignUpForm(true);      
+        setCheckEmailForm(false); 
+        setLoginForm(false);      
       }
     } else {
       console.error("Local storage data is invalid or empty.");
@@ -78,14 +82,62 @@ const SignInComponent = () => {
     console.log("Email exists state after check: ", emailExists);
   };
 
+  const validateName = (name) => {
+    return /^[A-Za-z]+$/.test(name);
+  };
+  const validateEmail = (email) => {
+    if (email.length < 7) {
+      return false;
+    }
+  
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    return emailRegex.test(email);
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
+  
+    if (!validateEmail(email)) {
+    alert("Invalid email address");
+    return false;
+  }
+    
+  
+    if (!validateName(firstName)) {
+      alert("Name should contain only letters and be between 3 and 30 characters.");
+      return false;
     }
+  
+    if (firstName.length < 3 || firstName.length > 30) {
+      alert("Name must be between 3 and 30 characters.");
+      return false;
+    }
+  
+    if (!validateName(lastName)) {
+      alert("Last Name should contain only letters and be between 2 and 30 characters.");
+      return false;
+    }
+  
+    if (lastName.length < 2 || lastName.length > 30) {
+      alert("Last Name must be between 2 and 30 characters.");
+      return false;
+    }
+  
+    const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
 
+  if (!passwordRegex.test(password)) {
+    alert(
+      "Password must be at least 8 characters long and include 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
+    );
+    return false;
+  }
+  
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return false;
+    }
+  
     const customerData = {
       email,
       firstName,
@@ -93,19 +145,21 @@ const SignInComponent = () => {
       password,
       sessionId,
     };
-
+  
     dispatch(addCustomer([customerData]));
     alert("Account created successfully!");
-
+  
     setEmail("");
     setFirstName("");
     setLastName("");
     setPassword("");
     setConfirmPassword("");
+    setLoginForm(true);
     setSignUpForm(false);
     setEmailExists(false);
-    setLoginForm(true);
   };
+  
+  
 
   return (
     <div className="privacy_description ">
@@ -138,8 +192,6 @@ const SignInComponent = () => {
            tabIndex="6"
            name="sign_email"
            placeholder="Enter Email"
-           minLength="5"
-           maxLength="30"
            id="sign_email_initial"
            value={email}
            onChange={(e) => setEmail(e.target.value)}
@@ -151,7 +203,7 @@ const SignInComponent = () => {
       {emailExists && (
         <section className="section welcome_message">
           <h3>Welcome Back, {firstName}!</h3>
-          <p>It seems like you already have an account with us. Please Log In</p>
+          <p>It seems like you already have an account with us. Please Sign In</p>
         </section>
       )}
       {loginForm && (
@@ -163,8 +215,6 @@ const SignInComponent = () => {
                 tabIndex="6"
                 name="sign_email"
                 placeholder="Enter Email"
-                minLength="5"
-                maxLength="30"
                 id="sign_email_signin"
                 value={email}
                 onChange={(e) => signInEmail(e.target.value)}
@@ -175,8 +225,6 @@ const SignInComponent = () => {
                 tabIndex="9"
                 name="sign_password"
                 placeholder="Enter Password"
-                minLength="5"
-                maxLength="30"
                 id="sign_password_signin"
                 value={password}
                 onChange={(e) => signInPassword(e.target.value)}
@@ -201,8 +249,6 @@ const SignInComponent = () => {
                 tabIndex="6"
                 name="sign_email"
                 placeholder="Enter Email"
-                minLength="5"
-                maxLength="30"
                 id="sign_email_signup"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -213,11 +259,13 @@ const SignInComponent = () => {
                 tabIndex="7"
                 name="sign_name"
                 placeholder="Name"
-                minLength="2"
-                maxLength="30"
                 id="sign_name"
                 value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (validateName(value) && value.length <= 30) setFirstName(value);
+                  else if (value === "") setFirstName("");
+                }}
               />
               <input
                 type="text"
@@ -225,11 +273,13 @@ const SignInComponent = () => {
                 tabIndex="8"
                 name="sign_lastName"
                 placeholder="Last Name"
-                minLength="3"
-                maxLength="30"
                 id="sign_lastName"
                 value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (validateName(value) && value.length <= 30) setLastName(value);
+                  else if (value === "") setLastName("");
+                }}
               />
               <input
                 type="password"
@@ -237,8 +287,6 @@ const SignInComponent = () => {
                 tabIndex="9"
                 name="sign_password"
                 placeholder="Enter Password"
-                minLength="5"
-                maxLength="30"
                 id="sign_password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -249,8 +297,6 @@ const SignInComponent = () => {
                 tabIndex="10"
                 name="sign_password_confirm"
                 placeholder="Confirm Password"
-                minLength="5"
-                maxLength="30"
                 id="sign_password_confirm"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
