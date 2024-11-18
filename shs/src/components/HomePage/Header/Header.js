@@ -17,10 +17,13 @@ import "./Header.scss";
 const Header = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart || {});
-  const firstName = useSelector((state) => state)
-  // console.log("Cart State:", cart); 
+  const customer = useSelector((state) => state.customer.customer || []);
+  const firstCustomer = customer.find(c => c.firstName);  
+  const firstName = firstCustomer.firstName || "";
 
-  const cartItems = cart.items || [];
+  console.log("Customer firstName during render:", firstName);
+
+    const cartItems = cart.items || [];
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
     const [isFormVisible, setFormVisible] = useState(false);
 
@@ -83,8 +86,13 @@ const Header = () => {
             <div className="header_block">
               <img src={iconLogIn} alt="Sign In Icon" />
               <span className="header_account">
-                <span>Hello, <span>Roman</span></span>
-                <span>SIGN IN</span>
+              {firstName ? (
+                  <span>
+                    Hello, <span>{firstName}</span>
+                  </span>
+                ) : (
+                  <span>SIGN IN</span>
+                )}
               </span>
             </div>
           </Link>

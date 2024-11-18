@@ -70,13 +70,13 @@ const App = () => {
 
       if (storedCustomer && storedCustomer.length > 0) {
         dispatch(updateCustomer(storedCustomer));
-        console.log('Loaded customer from localStorage:', storedCustomer);
+        // console.log('Loaded customer from localStorage:', storedCustomer);
       }
     }
 
     // console.log("useEffect triggered:", { sessionId, customer });
     // dispatch(addCustomer({ id: 1, name: 'John Doe' }));
-    console.log("Content", content)
+    // console.log("Content", content)
 
   }, [content, sessionId, dispatch, customer]);
 

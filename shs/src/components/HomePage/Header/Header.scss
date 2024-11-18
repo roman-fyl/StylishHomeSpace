@@ -60,13 +60,9 @@
       align-items: center;
       flex-direction: column;
       color: $primary-color-text;
-      font-size: 12px;
+      font-size: 16px;
       &:hover {
           color: $primary-color-hover-text;
-      }
-      span {
-          font-size: 12px;
-    
       }
     }
     &_call {
