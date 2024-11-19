@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addCustomer } from "../../store/reducers/customerSlice";
 import { loadContent } from "../../store/reducers/contentSlice";
 import { getFromLocalStorage } from "../LocalStorage/getFromLocalStorage";
@@ -9,6 +9,7 @@ import "./Pages.scss";
 
 const SignInComponent = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const content = useSelector((state) => state.content.pagesContent) || [];
   const sessionId = useSelector((state) => state.session.sessionId);
 
@@ -61,13 +62,27 @@ const SignInComponent = () => {
         setEmailExists(true);     
         setSignUpForm(false);     
         setCheckEmailForm(false);  
-        setLoginForm(true);       
+        setLoginForm(true);
       } else {
         setEmailExists(false);     
         setSignUpForm(true);      
         setCheckEmailForm(false); 
         setLoginForm(false);      
       }
+      if (!checkEmailForm && emailExists && !signUpForm) {
+        if (foundCustomer && signInPassword === foundCustomer.password && email === foundCustomer.email) {
+          alert("Success");
+          navigate("/my-account")
+        } else {
+          alert("Incorrect data");
+          setEmail("")
+          setSignInEmail("")
+          setSignInPassword("")
+          setSignUpForm(false);
+          setLoginForm(true);
+        }
+      }
+
     } else {
       console.error("Local storage data is invalid or empty.");
       setEmailExists(false);
@@ -153,7 +168,10 @@ const SignInComponent = () => {
     setLoginForm(true);
     setSignUpForm(false);
     setEmailExists(false);
+    
   };
+  
+  
   
   
 
@@ -204,7 +222,7 @@ const SignInComponent = () => {
       )}
       {loginForm && (
         <section className="section welcome_message">
-          <form className="sign_form" onSubmit={handleSubmit}>
+          <form className="sign_form" onSubmit={handleCheckEmailSubmit}>
               <input
                 type="email"
                 className="sign_personal"
@@ -213,7 +231,7 @@ const SignInComponent = () => {
                 placeholder="Enter Email"
                 id="sign_email_signin"
                 value={email}
-                onChange={(e) => signInEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
@@ -222,8 +240,8 @@ const SignInComponent = () => {
                 name="sign_password"
                 placeholder="Enter Password"
                 id="sign_password_signin"
-                value={password}
-                onChange={(e) => signInPassword(e.target.value)}
+                value={signInPassword}
+                onChange={(e) => setSignInPassword(e.target.value)}
               />
              
               <input
