@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addCustomer } from "../../store/reducers/customerSlice";
-import { loadContent } from "../../store/reducers/contentSlice";
 import { getFromLocalStorage } from "../LocalStorage/getFromLocalStorage";
 
 import "./Pages.scss";
@@ -155,6 +154,7 @@ const SignInComponent = () => {
       lastName,
       password,
       sessionId,
+      points: 100
     };
   
     dispatch(addCustomer([customerData]));

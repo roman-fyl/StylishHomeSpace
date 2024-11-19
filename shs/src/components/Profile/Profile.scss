@@ -39,6 +39,9 @@
             column-gap: 20px;
             padding: 20px 0;
             align-items: center;
+            &:last-child {
+                border-bottom: none;
+            }
         }
         &_section {
             width: 100%;

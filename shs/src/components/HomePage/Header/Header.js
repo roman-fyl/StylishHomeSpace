@@ -27,6 +27,10 @@ const Header = () => {
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
     const [isFormVisible, setFormVisible] = useState(false);
 
+    useEffect(() => {
+      console.log("Customer firstName updated:", firstName);
+    }, [firstName]);
+
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
     const storedSessionId = localStorage.getItem("abnd-session");
