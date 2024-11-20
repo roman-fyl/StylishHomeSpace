@@ -171,10 +171,6 @@ const SignInComponent = () => {
     
   };
   
-  
-  
-  
-
   return (
     <div className="privacy_description ">
       <section className="section sign_benefits">
@@ -191,8 +187,8 @@ const SignInComponent = () => {
       <section className="section sign_benefits_calc">
         {signBenefitsPoints.map((category, index) => (
           <p key={index}>
-            <strong>{category.name}:</strong>
-            {category.rule}
+            <strong>{category.heading}:</strong>
+            {category.description}
           </p>
         ))}
       </section>

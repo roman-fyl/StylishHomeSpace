@@ -18,8 +18,10 @@ const Header = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart || {});
   const customer = useSelector((state) => state.customer.customer || []);
-  const firstCustomer = customer.find(c => c.firstName);  
-  const firstName = firstCustomer.firstName || "";
+  // const firstCustomer = customer.find(c => c.firstName);  
+  // const firstName = firstCustomer.firstName || "";
+  const firstCustomer = Array.isArray(customer) && customer.length > 0 ? customer[0] : null;
+  const firstName = firstCustomer?.firstName || "Guest";
 
   console.log("Customer firstName during render:", firstName);
 

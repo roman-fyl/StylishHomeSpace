@@ -87,6 +87,9 @@
 }
 
 .faq {
+  section  {
+    margin: 0!important;;
+  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -98,9 +101,14 @@
   }
   h4 {
     font: $font-x-small;
-    font-weight: 700;
+    // font-weight: 700;
     text-decoration: none;
     text-indent: 0px;
+    cursor: $cursor;
+    text-indent: 0px;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   li {
     border-radius: 5px;
@@ -115,16 +123,15 @@
     text-align: center;
   }
   p {
-    border-radius: 5px;
+    display: none;
+    font: $font-small;
     padding: 15px;
-    border: 1px solid $primary-color;
-    // margin: 10px 0;
     background-color: $primary-color-text;
-    // width: 230px;
-    // height: 140px;
-    list-style: none !important;
-    margin-left: 0 !important;
+    border: 1px solid $primary-color;
+    border-radius: 5px;
     text-align: left;
+    margin-left: 0;
+    
   }
   &_content {
     display: flex;
@@ -137,6 +144,11 @@
     margin: 20px 0;
     width: 100%;
   }
+}
+  p.open {
+  display: block;
+  font: $font-x-small !important;
+
 }
 .search {
   &_tracking {
