@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 
 import "./Profile.scss";
 
 const ProfileMain = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const sessionId = useSelector((state) => state.session.sessionId);
   const customer = useSelector((state) => state.customer.customer || []);
   const firstCustomer = customer.find(value => value.firstName)

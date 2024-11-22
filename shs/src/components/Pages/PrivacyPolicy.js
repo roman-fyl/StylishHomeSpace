@@ -1,10 +1,21 @@
-import { useEffect, useState } from "react";
-import React from "react";
-import Layout from "../../Layout";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Pages.scss";
 
 const PrivacyPolicy = () => {
+
+  const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const content = useSelector((state) => state.content.pagesContent) || [];
+    const sessionId = useSelector((state) => state.session.sessionId);
+  
+    const faqContentPage =
+    content.find((item) => item.AccountManagementPage) || {};
+    const dbContent =
+    faqContentPage?.AccountManagementPage?.categories || [];
+
   useEffect(() => {
     document.title = "Privacy policy";
   }, []);

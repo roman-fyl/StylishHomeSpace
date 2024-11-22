@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addToCart} from "../../store/actions/cartActions";
+import {setLocalStorage} from "../../components/LocalStorage/setLocalStorage";
+import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import homepageLogo from "../../assets/images/icon-homepage.png";
 import data from "../../assets/db/items.json";
@@ -31,6 +33,8 @@ const SearchPage = ({
     colors: [],
   });
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
+  const sessionId = useSelector((state) => state.session.sessionId)
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -330,6 +334,14 @@ const SearchPage = ({
     navigate(`/cart?session=${sessionNumber}`);
 };
 
+const handleTrackItems = (item) => {
+  const existingData = getFromLocalStorage('visitedItems')
+  const updatedData = [ ...existingData, {...item, session: sessionId}]
+  
+      setLocalStorage("visitedItems", updatedData)
+      console.log([item])
+    }
+
   return (
     <div className="container">
       <ul className="breadcrumbs">
@@ -573,7 +585,7 @@ const SearchPage = ({
             {filteredAndSortedProducts.length > 0 ? (
               filteredAndSortedProducts.map((product, index) => (
                 <li className="card_item" data-id={index + 1} key={product.sku}>
-                  <Link to={`/item/${product.sku}`}>
+                  <Link to={`/item/${product.sku}`} onClick={() => handleTrackItems(product)}>
                     <span className="item_image">
                       <img
                         src={product.imageSlider[0]?.imageSliderLink}
@@ -623,7 +635,7 @@ const SearchPage = ({
               {filteredAndSortedProducts.length > 0 ? (
               filteredAndSortedProducts.map((product, index) => (
                 <li className="list_card_item" data-id={index + 1} key={product.sku}>
-                  <Link to={`/item/${product.sku}`}>
+                  <Link to={`/item/${product.sku}`} onClick={() => handleTrackItems(product)}>
                     <span className="list_item_image">
                       <img
                         src={product.imageSlider[0]?.imageSliderLink}

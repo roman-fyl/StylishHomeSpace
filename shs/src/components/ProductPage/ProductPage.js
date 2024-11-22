@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink, Element } from "react-scroll";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/actions/cartActions";
 import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
 import productData from "../../assets/db/items.json";

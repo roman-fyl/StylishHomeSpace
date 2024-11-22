@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../../store/actions/cartActions';
 import { getSessionNumber } from "../../Sessions/getSessionNumber";
+import {setLocalStorage} from "../../LocalStorage/setLocalStorage";
+import { getFromLocalStorage } from "../../LocalStorage/getFromLocalStorage";
 import { updateLocalStorage } from "../../LocalStorage/updateLocalStorage";
+import { addVisitedItem } from "../../../store/actions/visitedActions";
+import useAddToCart from "../../../hooks/useAddToCart";
 
 import "./ItemSection.scss";
 import data from "../../../assets/db/items.json"; 
 
 const ItemSection = ({ group = null, subject = null, brand = null, category = null, smartFeatures = null, subCategory = null, subType = null }) => {
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
+  const sessionId = useSelector((state) => state.session.sessionId)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let filteredData = [...data]; 
@@ -54,44 +59,21 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
     return oldPrice - price;
   }
 
-  const handleAddToCart = (item) => {
-    const sessionNumber = getSessionNumber(); 
- 
-    const itemToAdd = {
-      group: item.group,
-      smart: item.smart,
-      category: item.category,
-      subCategory: item.subCategory,
-      subType: item.subType,
-      brandLogo: item.brandLogo,
-      color: item.color,
-      brandText: item.brandText,
-      capacity: item.capacity,
-      imageSlider: item.imageSlider[0].imageSliderLink,
-      imageAlt: item.imageSlider[0].Alt,
-      sku: item.sku,
-      autorizationDealer: item.autorizationDealer,
-      tags: item.tags,
-      title: item.title,
-      rate: item.rate,
-      price: item.price,
-      idN: item.idN,
-      warranty: item.warranty,
-      description: item.description,
-      maintenance: item.maintenance,
-      installation: item.installation,
-      quantity: 1,
-      session: sessionNumber,
-      payment: "Pay in Full"
-    };
+  const handleAddToCart = useAddToCart()
 
-
-    updateLocalStorage('cartItems', itemToAdd);
-
-    dispatch(addToCart(itemToAdd));
-
-    navigate(`/cart?session=${sessionNumber}`); 
+  const handleTrackItems = (item) => {
+    const existingData = getFromLocalStorage('visitedItems');
+    const alreadyVisited = existingData.some((visitedItem) => visitedItem.sku === item.sku);
+  
+    if (!alreadyVisited) {
+      const itemWithSession = { ...item, session: sessionId };
+      dispatch(addVisitedItem(itemWithSession));
+      console.log("Tracked item added:", itemWithSession);
+    } else {
+      console.log("Item already tracked:", item);
+    }
   };
+  
 
   return (
     <div className="item-section_main">
@@ -102,7 +84,7 @@ const ItemSection = ({ group = null, subject = null, brand = null, category = nu
           .slice(0, displayedItemCount)
           .map((item, index) => (
             <li className="card_item" data-id={index + 1} key={item.sku}>
-              <Link to={`/item/${item.sku}`}>
+              <Link to={`/item/${item.sku}`} onClick={() => handleTrackItems(item)}>
                 <span className="item_image">
                   <img src={item.imageSlider[0]?.imageSliderLink} alt={`${item.description.short || 'product'}`} />
                 </span>
