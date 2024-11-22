@@ -23,14 +23,14 @@ const Header = () => {
   const firstCustomer = Array.isArray(customer) && customer.length > 0 ? customer[0] : null;
   const firstName = firstCustomer?.firstName || "Guest";
 
-  console.log("Customer firstName during render:", firstName);
+  // console.log("Customer firstName during render:", firstName);
 
     const cartItems = cart.items || [];
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
     const [isFormVisible, setFormVisible] = useState(false);
 
     useEffect(() => {
-      console.log("Customer firstName updated:", firstName);
+      // console.log("Customer firstName updated:", firstName);
     }, [firstName]);
 
   useEffect(() => {
