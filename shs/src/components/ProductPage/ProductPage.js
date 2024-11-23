@@ -3,16 +3,20 @@ import { Link as ScrollLink, Element } from "react-scroll";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/actions/cartActions";
+import {addWishListItem} from "../../store/actions/wishListActions"
 import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
-import productData from "../../assets/db/items.json";
+import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
+import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
+
 import QuantityItems from "./QuantityItems";
+import productData from "../../assets/db/items.json";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
 import itemShare from "../../assets/images/icon-share.png";
 import homepageLogo from "../../assets/images/icon-homepage.png";
-import "./ProductPage.scss";
 import arrowUp from "../../assets/images/arrow-up.png";
 import arrowBack from "../../assets/images/arrow-back.png";
+import "./ProductPage.scss";
 
 const ProductPage = () => {
   const { skuText } = useParams();
@@ -22,6 +26,10 @@ const ProductPage = () => {
   const [payment, setPayment] = useState("Pay in Full");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [sliderImage, setSliderImage] = useState(0)
+  const [reviews, setReviews] = useState(false)
+  const sessionId = useSelector((state) => state.session.sessionId);
+
 
   useEffect(() => {
     setProduct(null);
@@ -95,8 +103,28 @@ const ProductPage = () => {
     return price * (1 + percentage / 100);
   };
 
+const handleChangeImageIncrease = () => {
+  setSliderImage((prev) => (prev + 1) % product.imageSlider.length)
+}
 
+const handleChangeImageDecrease = () => {
+  setSliderImage((prev) => (prev - 1) % product.imageSlider.length)
+}
 
+const handleAddToWishlist = (item) => {
+  const existingData = getFromLocalStorage("wishListItems");
+  const alreadyVisited = existingData.some(
+    (wishListItem) => wishListItem.sku === item.sku
+  );
+
+  if (!alreadyVisited) {
+    const itemWithSession = { ...item, session: sessionId };
+    dispatch(addWishListItem(itemWithSession));
+    console.log("Tracked item added:", itemWithSession);
+  } else {
+    console.log("Item already tracked:", item);
+  }
+};
 
   return (
       <div className="container">
@@ -192,34 +220,26 @@ const ProductPage = () => {
             <div className="product_description_slider">
               <div className="slider_menu">
                 <img
-                  src={product.imageSlider[0].imageSliderLink}
-                  alt={product.imageSlider[0].Alt}
+                  src={product.imageSlider[sliderImage].imageSliderLink}
+                  alt={product.imageSlider[sliderImage].Alt}
                 ></img>
               </div>
               <div className="slider_images">
                 <img
                   src={arrowBack}
                   className="prev_arrow"
-                  alt="Arrow Back"
+                  alt="Arrow Back" onClick={handleChangeImageDecrease}
                 ></img>
-                {/* <img src={product.imageSlider[0].imageSliderLink} alt={product.sku}></img>     */}
-                <img
-                  src={product.imageSlider[1].imageSliderLink}
-                  alt={product.sku}
-                ></img>
-                <img
-                  src={product.imageSlider[2].imageSliderLink}
-                  alt={product.sku}
-                ></img>
-                <img
-                  src={product.imageSlider[3].imageSliderLink}
-                  alt={product.sku}
-                ></img>
-                <img
-                  src={product.imageSlider[4].imageSliderLink}
-                  alt={product.sku}
-                ></img>
-                <img src={arrowUp} className="Arrow Up"></img>
+                {product.imageSlider.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image.imageSliderLink}
+                    alt={image.Alt} 
+                    className={`thumbnail ${sliderImage === index ? 'active' : ''}`}
+                    onClick={() => setSliderImage(index)}
+                  />
+                ))}
+                <img src={arrowUp} className="Arrow Up" onClick={handleChangeImageIncrease}></img>
               </div>
             </div>
             <ul className="product_description_tags">
@@ -265,7 +285,7 @@ const ProductPage = () => {
                 Warranty: <span>{product.warranty[0].term}</span>
               </div>
               <div className="item_description_additional-options">
-                <img src={itemSaveWishList} alt=""></img>
+                <img src={itemSaveWishList} alt="" onClick={() => handleAddToWishlist(product)}></img>
                 <img src={itemShare} alt=""></img>
               </div>
               <div className="item_description_colors">
@@ -488,7 +508,7 @@ const ProductPage = () => {
           <section className="product_category_part">
             <h3>Ratings & Reviews</h3>
             <div className="product_reviews">
-              <div className="product_reviews_snapshot">
+              {/* <div className="product_reviews_snapshot">
                 <div className="reviews_bar">
                   <span className="reviews_label">5 Stars</span>
                   <div className="reviews_bar-fill"></div>
@@ -514,19 +534,22 @@ const ProductPage = () => {
                   <div className="reviews_bar-fill"></div>
                   <span className="reviews_count">(4)</span>
                 </div>
-              </div>
-              <div className="product_reviews_total">
+              </div> */}
+              {/* <div className="product_reviews_total">
                 <h4>Average Customer Ratings</h4>
                 <div className="product_reviews_pivot_rate">
                   <span>***** 4.9</span>
                   <span>(113)</span>
                 </div>
-              </div>
-              <div className="product_reviews_leave">
+              </div> */}
+
+              {/* <div className="product_reviews_leave">
                 <span>Leave a Review</span>
-              </div>
+              </div> */}
+              {reviews ? (<span>1</span>) : (<span>No reviews provided</span>)}
+              
             </div>
-            <ul className="product_reviews_list">
+            {/* <ul className="product_reviews_list">
               <li className="product_review">
                 <div className="review_header">
                   <span className="review_stars">*****</span>
@@ -549,7 +572,7 @@ const ProductPage = () => {
                   <strong>Conclusion: Y / N</strong>
                 </span>
               </li>
-            </ul>
+            </ul> */}
           </section>{" "}
         </Element>
 

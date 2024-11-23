@@ -7,6 +7,7 @@ import sessionReducer from "./sessionReducer";
 import customerReducer from "./customerSlice";
 import contentReducer from "./contentSlice";
 import visitedReducer from "./visitedReducer";
+import wishListReducer from "./wishListReducer";
 
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     customer: customerReducer, 
     content: contentReducer,
     visited: visitedReducer,
+    wishList: wishListReducer,
 });
 
 export default rootReducer;

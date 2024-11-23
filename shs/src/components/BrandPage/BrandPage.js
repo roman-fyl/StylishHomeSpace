@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import gastop from "../../assets/db/images/items/GE/categories/gastop.png";
-import laundryPair from "../../assets/db/images/items/GE/categories/laundry-pair.png";
-import range from "../../assets/db/images/items/GE/categories/range.png";
-import refrigerator from "../../assets/db/images/items/GE/categories/refrigerator.png";
-import wallOven from "../../assets/db/images/items/GE/categories/wall-oven.png";
+import { useDispatch, useSelector } from "react-redux";
+import useAddToCart from "../../hooks/useAddToCart";
+import { addVisitedItem } from "../../store/actions/visitedActions";
+import {addWishListItem} from "../../store/actions/wishListActions"
+
+import {getFromLocalStorage} from "../../components/LocalStorage/getFromLocalStorage";
+import {setLocalStorage} from "../../components/LocalStorage/setLocalStorage";
+import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
+import ItemCard from "../../hooks/itemCard";
+
 import data from "../../assets/db/items.json";
 import "./BrandPage.scss";
 
 const BrandPage = () => {
+  const dispatch = useDispatch();
+
   const { brandName } = useParams();
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
+  const sessionId = useSelector((state) => state.session.sessionId);
+
 
   useEffect(() => {
     console.log('Brand Name:', brandName); 
@@ -44,10 +53,35 @@ const BrandPage = () => {
     return price * (1 + percentage / 100);
   };
 
+  const calculateDiscountedAmount = (price, percentage) => {
+    const oldPrice = GenerateOldPrice(price, percentage);
+    return oldPrice - price;
+  };
+
+  const handleAddToCart = useAddToCart();
+
   const categories = [...new Set(products.map(item => item.category))];
 
   const filteredNewProducts = products.filter(item => item.group === "newArrival");
   const filteredBestsellerProducts = products.filter(item => item.group === "bestseller");
+
+  const handleTrackItems = (item) => {
+    const existingData = getFromLocalStorage("visitedItems");
+    const alreadyVisited = existingData.some(
+      (visitedItem) => visitedItem.sku === item.sku
+    );
+
+    if (!alreadyVisited) {
+      const itemWithSession = { ...item, session: sessionId };
+      dispatch(addVisitedItem(itemWithSession));
+      console.log("Tracked item added:", itemWithSession);
+    } else {
+      console.log("Item already tracked:", item);
+    }
+  };
+
+
+
 
   return (
       <div className="container">
@@ -72,34 +106,7 @@ const BrandPage = () => {
               <h2>Best-Selling Products</h2>
               <ul className="card_items">
                 {filteredBestsellerProducts .sort(() => Math.random() - 0.5).slice(0, displayedItemCount).map((item, index) => (
-                  <li className="card_item" data-id={index + 1} key={item.sku}>
-                    <Link to={`/item/${item.sku}`}>
-                      <span className="item_image">
-                        <img src={item.imageSlider[0]?.imageSliderLink} alt={`${item.description.short || 'product'}`} />
-                      </span>
-                      <div className="item_description">
-                        <span className="item_brand-logo">
-                          <img src={item.brandLogo} alt={item.brand} />
-                        </span>
-                        <h3 className="item_title">{item.description.short}</h3>
-                        <span className="item_rating">
-                          <span className="item_rate">{item.rate}</span>
-                          <span className="item_rate">{item.group}</span>
-                          <span className="item_rate">{item.brandText}</span>
-                        </span>
-                        <span className="item_pricing">
-                          <span className="item_old-price">
-                            <del>${GenerateOldPrice(parseFloat(item.price), 12.319).toFixed(2)}</del>
-                          </span>
-                          <span className="item_price">${item.price}</span>
-                        </span>
-                      </div>
-                    </Link>
-                    <div className="item_actions">
-                      <a href="#" className="item_add-to-cart">Add to Cart</a>
-                      <a href="#" className="item_quick-buy">Buy</a>
-                    </div>
-                  </li>
+                  <ItemCard key={item.sku} item={item} />
                 ))}
               </ul>
               <div className="items_more"><span onClick={showItems}>Explore More</span></div>
@@ -110,34 +117,7 @@ const BrandPage = () => {
               <h2>New Arrivals</h2>
               <ul className="card_items">
                 {filteredNewProducts.slice(0, displayedItemCount).map((item, index) => (
-                  <li className="card_item" data-id={index + 1} key={item.sku}>
-                    <Link to={`/item/${item.sku}.html`}>
-                      <span className="item_image">
-                        <img src={item.imageSlider[0]?.imageSliderLink} alt={`${item.description.short || 'product'}`} />
-                      </span>
-                      <div className="item_description">
-                        <span className="item_brand-logo">
-                          <img src={item.brandLogo} alt={item.brand} />
-                        </span>
-                        <h3 className="item_title">{item.description.short}</h3>
-                        <span className="item_rating">
-                          <span className="item_rate">{item.rate}</span>
-                          <span className="item_rate">{item.group}</span>
-                          <span className="item_rate">{item.brandText}</span>
-                        </span>
-                        <span className="item_pricing">
-                          <span className="item_old-price">
-                            <del>${GenerateOldPrice(parseFloat(item.price), 12.319).toFixed(2)}</del>
-                          </span>
-                          <span className="item_price">${item.price}</span>
-                        </span>
-                      </div>
-                    </Link>
-                    <div className="item_actions">
-                      <a href="#" className="item_add-to-cart">Add to Cart</a>
-                      <a href="#" className="item_quick-buy">Buy</a>
-                    </div>
-                  </li>
+                  <ItemCard key={item.sku} item={item} />
                 ))}
               </ul>
               <div className="items_more"><span onClick={showItems}>Explore More</span></div>

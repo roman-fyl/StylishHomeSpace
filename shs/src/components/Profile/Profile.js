@@ -33,14 +33,14 @@ return (
         <li className="account_quick_link">
           <a href="#profile-last-visited-items">Recently Viewed</a>
         </li>
-        {/* <li className="account_quick_link">
+        <li className="account_quick_link">
           <a href="#profile-wishlist">Wishlist</a>
-        </li> */}
+        </li>
         <li className="account_quick_link">
           <a href="#profile-order-history">Order History</a>
         </li>
         <li className="account_quick_link">
-          <a href="/order-tracking.html">Check Order Status</a>
+          <a href="/order-tracking">Check Order Status</a>
         </li>
         <li className="account_quick_link">
           <a href="#profile-returns">Returns</a>
@@ -68,7 +68,7 @@ return (
         <ProfileMain />
         <ProfileAddresses />
         <ProfileLastVisitedItems />
-        {/* <ProfileWishlist /> */}
+        <ProfileWishlist />
         {/* <ProfilePayments /> */}
         <ProfileOrderHistory />
         <ProfileReturns />

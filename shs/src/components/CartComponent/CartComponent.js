@@ -57,9 +57,7 @@ const CartComponent = () => {
       const storedCartItems = getFromLocalStorage("cartItems");
       if (storedCartItems && storedCartItems.length > 0) {
         dispatch(setCartItems(storedCartItems, localSessionId));
-        // console.log(storedCartItems)
-        // console.log(storedDeliveryType)
-        // setDeliveryType(storedDeliveryType)
+  
 
       }
     }
