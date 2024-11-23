@@ -2,38 +2,69 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useItemActions from "./useItemActions";
+import itemRemoveWishList from "../assets/images/icon-remove-wishlist.png";
 import itemSaveWishList from "../assets/images/icon-save-wishlist.png";
+
 import {getFromLocalStorage} from "../components/LocalStorage/getFromLocalStorage";
+import {setLocalStorage} from "../components/LocalStorage/setLocalStorage"
 
 const ItemCard = ({ item }) => {
-    const [wishlistItems, setWishlistItems] = useState([]);
+  const [isInWishList, setIsInWishList] = useState(false);
+  const [isActive, setIsActive] = useState(false); // State for active/hovered state
 
-  const { handleTrackItems, handleAddToWishlist, handleAddToCart } =
-    useItemActions(item);
+  const { handleTrackItems, handleAddToWishlist, handleAddToCart } = useItemActions(item);
 
+  useEffect(() => {
+    // Check if the item is already in the wishlist when the component mounts
+    const storedWishlist = getFromLocalStorage("wishListItems") || [];
+    const itemExists = storedWishlist.some((wishlistItem) => wishlistItem.sku === item.sku);
+    setIsInWishList(itemExists);
+  }, [item.sku]);
+
+  const toggleWishlist = () => {
+    // Handle adding/removing the item from wishlist
+    const storedWishlist = getFromLocalStorage("wishListItems") || [];
+    let updatedWishlist;
+
+    if (isInWishList) {
+      // Remove item from wishlist
+      updatedWishlist = storedWishlist.filter((wishlistItem) => wishlistItem.sku !== item.sku);
+    } else {
+      // Add item to wishlist
+      updatedWishlist = [...storedWishlist, item];
+    }
+
+    setLocalStorage("wishListItems", updatedWishlist);
+    setIsInWishList(!isInWishList); // Toggle state
+  };
+
+  const handleMouseEnter = () => setIsActive(true);
+  const handleMouseLeave = () => setIsActive(false); 
   const GenerateOldPrice = (price, percentage) => price * (1 + percentage / 100);
   const calculateDiscountedAmount = (price, percentage) =>
     GenerateOldPrice(price, percentage) - price;
 
-  useEffect(() => {
-    // Load wishlist items from localStorage on component mount
-    const storedWishlist = getFromLocalStorage("wishListItems") || [];
-    setWishlistItems(storedWishlist);
-  }, []);
-
-  const isInWishlist = wishlistItems.some((wishlistItem) => wishlistItem.sku === item.sku);
-
   return (
-    <li className="card_item" data-id={item.sku} key={item.sku}>
-       <span
+    <li
+      className="card_item"
+      data-id={item.sku}
+      key={item.sku}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {isActive && (
+        <span
           className="wishlist-icon"
-          onClick={handleAddToWishlist}
-          title="Add to Wishlist"
+          onClick={toggleWishlist}
+          title={isInWishList ? "Remove from Wishlist" : "Add to Wishlist"}
         >
-          <img src={itemSaveWishList} alt="Save to wishlist" />
+          <img
+            src={isInWishList ? itemRemoveWishList : itemSaveWishList}
+            alt={isInWishList ? "Remove from Wishlist" : "Save to Wishlist"}
+          />
         </span>
+      )}
       <Link to={`/item/${item.sku}`} onClick={handleTrackItems}>
-       
         <span className="item_image">
           <img
             src={item.imageSlider[0]?.imageSliderLink}
@@ -60,9 +91,7 @@ const ItemCard = ({ item }) => {
             </span>
             <div>
               $
-              {parseFloat(
-                calculateDiscountedAmount(item.price, 12.319)
-              ).toFixed(2)}
+              {parseFloat(calculateDiscountedAmount(item.price, 12.319)).toFixed(2)}
             </div>
             <span className="item_price">${item.price}</span>
           </span>

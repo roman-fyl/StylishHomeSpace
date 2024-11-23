@@ -16,14 +16,14 @@ const ProfileWishlist = () => {
   const navigate = useNavigate();
   const wishListItems = useSelector((state) => state.wishList.items || []);
   const sessionId = useSelector((state) => state.session.sessionId);
-console.log(wishListItems)
+  // console.log(wishListItems)
 
 
   return (
     <div className="account_content_block" id="profile-wishlist">
       <h1>Wishlist</h1>
       <ul className="profile_wishlist">
-      {wishListItems.slice(-4).map((item, index) =>
+      {wishListItems.map((item, index) =>
   item?.sku ? <ItemCard key={item.sku} item={item} /> : null
 )}
       </ul>

@@ -12,6 +12,8 @@
     const sessionId = useSelector((state) => state.session.sessionId);
     const handleAddToCart = useAddToCart();
 
+
+    
     const handleTrackItems = () => {
       const existingData = getFromLocalStorage("visitedItems") || [];
       const alreadyVisited = existingData.some(
