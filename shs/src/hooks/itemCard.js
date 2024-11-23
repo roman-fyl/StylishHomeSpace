@@ -1,16 +1,27 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useItemActions from "./useItemActions";
 import itemSaveWishList from "../assets/images/icon-save-wishlist.png";
+import {getFromLocalStorage} from "../components/LocalStorage/getFromLocalStorage";
 
 const ItemCard = ({ item }) => {
+    const [wishlistItems, setWishlistItems] = useState([]);
+
   const { handleTrackItems, handleAddToWishlist, handleAddToCart } =
     useItemActions(item);
 
   const GenerateOldPrice = (price, percentage) => price * (1 + percentage / 100);
   const calculateDiscountedAmount = (price, percentage) =>
     GenerateOldPrice(price, percentage) - price;
+
+  useEffect(() => {
+    // Load wishlist items from localStorage on component mount
+    const storedWishlist = getFromLocalStorage("wishListItems") || [];
+    setWishlistItems(storedWishlist);
+  }, []);
+
+  const isInWishlist = wishlistItems.some((wishlistItem) => wishlistItem.sku === item.sku);
 
   return (
     <li className="card_item" data-id={item.sku} key={item.sku}>

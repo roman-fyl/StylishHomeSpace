@@ -21,11 +21,6 @@ const ProfileLastVisitedItems = () => {
   const visitedItems = useSelector((state) => state.visited.items || [])
   const sessionId = useSelector((state) => state.session.sessionId);
   const handleAddToCart = useAddToCart()
-
-
-  const GenerateOldPrice = (price, percentage) => {
-    return price * (1 + percentage / 100);
-  };
   
 
   return (

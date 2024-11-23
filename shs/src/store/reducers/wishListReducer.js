@@ -1,4 +1,4 @@
-import { SET_WISHLIST_ITEMS, ADD_WISHLIST_ITEM } from "../actions/wishListActions";
+import { SET_WISHLIST_ITEMS, ADD_WISHLIST_ITEM, REMOVE_FROM_WISHLIST } from "../actions/wishListActions";
 
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import {setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
@@ -25,8 +25,13 @@ const wishListReducer = (state = initialState, action) => {
             items: updatedItems, 
           };
         }
-        
         return state;
+
+        case REMOVE_FROM_WISHLIST:
+          return {
+            ...state,
+            items: state.items.filter((item) => item.idN !== action.payload),
+          };
 
     default:
       return state;
