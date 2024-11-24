@@ -10,36 +10,35 @@ import {setLocalStorage} from "../components/LocalStorage/setLocalStorage"
 
 const ItemCard = ({ item }) => {
   const [isInWishList, setIsInWishList] = useState(false);
-  const [isActive, setIsActive] = useState(false); // State for active/hovered state
+  const [isActive, setIsActive] = useState(false); 
 
-  const { handleTrackItems, handleAddToWishlist, handleAddToCart } = useItemActions(item);
+  const { handleTrackItems, handleAddToWishlist, handleAddToCart, handleRemoveWishlistItem } = useItemActions(item);
 
   useEffect(() => {
-    // Check if the item is already in the wishlist when the component mounts
     const storedWishlist = getFromLocalStorage("wishListItems") || [];
     const itemExists = storedWishlist.some((wishlistItem) => wishlistItem.sku === item.sku);
     setIsInWishList(itemExists);
   }, [item.sku]);
 
   const toggleWishlist = () => {
-    // Handle adding/removing the item from wishlist
     const storedWishlist = getFromLocalStorage("wishListItems") || [];
     let updatedWishlist;
 
     if (isInWishList) {
-      // Remove item from wishlist
       updatedWishlist = storedWishlist.filter((wishlistItem) => wishlistItem.sku !== item.sku);
+      handleRemoveWishlistItem(item)
     } else {
-      // Add item to wishlist
       updatedWishlist = [...storedWishlist, item];
+      handleAddToWishlist(item)
     }
 
     setLocalStorage("wishListItems", updatedWishlist);
-    setIsInWishList(!isInWishList); // Toggle state
+    setIsInWishList(!isInWishList); 
   };
 
   const handleMouseEnter = () => setIsActive(true);
   const handleMouseLeave = () => setIsActive(false); 
+
   const GenerateOldPrice = (price, percentage) => price * (1 + percentage / 100);
   const calculateDiscountedAmount = (price, percentage) =>
     GenerateOldPrice(price, percentage) - price;

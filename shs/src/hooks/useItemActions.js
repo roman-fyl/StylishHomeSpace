@@ -38,22 +38,27 @@
       let updatedWishlist;
       if (!alreadyInWishlist) {
         updatedWishlist = [...wishlistItems, item];
-        dispatch(addWishListItem(item)); // Dispatch action
+        dispatch(addWishListItem(item)); 
       } else {
         updatedWishlist = wishlistItems.filter(
           (wishlistItem) => wishlistItem.sku !== item.sku
         );
-        dispatch(removeFromWishList(item.sku)); // Dispatch action
+        dispatch(removeFromWishList(item.sku)); 
       }
     
       setLocalStorage("wishListItems", updatedWishlist);
       return updatedWishlist;
     };
+    const handleRemoveWishlistItem = () => {
+      dispatch(removeFromWishList(item.sku));
+    }
+    
 
     return {
       handleTrackItems,
       handleAddToWishlist,
       handleAddToCart,
+      handleRemoveWishlistItem,
     };
   };
 

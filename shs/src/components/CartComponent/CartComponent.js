@@ -105,6 +105,7 @@ const CartComponent = () => {
   useEffect(() => {
     if (!cartItems || cartItems.length === 0) {
       setTotalAmount(0);
+
   
       if (!isInitialLoad) {
         setLocalStorage("couponDetails", null);
@@ -301,6 +302,7 @@ const CartComponent = () => {
         return 0
     }
   }
+
   const shippingCost = calculateShippingCost(deliveryType)
   const totalBeforeTax = shippingCost + totalBeforeTaxCollected;
   // console.log(totalBeforeTaxCollected)
