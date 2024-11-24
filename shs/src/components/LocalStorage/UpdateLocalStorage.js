@@ -12,7 +12,7 @@ export const updateLocalStorage = (key, updatedItem) => {
         } else {
             existingData.push(updatedItem);
         }
-        console.log('existingData', existingData)
+        // console.log('existingData', existingData)
         setLocalStorage(key, existingData);
     } catch (error) {
         console.error("Error in updateLocalStorage:", error);

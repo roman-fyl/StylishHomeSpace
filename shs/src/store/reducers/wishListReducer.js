@@ -12,8 +12,8 @@ const initialState = {
 };
 
 const wishListReducer = (state = initialState, action) => {
-  console.log("Action:", action);
-  console.log("State before:", state);
+  // console.log("Action:", action);
+  // console.log("State before:", state);
   switch (action.type) {
     case SET_WISHLIST_ITEMS:
       setLocalStorage("wishListItems", action.payload);
@@ -34,7 +34,7 @@ const wishListReducer = (state = initialState, action) => {
       const updatedRemoveItems = state.items.filter(
         (item) => item.sku !== action.payload
       );
-      setLocalStorage("wishListItems", updatedRemoveItems); // Sync with localStorage
+      setLocalStorage("wishListItems", updatedRemoveItems); 
       return { ...state, items: updatedRemoveItems };
 
     default:

@@ -3,6 +3,7 @@ import { Link as ScrollLink, Element } from "react-scroll";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/actions/cartActions";
+import {removeFromWishList} from "../../store/actions/wishListActions";
 import {addWishListItem} from "../../store/actions/wishListActions"
 import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
@@ -12,6 +13,8 @@ import QuantityItems from "./QuantityItems";
 import productData from "../../assets/db/items.json";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
+import removeFromWishListImage from "../../assets/images/icon-remove-wishlist.png";
+
 import itemShare from "../../assets/images/icon-share.png";
 import homepageLogo from "../../assets/images/icon-homepage.png";
 import arrowUp from "../../assets/images/arrow-up.png";
@@ -29,25 +32,34 @@ const ProductPage = () => {
   const [sliderImage, setSliderImage] = useState(0)
   const [reviews, setReviews] = useState(false)
   const sessionId = useSelector((state) => state.session.sessionId);
+  const [isInWishList, setIsInWishList] = useState(false);
+
 
 
   useEffect(() => {
     setProduct(null);
     if (!skuText) return;
-
+  
     const fetchedProduct = productData.find(
       (item) => item.sku.toLowerCase() === skuText.toLowerCase()
     );
-
+  
     if (fetchedProduct) {
       setProduct(fetchedProduct);
       setError(null);
+  
+      const wishlistItems = getFromLocalStorage("wishListItems") || [];
+      const alreadyInWishlist = wishlistItems.some(
+        (wishlistItem) => wishlistItem.sku === fetchedProduct.sku
+      );
+      setIsInWishList(alreadyInWishlist);
     } else {
       setError("Product not found");
     }
-
+  
     document.title = `Product Details - ${skuText.toUpperCase()}`;
   }, [skuText]);
+  
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -111,20 +123,29 @@ const handleChangeImageDecrease = () => {
   setSliderImage((prev) => (prev - 1) % product.imageSlider.length)
 }
 
-const handleAddToWishlist = (item) => {
-  const existingData = getFromLocalStorage("wishListItems");
-  const alreadyVisited = existingData.some(
-    (wishListItem) => wishListItem.sku === item.sku
+const handleAddToWishlist = () => {
+  const wishlistItems = getFromLocalStorage("wishListItems") || [];
+  const alreadyInWishlist = wishlistItems.some(
+    (wishlistItem) => wishlistItem.sku === product.sku
   );
 
-  if (!alreadyVisited) {
-    const itemWithSession = { ...item, session: sessionId };
-    dispatch(addWishListItem(itemWithSession));
-    console.log("Tracked item added:", itemWithSession);
+  let updatedWishlist;
+  if (!alreadyInWishlist) {
+    updatedWishlist = [...wishlistItems, product];
+    dispatch(addWishListItem(product));
+    setIsInWishList(true);
   } else {
-    console.log("Item already tracked:", item);
+    updatedWishlist = wishlistItems.filter(
+      (wishlistItem) => wishlistItem.sku !== product.sku
+    );
+    dispatch(removeFromWishList(product.sku));
+    setIsInWishList(false);
   }
+
+  setLocalStorage("wishListItems", updatedWishlist);
+  return updatedWishlist;
 };
+
 
   return (
       <div className="container">
@@ -285,8 +306,8 @@ const handleAddToWishlist = (item) => {
                 Warranty: <span>{product.warranty[0].term}</span>
               </div>
               <div className="item_description_additional-options">
-                <img src={itemSaveWishList} alt="" onClick={() => handleAddToWishlist(product)}></img>
-                <img src={itemShare} alt=""></img>
+              <img src={!isInWishList ? itemSaveWishList : removeFromWishListImage} alt="" onClick={() => handleAddToWishlist(product)}></img>
+              <img src={itemShare} alt=""></img>
               </div>
               <div className="item_description_colors">
                 <ul className="item_description_colors_options">

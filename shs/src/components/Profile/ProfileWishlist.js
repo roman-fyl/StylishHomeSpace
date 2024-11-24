@@ -30,7 +30,12 @@ const ProfileWishlist = () => {
 
   return (
     <div className="account_content_block" id="profile-wishlist">
+      <div>
       <h1>Wishlist</h1>
+      {wishListItems.length > 0 && (
+        <button className="cart_button" onClick={handleAddAllToCart}>Add All to Cart</button>
+      )}   
+      </div>
       <ul className="profile_wishlist">
       {wishListItems.length > 0 && wishListItems ? (
         wishListItems.map((item, index) =>
@@ -38,9 +43,8 @@ const ProfileWishlist = () => {
         )
       ): (<span>No data</span>)}
       </ul>
-      {wishListItems.length > 0 && (
-        <button onClick={handleAddAllToCart}>Add All to Cart</button>
-      )}    </div>
+       
+    </div>
   );
 };
 

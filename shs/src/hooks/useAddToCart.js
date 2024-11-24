@@ -39,7 +39,8 @@ const useAddToCart = () => {
       session: sessionNumber,
       payment: "Pay in Full"
     };
-
+      
+    
     updateLocalStorage('cartItems', itemToAdd);
     dispatch(addToCart(itemToAdd));
 
