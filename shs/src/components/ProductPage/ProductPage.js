@@ -8,6 +8,7 @@ import {addWishListItem} from "../../store/actions/wishListActions"
 import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
+import SimilarItems from "../../components/SimilarItems/SimilarItems";
 
 import QuantityItems from "./QuantityItems";
 import productData from "../../assets/db/items.json";
@@ -400,7 +401,7 @@ const handleAddToWishlist = () => {
     </div>
           </section>
         </Element>
-
+        <SimilarItems />
         <Element name="features" className="section product_page">
           <section className="product_category_part">
             <h3>Features</h3>
