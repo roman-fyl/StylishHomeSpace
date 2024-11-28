@@ -148,6 +148,7 @@ const handleAddToWishlist = () => {
 };
 
 
+
   return (
       <div className="container">
  <ul className="breadcrumbs">
@@ -352,10 +353,6 @@ const handleAddToWishlist = () => {
         onQuantityChange={handleQuantityChangePP}
       />
       </div>
-      {/* <div className="price_coupon">
-        <a href="">Click to activate coupon</a>
-      </div> */}
-
       <div className="price_financing">
         <form>
           <label>
@@ -401,7 +398,10 @@ const handleAddToWishlist = () => {
     </div>
           </section>
         </Element>
-        <SimilarItems />
+        <div className="similar-items-section">
+        <h2>Similar Items</h2>
+        <SimilarItems product={product} />
+      </div>
         <Element name="features" className="section product_page">
           <section className="product_category_part">
             <h3>Features</h3>

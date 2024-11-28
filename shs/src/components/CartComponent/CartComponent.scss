@@ -25,7 +25,7 @@
   &_elements {
     flex: 1;
     width: 100%;
-    min-height: 530px;
+    min-height: 350px;
     // padding: 0 10px;
     // box-shadow: $box-shadow;
     padding: 0 25px 25px 0;
@@ -51,7 +51,8 @@
     }
   }
   &_summary {
-    min-height: 530px;
+    height: 850px;
+    flex: 0 0 auto;
     width: 330px;
     padding: 0 10px;
     box-shadow: $box-shadow;
@@ -124,6 +125,7 @@
     &_coupon {
       display: flex;
       font:$font-x-small;
+      height: 50px;
       button {
         padding: 5px;
         font:$font-x-small;
@@ -132,6 +134,9 @@
             background-color: $primary-color-hover-link;
             color: white;
         }
+      }
+      span {
+        display: flex;
       }
     }
   }

@@ -23,9 +23,9 @@
       if (!alreadyVisited) {
         const itemWithSession = { ...item, session: sessionId };
         dispatch(addVisitedItem(itemWithSession));
-        console.log("Tracked item added:", itemWithSession);
+        // console.log("Tracked item added:", itemWithSession);
       } else {
-        console.log("Item already tracked:", item);
+        // console.log("Item already tracked:", item);
       }
     };
 

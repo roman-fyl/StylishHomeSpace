@@ -1,18 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../../store/actions/cartActions";
-import { getSessionNumber } from "../../Sessions/getSessionNumber";
-import { setLocalStorage } from "../../LocalStorage/setLocalStorage";
-import { getFromLocalStorage } from "../../LocalStorage/getFromLocalStorage";
-import { updateLocalStorage } from "../../LocalStorage/updateLocalStorage";
-import { addVisitedItem } from "../../../store/actions/visitedActions";
-import { addWishListItem } from "../../../store/actions/wishListActions";
 import ItemCard from "../../../hooks/itemCard";
-
-import useAddToCart from "../../../hooks/useAddToCart";
-import itemSaveWishList from "../../../assets/images/icon-save-wishlist.png";
-
 import "./ItemSection.scss";
 import data from "../../../assets/db/items.json";
 

@@ -10,6 +10,7 @@ import { setCoupon, clearCoupon } from "../../store/actions/couponActions";
 import Notification from "../../components/Notification/Notification";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import { setSessionId} from "../../store/actions/sessionActions";
+import SimilarItems from "../../components/SimilarItems/SimilarItems";
 
 
 import "./CartComponent.scss";
@@ -388,11 +389,13 @@ const CartComponent = () => {
               />
               <input type="submit" className="cart_button" value="Apply Coupon" />
             </form>
+            <div className="cart_total_coupon">
             {notification && <Notification message={notification.message} type={notification.type} />}
             {discountAmount > 0 && appliedCouponCode && (
-        <div className="cart_total_coupon">Applied Coupon: {appliedCouponCode}
+        <span>Applied Coupon: {appliedCouponCode}
         <button onClick={handleRemoveCoupon}>Remove Coupon</button>
-          </div>)}
+          </span>)}
+          </div>
             <form onSubmit={handleZipCodeSubmit} className="cart_form">
               <input
                 type="text"
@@ -435,6 +438,10 @@ const CartComponent = () => {
           </div>
           <button className="cart_button">Checkout</button>
         </div>
+      </div>
+      <div>
+      <h2>You may also like</h2>
+      <SimilarItems />
       </div>
     </div>
   );
