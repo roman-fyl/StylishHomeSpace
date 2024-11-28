@@ -76,6 +76,14 @@ const ItemCard = ({ item }) => {
             <img src={item.brandLogo} alt={item.brand} />
           </span>
           <h3 className="item_title">{item.description.short}</h3>
+          <ul className="item_tags">
+              {item.tags.map((tag, index) => (
+                <li key={index}>
+                  <img src={tag.iconLink} alt={`${tag.value} ${item.sku}`}
+                  ></img>
+                </li>
+              ))}
+            </ul>
           <span className="item_rating">
             <span className="item_rate">{item.sku}</span>
             <span className="item_rate">{item.rate}</span>

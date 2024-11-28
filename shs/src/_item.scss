@@ -153,6 +153,16 @@
       }
       
     }
+    &_tags {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: 60px;
+      img {
+          width: 30px;
+          margin: 0 5px;
+      }
+  }
   }
   .item_add-to-cart {
     background: $button-addToCart;

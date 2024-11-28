@@ -399,7 +399,6 @@ const handleAddToWishlist = () => {
           </section>
         </Element>
         <div className="similar-items-section">
-        <h2>Similar Items</h2>
         <SimilarItems product={product} />
       </div>
         <Element name="features" className="section product_page">
