@@ -133,15 +133,18 @@ const SimilarItems = ({ product }) => {
   }, [finalSelectedItems, products, minUniquePriceRange, maxUniquePriceRange]);
 
   return (
-    <div className="card_items">
+    <div>
+        <h2>You may also like</h2>
+      <div className="card_items">
       {updatedProducts.length > 3 ? (
         updatedProducts
           .sort(() => Math.random() - 0.5) 
           .slice(0, displayedItemCount) 
           .map((item) => <ItemCard key={item.sku} item={item} />)
       ) : (
-        <ItemSection group="bestseller" />
+        <ItemSection group="bestseller"/>
       )}
+    </div>
     </div>
   );
 };

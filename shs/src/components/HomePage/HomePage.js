@@ -1,6 +1,5 @@
 
 import React, {useEffect, useState} from "react";
-import Layout from "../../Layout";
 
 import MainSlider from "../HomePage/MainSlider/MainSlider";
 import BannersGroup from "../HomePage/Banners/BannersGroup";
@@ -34,19 +33,22 @@ const HomePage = () => {
                <FlashOffers />
             </section>
             <section className="section">
-            <ItemSection group="bestseller" subject="Best-Selling Items" />
+               <h2>Best-Selling Items</h2>
+            <ItemSection group="bestseller" subject="" />
             </section>
             <section className="section">
             <Trends />
             </section>
             <section className="section">
-               <ItemSection group="newArrival" subject="New Arrivals"/>
+               <h2>New Arrivals</h2>
+               <ItemSection group="newArrival" subject=""/>
             </section>
             <section className="section">
                <DailyDeals />
             </section>
             <section className="section">
-            <ItemSection group="outlet" subject="Outlets"/>
+               <h2>Outlets</h2>
+            <ItemSection group="outlet" subject=""/>
             </section>
            </div>
        </div>

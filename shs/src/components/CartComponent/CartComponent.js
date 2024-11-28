@@ -440,7 +440,7 @@ const CartComponent = () => {
         </div>
       </div>
       <div>
-      <h2>You may also like</h2>
+     
       <SimilarItems />
       </div>
     </div>

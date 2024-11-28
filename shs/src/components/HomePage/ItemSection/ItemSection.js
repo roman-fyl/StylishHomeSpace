@@ -55,7 +55,7 @@ const ItemSection = ({
 
   return (
     <div className="item-section_main">
-      <h2>{subject}</h2>
+      {/* <h2>{subject}</h2> */}
       <ul className="card_items">
         {filteredData
           .sort(() => Math.random() - 0.5)
