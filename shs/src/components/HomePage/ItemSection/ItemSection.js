@@ -13,6 +13,7 @@ const ItemSection = ({
   smartFeatures = null,
   subCategory = null,
   subType = null,
+  viewButton = false
 }) => {
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
   const sessionId = useSelector((state) => state.session.sessionId);
@@ -65,17 +66,18 @@ const ItemSection = ({
           ))}
       </ul>
       <div className="items_more">
-        <span
+        {viewButton ? (<span
           data-group={group}
           data-category={category}
           data-brand={brand}
           data-smartFeatures={smartFeatures}
           data-subcategory={subCategory}
           data-subtype={subType}
+          data-viewButton={viewButton}
           onClick={handleClick}
         >
           Explore More
-        </span>
+        </span>) : null}
       </div>
     </div>
   );

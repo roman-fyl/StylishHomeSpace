@@ -8,7 +8,7 @@ import {addWishListItem} from "../../store/actions/wishListActions"
 import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
-import SimilarItems from "../../components/SimilarItems/SimilarItems";
+import SimilarItemsBasedOnActiveItem from "../../components/SimilarItems/SimilarItemsBasedOnActiveItem";
 
 import QuantityItems from "./QuantityItems";
 import productData from "../../assets/db/items.json";
@@ -398,9 +398,6 @@ const handleAddToWishlist = () => {
     </div>
           </section>
         </Element>
-        <div className="similar-items-section">
-        <SimilarItems product={product} />
-      </div>
         <Element name="features" className="section product_page">
           <section className="product_category_part">
             <h3>Features</h3>
@@ -652,6 +649,9 @@ const handleAddToWishlist = () => {
               </ul>
             </div>
           </section>        </Element>
+          <div className="similar-items-section">
+        <SimilarItemsBasedOnActiveItem product={product} />
+      </div>
       </div>
   );
 };

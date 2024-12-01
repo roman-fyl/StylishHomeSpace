@@ -34,21 +34,21 @@ const HomePage = () => {
             </section>
             <section className="section">
                <h2>Best-Selling Items</h2>
-            <ItemSection group="bestseller" subject="" />
+            <ItemSection group="bestseller" subject="" viewButton={true} />
             </section>
             <section className="section">
             <Trends />
             </section>
             <section className="section">
                <h2>New Arrivals</h2>
-               <ItemSection group="newArrival" subject=""/>
+               <ItemSection group="newArrival" subject="" viewButton={true}/>
             </section>
             <section className="section">
                <DailyDeals />
             </section>
             <section className="section">
                <h2>Outlets</h2>
-            <ItemSection group="outlet" subject=""/>
+            <ItemSection group="outlet" subject="" viewButton={true}/>
             </section>
            </div>
        </div>

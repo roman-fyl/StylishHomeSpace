@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, memo } from "react";
 import { useSelector } from "react-redux";
 import { setLocalStorage } from "../LocalStorage/setLocalStorage";
 import { getFromLocalStorage } from "../LocalStorage/getFromLocalStorage";
@@ -8,7 +8,7 @@ import { excludeDuplicates } from "../../hooks/excludeDuplicates";
 import data from "../../assets/db/items.json";
 import "./SimilarItems.scss";
 
-const SimilarItems = ({ product }) => {
+const SimilarItems = memo(({ product }) => {
   const [products, setProducts] = useState([]);
   const [updatedProducts, setUpdatedProducts] = useState([]);
   const visitedItems = useSelector((state) => state.visited.items || []);
@@ -147,6 +147,6 @@ const SimilarItems = ({ product }) => {
     </div>
     </div>
   );
-};
+});
 
 export default SimilarItems;

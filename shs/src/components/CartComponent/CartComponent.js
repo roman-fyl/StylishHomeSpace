@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { removeFromCart, setCartItems } from "../../store/actions/cartActions";
@@ -441,7 +441,10 @@ const CartComponent = () => {
       </div>
       <div>
      
-      <SimilarItems />
+      <SimilarItems 
+    cartItems={cartItems}
+    excludeCartItems={true}
+  />
       </div>
     </div>
   );
