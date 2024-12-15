@@ -85,7 +85,9 @@ const ItemCard = ({ item }) => {
               ))}
             </ul>
           <span className="item_rating">
+          <span className="item_rate">{item.group}</span>
             <span className="item_rate">{item.sku}</span>
+            <span className="item_rate">{item.idN}</span>
             <span className="item_rate">{item.rate}</span>
             <span className="item_rate">{item.category}</span>
             <span className="item_rate">{item.subCategory}</span>

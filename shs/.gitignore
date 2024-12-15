@@ -9,6 +9,7 @@ src/assets/db/
 /public
 admin
 ./admin
+src/components/App.js
 
 
 # next.js

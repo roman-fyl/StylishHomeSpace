@@ -40,6 +40,8 @@ const ProductPage = () => {
   useEffect(() => {
     setProduct(null);
     if (!skuText) return;
+    // const productData = getFromLocalStorage('admin-products');
+
   
     const fetchedProduct = productData.find(
       (item) => item.sku.toLowerCase() === skuText.toLowerCase()
@@ -305,13 +307,13 @@ const handleAddToWishlist = () => {
                 <span>{product.sku}</span>
               </div>
               <div className="item_description_warranty">
-                Warranty: <span>{product.warranty[0].term}</span>
+                Warranty: <span>{product.warranty[0].term}</span><span>. {product.warranty[0].description}</span>
               </div>
               <div className="item_description_additional-options">
               <img src={!isInWishList ? itemSaveWishList : removeFromWishListImage} alt="" onClick={() => handleAddToWishlist(product)}></img>
               <img src={itemShare} alt=""></img>
               </div>
-              <div className="item_description_colors">
+              {/* <div className="item_description_colors">
                 <ul className="item_description_colors_options">
                   {product?.description?.options?.[0]?.meanings?.length > 0 ? (
                     product.description.options[0].meanings.map((meaning, index) => (
@@ -325,9 +327,8 @@ const handleAddToWishlist = () => {
                   ) : (
                     ""
                   )}
-
                 </ul>
-              </div>
+              </div> */}
             </div>
             <div className="product_description_price">
       <div className="price_list">
@@ -602,8 +603,8 @@ const handleAddToWishlist = () => {
                 {product?.installation && product.installation.length > 0 ? (
                   product.installation.map((step, index) => (
                     <li className="product_installation" key={index}>
-                      <strong>Step {index + 1}:</strong>
-                      <span>{step.value}</span>
+                      <strong>{step.step}:</strong>
+                      <span>{step.stepExplain}</span>
                     </li>
                   ))
                 ) : (
@@ -620,8 +621,8 @@ const handleAddToWishlist = () => {
     <h3>Warranty</h3>
     <div className="product_warranties">
       <ul className="product_warranties_list">
-        {Array.isArray(product?.warranty) && product.warranty.length > 0 ? (
-          product.warranty.map((option, index) => (
+        {Array.isArray(product.warranty) && product.warranty.length > 0 ? (
+          product?.warranty?.map((option, index) => (
             <li className="product_warranty" key={index}>
               <strong>{option.term}:</strong>
               <span>{option.description}</span>

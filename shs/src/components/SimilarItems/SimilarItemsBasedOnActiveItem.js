@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import { setLocalStorage } from "../LocalStorage/setLocalStorage";
 import { getFromLocalStorage } from "../LocalStorage/getFromLocalStorage";
 import ItemCard from "../../hooks/itemCard";
-import ItemSection from "../../components/HomePage/ItemSection/ItemSection";
+import ItemSection from "../../components/ItemSection/ItemSection";
 import { excludeDuplicates } from "../../hooks/excludeDuplicates";
 import data from "../../assets/db/items.json";
 import "./SimilarItems.scss";
 
 const SimilarItemsBasedOnActiveItem = memo(({ product }) => {
-  console.log("Active product:", product);
+  // console.log("Active product:", product);
 
   const [updatedProducts, setUpdatedProducts] = useState([]);
   const visitedItems = useSelector((state) => state.visited.items || []);
@@ -19,7 +19,7 @@ const SimilarItemsBasedOnActiveItem = memo(({ product }) => {
   const minPriceRange = useMemo(() => (product.price * 0.6).toFixed(2), [product.price]);
   const maxPriceRange = useMemo(() => (product.price * 1.4).toFixed(2), [product.price]);
 
-  console.log("Price range:", minPriceRange, maxPriceRange);
+  // console.log("Price range:", minPriceRange, maxPriceRange);
 
   const generateCombinations = () => {
     const uniqueBrands = Array.from(new Set(visitedItems.map((item) => item.brandText)));
@@ -98,7 +98,7 @@ const SimilarItemsBasedOnActiveItem = memo(({ product }) => {
       });
     });
 
-    console.log("Filtered items:", filteredItems);
+    // console.log("Filtered items:", filteredItems);
 
     const uniqueItems = excludeDuplicates(filteredItems);
     return uniqueItems.slice(0, 6); 
@@ -115,7 +115,7 @@ const SimilarItemsBasedOnActiveItem = memo(({ product }) => {
     }
   }, [similarItems]);
 
-  console.log("Updated products:", updatedProducts);
+  // console.log("Updated products:", updatedProducts);
 
   return (
     <div className="similar-items-container">

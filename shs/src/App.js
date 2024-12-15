@@ -37,6 +37,7 @@ import BrandPage from "./components/BrandPage/BrandPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import CartComponent from './components/CartComponent/CartComponent';
+import DashBoard from "../src/admin/DashBoard/DashBoard";
 
 import './App.scss';
 
@@ -86,6 +87,7 @@ const App = () => {
       <ScrollToTop />
       <Layout>
         <Routes>
+          <Route path="/dashboard/*" element={<DashBoard />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />

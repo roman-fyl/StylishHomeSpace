@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { setLocalStorage } from "../LocalStorage/setLocalStorage";
 import { getFromLocalStorage } from "../LocalStorage/getFromLocalStorage";
 import ItemCard from "../../hooks/itemCard";
-import ItemSection from "../../components/HomePage/ItemSection/ItemSection";
+import ItemSection from "../../components/ItemSection/ItemSection";
 import { excludeDuplicates } from "../../hooks/excludeDuplicates";
 import data from "../../assets/db/items.json";
 import "./SimilarItems.scss";

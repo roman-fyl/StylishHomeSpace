@@ -180,6 +180,7 @@
       font: $font-x-small;
       color: white;
       padding: 10px 15px;
+      margin: 5px 0;
       text-align: center;
       text-transform: capitalize;
       border-radius: 2px;
@@ -188,6 +189,12 @@
       cursor: $cursor;
       &:hover {
         background-color: $primary-color-hover-link;
+      }
+      &_success {
+        background-color: $primary-color-success;
+      }
+      &_attention {
+        background-color: $primary-color-attention;
       }
     }
   &_button {
