@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { removeFromCart, setCartItems } from "../../store/actions/cartActions";
@@ -8,17 +8,21 @@ import QuantityInCart from "../Items/QuantityInCart/QuantityInCart";
 import { setZipCode, setError } from "../../store/actions/locationActions";
 import { setCoupon, clearCoupon } from "../../store/actions/couponActions";
 import Notification from "../../components/Notification/Notification";
+import { getSessionNumber } from "../Sessions/getSessionNumber";
+import { setSessionId} from "../../store/actions/sessionActions";
+import SimilarItems from "../../components/SimilarItems/SimilarItems";
+
 
 import "./CartComponent.scss";
 
 const CartComponent = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const zipCode = useSelector((state) => state.location.zipCode);
+  const sessionId = useSelector((state) => state.session.sessionId);
   const { discountAmount, code: appliedCouponCode, minOrderValue } = useSelector((state) => state.coupon);  
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [session, setSession] = useState(null);
   const [couponCode, setCouponCode] = useState("");
   const [coupons, setCoupons] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -26,27 +30,40 @@ const CartComponent = () => {
   const [deliveryType, setDeliveryType] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true); 
   const [notification, setNotification] = useState({ message: "", type: "" });
+  const [totalBeforeTaxCollected, setTotalBeforeTaxCollected] = useState("")
 
   
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    let sessionId = queryParams.get("session");
 
-    if (!sessionId) {
-      sessionId = getFromLocalStorage("abnd-session") || Date.now();
-      setLocalStorage("abnd-session", sessionId);
-      queryParams.set("session", sessionId);
+    let localSessionId = sessionId;
+  
+    if (!localSessionId) {
+      localSessionId = getFromLocalStorage("abnd-session");
+      if (!localSessionId) {
+        localSessionId = getSessionNumber();  
+        setLocalStorage("abnd-session", localSessionId);
+      }
+    }
+  
+    if (queryParams.get("session") !== localSessionId) {
+      queryParams.set("session", localSessionId);
       navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
     }
-    setSession(sessionId);
+  
+    dispatch(setSessionId(localSessionId));
 
+  
     if (!cartItems.length) {
       const storedCartItems = getFromLocalStorage("cartItems");
       if (storedCartItems && storedCartItems.length > 0) {
-        dispatch(setCartItems(storedCartItems, sessionId));
+        dispatch(setCartItems(storedCartItems, localSessionId));
+  
+
       }
     }
-
+  
+  
     import("../../assets/db/coupons.json")
       .then((data) => {
         setCoupons(data.default || data);
@@ -54,51 +71,73 @@ const CartComponent = () => {
       .catch((error) => {
         console.error("Error loading coupons:", error);
       });
-
+  
     const savedCoupon = getFromLocalStorage("couponDetails");
     if (savedCoupon) {
       const coupon = Array.isArray(savedCoupon) ? savedCoupon[0] : savedCoupon;
       if (coupon) {
         dispatch(setCoupon(coupon));
+        // console.log(savedCoupon)
       }
     }
-    setIsInitialLoad(false); 
-  }, [location, navigate, session, dispatch, cartItems.length]);
+  
+    setIsInitialLoad(false);  
+  }, [location, navigate, sessionId, dispatch, cartItems.length]);
+  
+  useEffect(() => {
+    const storedDeliveryType = getFromLocalStorage("deliveryType");
+
+    if (storedDeliveryType && Array.isArray(storedDeliveryType)) {
+      setDeliveryType(storedDeliveryType[0]); 
+    } else if (storedDeliveryType) {
+      setDeliveryType(storedDeliveryType); 
+    }
+
+    // console.log("Loaded deliveryType from local storage:", storedDeliveryType);
+  }, []);
+
+  const handleTypeDelivery = (e) => {
+    const selectedType = e.target.value; 
+    setDeliveryType(selectedType); 
+    setLocalStorage("deliveryType", selectedType); 
+    console.log("Updated deliveryType:", selectedType);
+  };
 
   useEffect(() => {
     if (!cartItems || cartItems.length === 0) {
       setTotalAmount(0);
 
+  
       if (!isInitialLoad) {
-        setLocalStorage("couponDetails", null); 
+        setLocalStorage("couponDetails", null);
         dispatch(clearCoupon());
       }
       return;
     }
-
+  
     const calculateTotal = () => {
       const calculatedTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-    
+      
       let discountedTotal = calculatedTotal;
       const validDiscountAmount = discountAmount || 0;
-    
+      
+      if (discountedTotal < minOrderValue) {
+        dispatch(clearCoupon());
+        setLocalStorage("couponDetails", null);
+        setNotification({ message: "Your order value is below the minimum required for this coupon, and it has been removed", type: 'error' });
+      }
+  
       if (validDiscountAmount > 0) {
         discountedTotal = calculatedTotal - validDiscountAmount;
-        if (discountedTotal < minOrderValue) {
-          dispatch(clearCoupon());
-          setLocalStorage("couponDetails", null);
-          setNotification({ message: "Your order value is below the minimum required for this coupon, and it has been removed", type: 'error' });
-        
-        }
       }
-    
+  
       if (appliedCouponCode) {
         const matchingCoupon = coupons.find(coupon => coupon.code.trim() === appliedCouponCode.trim());
-    
+  
         if (matchingCoupon) {
           let newTotal = calculatedTotal;
           let appliedDiscountAmount = 0;
-    
+  
           if (matchingCoupon.isPercentage) {
             appliedDiscountAmount = (calculatedTotal * matchingCoupon.discountAmount) / 100;
             newTotal = calculatedTotal - appliedDiscountAmount;
@@ -106,22 +145,23 @@ const CartComponent = () => {
             appliedDiscountAmount = matchingCoupon.discountAmount;
             newTotal = calculatedTotal - appliedDiscountAmount;
           }
-    
-          if (newTotal >= matchingCoupon.minOrderValue) {
+  
+          if (newTotal + appliedDiscountAmount >= matchingCoupon.minOrderValue) {
             dispatch(setCoupon({
               code: matchingCoupon.code,
               discountAmount: appliedDiscountAmount,
               isPercentage: matchingCoupon.isPercentage,
               minOrderValue: matchingCoupon.minOrderValue
             }));
-    
+  
             setLocalStorage("couponDetails", {
               code: matchingCoupon.code,
               discountAmount: appliedDiscountAmount,
               isPercentage: matchingCoupon.isPercentage,
-              minOrderValue: matchingCoupon.minOrderValue
+              minOrderValue: matchingCoupon.minOrderValue,
+              session: sessionId
             });
-    
+  
             discountedTotal = newTotal;
           } else {
             dispatch(clearCoupon());
@@ -130,13 +170,14 @@ const CartComponent = () => {
           }
         }
       }
-    
+  
       setTotalAmount(discountedTotal.toFixed(2));
+      setTotalBeforeTaxCollected(discountedTotal);
     };
-    
-
+  
     calculateTotal();
-  }, [cartItems, discountAmount, dispatch, isInitialLoad]);
+  }, [cartItems, appliedCouponCode, discountAmount, coupons, minOrderValue, dispatch, sessionId, isInitialLoad]);
+  
 
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
@@ -145,6 +186,8 @@ const CartComponent = () => {
 
     if (updatedCartItems.length === 0) {
       dispatch(clearCoupon());
+      setTotalBeforeTaxCollected(0);
+      setDeliveryType("");
       setLocalStorage("couponDetails", null); 
     }
   };
@@ -170,7 +213,10 @@ const CartComponent = () => {
           newTotal = calculatedTotal - appliedDiscountAmount;
         }
   
-        if (newTotal >= matchingCoupon.minOrderValue) {
+        // console.log("calculatedTotal", calculatedTotal);
+        // console.log("New Total", newTotal);
+  
+        if (calculatedTotal >= matchingCoupon.minOrderValue) {
           dispatch(setCoupon({
             code: couponCode,
             discountAmount: appliedDiscountAmount,
@@ -182,7 +228,8 @@ const CartComponent = () => {
             code: couponCode,
             discountAmount: appliedDiscountAmount,
             isPercentage: matchingCoupon.isPercentage,
-            minOrderValue: matchingCoupon.minOrderValue
+            minOrderValue: matchingCoupon.minOrderValue,
+            session: sessionId,
           });
   
         } else {
@@ -203,12 +250,13 @@ const CartComponent = () => {
     setCouponCode("");
   };
   
+  
 
   const handleQuantityInCart = (itemId, newQuantity) => {
     const updatedCart = cartItems.map((item) =>
       item.idN === itemId ? { ...item, quantity: newQuantity } : item
     );
-    dispatch(setCartItems(updatedCart, session));
+    dispatch(setCartItems(updatedCart, sessionId));
     setLocalStorage("cartItems", updatedCart);
   };
 
@@ -231,9 +279,6 @@ const CartComponent = () => {
     }
   };
 
-  const handleTypeDelivery = (e) => {
-    setDeliveryType(e.target.value);
-  };
 
   const totalOldAmount = cartItems.reduce((total, item) => {
     const oldPrice = parseFloat(item.price) * 1.12;
@@ -248,9 +293,26 @@ const CartComponent = () => {
     setTotalAmount(calculatedTotal.toFixed(2));
   };
 
+  const calculateShippingCost = (deliveryType) => {
+    switch(deliveryType) {
+      case "White Glove Delivery":
+        return 69.99;
+      case "In-Home Delivery":
+        return 39.99;
+      default:
+        return 0
+    }
+  }
+
+  const shippingCost = calculateShippingCost(deliveryType)
+  const totalBeforeTax = shippingCost + totalBeforeTaxCollected;
+  // console.log(totalBeforeTaxCollected)
+
+
+
   return (
     <div className="container cart_container">
-      <h2>Your Cart (Session ID: {session})</h2>
+      <h2>Your Cart (Session ID: {sessionId})</h2>
       <div className="cart_main">
         <ul className="cart_elements">
           {cartItems.length ? (
@@ -327,11 +389,13 @@ const CartComponent = () => {
               />
               <input type="submit" className="cart_button" value="Apply Coupon" />
             </form>
+            <div className="cart_total_coupon">
             {notification && <Notification message={notification.message} type={notification.type} />}
             {discountAmount > 0 && appliedCouponCode && (
-        <div className="cart_total_coupon">Applied Coupon: {appliedCouponCode}
+        <span>Applied Coupon: {appliedCouponCode}
         <button onClick={handleRemoveCoupon}>Remove Coupon</button>
-          </div>)}
+          </span>)}
+          </div>
             <form onSubmit={handleZipCodeSubmit} className="cart_form">
               <input
                 type="text"
@@ -344,10 +408,21 @@ const CartComponent = () => {
                 tabIndex="11"
                 required
               />
-              <input type="submit" className="cart_button" value="Add Zip Code" />
+              <input type="submit" className="cart_button" value={zipCode ? "Update Zip Code" : "Add Zip Code"} />
             </form>
             <div className="cart_total_shipping"><span>Shipping to:</span><span>{zipCode}</span></div>
             <form className="cart_form">
+            <div className="cart_total_subtotal"><span>Select Shipping Options:</span></div>
+            <label>
+                <input
+                  type="radio"
+                  value="White Glove Delivery"
+                  name="payment"
+                  checked={deliveryType === "White Glove Delivery"}
+                  onChange={handleTypeDelivery}
+                />
+                White Glove Delivery - $69.99
+              </label>
               <label>
                 <input
                   type="radio"
@@ -358,21 +433,18 @@ const CartComponent = () => {
                 />
                 In-Home Delivery - $39.99
               </label>
-              <label>
-                <input
-                  type="radio"
-                  value="White Glove Delivery"
-                  name="payment"
-                  checked={deliveryType === "White Glove Delivery"}
-                  onChange={handleTypeDelivery}
-                />
-                White Glove Delivery - $69.99
-              </label>
             </form>
-            <div className="cart_total_total-amount"><span>Total:</span>${totalAmount}</div>
+            <div className="cart_total_total-amount"><span>Total Before Tax:</span>${totalBeforeTax}</div>
           </div>
           <button className="cart_button">Checkout</button>
         </div>
+      </div>
+      <div>
+     
+      <SimilarItems 
+    cartItems={cartItems}
+    excludeCartItems={true}
+  />
       </div>
     </div>
   );

@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink, Element } from "react-scroll";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/actions/cartActions";
+import {removeFromWishList} from "../../store/actions/wishListActions";
+import {addWishListItem} from "../../store/actions/wishListActions"
 import { updateLocalStorage } from "../../components/LocalStorage/updateLocalStorage";
-import productData from "../../assets/db/items.json";
+import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
+import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
+import SimilarItemsBasedOnActiveItem from "../../components/SimilarItems/SimilarItemsBasedOnActiveItem";
+
 import QuantityItems from "./QuantityItems";
+import productData from "../../assets/db/items.json";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
+import removeFromWishListImage from "../../assets/images/icon-remove-wishlist.png";
+
 import itemShare from "../../assets/images/icon-share.png";
 import homepageLogo from "../../assets/images/icon-homepage.png";
-import "./ProductPage.scss";
 import arrowUp from "../../assets/images/arrow-up.png";
 import arrowBack from "../../assets/images/arrow-back.png";
+import "./ProductPage.scss";
 
 const ProductPage = () => {
   const { skuText } = useParams();
@@ -22,24 +30,39 @@ const ProductPage = () => {
   const [payment, setPayment] = useState("Pay in Full");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [sliderImage, setSliderImage] = useState(0)
+  const [reviews, setReviews] = useState(false)
+  const sessionId = useSelector((state) => state.session.sessionId);
+  const [isInWishList, setIsInWishList] = useState(false);
+
+
 
   useEffect(() => {
     setProduct(null);
     if (!skuText) return;
+    // const productData = getFromLocalStorage('admin-products');
 
+  
     const fetchedProduct = productData.find(
       (item) => item.sku.toLowerCase() === skuText.toLowerCase()
     );
-
+  
     if (fetchedProduct) {
       setProduct(fetchedProduct);
       setError(null);
+  
+      const wishlistItems = getFromLocalStorage("wishListItems") || [];
+      const alreadyInWishlist = wishlistItems.some(
+        (wishlistItem) => wishlistItem.sku === fetchedProduct.sku
+      );
+      setIsInWishList(alreadyInWishlist);
     } else {
       setError("Product not found");
     }
-
+  
     document.title = `Product Details - ${skuText.toUpperCase()}`;
   }, [skuText]);
+  
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -54,6 +77,7 @@ const ProductPage = () => {
 
   const handleQuantityChangePP = (newQuantity) => {
     setQuantity(newQuantity);
+    
   };
 
   const handleAddToCart = (item) => {
@@ -94,6 +118,36 @@ const ProductPage = () => {
     return price * (1 + percentage / 100);
   };
 
+const handleChangeImageIncrease = () => {
+  setSliderImage((prev) => (prev + 1) % product.imageSlider.length)
+}
+
+const handleChangeImageDecrease = () => {
+  setSliderImage((prev) => (prev - 1) % product.imageSlider.length)
+}
+
+const handleAddToWishlist = () => {
+  const wishlistItems = getFromLocalStorage("wishListItems") || [];
+  const alreadyInWishlist = wishlistItems.some(
+    (wishlistItem) => wishlistItem.sku === product.sku
+  );
+
+  let updatedWishlist;
+  if (!alreadyInWishlist) {
+    updatedWishlist = [...wishlistItems, product];
+    dispatch(addWishListItem(product));
+    setIsInWishList(true);
+  } else {
+    updatedWishlist = wishlistItems.filter(
+      (wishlistItem) => wishlistItem.sku !== product.sku
+    );
+    dispatch(removeFromWishList(product.sku));
+    setIsInWishList(false);
+  }
+
+  setLocalStorage("wishListItems", updatedWishlist);
+  return updatedWishlist;
+};
 
 
 
@@ -191,34 +245,26 @@ const ProductPage = () => {
             <div className="product_description_slider">
               <div className="slider_menu">
                 <img
-                  src={product.imageSlider[0].imageSliderLink}
-                  alt={product.imageSlider[0].Alt}
+                  src={product.imageSlider[sliderImage].imageSliderLink}
+                  alt={product.imageSlider[sliderImage].Alt}
                 ></img>
               </div>
               <div className="slider_images">
                 <img
                   src={arrowBack}
                   className="prev_arrow"
-                  alt="Arrow Back"
+                  alt="Arrow Back" onClick={handleChangeImageDecrease}
                 ></img>
-                {/* <img src={product.imageSlider[0].imageSliderLink} alt={product.sku}></img>     */}
-                <img
-                  src={product.imageSlider[1].imageSliderLink}
-                  alt={product.sku}
-                ></img>
-                <img
-                  src={product.imageSlider[2].imageSliderLink}
-                  alt={product.sku}
-                ></img>
-                <img
-                  src={product.imageSlider[3].imageSliderLink}
-                  alt={product.sku}
-                ></img>
-                <img
-                  src={product.imageSlider[4].imageSliderLink}
-                  alt={product.sku}
-                ></img>
-                <img src={arrowUp} className="Arrow Up"></img>
+                {product.imageSlider.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image.imageSliderLink}
+                    alt={image.Alt} 
+                    className={`thumbnail ${sliderImage === index ? 'active' : ''}`}
+                    onClick={() => setSliderImage(index)}
+                  />
+                ))}
+                <img src={arrowUp} className="Arrow Up" onClick={handleChangeImageIncrease}></img>
               </div>
             </div>
             <ul className="product_description_tags">
@@ -261,13 +307,13 @@ const ProductPage = () => {
                 <span>{product.sku}</span>
               </div>
               <div className="item_description_warranty">
-                Warranty: <span>{product.warranty[0].term}</span>
+                Warranty: <span>{product.warranty[0].term}</span><span>. {product.warranty[0].description}</span>
               </div>
               <div className="item_description_additional-options">
-                <img src={itemSaveWishList} alt=""></img>
-                <img src={itemShare} alt=""></img>
+              <img src={!isInWishList ? itemSaveWishList : removeFromWishListImage} alt="" onClick={() => handleAddToWishlist(product)}></img>
+              <img src={itemShare} alt=""></img>
               </div>
-              <div className="item_description_colors">
+              {/* <div className="item_description_colors">
                 <ul className="item_description_colors_options">
                   {product?.description?.options?.[0]?.meanings?.length > 0 ? (
                     product.description.options[0].meanings.map((meaning, index) => (
@@ -281,9 +327,8 @@ const ProductPage = () => {
                   ) : (
                     ""
                   )}
-
                 </ul>
-              </div>
+              </div> */}
             </div>
             <div className="product_description_price">
       <div className="price_list">
@@ -309,10 +354,6 @@ const ProductPage = () => {
         onQuantityChange={handleQuantityChangePP}
       />
       </div>
-      <div className="price_coupon">
-        <a href="">Click to activate coupon</a>
-      </div>
-
       <div className="price_financing">
         <form>
           <label>
@@ -358,7 +399,6 @@ const ProductPage = () => {
     </div>
           </section>
         </Element>
-
         <Element name="features" className="section product_page">
           <section className="product_category_part">
             <h3>Features</h3>
@@ -487,7 +527,7 @@ const ProductPage = () => {
           <section className="product_category_part">
             <h3>Ratings & Reviews</h3>
             <div className="product_reviews">
-              <div className="product_reviews_snapshot">
+              {/* <div className="product_reviews_snapshot">
                 <div className="reviews_bar">
                   <span className="reviews_label">5 Stars</span>
                   <div className="reviews_bar-fill"></div>
@@ -513,19 +553,22 @@ const ProductPage = () => {
                   <div className="reviews_bar-fill"></div>
                   <span className="reviews_count">(4)</span>
                 </div>
-              </div>
-              <div className="product_reviews_total">
+              </div> */}
+              {/* <div className="product_reviews_total">
                 <h4>Average Customer Ratings</h4>
                 <div className="product_reviews_pivot_rate">
                   <span>***** 4.9</span>
                   <span>(113)</span>
                 </div>
-              </div>
-              <div className="product_reviews_leave">
+              </div> */}
+
+              {/* <div className="product_reviews_leave">
                 <span>Leave a Review</span>
-              </div>
+              </div> */}
+              {reviews ? (<span>1</span>) : (<span>No reviews provided</span>)}
+              
             </div>
-            <ul className="product_reviews_list">
+            {/* <ul className="product_reviews_list">
               <li className="product_review">
                 <div className="review_header">
                   <span className="review_stars">*****</span>
@@ -548,7 +591,7 @@ const ProductPage = () => {
                   <strong>Conclusion: Y / N</strong>
                 </span>
               </li>
-            </ul>
+            </ul> */}
           </section>{" "}
         </Element>
 
@@ -560,8 +603,8 @@ const ProductPage = () => {
                 {product?.installation && product.installation.length > 0 ? (
                   product.installation.map((step, index) => (
                     <li className="product_installation" key={index}>
-                      <strong>Step {index + 1}:</strong>
-                      <span>{step.value}</span>
+                      <strong>{step.step}:</strong>
+                      <span>{step.stepExplain}</span>
                     </li>
                   ))
                 ) : (
@@ -578,8 +621,8 @@ const ProductPage = () => {
     <h3>Warranty</h3>
     <div className="product_warranties">
       <ul className="product_warranties_list">
-        {Array.isArray(product?.warranty) && product.warranty.length > 0 ? (
-          product.warranty.map((option, index) => (
+        {Array.isArray(product.warranty) && product.warranty.length > 0 ? (
+          product?.warranty?.map((option, index) => (
             <li className="product_warranty" key={index}>
               <strong>{option.term}:</strong>
               <span>{option.description}</span>
@@ -607,6 +650,9 @@ const ProductPage = () => {
               </ul>
             </div>
           </section>        </Element>
+          <div className="similar-items-section">
+        <SimilarItemsBasedOnActiveItem product={product} />
+      </div>
       </div>
   );
 };

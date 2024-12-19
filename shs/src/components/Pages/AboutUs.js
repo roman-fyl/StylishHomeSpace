@@ -44,16 +44,16 @@ const AboutUs = () => {
 <section className="about_content">
   <h3>FAQs</h3>
 <div className="about_content_items">
-<Link to="/faqs.html">Account Management</Link>
-<Link to="/faqs.html">Orders</Link>
-<Link to="/faqs.html">Shipping & Delivery</Link>
-<Link to="/faqs.html">Returns & Refunds</Link>
-<Link to="/faqs.html">Payments & Billing</Link>
-<Link to="/faqs.html">Customer Support</Link>
-<Link to="/faqs.html">Products & Inventory</Link>
-<Link to="/faqs.html">Website Navigation</Link>
-<Link to="/faqs.html">Promotions & Discounts</Link>
-<Link to="/faqs.html">Privacy & Security</Link>
+<Link to="/faqs">Shipping & Delivery</Link>
+<Link to="/faqs">Orders</Link>
+<Link to="/faqs">Account Management</Link>
+<Link to="/faqs">Returns & Refunds</Link>
+<Link to="/faqs">Payments & Billing</Link>
+<Link to="/faqs">Customer Support</Link>
+<Link to="/faqs">Products & Inventory</Link>
+<Link to="/faqs">Website Navigation</Link>
+<Link to="/faqs">Promotions & Discounts</Link>
+<Link to="/faqs">Privacy & Security</Link>
 </div>
 </section>
 <section className="section">

@@ -20,12 +20,49 @@
     min-height: 600px;
     width: 250px;
     background-color: #fff;
-    position: relative; // Added to position the button at the bottom
+    position: relative; 
     &:hover {
       box-shadow: $box-shadow-hover;
+      // &::after {
+      //   position: absolute;
+      //   content: '';
+      //   background-image: url('./assets/images/icon-save-wishlist.png');
+      //   background-size: cover; 
+      //   background-position: center;
+      //   width: 50px;
+      //   height: 50px;
+      //   display: block;
+      //   right: 15px;
+      //   top: 15px;
+      //   display: block;
+      //   cursor: $cursor;
+      //   transition: $transition; 
+      // }
+
     }
   }
 }
+
+.wishlist-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
 
 .item {
     &_description {
@@ -116,6 +153,16 @@
       }
       
     }
+    &_tags {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: 60px;
+      img {
+          width: 30px;
+          margin: 0 5px;
+      }
+  }
   }
   .item_add-to-cart {
     background: $button-addToCart;

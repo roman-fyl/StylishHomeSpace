@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import data from "../../assets/db/items.json";
 
 import CategorySlider from "./CategorySlider";
-import ItemSection from "../HomePage/ItemSection/ItemSection";
+import ItemSection from "../ItemSection/ItemSection";
 
 import "./CategoryPage.scss";
 
@@ -48,8 +48,10 @@ const CategoryPage = ({ group = null, subject = null, brand = null, category = n
             params.set(key, additionalParams[key]);
         }
     });
-
+    
+    console.log(params)
     return params.toString();
+
 };
 
   useEffect(() => {
@@ -130,7 +132,12 @@ const CategoryPage = ({ group = null, subject = null, brand = null, category = n
         </div>
 
         <section className="section">
+        <h2>Best-Selling Items</h2>
           <ItemSection group="bestseller" subject="Best-Selling Items" category={categoryName} />
+        </section>
+        <section className="section">
+        <h2>New Arrivals</h2>
+          <ItemSection group="newArrival" subject="New Arrival" category={categoryName} />
         </section>
 
         <section className="section category-navigation_lists">

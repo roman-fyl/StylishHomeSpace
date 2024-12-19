@@ -8,11 +8,11 @@ export const updateLocalStorage = (key, updatedItem) => {
         const existingItemIndex = existingData.findIndex(item => item.sku === updatedItem.sku);
         
         if (existingItemIndex !== -1) {
-            existingData[existingItemIndex].quantity = updatedItem.quantity;
+            existingData[existingItemIndex].quantity += updatedItem.quantity;
         } else {
             existingData.push(updatedItem);
         }
-
+        // console.log('existingData', existingData)
         setLocalStorage(key, existingData);
     } catch (error) {
         console.error("Error in updateLocalStorage:", error);

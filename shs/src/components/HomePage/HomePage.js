@@ -1,11 +1,10 @@
 
 import React, {useEffect, useState} from "react";
-import Layout from "../../Layout";
 
 import MainSlider from "../HomePage/MainSlider/MainSlider";
 import BannersGroup from "../HomePage/Banners/BannersGroup";
 import FlashOffers from "../HomePage/FlashOffers/FlashOffers";
-import ItemSection from "./ItemSection/ItemSection";
+import ItemSection from "../ItemSection/ItemSection";
 import Trends from "../HomePage/Trends/Trends";
 import DailyDeals from "../HomePage/DailyDeals/DailyDeals";
 
@@ -34,19 +33,22 @@ const HomePage = () => {
                <FlashOffers />
             </section>
             <section className="section">
-            <ItemSection group="bestseller" subject="Best-Selling Items" />
+               <h2>Best-Selling Items</h2>
+            <ItemSection group="bestseller" subject="" viewbutton={true} />
             </section>
             <section className="section">
             <Trends />
             </section>
             <section className="section">
-               <ItemSection group="newArrival" subject="New Arrivals"/>
+               <h2>New Arrivals</h2>
+               <ItemSection group="newArrival" subject="" viewbutton={true}/>
             </section>
             <section className="section">
                <DailyDeals />
             </section>
             <section className="section">
-            <ItemSection group="outlet" subject="Outlets"/>
+               <h2>Outlets</h2>
+            <ItemSection group="outlet" subject="" viewbutton={true}/>
             </section>
            </div>
        </div>

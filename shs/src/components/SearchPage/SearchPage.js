@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addToCart} from "../../store/actions/cartActions";
+import {addWishListItem} from "../../store/actions/wishListActions"
+import {setLocalStorage} from "../../components/LocalStorage/setLocalStorage";
+import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import homepageLogo from "../../assets/images/icon-homepage.png";
+import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
+import ItemCard from "../../hooks/itemCard"
+
 import data from "../../assets/db/items.json";
 import "./SearchPage.scss";
 
@@ -31,6 +37,8 @@ const SearchPage = ({
     colors: [],
   });
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
+  const sessionId = useSelector((state) => state.session.sessionId)
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -324,11 +332,28 @@ const SearchPage = ({
     setIsListView(!isListView);
   };
 
-  const handleAddToCart = (item) => {
-    const sessionNumber = getSessionNumber();
-    dispatch(addToCart(item));
-    navigate(`/cart?session=${sessionNumber}`);
-};
+const handleTrackItems = (item) => {
+  const existingData = getFromLocalStorage('visitedItems')
+  const updatedData = [ ...existingData, {...item, session: sessionId}]
+  
+      setLocalStorage("visitedItems", updatedData)
+      console.log([item])
+    }
+
+    const handleAddToWishlist = (item) => {
+      const existingData = getFromLocalStorage("wishListItems");
+      const alreadyVisited = existingData.some(
+        (wishListItem) => wishListItem.sku === item.sku
+      );
+  
+      if (!alreadyVisited) {
+        const itemWithSession = { ...item, session: sessionId };
+        dispatch(addWishListItem(itemWithSession));
+        console.log("Tracked item added:", itemWithSession);
+      } else {
+        console.log("Item already tracked:", item);
+      }
+    };
 
   return (
     <div className="container">
@@ -572,46 +597,7 @@ const SearchPage = ({
             <ul className="card_items">
             {filteredAndSortedProducts.length > 0 ? (
               filteredAndSortedProducts.map((product, index) => (
-                <li className="card_item" data-id={index + 1} key={product.sku}>
-                  <Link to={`/item/${product.sku}`}>
-                    <span className="item_image">
-                      <img
-                        src={product.imageSlider[0]?.imageSliderLink}
-                        alt={`${product.title}`}
-                      />
-                    </span>
-                    <div className="item_description">
-                      <span className="item_brand-logo">
-                        <img src={product.brandLogo} alt={product.brand} />
-                      </span>
-                      <h3 className="item_title">{`${product.brandText || ""} ${product.description?.options[0]?.meanings[0]?.value || ""} ${product.subType || ""} ${product.subCategory || ""} ${product.capacity || ""}`}</h3>
-                      <span className="item_rating">
-                        <span className="item_rate">{product.rate}</span>
-                        <span className="item_rate">{product.group}</span>
-                        <span className="item_rate">{product.color}</span>
-                        <span className="item_rate">{product.brandText}</span>
-                      </span>
-                      <span className="item_pricing">
-                        <span className="item_old-price">
-                          <del>
-                            ${GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
-                              2
-                            )}
-                          </del>
-                          <div>
-                            ${parseFloat(calculateDiscountedAmount(product.price, 12.319)).toFixed(2)}
-                          </div>
-                        </span>
-                        <span className="item_price">${product.price}</span>
-                      </span>
-                    </div>
-                  </Link>
-                  <div className="item_actions">
-                  <button onClick={() => handleAddToCart(product)} className="item_add-to-cart">
-                  Add To Cart
-                </button>   
-                  </div>
-                </li>
+                <ItemCard key={product.sku} item={product} />
               ))
             ) : (
               <p>No products match your selected filters.</p>
@@ -623,7 +609,14 @@ const SearchPage = ({
               {filteredAndSortedProducts.length > 0 ? (
               filteredAndSortedProducts.map((product, index) => (
                 <li className="list_card_item" data-id={index + 1} key={product.sku}>
-                  <Link to={`/item/${product.sku}`}>
+                  <Link to={`/item/${product.sku}`} onClick={() => handleTrackItems(product)}>
+                  <span 
+  className="wishlist-icon" 
+  onClick={() => handleAddToWishlist(product)}
+  title="Add to Wishlist"
+>
+  <img src={itemSaveWishList} alt="Save to wishlist" />
+</span>
                     <span className="list_item_image">
                       <img
                         src={product.imageSlider[0]?.imageSliderLink}

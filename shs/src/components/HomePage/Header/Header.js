@@ -17,11 +17,21 @@ import "./Header.scss";
 const Header = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart || {});
-  // console.log("Cart State:", cart); 
+  const customer = useSelector((state) => state.customer.customer || []);
+  // const firstCustomer = customer.find(c => c.firstName);  
+  // const firstName = firstCustomer.firstName || "";
+  const firstCustomer = Array.isArray(customer) && customer.length > 0 ? customer[0] : null;
+  const firstName = firstCustomer?.firstName || "Guest";
 
-  const cartItems = cart.items || [];
+  // console.log("Customer firstName during render:", firstName);
+
+    const cartItems = cart.items || [];
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
     const [isFormVisible, setFormVisible] = useState(false);
+
+    useEffect(() => {
+      // console.log("Customer firstName updated:", firstName);
+    }, [firstName]);
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
@@ -82,8 +92,13 @@ const Header = () => {
             <div className="header_block">
               <img src={iconLogIn} alt="Sign In Icon" />
               <span className="header_account">
-                <span>Hello, <span>Roman</span></span>
-                <span>SIGN IN</span>
+              {firstName ? (
+                  <span>
+                    Hello, <span>{firstName}</span>
+                  </span>
+                ) : (
+                  <span>SIGN IN</span>
+                )}
               </span>
             </div>
           </Link>

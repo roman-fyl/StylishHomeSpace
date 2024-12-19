@@ -7,7 +7,6 @@ import ProfileAffiliateProgram from './ProfileAffiliateProgram';
 import ProfileLastVisitedItems from "./ProfileLastVisitedItems";
 import ProfileLoyaltyPoints from "./ProfileLoyaltyPoints";
 import ProfileOrderHistory from "./ProfileOrderHistory";
-import ProfilePayments from './ProfilePayments';
 import ProfileReturns from "./ProfileReturns";
 import ProfileSubmittedTickets from './ProfileSubmittedTickets';
 import ProfileWishlist from "./ProfileWishlist";
@@ -23,19 +22,7 @@ const Profile = () => {
 return (
     <div className="account_description"><h1>My Account</h1>
    <div className="account_content">
-    {/* <ul className="account_quick_links">
-                <li className="account_quick_link"><Link to="/my-profile.html">Profile Information</Link></li>
-                <li className="account_quick_link"><Link to="/my-profile-address.html">Addresses</Link></li>
-                <li className="account_quick_link"><Link to="/my-profile-payments.html">Payments</Link></li>
-                <li className="account_quick_link"><Link to="/my-profile-order-history.html">Order History</Link></li>
-                <li className="account_quick_link"><Link to="/order-tracking.html">Check Order Status</Link></li>
-                <li className="account_quick_link"><Link to="/my-profile-returns.html">Returns</Link></li>
-                <li className="account_quick_link"><Link to="/my-profile-wishlist.html">Wishlist</Link></li>
-                <li className="account_quick_link"><Link to="/my-profile-last-visited-items.html">Last Visited Items</Link></li>
-                <li className="account_quick_link"><Link to="/my-profile-loyalty.html">Loyalty Points</Link></li>
-                <li className="account_quick_link"><Link to="/my-profile-affiliate.html">Affiliate Program</Link></li>
-                <li className="account_quick_link"><Link to="/my-profile-submitted-tickets.html">Submitted Tickets</Link></li>
-    </ul> */}
+   
      <ul className="account_quick_links">
         <li className="account_quick_link">
           <a href="#profile-info">Profile Information</a>
@@ -53,22 +40,22 @@ return (
           <a href="#profile-order-history">Order History</a>
         </li>
         <li className="account_quick_link">
-          <a href="/order-tracking.html">Check Order Status</a>
+          <a href="/order-tracking">Check Order Status</a>
         </li>
         <li className="account_quick_link">
           <a href="#profile-returns">Returns</a>
         </li>
-        <li className="account_quick_link">
+        {/* <li className="account_quick_link">
           <a href="#profile-affiliate-program">Affiliate Program</a>
-        </li>
+        </li> */}
        
         <li className="account_quick_link">
           <a href="#profile-loyalty-points">Loyalty Points</a>
         </li>
       
-        <li className="account_quick_link">
+        {/* <li className="account_quick_link">
           <a href="#profile-submitted-tickets">Submitted Tickets</a>
-        </li>
+        </li> */}
         <li className="account_quick_link">
           <a href="#profile-submitted-tickets">Logout</a>
         </li>
@@ -85,9 +72,9 @@ return (
         {/* <ProfilePayments /> */}
         <ProfileOrderHistory />
         <ProfileReturns />
-        <ProfileAffiliateProgram />
+        {/* <ProfileAffiliateProgram /> */}
         <ProfileLoyaltyPoints />
-        <ProfileSubmittedTickets />
+        {/* <ProfileSubmittedTickets /> */}
     </div>
    </div>
    
