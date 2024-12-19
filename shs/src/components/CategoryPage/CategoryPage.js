@@ -132,9 +132,11 @@ const CategoryPage = ({ group = null, subject = null, brand = null, category = n
         </div>
 
         <section className="section">
+        <h2>Best-Selling Items</h2>
           <ItemSection group="bestseller" subject="Best-Selling Items" category={categoryName} />
         </section>
         <section className="section">
+        <h2>New Arrivals</h2>
           <ItemSection group="newArrival" subject="New Arrival" category={categoryName} />
         </section>
 
