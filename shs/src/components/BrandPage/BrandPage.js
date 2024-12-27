@@ -105,7 +105,7 @@ const BrandPage = () => {
             <div className="newArrivals_main">
               <h2>Best-Selling Products</h2>
               <ul className="card_items">
-                {filteredBestsellerProducts .sort(() => Math.random() - 0.5).slice(0, displayedItemCount).map((item, index) => (
+                {filteredBestsellerProducts.sort(() => Math.random() - 0.5).slice(0, displayedItemCount).map((item, index) => (
                   <ItemCard key={item.sku} item={item} />
                 ))}
               </ul>
