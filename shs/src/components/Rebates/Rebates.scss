@@ -1,0 +1,57 @@
+@import "../../_vars.scss";
+
+.rebates {
+    &_content {
+        min-height: 80vh;
+    }
+}
+
+.rebate {
+    &_container {
+        display: flex;
+        flex-direction: row;
+    }
+    &_description {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        span {
+            margin-bottom: 10px;
+        }
+    }
+    &_image {
+       height: 180px;
+       margin-right: 35px; 
+    }
+    &_date {
+        color: $primary-color-light;
+        font-style: italic;
+    }
+    &_header {
+        font-weight: 700;
+    }
+    &_content {
+        border: 1px solid red;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        row-gap: 20px;
+        width: 100%;
+    }
+    &_link {
+        color: $primary-color;
+            &:hover {
+                text-decoration: underline;
+            }
+    }
+    &_text {
+        margin-bottom: 30px;
+    }
+    &_main {
+        &_image {
+            max-width: 100%;
+        }
+    }
+ 
+}
