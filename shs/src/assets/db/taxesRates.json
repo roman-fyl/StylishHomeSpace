@@ -1,0 +1,903 @@
+[
+      {
+        "state": "Alabama",
+        "general_rate": 4.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Alaska",
+        "general_rate": 0.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 0.00,
+            "exceptions": ["Local taxes may apply."]
+          },
+          "furniture": {
+            "rate": 0.00,
+            "exceptions": ["Local taxes may apply."]
+          },
+          "warranties": {
+            "rate": 0.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Arizona",
+        "general_rate": 5.60,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 5.60,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 5.60,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 5.60,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Arkansas",
+        "general_rate": 6.50,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.50,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.50,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.50,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "California",
+        "general_rate": 7.25,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 7.25,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 7.25,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 7.25,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Colorado",
+        "general_rate": 2.90,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 2.90,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 2.90,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 2.90,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Connecticut",
+        "general_rate": 6.35,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.35,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.35,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.35,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Delaware",
+        "general_rate": 0.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 0.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 0.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 0.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Florida",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Georgia",
+        "general_rate": 4.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Hawaii",
+        "general_rate": 4.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Idaho",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Illinois",
+        "general_rate": 6.25,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.25,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.25,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.25,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Indiana",
+        "general_rate": 7.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 7.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 7.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 7.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Iowa",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Kansas",
+        "general_rate": 6.50,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.50,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.50,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.50,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Kentucky",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Louisiana",
+        "general_rate": 4.45,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.45,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.45,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.45,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Maine",
+        "general_rate": 5.50,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 5.50,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 5.50,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 5.50,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Maryland",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Massachusetts",
+        "general_rate": 6.25,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.25,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.25,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.25,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Michigan",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Minnesota",
+        "general_rate": 6.875,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.875,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.875,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.875,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Mississippi",
+        "general_rate": 7.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 7.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 7.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 7.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Missouri",
+        "general_rate": 4.23,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.23,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.23,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.23,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Montana",
+        "general_rate": 0.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 0.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 0.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 0.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Nebraska",
+        "general_rate": 5.50,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 5.50,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 5.50,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 5.50,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Nevada",
+        "general_rate": 6.85,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.85,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.85,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.85,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "New Hampshire",
+        "general_rate": 0.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 0.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 0.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 0.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "New Jersey",
+        "general_rate": 6.625,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.625,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.625,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.625,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "New Mexico",
+        "general_rate": 5.125,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 5.125,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 5.125,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 5.125,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "New York",
+        "general_rate": 4.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "North Carolina",
+        "general_rate": 4.75,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.75,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.75,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.75,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "North Dakota",
+        "general_rate": 5.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 5.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 5.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 5.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Ohio",
+        "general_rate": 5.75,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 5.75,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 5.75,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 5.75,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Oklahoma",
+        "general_rate": 4.50,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.50,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.50,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.50,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Oregon",
+        "general_rate": 0.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 0.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 0.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 0.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Pennsylvania",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Rhode Island",
+        "general_rate": 7.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 7.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 7.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 7.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "South Carolina",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "South Dakota",
+        "general_rate": 4.50,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.50,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.50,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.50,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Tennessee",
+        "general_rate": 7.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 7.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 7.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 7.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Texas",
+        "general_rate": 6.25,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.25,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.25,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.25,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Utah",
+        "general_rate": 4.85,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.85,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.85,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.85,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Vermont",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Virginia",
+        "general_rate": 5.30,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 5.30,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 5.30,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 5.30,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Washington",
+        "general_rate": 6.50,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.50,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.50,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.50,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "West Virginia",
+        "general_rate": 6.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 6.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 6.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Wisconsin",
+        "general_rate": 5.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 5.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 5.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 5.00,
+            "exceptions": []
+          }
+        }
+      },
+      {
+        "state": "Wyoming",
+        "general_rate": 4.00,
+        "categories": {
+          "kitchen_appliances": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "furniture": {
+            "rate": 4.00,
+            "exceptions": []
+          },
+          "warranties": {
+            "rate": 4.00,
+            "exceptions": []
+          }
+        }
+      }
+    ]
+  
