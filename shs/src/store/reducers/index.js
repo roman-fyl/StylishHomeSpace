@@ -8,6 +8,7 @@ import customerReducer from "./customerSlice";
 import contentReducer from "./contentSlice";
 import visitedReducer from "./visitedReducer";
 import wishListReducer from "./wishListReducer";
+import laterReducer from "./laterReducer";
 
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     content: contentReducer,
     visited: visitedReducer,
     wishList: wishListReducer,
+    later: laterReducer,
 });
 
 export default rootReducer;

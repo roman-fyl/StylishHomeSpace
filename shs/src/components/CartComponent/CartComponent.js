@@ -11,6 +11,10 @@ import Notification from "../../components/Notification/Notification";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import { setSessionId} from "../../store/actions/sessionActions";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
+import useItemActions from ".././../hooks/useItemActions";
+import SaveLater from "./SaveLater"
+
+
 
 
 import "./CartComponent.scss";
@@ -30,8 +34,62 @@ const CartComponent = () => {
   const [deliveryType, setDeliveryType] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true); 
   const [notification, setNotification] = useState({ message: "", type: "" });
-  const [totalBeforeTaxCollected, setTotalBeforeTaxCollected] = useState("")
+  const [totalBeforeTaxCollected, setTotalBeforeTaxCollected] = useState("");
+  const [isInLater, setIsInLater] = useState({});
 
+  const { handleAddLaterItem, handleRemoveLaterItem } = useItemActions();
+
+  useEffect(() => {
+    const storedLater = getFromLocalStorage("laterItems") || [];
+    
+    const newIsInLater = cartItems.reduce((acc, item) => {
+      const isInLater = storedLater.some(laterItem => laterItem.sku === item.sku);
+      acc[item.sku] = isInLater;
+      return acc;
+    }, {});
+  
+    setIsInLater(newIsInLater);
+  }, [cartItems]); 
+  
+  
+  
+  const toggleLater = (item) => {
+    if (!item || !item.sku) {
+      console.error("Invalid item passed to toggleLater:", item);
+      return;
+    }
+  
+    const storedLater = getFromLocalStorage("laterItems") || [];
+    let updatedWishlist = [];
+    const isItemInLater = storedLater.some(laterItem => laterItem.sku === item.sku);
+  
+    if (isItemInLater) {
+      // Remove from "later" list
+      updatedWishlist = storedLater.filter(laterItem => laterItem.sku !== item.sku);
+      handleRemoveLaterItem(item);
+    } else {
+      // Add to "later" list
+      updatedWishlist = [...storedLater, item];
+      handleAddLaterItem(item);
+    }
+  
+    // Update localStorage with the new list
+    setLocalStorage("laterItems", updatedWishlist);
+  
+    // Update the local state for the specific item
+    setIsInLater((prev) => ({
+      ...prev,
+      [item.sku]: !isItemInLater,  // Toggle only the current item
+    }));
+  
+    // Remove the item from the cart
+    if (!isItemInLater) {
+      dispatch(removeFromCart(item.idN));  // Remove from Redux cart state
+      const updatedCartItems = cartItems.filter((cartItem) => cartItem.idN !== item.idN);
+      setLocalStorage("cartItems", updatedCartItems);  // Update localStorage with updated cart items
+    }
+  };
+  
   
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -350,6 +408,9 @@ const CartComponent = () => {
                       onQuantityChange={handleQuantityInCart}
                     />
                     <button className="cart_button_remove" onClick={() => handleRemove(item.idN)}>Remove</button>
+      
+                    <button onClick={() => toggleLater(item)}>{isInLater[item.sku] ? "Remove from List" : "Save for Later"}</button>
+
                   </div>
                 </div>
                 <div className="cartItem_pricing">
@@ -440,7 +501,8 @@ const CartComponent = () => {
         </div>
       </div>
       <div>
-     
+     <SaveLater />
+
       <SimilarItems 
     cartItems={cartItems}
     excludeCartItems={true}

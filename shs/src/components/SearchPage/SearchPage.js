@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {addToCart} from "../../store/actions/cartActions";
-import {addWishListItem} from "../../store/actions/wishListActions"
-import {setLocalStorage} from "../../components/LocalStorage/setLocalStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../store/actions/cartActions";
+import { addWishListItem } from "../../store/actions/wishListActions"
+import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import homepageLogo from "../../assets/images/icon-homepage.png";
@@ -269,91 +269,91 @@ const SearchPage = ({
     const oldPrice = GenerateOldPrice(price, percentage);
     return oldPrice - price
   }
-  
+
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
     setShuffled(false);
   };
 
   const filteredAndSortedProducts = products
-  .filter((product) => {
+    .filter((product) => {
 
-    if (selectedFilters.brands.length > 0 && !selectedFilters.brands.includes(product.brandText)) {
-      return false;
-    }
+      if (selectedFilters.brands.length > 0 && !selectedFilters.brands.includes(product.brandText)) {
+        return false;
+      }
 
-    if (selectedFilters.groups.length > 0 && !selectedFilters.groups.includes(product.group)) {
-      return false;
-    }
+      if (selectedFilters.groups.length > 0 && !selectedFilters.groups.includes(product.group)) {
+        return false;
+      }
 
-    if (selectedFilters.categories.length > 0 && !selectedFilters.categories.includes(product.category)) {
-      return false;
-    }
+      if (selectedFilters.categories.length > 0 && !selectedFilters.categories.includes(product.category)) {
+        return false;
+      }
 
-    if (selectedFilters.subCategories.length > 0 && !selectedFilters.subCategories.includes(product.subCategory)) {
-      return false;
-    }
+      if (selectedFilters.subCategories.length > 0 && !selectedFilters.subCategories.includes(product.subCategory)) {
+        return false;
+      }
 
-    if (selectedFilters.subTypes.length > 0 && !selectedFilters.subTypes.includes(product.subType)) {
-      return false;
-    }
+      if (selectedFilters.subTypes.length > 0 && !selectedFilters.subTypes.includes(product.subType)) {
+        return false;
+      }
 
-    if (selectedFilters.colors.length > 0 && !selectedFilters.colors.includes(product.color)) {
-      return false;
-    }
+      if (selectedFilters.colors.length > 0 && !selectedFilters.colors.includes(product.color)) {
+        return false;
+      }
 
-    const price = parseFloat(product.price);
-    if (price < priceRange.min || price > priceRange.max) {
-      return false;
-    }
+      const price = parseFloat(product.price);
+      if (price < priceRange.min || price > priceRange.max) {
+        return false;
+      }
 
-    return true;
-  })
-  .sort((a, b) => {
-    switch (sortOption) {
-      case "priceLowToHigh":
-        return a.price - b.price;
-      case "priceHighToLow":
-        return b.price - a.price;
-      case "bestSeller":
-        return b.rate - a.rate;
-      case "sortDiscount":
-        return (
-          calculateDiscountedAmount(b.price, 12.319) -
-          calculateDiscountedAmount(a.price, 12.319)
-        );
-      case "mostVisited":
-        return Math.random() - 0.5;
-      default:
-        return 0;
-    }
-  });
+      return true;
+    })
+    .sort((a, b) => {
+      switch (sortOption) {
+        case "priceLowToHigh":
+          return a.price - b.price;
+        case "priceHighToLow":
+          return b.price - a.price;
+        case "bestSeller":
+          return b.rate - a.rate;
+        case "sortDiscount":
+          return (
+            calculateDiscountedAmount(b.price, 12.319) -
+            calculateDiscountedAmount(a.price, 12.319)
+          );
+        case "mostVisited":
+          return Math.random() - 0.5;
+        default:
+          return 0;
+      }
+    });
   const toggleViewMode = () => {
     setIsListView(!isListView);
   };
 
-const handleTrackItems = (item) => {
-  const existingData = getFromLocalStorage('visitedItems')
-  const updatedData = [ ...existingData, {...item, session: sessionId}]
-  
-      setLocalStorage("visitedItems", updatedData)
-      console.log([item])
-    }
+  const handleTrackItems = (item) => {
+    const existingData = getFromLocalStorage('visitedItems')
+    const updatedData = [...existingData, { ...item, session: sessionId }]
 
-    const handleAddToWishlist = (item) => {
-      const existingData = getFromLocalStorage("wishListItems");
-      const alreadyVisited = existingData.some(
-        (wishListItem) => wishListItem.sku === item.sku
-      );
-  
-      if (!alreadyVisited) {
-        const itemWithSession = { ...item, session: sessionId };
-        dispatch(addWishListItem(itemWithSession));
-        console.log("Tracked item added:", itemWithSession);
-      } else {
-        console.log("Item already tracked:", item);
-      }
-    };
+    setLocalStorage("visitedItems", updatedData)
+    console.log([item])
+  }
+
+  const handleAddToWishlist = (item) => {
+    const existingData = getFromLocalStorage("wishListItems");
+    const alreadyVisited = existingData.some(
+      (wishListItem) => wishListItem.sku === item.sku
+    );
+
+    if (!alreadyVisited) {
+      const itemWithSession = { ...item, session: sessionId };
+      dispatch(addWishListItem(itemWithSession));
+      console.log("Tracked item added:", itemWithSession);
+    } else {
+      console.log("Item already tracked:", item);
+    }
+  };
 
   return (
     <div className="container">
@@ -575,77 +575,77 @@ const handleTrackItems = (item) => {
             </div>
             <div className="search_filters_filter">
               <div className="search_filters">
-        <select id="sort" className="search_filters_select" value={sortOption} onChange={handleSortChange}>
-          <option value=""><strong>Select Sorting Options</strong></option>
-          <option value="sortDiscount">Sort By Discount</option>
-          <option value="priceLowToHigh">Price: Low to High</option>
-          <option value="priceHighToLow">Price: High to Low</option>
-          <option value="bestSeller">Best Sellers</option>
-          <option value="mostVisited">Most Visited</option>
-        </select>
-      </div>
+                <select id="sort" className="search_filters_select" value={sortOption} onChange={handleSortChange}>
+                  <option value=""><strong>Select Sorting Options</strong></option>
+                  <option value="sortDiscount">Sort By Discount</option>
+                  <option value="priceLowToHigh">Price: Low to High</option>
+                  <option value="priceHighToLow">Price: High to Low</option>
+                  <option value="bestSeller">Best Sellers</option>
+                  <option value="mostVisited">Most Visited</option>
+                </select>
+              </div>
             </div>
             <div className="search_filters_filter">
-            <h4>Grid/List</h4>
-           <div className="switcher">
-           <input type="checkbox" id="switchView" onClick={toggleViewMode} />
-           <label for="switchView"></label>
-           </div>
+              <h4>Grid/List</h4>
+              <div className="switcher">
+                <input type="checkbox" id="switchView" onClick={toggleViewMode} />
+                <label for="switchView"></label>
+              </div>
             </div>
           </div>
           {!isListView && (
             <ul className="card_items">
-            {filteredAndSortedProducts.length > 0 ? (
-              filteredAndSortedProducts.map((product, index) => (
-                <ItemCard key={product.sku} item={product} />
-              ))
-            ) : (
-              <p>No products match your selected filters.</p>
-            )}
-          </ul>
+              {filteredAndSortedProducts.length > 0 ? (
+                filteredAndSortedProducts.map((product, index) => (
+                  <ItemCard key={product.sku} item={product} />
+                ))
+              ) : (
+                <p>No products match your selected filters.</p>
+              )}
+            </ul>
           )}
           {isListView && (
             <ul className="list_card_items">
               {filteredAndSortedProducts.length > 0 ? (
-              filteredAndSortedProducts.map((product, index) => (
-                <li className="list_card_item" data-id={index + 1} key={product.sku}>
-                  <Link to={`/item/${product.sku}`} onClick={() => handleTrackItems(product)}>
-                  <span 
-  className="wishlist-icon" 
-  onClick={() => handleAddToWishlist(product)}
-  title="Add to Wishlist"
->
-  <img src={itemSaveWishList} alt="Save to wishlist" />
-</span>
-                    <span className="list_item_image">
-                      <img
-                        src={product.imageSlider[0]?.imageSliderLink}
-                        alt={`${product.title}`}
-                      />
-                    </span>
-                  </Link>
-                  <div className="list_item_description">
-                    <div className="list_item_header">
-                    <span className="list_item_brand-logo">
-                        <img src={product.brandLogo} alt={product.brand} /></span>
+                filteredAndSortedProducts.map((product, index) => (
+                  <li className="list_card_item" data-id={index + 1} key={product.sku}>
+                    <Link to={`/item/${product.sku}`} onClick={() => handleTrackItems(product)}>
+                      <span
+                        className="wishlist-icon"
+                        onClick={() => handleAddToWishlist(product)}
+                        title="Add to Wishlist"
+                      >
+                        <img src={itemSaveWishList} alt="Save to wishlist" />
+                      </span>
+                      <span className="list_item_image">
+                        <img
+                          src={product.imageSlider[0]?.imageSliderLink}
+                          alt={`${product.title}`}
+                        />
+                      </span>
+                    </Link>
+                    <div className="list_item_description">
+                      <div className="list_item_header">
+                        <span className="list_item_brand-logo">
+                          <img src={product.brandLogo} alt={product.brand} /></span>
                         <ul className="list_item_tags">
-              {product.tags.map((tag, index) => (
-                <li key={index}>
-                  <img src={tag.iconLink} alt={`${tag.value} ${product.sku}`}
-                  ></img>
-                </li>
-              ))}
-            </ul>
-                </div>
-                <span className="list_item_sku">{product.sku}</span>
-                  <h3 className="list_item_subject">{`${product.brandText || ""} ${product.description?.options[0]?.meanings[0]?.value || ""} ${product.subType || ""} ${product.subCategory || ""} ${product.capacity || ""}`}</h3>
-                  <div className="list_item_additional">
-                    <span className="item_rate">{product.rate}</span>
-                    <span className="list_item_dealer-info">{product.autorizationDealer ? "AUTHORIZED DEALER" : ""}</span>
-                </div>
-                  </div>
-                  <div className="list_item_actions">
-                  <span className="list_item_pricing">
+                          {product.tags.map((tag, index) => (
+                            <li key={index}>
+                              <img src={tag.iconLink} alt={`${tag.value} ${product.sku}`}
+                              ></img>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <span className="list_item_sku">{product.sku}</span>
+                      <h3 className="list_item_subject">{`${product.brandText || ""} ${product.description?.options[0]?.meanings[0]?.value || ""} ${product.subType || ""} ${product.subCategory || ""} ${product.capacity || ""}`}</h3>
+                      <div className="list_item_additional">
+                        <span className="item_rate">{product.rate}</span>
+                        <span className="list_item_dealer-info">{product.autorizationDealer ? "AUTHORIZED DEALER" : ""}</span>
+                      </div>
+                    </div>
+                    <div className="list_item_actions">
+                      <span className="list_item_pricing">
                         <div className="list_item_old-price">
                           <del>
                             ${GenerateOldPrice(parseFloat(product.price), 12.319).toFixed(
@@ -658,16 +658,16 @@ const handleTrackItems = (item) => {
                         </div>
                         <span className="item_price">${product.price}</span>
                       </span>
-                    <a href="#" className="item_add-to-cart">
-                      Add to Cart
-                    </a>
-                    <Link to={`/item/${product.sku}`} className="item_add-to-cart">More Details</Link>
-                  </div>
-                </li>
-              ))
-            ) : (
-              <p>No products match your selected filters.</p>
-            )}
+                      <a href="#" className="item_add-to-cart">
+                        Add to Cart
+                      </a>
+                      <Link to={`/item/${product.sku}`} className="item_add-to-cart">More Details</Link>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <p>No products match your selected filters.</p>
+              )}
             </ul>
           )}
         </section>

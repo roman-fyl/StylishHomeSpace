@@ -109,7 +109,7 @@ const SimilarItemsBasedOnActiveItem = memo(({ product }) => {
       const existingData = getFromLocalStorage("matchedProduct") || [];
       const updatedData = excludeDuplicates([...existingData, ...similarItems]);
 
-      console.log("Saving data to localStorage:", updatedData);
+      // console.log("Saving data to localStorage:", updatedData);
       setLocalStorage("matchedProduct", updatedData);
       setUpdatedProducts(updatedData);
     }

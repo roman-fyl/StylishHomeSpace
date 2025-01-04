@@ -37,6 +37,8 @@ import BrandPage from "./components/BrandPage/BrandPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import CartComponent from './components/CartComponent/CartComponent';
+import Rebates from "./components/Rebates/Rebates";
+import RebatePage from "./components/Rebates/RebatePage";
 import DashBoard from "../src/admin/DashBoard/DashBoard";
 
 import './App.scss';
@@ -111,9 +113,11 @@ const App = () => {
           <Route path="/success" element={<ThankYouPage />} />
           <Route path="/item/:skuText" element={<ProductPage />} />
           <Route path="/category/:categoryName" element={<CategoryPage />} />
+          <Route path="/rebate/:idN" element={<RebatePage />} />
           <Route path="/brand/:brandName" element={<BrandPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/cart" element={<CartComponent />} />
+          <Route path="/rebates" element={<Rebates />} />
         </Routes>
       </Layout>
     </Router>

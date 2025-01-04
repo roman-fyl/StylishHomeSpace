@@ -102,15 +102,18 @@ const BrandPage = () => {
             <div className="items_more"><Link to="/shop-all">Shop All</Link></div>
           </section>
           <section className="section">
-            <div className="newArrivals_main">
+            {filteredBestsellerProducts.length > 0 ? (
+              <div className="newArrivals_main">
               <h2>Best-Selling Products</h2>
               <ul className="card_items">
-                {filteredBestsellerProducts .sort(() => Math.random() - 0.5).slice(0, displayedItemCount).map((item, index) => (
-                  <ItemCard key={item.sku} item={item} />
+                {filteredBestsellerProducts.sort(() => Math.random() - 0.5).slice(0, displayedItemCount).map((item, index) => (
+                  <ItemCard key={item.sku} item={item}  />
                 ))}
               </ul>
               <div className="items_more"><span onClick={showItems}>Explore More</span></div>
             </div>
+            ): null}
+            
           </section>
           <section className="section">
             <div className="newArrivals_main">

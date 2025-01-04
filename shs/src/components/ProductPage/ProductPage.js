@@ -9,9 +9,12 @@ import { updateLocalStorage } from "../../components/LocalStorage/updateLocalSto
 import { getFromLocalStorage } from "../../components/LocalStorage/getFromLocalStorage";
 import { setLocalStorage } from "../../components/LocalStorage/setLocalStorage";
 import SimilarItemsBasedOnActiveItem from "../../components/SimilarItems/SimilarItemsBasedOnActiveItem";
+import {HandleTrackRebates} from "../../hooks/handleTrackRebates";
+import {getDate} from "../../components/Sessions/getDate";
 
 import QuantityItems from "./QuantityItems";
-import productData from "../../assets/db/items.json";
+import products from "../../assets/db/items.json";
+import rebates from "../../assets/db/rebates.json";
 import { getSessionNumber } from "../Sessions/getSessionNumber";
 import itemSaveWishList from "../../assets/images/icon-save-wishlist.png";
 import removeFromWishListImage from "../../assets/images/icon-remove-wishlist.png";
@@ -34,22 +37,43 @@ const ProductPage = () => {
   const [reviews, setReviews] = useState(false)
   const sessionId = useSelector((state) => state.session.sessionId);
   const [isInWishList, setIsInWishList] = useState(false);
-
+  const [applicableRebate, setApplicableRebate] = useState([]);
+  const [validRebates, setValidRebates] = useState([])
+  
 
 
   useEffect(() => {
     setProduct(null);
     if (!skuText) return;
-    // const productData = getFromLocalStorage('admin-products');
+    // const products = getFromLocalStorage('admin-products');
 
   
-    const fetchedProduct = productData.find(
+    const fetchedProduct = products.find(
       (item) => item.sku.toLowerCase() === skuText.toLowerCase()
     );
   
     if (fetchedProduct) {
       setProduct(fetchedProduct);
       setError(null);
+
+      const applicableRebates = rebates.filter((rebate) => 
+        rebate.items.includes(fetchedProduct.sku)
+    )
+      if (applicableRebates.length > 0) {
+        // console.log('applicableRebate', applicableRebates)
+        setApplicableRebate(applicableRebates)
+      } else {
+        console.log("No rebates found")
+      }
+
+      const isRebateValid = (rebate) => {
+        const currentDate = new Date();
+        const endDate = new Date(rebate.endDate)
+        return endDate >= currentDate;
+      }
+      
+      const validRebates = applicableRebates.filter(isRebateValid);
+      setValidRebates(validRebates)
   
       const wishlistItems = getFromLocalStorage("wishListItems") || [];
       const alreadyInWishlist = wishlistItems.some(
@@ -422,6 +446,34 @@ const handleAddToWishlist = () => {
             )}
           </section>
         </Element>
+        {validRebates.length > 0 && (
+  <Element name="promotions" className="section product_page">
+    <section className="product_category_part">
+      <ul className="list_card_items">
+      <h3>Rebates</h3>
+        {validRebates.map((rebate, index) => (
+          <li className="list_card_item" data-id={index + 1} key={rebate.idN}>
+            <Link
+              to={`/rebate/${rebate.idN}`}
+              onClick={() => HandleTrackRebates(rebate)}
+            >
+              <div className="rebate_container">
+                <img src={rebate.rebateImage} className="rebate_image" alt={`${rebate.brandText} - ${rebate.name}`} />
+                <div className="rebate_description">
+                  <span><img src={rebate.brandLogo} className="item_brand-logo" alt={`${rebate.brandText} Rebate`} /></span>
+                  <span className="rebate_header">{rebate.brandText} - {rebate.name}</span>
+                  <span className="rebate_date">{rebate.startDate.slice(0, 10)} - {rebate.endDate.slice(0, 10)}</span>
+                  <span>{rebate.description}</span>
+                </div>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </Element>
+)}
+
         <Element name="specifications" className="section product_page">
           <section className="product_category_part">
             <h3>Specifications</h3>
@@ -469,40 +521,7 @@ const handleAddToWishlist = () => {
           </section>
         </Element>
 
-        <Element name="promotions" className="section product_page">
-          <section className="product_category_part">
-            <ul className="product_rebates">
-              {product.description.options
-                ?.find((option) => option.option === "Rebates")
-                ?.meanings ? (
-                product.description.options
-                  .find((option) => option.option === "Rebates")
-                  .meanings.map((rebate, index) => (
-                    <li className="product_rebate" data-id={rebate.value} key={index}>
-                      <div className="rebate_description">
-                        <span className="rebate_images">
-                          <a href="">
-                            {/* <img src={logo3} alt="logo1" /> */}
-                          </a>
-                        </span>
-                        <a href="" className="rebate_title">
-                          <h5 className="rebate_title">{rebate.value}</h5>
-                          <p>{rebate.meaning}</p>
-                        </a>
-                        <div className="rebate_actions">
-                          <a href="">More</a>
-                        </div>
-                      </div>
-                    </li>
-                  ))
-              ) : (
-                <li>No rebates available.</li>
-              )}
-
-            </ul>
-
-          </section>
-        </Element>
+        
         <Element name="care-maintenance" className="section product_page">
           <section className="product_category_part">
             <h3>Care & Maintenance</h3>

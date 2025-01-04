@@ -41,6 +41,15 @@
 
     }
   }
+  &_section {
+    width: 100%;
+    &_element {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+    }
+}
 }
 
 .wishlist-icon {
