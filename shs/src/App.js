@@ -1,16 +1,15 @@
-import React, { useEffect} from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Provider, useSelector, useDispatch } from 'react-redux';
-import store from './store/stores/store';
-import { getFromLocalStorage } from './components/LocalStorage/getFromLocalStorage';
-import { getSessionNumber } from './components/Sessions/getSessionNumber';
-import {setSessionId} from "./store/actions/sessionActions";
-import {updateCustomer} from "./store/reducers/customerSlice";
-import {loadContent} from "./store/reducers/contentSlice";
-
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Provider, useSelector, useDispatch } from "react-redux";
+import store from "./store/stores/store";
+import { getFromLocalStorage } from "./components/LocalStorage/getFromLocalStorage";
+import { getSessionNumber } from "./components/Sessions/getSessionNumber";
+import { setSessionId } from "./store/actions/sessionActions";
+import { updateCustomer } from "./store/reducers/customerSlice";
+import { loadContent } from "./store/reducers/contentSlice";
 
 import ScrollToTop from "./components/ScrollToTop";
-import Layout from "./Layout"; 
+import Layout from "./Layout";
 import HomePage from "./components/HomePage/HomePage";
 import AboutUs from "./components/Pages/AboutUs";
 import ContactUs from "./components/Pages/ContactUs";
@@ -36,18 +35,19 @@ import ProductPage from "./components/ProductPage/ProductPage";
 import BrandPage from "./components/BrandPage/BrandPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import SearchPage from "./components/SearchPage/SearchPage";
-import CartComponent from './components/CartComponent/CartComponent';
+import CartComponent from "./components/CartComponent/CartComponent";
 import Rebates from "./components/Rebates/Rebates";
 import RebatePage from "./components/Rebates/RebatePage";
 import DashBoard from "../src/admin/DashBoard/DashBoard";
 
-import './App.scss';
+
+import "./App.scss";
 
 const App = () => {
   const dispatch = useDispatch();
   const sessionId = useSelector((state) => state.session.sessionId);
   const customer = useSelector((state) => state.customer.customer);
-  const content = useSelector((state) => state.content.pagesContent)
+  const content = useSelector((state) => state.content.pagesContent);
 
   useEffect(() => {
     dispatch(loadContent());
@@ -65,8 +65,8 @@ const App = () => {
     }
 
     if (!customer) {
-      const storedCustomer = getFromLocalStorage('customer');
-      
+      const storedCustomer = getFromLocalStorage("customer");
+
       if (!storedCustomer || storedCustomer.length === 0) {
         // console.log("Hello");  // Log for debugging purposes
       }
@@ -80,9 +80,7 @@ const App = () => {
     // console.log("useEffect triggered:", { sessionId, customer });
     // dispatch(addCustomer({ id: 1, name: 'John Doe' }));
     // console.log("Content", content)
-
   }, [content, sessionId, dispatch, customer]);
-
 
   return (
     <Router>
@@ -97,13 +95,19 @@ const App = () => {
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/warranty" element={<Warranty />} />
           <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
-          <Route path="/shipping-information" element={<ShippingInformation />} />
+          <Route
+            path="/shipping-information"
+            element={<ShippingInformation />}
+          />
           <Route path="/order-tracking" element={<OrderTracking />} />
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/loyalty-program" element={<LoyaltyProgram />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-up-professional" element={<SignUpProfessional />} />
+          <Route
+            path="/sign-up-professional"
+            element={<SignUpProfessional />}
+          />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/special-offers" element={<SpecialOffers />} />
           <Route path="/financing" element={<Financing />} />

@@ -6,14 +6,14 @@ import AddSlider_2 from "../../../assets/images/Slides/add-slider2.png";
 import AddSlider_3 from "../../../assets/images/Slides/add-slider3.png";
 import AddSlider_4 from "../../../assets/images/Slides/add-slider4.png";
 
-const Banner_1 = () => {
-  const images = [
-    { src: AddSlider_1, alt: "AddSlider 1" },
-    { src: AddSlider_2, alt: "AddSlider 2" },
-    { src: AddSlider_3, alt: "AddSlider 3" },
-    { src: AddSlider_4, alt: "AddSlider 4" },
-  ];
+const images = [
+  { src: AddSlider_1, alt: "AddSlider 1" },
+  { src: AddSlider_2, alt: "AddSlider 2" },
+  { src: AddSlider_3, alt: "AddSlider 3" },
+  { src: AddSlider_4, alt: "AddSlider 4" },
+];
 
+const Banner_1 = () => {
   return <Banner images={images} autoSlideInterval={5000} />;
 };
 

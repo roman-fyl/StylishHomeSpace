@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import "./Slider.scss";
 
-const Slider = ({ images, autoSlideInterval }) => {
+const Slider = ({ images, autoSlideInterval = 3000 }) => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = images.length;
 
@@ -42,7 +42,7 @@ const Slider = ({ images, autoSlideInterval }) => {
               key={index}
               className={`bar ${currentSlide === index + 1 ? "active" : ""}`}
               onClick={() => handleNavigation(index + 1)}
-            ></label>
+            />
           ))}
         </div>
       </div>
@@ -60,8 +60,5 @@ Slider.propTypes = {
   autoSlideInterval: PropTypes.number,
 };
 
-Slider.defaultProps = {
-  autoSlideInterval: 3000,
-};
 
 export default Slider;

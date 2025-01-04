@@ -1,85 +1,82 @@
-import React, {useEffect} from "react";
-import {Link} from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import ProfileMain from "./ProfileMain";
 import ProfileAddresses from "./ProfileAddresses";
-import ProfileAffiliateProgram from './ProfileAffiliateProgram';
+import ProfileAffiliateProgram from "./ProfileAffiliateProgram";
 import ProfileLastVisitedItems from "./ProfileLastVisitedItems";
 import ProfileLoyaltyPoints from "./ProfileLoyaltyPoints";
 import ProfileOrderHistory from "./ProfileOrderHistory";
 import ProfileReturns from "./ProfileReturns";
-import ProfileSubmittedTickets from './ProfileSubmittedTickets';
+import ProfileSubmittedTickets from "./ProfileSubmittedTickets";
 import ProfileWishlist from "./ProfileWishlist";
 
 import "./Profile.scss";
 
 const Profile = () => {
-    
-    useEffect(() => {
-        document.title = 'My Account';
-      }, []);
+  useEffect(() => {
+    document.title = "My Account";
+  }, []);
 
-return (
-    <div className="account_description"><h1>My Account</h1>
-   <div className="account_content">
-   
-     <ul className="account_quick_links">
-        <li className="account_quick_link">
-          <a href="#profile-info">Profile Information</a>
-        </li>
-        <li className="account_quick_link">
-          <a href="#profile-addresses">Address</a>
-        </li>
-        <li className="account_quick_link">
-          <a href="#profile-last-visited-items">Recently Viewed</a>
-        </li>
-        <li className="account_quick_link">
-          <a href="#profile-wishlist">Wishlist</a>
-        </li>
-        <li className="account_quick_link">
-          <a href="#profile-order-history">Order History</a>
-        </li>
-        <li className="account_quick_link">
-          <a href="/order-tracking">Check Order Status</a>
-        </li>
-        <li className="account_quick_link">
-          <a href="#profile-returns">Returns</a>
-        </li>
-        {/* <li className="account_quick_link">
+  return (
+    <div className="account_description">
+      <h1>My Account</h1>
+      <div className="account_content">
+        <ul className="account_quick_links">
+          <li className="account_quick_link">
+            <a href="#profile-info">Profile Information</a>
+          </li>
+          <li className="account_quick_link">
+            <a href="#profile-addresses">Address</a>
+          </li>
+          <li className="account_quick_link">
+            <a href="#profile-last-visited-items">Recently Viewed</a>
+          </li>
+          <li className="account_quick_link">
+            <a href="#profile-wishlist">Wishlist</a>
+          </li>
+          <li className="account_quick_link">
+            <a href="#profile-order-history">Order History</a>
+          </li>
+          <li className="account_quick_link">
+            <a href="/order-tracking">Check Order Status</a>
+          </li>
+          <li className="account_quick_link">
+            <a href="#profile-returns">Returns</a>
+          </li>
+          {/* <li className="account_quick_link">
           <a href="#profile-affiliate-program">Affiliate Program</a>
         </li> */}
-       
-        <li className="account_quick_link">
-          <a href="#profile-loyalty-points">Loyalty Points</a>
-        </li>
-      
-        {/* <li className="account_quick_link">
+
+          <li className="account_quick_link">
+            <a href="#profile-loyalty-points">Loyalty Points</a>
+          </li>
+
+          {/* <li className="account_quick_link">
           <a href="#profile-submitted-tickets">Submitted Tickets</a>
         </li> */}
-        <li className="account_quick_link">
-          <a href="#profile-submitted-tickets">Logout</a>
-        </li>
-            {/* <li className="account_quick_link">
+          <li className="account_quick_link">
+            <a href="#profile-submitted-tickets">Logout</a>
+          </li>
+          {/* <li className="account_quick_link">
           <a href="#profile-payments">Payments</a>
         </li> */}
-        
-      </ul>
-    <div className="account_content_main-block">
-        <ProfileMain />
-        <ProfileAddresses />
-        <ProfileLastVisitedItems />
-        <ProfileWishlist />
-        {/* <ProfilePayments /> */}
-        <ProfileOrderHistory />
-        <ProfileReturns />
-        {/* <ProfileAffiliateProgram /> */}
-        <ProfileLoyaltyPoints />
-        {/* <ProfileSubmittedTickets /> */}
+        </ul>
+        <div className="account_content_main-block">
+          <ProfileMain />
+          <ProfileAddresses />
+          <ProfileLastVisitedItems />
+          <ProfileWishlist />
+          {/* <ProfilePayments /> */}
+          <ProfileOrderHistory />
+          <ProfileReturns />
+          {/* <ProfileAffiliateProgram /> */}
+          <ProfileLoyaltyPoints />
+          {/* <ProfileSubmittedTickets /> */}
+        </div>
+      </div>
     </div>
-   </div>
-   
-    </div>
-)
-}
+  );
+};
 
 export default Profile;

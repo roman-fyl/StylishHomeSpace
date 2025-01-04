@@ -9,12 +9,18 @@ const ProfileAddresses = () => {
   const navigate = useNavigate();
   const sessionId = useSelector((state) => state.session.sessionId);
   const customer = useSelector((state) => state.customer.customer || []);
+  const customer_ZipAddress = useSelector((state) => state.location.zipCode);
+
   const firstCustomer = customer.find(value => value.firstName);
+
+  if(!firstCustomer) {
+    return null
+  }
+
   const customer_streetAddress = firstCustomer.address || "No data";
   const customer_unitAddress = firstCustomer.address || "No data";
   const customer_cityAddress = firstCustomer.address || "No data";
   const customer_StateAddress = firstCustomer.address || "No data";
-  const customer_ZipAddress = useSelector((state) => state.location.zipCode)
 
 
 
