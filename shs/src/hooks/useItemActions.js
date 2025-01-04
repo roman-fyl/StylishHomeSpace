@@ -1,6 +1,7 @@
   import { useDispatch, useSelector } from "react-redux";
   import { addVisitedItem } from "../store/actions/visitedActions";
   import { addWishListItem, removeFromWishList } from "../store/actions/wishListActions";
+  import { addLaterItem, setLaterItems, removeLaterItem } from "../store/actions/laterActions";
 
   import { getFromLocalStorage } from "../components/LocalStorage/getFromLocalStorage";
   import { setLocalStorage } from "../components/LocalStorage/setLocalStorage";
@@ -49,9 +50,34 @@
       setLocalStorage("wishListItems", updatedWishlist);
       return updatedWishlist;
     };
+
     const handleRemoveWishlistItem = () => {
       dispatch(removeFromWishList(item.sku));
     }
+
+    const handleAddLaterItem = (item) => {
+      if (!item || !item.sku) {
+        console.error("Invalid item passed to handleAddLaterItem:", item);
+        return;
+      }
+      dispatch(addLaterItem(item));
+      const updatedItems = getFromLocalStorage("laterItems") || [];
+      setLocalStorage("laterItems", [...updatedItems, item]);
+    };
+    
+    const handleRemoveLaterItem = (item) => {
+      if (!item || !item.sku) {
+        console.error("Invalid item passed to handleRemoveLaterItem:", item);
+        return;
+      }
+      dispatch(removeLaterItem(item.sku));
+      const updatedItems = getFromLocalStorage("laterItems") || [];
+      setLocalStorage(
+        "laterItems",
+        updatedItems.filter((laterItem) => laterItem.sku !== item.sku)
+      );
+    };
+    
     
 
     return {
@@ -59,6 +85,8 @@
       handleAddToWishlist,
       handleAddToCart,
       handleRemoveWishlistItem,
+      handleAddLaterItem,
+      handleRemoveLaterItem,
     };
   };
 

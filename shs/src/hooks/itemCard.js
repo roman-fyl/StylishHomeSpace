@@ -67,7 +67,7 @@ const ItemCard = ({ item }) => {
       <Link to={`/item/${item.sku}`} onClick={handleTrackItems}>
         <span className="item_image">
           <img
-            src={item.imageSlider[0]?.imageSliderLink}
+            src={item.imageSlider[0]?.imageSliderLink || item.imageSlider}
             alt={`${item.description.short || "product"}`}
           />
         </span>

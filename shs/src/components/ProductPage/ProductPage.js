@@ -450,6 +450,7 @@ const handleAddToWishlist = () => {
   <Element name="promotions" className="section product_page">
     <section className="product_category_part">
       <ul className="list_card_items">
+      <h3>Rebates</h3>
         {validRebates.map((rebate, index) => (
           <li className="list_card_item" data-id={index + 1} key={rebate.idN}>
             <Link

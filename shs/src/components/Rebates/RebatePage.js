@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ItemCard from "../../hooks/itemCard";
 import data from "../../assets/db/rebates.json";
@@ -41,11 +41,9 @@ const RebatePage = () => {
     <div className="container">
       <div className="rebate_content">
         <div className="brand-page_main-logo">
-          <img
-            src={rebate?.brandLogo}
-            className="item_brand-logo"
-            alt={`${rebate?.brandText} Rebate`}
-          />
+           <Link to={`/brand/${rebate?.brandText?.toLowerCase()}`}>
+                              <img src={rebate?.brandLogo} alt={`${rebate?.brandText} Rebate`} />
+                            </Link>
         </div>
         <h1 className="rebate_header">{rebate?.name}</h1>
         <span className="rebate_date">
