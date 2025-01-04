@@ -1,0 +1,228 @@
+@import "../../reset.scss";
+@import "../../vars.scss";
+
+.admin {
+  padding: 20px;
+  &_header {
+    font-weight: 700;
+  }
+  &_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex: 1 1 auto;
+  }
+  &_menu {
+    background-color: rgb(206, 206, 206);
+    li,
+    a {
+      padding: 10px;
+      &:hover {
+        background-color: rgb(242, 242, 242);
+        color: black;
+        cursor: $cursor;
+      }
+    }
+  }
+  &_content {
+    width: 90%;
+    min-height: 100vh;
+    padding: 20px;
+    li {
+      display: flex;
+      flex-direction: row;
+      padding: 5px;
+      span {
+        min-width: 150px;
+        padding: 5px;
+        
+      }
+      &:hover {
+        background-color: rgb(242, 242, 242);
+        cursor: $cursor;
+      }
+    }
+    form {
+      padding: 10px;
+      width: 100%;
+      border-radius: 2px;
+      font: $font-x-small;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+      label {
+        width: 500px;
+        margin: 5px 0;
+        font-weight: 700;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      input {
+        padding: 10px 5px;
+        width: 400px;
+        border: 1px solid gray;
+      }
+      select {
+        font: $font-x-small;
+        width: 180px;
+      }
+    }
+  }
+  &_analytics {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    li {
+      box-shadow: $box-shadow-hover;
+      width: 30%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  }
+  &_icons {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    transition: transform 0.3s ease;
+
+    img {
+      width: 20px;
+      margin-right: 15px;
+      height: auto;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+  &_form {
+    &_input {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      min-height: 300px;
+      box-shadow: $box-shadow;
+      padding: 10px 15px;
+      margin: 5px 50px 15px 5px;
+      h3 {
+        font-weight: 700;
+      }
+      input {
+        padding: 10px;
+        border-radius: 2px;
+        font: $font-x-small;
+        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+        label {
+          width: 300px;
+          margin: 5px 0;
+          font-weight: 700;
+        }
+      }
+      .cart_button {
+        width: 100px;
+      }
+      input {
+        padding: 10px 5px;
+        width: 100%;
+        border: 1px solid gray;
+      }
+      ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+    &_container {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+  &_sliders {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 50px;
+    position: relative;
+    margin: 20px 0;
+    border: 1px solid gray !important;
+    padding: 10px;
+  }
+  &_slider {
+    display: flex;
+    margin: 10px 0;
+    span {
+      margin-right: 30px !important;
+    }
+    input {
+      margin-left: 20px !important;
+    }
+  }
+  &_checkbox {
+    &_group {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      input {
+        width: 100px !important;
+      }
+      label {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start !important;
+      }
+    }
+  }
+  &_textarea {
+    width: 100%;
+    border: 1px solid gray !important;
+    min-height: 100px;
+    margin-left: 50px;
+  }
+  &_features {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 50px;
+    position: relative;
+    margin: 20px 0;
+    border: 1px solid gray !important;
+    padding: 10px;
+    
+    &_section {
+        display: flex;
+        flex-direction: row;
+        margin: 0 10px 10px 0px;
+        column-gap: 10px;
+    }
+    &_title {
+        margin: 0 10px;
+        input {
+            margin: 0 10px;
+        }
+        
+    }
+    &_button {
+        padding: 15px !important;
+        width: 200px;
+    }
+  }
+  &_rebate {
+    &_items {
+      display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: space-between;
+          align-content: flex-start;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin: 10px 0;
+          width: 100%;
+    }
+  }
+}

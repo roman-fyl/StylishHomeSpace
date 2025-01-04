@@ -1,0 +1,919 @@
+[
+    {
+      "SignUpPage_benefits": {
+        "title": "Sign-Up Benefits",
+        "details": [
+          {
+            "heading": "Access Exclusive Trade Discounts",
+            "description": "Enjoy special trade discounts and pricing available only to account holders, helping you save more on your purchases."
+          },
+          {
+            "heading": "Access and Manage Your Personal Details",
+            "description": "Easily update and manage your personal information and addresses all in one place, making your account management seamless and straightforward."
+          },
+          {
+            "heading": "Order History and Fast Tracking",
+            "description": "Quickly view your complete order history and track the status of your orders with ease, ensuring you stay informed about your purchases."
+          },
+          {
+            "heading": "Loyalty Rewards",
+            "description": "Earn rewards points with each purchase and keep track of your accumulated points, which can be redeemed for discounts, special offers, or exclusive benefits."
+          },
+          {
+            "heading": "Personalized Offers",
+            "description": "Receive tailored offers and promotions based on your shopping preferences and history, ensuring you get deals that matter to you."
+          }
+        ]
+      }
+    },
+    {
+      "SignUpPage_benefitsPoints": {
+        "title": "Points Calculation",
+        "categories": [
+          {
+            "heading": "Main Categories",
+            "description": "Spend $10 = 1 point"
+          },
+          {
+            "heading": "Accessories",
+            "description": "Spend $10 = 1.5 points"
+          },
+          {
+            "heading": "Services",
+            "description": "Spend $10 = 2 points"
+          },
+          {
+            "heading": "Main Categories + Accessories + Services",
+            "description": "(Earned) * 5%"
+          }
+        ]
+      }
+    },
+    {
+      "faq_contentPage": {
+        "title": "",
+        "categories": [
+          {
+            "heading": "Access Exclusive Trade Discounts",
+            "description": "Enjoy special trade discounts and pricing available only to account holders, helping you save more on your purchases."
+          },
+          {
+            "heading": "Access and Manage Your Personal Details",
+            "description": "Easily update and manage your personal information and addresses all in one place, making your account management seamless and straightforward."
+          },
+          {
+            "heading": "Order History and Fast Tracking",
+            "description": "Quickly view your complete order history and track the status of your orders with ease, ensuring you stay informed about your purchases."
+          },
+          {
+            "heading": "Loyalty Rewards",
+            "description": "Earn rewards points with each purchase and keep track of your accumulated points, which can be redeemed for discounts, special offers, or exclusive benefits."
+          },
+          {
+            "heading": "Personalized Offers",
+            "description": "Receive tailored offers and promotions based on your shopping preferences and history, ensuring you get deals that matter to you."
+          },
+          {
+            "heading": "Quality Assurance",
+            "description": "We offer only high-quality, top-rated brands to ensure durability and performance."
+          },
+          {
+            "heading": "Competitive Pricing",
+            "description": "Get the best value for your money with our competitive pricing and exclusive deals."
+          },
+          {
+            "heading": "Free Shipping Available",
+            "description": "Enjoy free shipping on all +$499 orders within the contiguous United States."
+          },
+          {
+            "heading": "Wide Selection",
+            "description": "Choose from a vast range of home appliances and stylish home solutions."
+          },
+          {
+            "heading": "Expert Advice",
+            "description": "Our knowledgeable staff provides expert advice to help you make the best choices."
+          },
+          {
+            "heading": "Customer-Centric Service",
+            "description": "We prioritize your satisfaction with responsive and friendly customer service."
+          },
+          {
+            "heading": "Flexible Financing",
+            "description": "Take advantage of flexible financing options to make your purchase more affordable."
+          },
+          {
+            "heading": "Hassle-Free Returns",
+            "description": "Easy return process with minimal hassle if you need to return a product."
+          },
+          {
+            "heading": "Extended Warranties",
+            "description": "Purchase extended warranties for added peace of mind and protection."
+          },
+          {
+            "heading": "Latest Models",
+            "description": "Access to the latest models and innovations in home appliances."
+          },
+          {
+            "heading": "Detailed Product Information",
+            "description": "Comprehensive product descriptions, specifications, and reviews to aid in your decision-making."
+          },
+          {
+            "heading": "Installation Support",
+            "description": "Assistance with coordinating professional installation services if needed."
+          },
+          {
+            "heading": "User-Friendly Website",
+            "description": "Easy-to-navigate website for a seamless shopping experience."
+          },
+          {
+            "heading": "Trusted Brands",
+            "description": "We carry only trusted and reputable brands in the industry."
+          },
+          {
+            "heading": "Customer Reviews",
+            "description": "Transparent customer reviews and ratings to help you make informed decisions."
+          },
+          {
+            "heading": "Personalized Recommendations",
+            "description": "Tailored product recommendations based on your preferences and needs."
+          },
+          {
+            "heading": "Special Promotions",
+            "description": "Exclusive promotions and discounts available for our customers."
+          },
+          {
+            "heading": "Secure Shopping",
+            "description": "Safe and secure online shopping environment with robust data protection."
+          },
+          {
+            "heading": "Responsive Support",
+            "description": "Prompt and helpful customer support via phone, email, and live chat."
+          },
+          {
+            "heading": "Expert Installation Advice",
+            "description": "Guidance on choosing the right installation services and professionals."
+          },
+          {
+            "heading": "Eco-Friendly Options",
+            "description": "Environmentally friendly products and energy-efficient appliances."
+          },
+          {
+            "heading": "Fast Processing",
+            "description": "Quick order processing and shipping to get your products to you as soon as possible."
+          },
+          {
+            "heading": "Transparent Policies",
+            "description": "Clear and fair return, exchange, and warranty policies."
+          },
+          {
+            "heading": "Customer Satisfaction Guarantee",
+            "description": "We are committed to ensuring your satisfaction with every purchase."
+          },
+          {
+            "heading": "Exclusive Deals",
+            "description": "Access to special deals and early access to sales events."
+          },
+          {
+            "heading": "Comprehensive Warranty",
+            "description": "Full manufacturer’s warranty included on all products."
+          },
+          {
+            "heading": "Educational Resources",
+            "description": "Access to guides, FAQs, and tips to help you use and maintain your appliances."
+          },
+          {
+            "heading": "Professional Recommendations",
+            "description": "Advice from industry professionals to help you choose the right products."
+          },
+          {
+            "heading": "Easy Reordering",
+            "description": "Simple reordering process for repeat purchases."
+          },
+          {
+            "heading": "Custom Solutions",
+            "description": "Customized solutions to meet your specific home needs and preferences."
+          },
+          {
+            "heading": "Local Expertise",
+            "description": "Knowledgeable staff familiar with local home trends and needs."
+          },
+          {
+            "heading": "Customer Loyalty Programs",
+            "description": "Rewards and incentives for repeat customers."
+          },
+          {
+            "heading": "Detailed Comparisons",
+            "description": "Side-by-side product comparisons to help you find the best fit."
+          },
+          {
+            "heading": "High Customer Retention",
+            "description": "Many satisfied customers who return for future purchases."
+          },
+          {
+            "heading": "Exclusive Brands",
+            "description": "Access to exclusive brands and products not available elsewhere."
+          },
+          {
+            "heading": "Advanced Technology",
+            "description": "Cutting-edge technology in all our appliances and home solutions."
+          },
+          {
+            "heading": "Product Availability",
+            "description": "Reliable availability of in-demand products."
+          },
+          {
+            "heading": "Responsive Feedback",
+            "description": "Actively listens to and incorporates customer feedback to improve our services."
+          },
+          {
+            "heading": "Flexible Delivery Options",
+            "description": "Various delivery options to suit your schedule and needs."
+          },
+          {
+            "heading": "Regular Updates",
+            "description": "Stay informed with regular updates on new products and promotions."
+          },
+          {
+            "heading": "Community Involvement",
+            "description": "Active involvement in local community events and initiatives."
+          },
+          {
+            "heading": "Streamlined Processes",
+            "description": "Efficient and streamlined purchasing and delivery processes."
+          },
+          {
+            "heading": "Customer Education",
+            "description": "Opportunities for learning more about product usage and maintenance."
+          },
+          {
+            "heading": "After-Sales Support",
+            "description": "Ongoing support and assistance after your purchase."
+          },
+          {
+            "heading": "Innovative Solutions",
+            "description": "Offering innovative solutions for modern home needs."
+          },
+          {
+            "heading": "Product Testing",
+            "description": "Rigorous product testing to ensure quality and performance."
+          },
+          {
+            "heading": "Easy Access to Information",
+            "description": "All the information you need at your fingertips, from product details to support."
+          },
+          {
+            "heading": "Positive Reputation",
+            "description": "Strong reputation for reliability and customer satisfaction in the industry."
+          }
+        ]
+      }
+    },
+    {
+      "faq_AccountManagementPage": {
+        "title": "Account Management FAQ",
+        "categories": [
+          {
+            "heading": "How do I create an account?",
+            "description": "To create an account, click on the 'Sign Up' or 'Create Account' button typically found in the top right corner of the homepage. Fill in your email address, create a password, and provide the required personal information. Once submitted, you’ll receive a confirmation email to verify your account."
+          },
+          {
+            "heading": "How do I reset my password?",
+            "description": "To reset your password, click on the 'Forgot Password' link on the login page. Enter your registered email address, and you'll receive a password reset link. Click the link and follow the instructions to create a new password."
+          },
+          {
+            "heading": "Can I change my email address on my account?",
+            "description": "Yes, you can change your email address in the account settings section. After logging in, go to 'My Account' or 'Profile' and update your email address. You may need to verify the new email before the change is complete."
+          },
+          {
+            "heading": "How do I update my personal information?",
+            "description": "To update your personal information, log in to your account and navigate to the 'My Account' or 'Profile' section. Here, you can update your name, address, phone number, and other personal details."
+          },
+          {
+            "heading": "How do I subscribe/unsubscribe to the newsletter?",
+            "description": "You can manage your newsletter preferences in your account settings. If you're subscribed, you'll see an option to unsubscribe. If you want to subscribe, enter your email in the subscription box usually found at the bottom of the homepage or during checkout."
+          },
+          {
+            "heading": "How can I delete my account?",
+            "description": "To delete your account, contact customer support with your request. Some sites may also offer an option in the account settings to permanently delete your account."
+          },
+          {
+            "heading": "How can I view my order history?",
+            "description": "Your order history can be viewed in the 'My Orders' or 'Order History' section of your account dashboard. Here you can see details of all your past orders."
+          },
+          {
+            "heading": "What should I do if I forget my username or password?",
+            "description": "If you forget your username, try using your email address to log in. If you forget your password, click on the 'Forgot Password' link on the login page and follow the instructions to reset it."
+          },
+          {
+            "heading": "How can I manage my saved addresses?",
+            "description": "You can manage your saved addresses in the 'Address Book' or 'Shipping Addresses' section of your account. Here, you can add new addresses, update existing ones, or delete those you no longer need."
+          },
+          {
+            "heading": "How do I add a new payment method to my account?",
+            "description": "To add a new payment method, go to the 'Payment Methods' section of your account settings. Here, you can add a credit/debit card, PayPal account, or other payment options."
+          },
+          {
+            "heading": "How do I change my account password?",
+            "description": "To change your password, log in and go to the 'Account Settings' or 'Profile' section. Select 'Change Password,' enter your current password, and then your new password. Save the changes."
+          },
+          {
+            "heading": "What should I do if my account is locked or suspended?",
+            "description": "If your account is locked or suspended, contact customer support for assistance. They will guide you through the process of unlocking your account or provide information on why it was suspended."
+          },
+          {
+            "heading": "How do I manage my payment methods?",
+            "description": "You can manage your payment methods in the 'Payment Methods' section of your account. Here, you can add, edit, or remove credit/debit cards and other payment options."
+          },
+          {
+            "heading": "Can I link my social media accounts to my store account?",
+            "description": "Yes, many stores allow you to link your social media accounts, like Facebook or Google, for easier login. This option is usually available in the 'Account Settings' section."
+          },
+          {
+            "heading": "How do I log out of my account?",
+            "description": "To log out, click on your account name or icon at the top of the page and select 'Log Out' from the dropdown menu."
+          },
+          {
+            "heading": "Can I have multiple accounts with the same email address?",
+            "description": "No, typically each email address is associated with one account. If you try to create a new account with an email already in use, you'll be prompted to log in instead."
+          },
+          {
+            "heading": "How do I update my email preferences?",
+            "description": "You can update your email preferences in the 'Account Settings' or 'Communication Preferences' section. Here, you can choose which types of emails you'd like to receive or opt-out of certain communications."
+          },
+          {
+            "heading": "How can I close my account?",
+            "description": "To close your account, contact customer support with your request. They may ask for verification before closing the account."
+          },
+          {
+            "heading": "Can I merge two accounts into one?",
+            "description": "Most stores do not allow account merging. However, you can contact customer support to see if they can assist you with transferring information from one account to another."
+          }
+        ]
+      }
+    },
+    {
+      "faq_CustomerSupportPage": {
+        "title": "Customer Support FAQ",
+        "categories": [
+          {
+            "heading": "How can I contact customer support?",
+            "description": "You can contact customer support via phone, email, or live chat. The contact details are usually available on our 'Contact Us' page."
+          },
+          {
+            "heading": "What are your customer support hours?",
+            "description": "Our customer support hours are typically listed on the 'Contact Us' page. We offer support during business hours and may also provide 24/7 assistance for urgent issues."
+          },
+          {
+            "heading": "How do I report an issue with my order?",
+            "description": "To report an issue, log in to your account, find the relevant order, and select the 'Report Issue' or 'Contact Support' option. Provide details about the issue, and our team will assist you."
+          },
+          {
+            "heading": "Can I speak with a manager or escalate my issue?",
+            "description": "If you need to escalate an issue, request to speak with a manager when contacting customer support. They will assist you with resolving the matter."
+          },
+          {
+            "heading": "How can I provide feedback on my shopping experience?",
+            "description": "You can provide feedback through surveys, product reviews, or by contacting customer support directly. We value your input and use it to improve our services."
+          },
+          {
+            "heading": "Do you offer live chat support?",
+            "description": "Yes, we offer live chat support. You can access it by clicking the chat icon on our website during business hours."
+          },
+          {
+            "heading": "How can I track my support ticket or inquiry?",
+            "description": "After contacting support, you’ll receive a confirmation with a ticket number. You can track your inquiry by referencing this number when you follow up."
+          },
+          {
+            "heading": "What languages do you offer customer support in?",
+            "description": "We offer customer support in multiple languages. The available languages depend on your location and will be indicated on our 'Contact Us' page."
+          },
+          {
+            "heading": "How can I resolve an issue if I’m not satisfied with customer support?",
+            "description": "If you're not satisfied with the resolution provided by customer support, you can escalate the issue by requesting a higher level of assistance or providing feedback through our survey process."
+          },
+          {
+            "heading": "Can I leave a review for customer support?",
+            "description": "Yes, you may be prompted to leave a review or feedback after your interaction with customer support. This helps us improve our services."
+          }
+        ]
+      }
+    },
+    {
+      "faq_OrdersSupportPage": {
+        "title": "Order FAQ",
+        "categories": [
+          {
+            "heading": "How do I place an order?",
+            "description": "To place an order, browse the products on the website, select the items you want, and add them to your cart. Once you're ready, proceed to checkout, fill in your shipping and payment details, and confirm the order."
+          },
+          {
+            "heading": "Can I change my order after it’s been placed?",
+            "description": "Once an order is placed, it might not be possible to make changes. Contact customer support as soon as possible to see if they can assist with modifications."
+          },
+          {
+            "heading": "How can I track my order?",
+            "description": "You can track your order by logging into your account and navigating to the 'My Orders' section. You'll find tracking information for each order there, or you may receive tracking details via email."
+          },
+          {
+            "heading": "What should I do if I receive a damaged or incorrect item?",
+            "description": "If you receive a damaged or incorrect item, contact customer support immediately. Provide them with your order number and photos of the damaged or incorrect item, and they’ll assist you with a replacement or refund."
+          },
+          {
+            "heading": "How do I cancel my order?",
+            "description": "To cancel your order, go to the 'My Orders' section in your account and check if cancellation is still possible. If the order has not yet been processed or shipped, you can cancel it. Otherwise, you may need to return the item once you receive it."
+          },
+          {
+            "heading": "Can I place an order over the phone?",
+            "description": "Yes, some stores offer the option to place an order over the phone. Check the store’s contact details for their phone order service."
+          },
+          {
+            "heading": "Why was my order canceled?",
+            "description": "Orders can be canceled for various reasons, such as payment issues, out-of-stock items, or address verification problems. You’ll typically receive an email explaining why your order was canceled."
+          },
+          {
+            "heading": "Can I place an order as a guest?",
+            "description": "Yes, most eCommerce stores allow you to place an order as a guest without creating an account. However, creating an account can make future purchases faster and easier."
+          },
+          {
+            "heading": "How do I use a promo code or discount during checkout?",
+            "description": "During checkout, you’ll see a field labeled 'Promo Code' or 'Discount Code.' Enter your code there and click 'Apply' to see the discount reflected in your order total."
+          },
+          {
+            "heading": "What payment methods do you accept?",
+            "description": "We accept various payment methods, including credit/debit cards, PayPal, and store-specific gift cards."
+          }
+        ]
+      }
+    },
+    {
+      "faq_PaymentsBillingSupportPage": {
+        "title": "Payment FAQ",
+        "categories": [
+          {
+            "heading": "How can I update my payment information?",
+            "description": "You can update your payment information in the 'Payment Methods' section of your account settings. Here, you can add, edit, or remove credit/debit cards and other payment options."
+          },
+          {
+            "heading": "Why was my payment declined?",
+            "description": "Payment declines can happen for various reasons, such as incorrect card information, insufficient funds, or issues with your bank. Contact your bank or payment provider for more details."
+          },
+          {
+            "heading": "Can I split my payment between multiple payment methods?",
+            "description": "Some stores allow you to split payments between different methods, such as a credit card and a gift card. This option is typically available during checkout."
+          },
+          {
+            "heading": "How do I apply store credit or a gift card to my order?",
+            "description": "During checkout, there will be a field where you can enter your gift card code or apply store credit. The amount will be deducted from your total order cost."
+          },
+          {
+            "heading": "Will I be charged sales tax?",
+            "description": "Sales tax is calculated based on your shipping address and applicable local laws. The tax amount will be displayed during checkout before you complete your purchase."
+          },
+          {
+            "heading": "How can I view my billing history?",
+            "description": "Your billing history is available in the 'My Orders' or 'Billing' section of your account. Here, you can view past transactions and download invoices."
+          },
+          {
+            "heading": "Do you offer financing or payment plans?",
+            "description": "Some stores partner with financing services like Afterpay, Klarna, or PayPal Credit to offer payment plans. If available, you can choose this option during checkout."
+          },
+          {
+            "heading": "What currencies do you accept?",
+            "description": "We accept payments in various currencies depending on your location. The available currencies will be shown during checkout."
+          },
+          {
+            "heading": "How do I get a copy of my receipt or invoice?",
+            "description": "You can download a copy of your receipt or invoice from the 'My Orders' section of your account. It’s also typically emailed to you after the purchase."
+          },
+          {
+            "heading": "Can I get a refund if the price drops after my purchase?",
+            "description": "Price adjustment policies vary by store. Contact customer support to see if you’re eligible for a refund or store credit if the price drops shortly after your purchase."
+          }
+        ]
+      }
+    },
+    {
+      "faq_ProductsInventorySupportPage": {
+        "title": "Product FAQ",
+        "categories": [
+          {
+            "heading": "How do I find specific products on your website?",
+            "description": "Use the search bar at the top of the page to enter keywords, product names, or item numbers. You can also browse by category or use filters to narrow down your search."
+          },
+          {
+            "heading": "What should I do if a product is out of stock?",
+            "description": "If a product is out of stock, you can sign up for restock notifications or check back later. Some stores also offer the option to pre-order or place a backorder."
+          },
+          {
+            "heading": "How can I check if a product is available in-store?",
+            "description": "If we have physical store locations, you can check product availability in-store by using the store locator feature on our website or contacting the store directly."
+          },
+          {
+            "heading": "Do you offer product warranties?",
+            "description": "Yes, many products come with a manufacturer’s warranty. Warranty details are usually listed on the product page or included with the item upon purchase."
+          },
+          {
+            "heading": "How do I know if a product is authentic?",
+            "description": "We guarantee the authenticity of all products sold on our website. If you have concerns, contact customer support for more information."
+          },
+          {
+            "heading": "What should I do if I have a question about a product?",
+            "description": "If you have a question, check the product description, specifications, and customer reviews on the product page. You can also contact customer support for more information."
+          },
+          {
+            "heading": "Can I request a product that’s not listed on your website?",
+            "description": "You can suggest products by contacting customer support. While we can’t guarantee availability, we value customer input for expanding our inventory."
+          },
+          {
+            "heading": "How do I find sizing information?",
+            "description": "Sizing information is available on the product page under the 'Size Guide' or 'Size Chart' section. Make sure to check the guide before making a purchase to ensure the best fit."
+          },
+          {
+            "heading": "What is your policy on discontinued products?",
+            "description": "If a product is discontinued, it will no longer be available for purchase. We recommend checking for similar items on our website."
+          },
+          {
+            "heading": "How do I search for products by brand?",
+            "description": "You can search for products by brand using the search bar or by navigating to the 'Brands' section of our website. This will display all products available from that specific brand."
+          }
+        ]
+      }
+    },
+    {
+      "faq_PromotionsDiscountsSupportPage": {
+        "title": "Promotions & Discounts FAQ",
+        "categories": [
+          {
+            "heading": "How do I find out about current promotions?",
+            "description": "Current promotions are usually displayed on the homepage, in the 'Promotions' section, or announced through our newsletter. Sign up to stay informed about the latest deals."
+          },
+          {
+            "heading": "Can I use multiple promo codes on one order?",
+            "description": "Typically, only one promo code can be applied per order. Check the promotion's terms and conditions for details on usage."
+          },
+          {
+            "heading": "What should I do if my promo code isn’t working?",
+            "description": "If your promo code isn’t working, check the code for errors, ensure it hasn’t expired, and confirm it applies to the items in your cart. If you still have trouble, contact customer support."
+          },
+          {
+            "heading": "Do you offer a loyalty program?",
+            "description": "Yes, we offer a loyalty program where you can earn points for purchases, referrals, and other activities. Points can be redeemed for discounts on future orders."
+          },
+          {
+            "heading": "How do I earn and redeem loyalty points?",
+            "description": "You can earn loyalty points by making purchases, writing reviews, and other activities. Redeem points at checkout for discounts on your order."
+          },
+          {
+            "heading": "Do you offer student, military, or senior discounts?",
+            "description": "Yes, we offer special discounts for students, military personnel, and seniors. Verify your status through our partner platforms or contact customer support for more information."
+          },
+          {
+            "heading": "How can I find out if a product is on sale?",
+            "description": "Sale items are usually marked with a discount badge on the product page. You can also browse the 'Sale' section on our website to find discounted products."
+          },
+          {
+            "heading": "Are there any exclusions to your promotions?",
+            "description": "Promotions may have exclusions, such as specific brands or product categories. Check the terms and conditions of each promotion for details."
+          },
+          {
+            "heading": "How do I sign up for exclusive member discounts?",
+            "description": "To receive exclusive member discounts, create an account on our website and opt-in to receive promotional emails during registration."
+          },
+          {
+            "heading": "Do you price match with other retailers?",
+            "description": "We may offer price matching with other retailers. Contact customer support with details about the lower price to see if you qualify for a match."
+          }
+        ]
+      }
+    },
+    {
+      "faq_ReturnsRefundsSupportPage": {
+        "title": "Return & Refund Policy FAQ",
+        "categories": [
+          {
+            "heading": "What is your return policy?",
+            "description": "Our return policy typically allows returns within 30 days of purchase, provided the item is in its original condition and packaging. Some restrictions may apply, so check the policy details on our website."
+          },
+          {
+            "heading": "How do I initiate a return?",
+            "description": "To initiate a return, log in to your account and go to the 'My Orders' section. Select the order you want to return and follow the prompts to generate a return label and instructions."
+          },
+          {
+            "heading": "How long does it take to process a refund?",
+            "description": "Refunds are usually processed within 5-10 business days after we receive and inspect your returned item. The time may vary depending on your payment method."
+          },
+          {
+            "heading": "Can I exchange an item instead of returning it?",
+            "description": "Yes, exchanges are often available. Follow the return process and select the exchange option if it's offered, or contact customer support for assistance."
+          },
+          {
+            "heading": "What should I do if I received a defective item?",
+            "description": "If you receive a defective item, contact customer support immediately. Provide your order number and details about the defect, and we’ll assist you with a replacement or refund."
+          },
+          {
+            "heading": "Who pays for return shipping?",
+            "description": "Return shipping costs may be the responsibility of the customer unless the return is due to a defective or incorrect item. Some stores offer free returns, so check our return policy."
+          },
+          {
+            "heading": "Can I return an item to a physical store?",
+            "description": "If we have physical store locations, you may be able to return items in-store. Check our return policy or contact customer support for details."
+          },
+          {
+            "heading": "How will I be refunded?",
+            "description": "Refunds are typically issued to the original payment method used for the purchase. If you paid with a gift card, the refund may be credited back to the gift card."
+          },
+          {
+            "heading": "What items are non-returnable?",
+            "description": "Non-returnable items typically include perishable goods, personalized products, and final sale items. Check our return policy for a full list of exclusions."
+          },
+          {
+            "heading": "How do I return a gift?",
+            "description": "To return a gift, contact customer support with the order number or details of the gift. We may offer a gift receipt or store credit as a refund option."
+          }
+        ]
+      }
+    },
+    {
+      "faq_SecurityPrivacySupportPage": {
+        "title": "Privacy & Security FAQ",
+        "categories": [
+          {
+            "heading": "How do you protect my personal information?",
+            "description": "We use advanced encryption and security protocols to protect your personal information. Our privacy policy details how we handle and safeguard your data."
+          },
+          {
+            "heading": "What should I do if I suspect fraudulent activity on my account?",
+            "description": "If you suspect fraudulent activity, change your password immediately and contact customer support. We’ll help secure your account and investigate the issue."
+          },
+          {
+            "heading": "How do I update my privacy settings?",
+            "description": "You can update your privacy settings in the 'Account Settings' section. Here, you can manage data sharing, marketing preferences, and other privacy-related options."
+          },
+          {
+            "heading": "What is your policy on cookies and tracking?",
+            "description": "We use cookies and tracking technologies to enhance your shopping experience. You can manage your cookie preferences in your browser settings or through our website’s cookie policy."
+          },
+          {
+            "heading": "How do I opt out of marketing emails?",
+            "description": "To opt out of marketing emails, click the 'Unsubscribe' link at the bottom of any promotional email or update your preferences in the 'Account Settings' section."
+          },
+          {
+            "heading": "Can I delete my account?",
+            "description": "Yes, you can request account deletion by contacting customer support. Please note that deleting your account is permanent and cannot be undone."
+          },
+          {
+            "heading": "How do you handle my payment information?",
+            "description": "We do not store your full payment details. Payments are processed securely through our payment gateway partners, and your information is encrypted during the transaction."
+          },
+          {
+            "heading": "What are my rights under GDPR or CCPA?",
+            "description": "Under GDPR or CCPA, you have the right to access, correct, or delete your personal data. You can also request information on how your data is used. Contact customer support for assistance."
+          },
+          {
+            "heading": "How do I verify my identity for account-related requests?",
+            "description": "To verify your identity, we may ask for additional information or documentation when making account-related requests, such as password resets or account deletions."
+          },
+          {
+            "heading": "What is your data retention policy?",
+            "description": "We retain your data only as long as necessary for legal, business, or customer service purposes. You can request data deletion by contacting customer support."
+          }
+        ]
+      }
+    },
+    {
+      "faq_ShippingDeliverySupportPage": {
+        "title": "Shipping & Delivery FAQ",
+        "categories": [
+          {
+            "heading": "What are your shipping options?",
+            "description": "We offer several shipping options, including standard, expedited, and overnight shipping. The available options and costs will be displayed during checkout."
+          },
+          {
+            "heading": "How long does shipping take?",
+            "description": "Shipping times vary based on the method selected and your location. Standard shipping typically takes 3-7 business days, while expedited options are faster."
+          },
+          {
+            "heading": "Do you offer international shipping?",
+            "description": "Yes, we ship to many countries worldwide. International shipping options and costs will be available during checkout."
+          },
+          {
+            "heading": "How can I qualify for free shipping?",
+            "description": "Free shipping is often available for orders that meet a minimum purchase threshold. Check our promotions page or during checkout for details on qualifying for free shipping."
+          },
+          {
+            "heading": "Can I ship my order to a P.O. Box or APO/FPO address?",
+            "description": "Yes, we can ship to P.O. Boxes and APO/FPO addresses. However, some restrictions may apply depending on the shipping carrier."
+          },
+          {
+            "heading": "What should I do if my package is delayed?",
+            "description": "If your package is delayed, check the tracking information for updates. If the delay exceeds the expected delivery window, contact customer support for assistance."
+          },
+          {
+            "heading": "How can I change my shipping address after placing an order?",
+            "description": "Changing a shipping address after an order is placed may not be possible if the order has already been processed. Contact customer support immediately to see if they can update the address."
+          },
+          {
+            "heading": "Do you offer in-store pickup?",
+            "description": "Yes, if we have physical store locations, you may have the option to pick up your order in-store. Select 'In-Store Pickup' during checkout if available."
+          },
+          {
+            "heading": "What should I do if my package is lost?",
+            "description": "If your package is marked as delivered but you haven't received it, check with your neighbors or building management first. If you still can't find it, contact customer support for help with locating the package or initiating a replacement."
+          },
+          {
+            "heading": "Can I schedule a specific delivery date?",
+            "description": "While most standard shipping does not allow scheduling a specific delivery date, some carriers offer this option. Check during checkout or with customer support for availability."
+          }
+        ]
+      }
+    },
+    {
+      "faq_TechnicalIssuesSupportPage": {
+        "title": "Website Troubleshooting FAQ",
+        "categories": [
+          {
+            "heading": "What should I do if I forget my password?",
+            "description": "Click the 'Forgot Password' link on the login page. Enter your email address, and we’ll send you instructions to reset your password."
+          },
+          {
+            "heading": "How do I update my browser to ensure the website works properly?",
+            "description": "Update your browser by visiting the official website of your browser provider (e.g., Chrome, Firefox, Safari) and following the update instructions."
+          },
+          {
+            "heading": "Why am I having trouble viewing certain pages on your website?",
+            "description": "Issues with viewing pages can be due to outdated browsers, slow internet connections, or cache problems. Try clearing your cache, updating your browser, or contacting customer support."
+          },
+          {
+            "heading": "How do I enable cookies in my browser?",
+            "description": "Enable cookies in your browser settings. This option is usually found under 'Privacy' or 'Security' settings. Cookies must be enabled to use all features on our website."
+          },
+          {
+            "heading": "Can I shop on your website using a VPN?",
+            "description": "Yes, you can shop using a VPN, but some features might be restricted due to security protocols. If you encounter issues, try disabling your VPN or contacting customer support."
+          },
+          {
+            "heading": "What should I do if the website is down?",
+            "description": "If our website is down, please wait a few minutes and try again. If the issue persists, check our social media channels for updates or contact customer support."
+          },
+          {
+            "heading": "How do I clear my browser cache?",
+            "description": "To clear your browser cache, go to your browser’s settings or preferences, find the 'Clear Browsing Data' option, and select 'Cached Images and Files.' Then, click 'Clear Data.'"
+          },
+          {
+            "heading": "Why can’t I log in to my account?",
+            "description": "Login issues can occur due to incorrect credentials, browser issues, or account-related problems. Try resetting your password, clearing your browser cache, or contacting customer support."
+          },
+          {
+            "heading": "How do I disable ad blockers to view content on your website?",
+            "description": "To disable ad blockers, access the settings in your ad blocker extension or browser. Whitelist our website or temporarily disable the ad blocker to view content."
+          },
+          {
+            "heading": "What should I do if I receive an error message during checkout?",
+            "description": "If you receive an error message during checkout, try refreshing the page, using a different payment method, or contacting customer support for assistance."
+          }
+        ]
+      }
+    },
+    {
+      "faq_WebsiteNavigationSupportPage": {
+        "title": "Website Features & Support",
+        "categories": [
+          {
+            "heading": "How do I search for products on your website?",
+            "description": "Use the search bar at the top of the page to enter keywords, product names, or item numbers. You can also browse categories and use filters to refine your search results."
+          },
+          {
+            "heading": "What browsers are supported on your website?",
+            "description": "Our website supports the latest versions of major browsers, including Chrome, Firefox, Safari, and Edge. Ensure your browser is updated for the best experience."
+          },
+          {
+            "heading": "How do I create a wishlist?",
+            "description": "To create a wishlist, log in to your account and click on the 'Wishlist' icon or button on product pages. You can add, remove, or share items from your wishlist."
+          },
+          {
+            "heading": "Can I compare products on your website?",
+            "description": "Yes, many eCommerce websites offer a product comparison feature. Use the 'Compare' button on product pages to view and compare specifications side by side."
+          },
+          {
+            "heading": "How do I change the currency or language on the website?",
+            "description": "Currency and language options are typically available in the footer or top right corner of the website. Select your preferred currency or language from the dropdown menu."
+          },
+          {
+            "heading": "How do I subscribe to your newsletter?",
+            "description": "To subscribe to our newsletter, enter your email address in the subscription box located in the website’s footer or during account registration."
+          },
+          {
+            "heading": "What should I do if the website is not loading properly?",
+            "description": "If the website is not loading properly, try refreshing the page, clearing your browser cache, or using a different browser. If the issue persists, contact customer support."
+          },
+          {
+            "heading": "How do I update my account information on the website?",
+            "description": "Log in to your account and go to the 'Account Settings' section. Here, you can update your personal information, address, and payment details."
+          },
+          {
+            "heading": "How do I report a bug or issue on the website?",
+            "description": "If you encounter a bug or issue, contact customer support with details about the problem. Provide screenshots if possible to help us resolve the issue quickly."
+          },
+          {
+            "heading": "Can I view your website on my mobile device?",
+            "description": "Yes, our website is mobile-friendly and can be accessed on smartphones and tablets. You can browse products, place orders, and manage your account on the go."
+          }
+        ]
+      }
+    },
+    {
+      "ReturnExchangePolicy": {
+        "title": "Return/Exchange Policy",
+        "categories": [
+          {
+            "heading": "Return/Exchange Window",
+            "description": "Standard: Must be reported within 14 days of the delivery date. No Returns/Exchanges: _."
+          },
+          {
+            "heading": "Restocking Fee",
+            "description": "A minimum 5% restocking fee applies to all returns and exchanges. Refer to the brand-specific restocking fees listed below."
+          },
+          {
+            "heading": "Cancellation or Refusal",
+            "description": "If you cancel or refuse an order after it has shipped, a restocking fee will be charged."
+          },
+          {
+            "heading": "Incorrect Shipping Information",
+            "description": "If incorrect address or phone number leads to delivery failure, you will be responsible for the restocking fee."
+          },
+          {
+            "heading": "Product Condition",
+            "description": "Only uninstalled, unused products in original packaging (including box and pallet) are eligible for returns and exchanges. No returns/exchanges for products without original packaging or that have been used/installed."
+          },
+          {
+            "heading": "Restocking Fees by Brand",
+            "description": "ZLINE, Thor Kitchen, Kucht, Fotile, KubeBath: 15%"
+          },
+          {
+            "heading": "Non-Returnable/Non-Exchangeable Products",
+            "description": "Modified products. Products not in resalable condition. Products without an Order Number. Products without original packaging. Installed, used, or plugged-in items. Accessories (e.g., range hood extensions, trim kits, filters). Air conditioners, special order merchandise, and commercial laundry equipment."
+          }
+        ]
+      },
+      "InspectionUponDelivery": {
+        "title": "Inspection Upon Delivery",
+        "categories": [
+          {
+            "heading": "Check Your Product",
+            "description": "Inspect your product thoroughly before signing for delivery. Look for both internal and external damage."
+          },
+          {
+            "heading": "Report Damage Immediately",
+            "description": "If you notice damage, refuse the delivery, take photos, and notify the delivery driver. Contact us at (111) 123 4567 or email support@stylishhomespace.com immediately. If you discover damage after delivery, report it within 24 hours."
+          }
+        ]
+      },
+      "DefectiveMerchandise": {
+        "title": "Defective Merchandise",
+        "categories": [
+          {
+            "heading": "Immediate Defects",
+            "description": "Report defective products within 24 hours of receipt. For defects found after 24 hours, contact the product’s manufacturer directly for service. Manufacturer contact info is in the product literature."
+          },
+          {
+            "heading": "Warranty Requirements",
+            "description": "Most products include a one-year parts and labor warranty. Some manufacturers may require a service call to diagnose issues before authorizing returns/replacements."
+          }
+        ]
+      },
+      "WarrantyInformation": {
+        "title": "Warranty Information",
+        "categories": [
+          {
+            "heading": "Warranty Voidance",
+            "description": "Warranty is void if a residential appliance is installed in a commercial location or taken outside the continental United States. SHS follows manufacturer warranties and policies."
+          }
+        ]
+      },
+      "ReturnAuthorizationRefunds": {
+        "title": "Return Authorization & Refunds",
+        "categories": [
+          {
+            "heading": "Return Authorization (RA)",
+            "description": "Contact customer service to receive an RA number for returns. Returns without an RA will not be accepted."
+          },
+          {
+            "heading": "Shipping Costs",
+            "description": "Shipping and handling charges to and from the warehouse are non-refundable. Returns must be shipped back prepaid using the original method of shipment."
+          },
+          {
+            "heading": "Refunds",
+            "description": "Refunds to the original payment method will be issued within 90 days. After 90 days, store credit will be provided. Refunds are processed after inspection and approval of returned/exchanged products."
+          },
+          {
+            "heading": "Important Notes",
+            "description": "Returns must be in brand-new condition with all packaging, product literature, and blank warranty cards enclosed. Items moved from their original delivery location cannot be returned. Contact the manufacturer for missing or damaged parts that are covered under warranty. SHS reserves the right to refuse returns for any reason."
+          }
+        ]
+      }
+    }
+    
+    
+
+  ]
+  

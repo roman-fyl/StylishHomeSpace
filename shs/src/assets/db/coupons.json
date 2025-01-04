@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "code": "SAVE10",
+    "discountAmount": 10,
+    "isPercentage": false,
+    "minOrderValue": 500,
+    "expiryDate": "2024-12-31",
+    "applicableCategories": ["Electronics", "Home Appliances"]
+  },
+  {
+    "id": 2,
+    "code": "SAVE20",
+    "discountAmount": 20,
+    "isPercentage": true,
+    "minOrderValue": 1500,
+    "expiryDate": "2024-12-31",
+    "applicableCategories": ["Electronics", "Home Appliances"]
+  }
+]
