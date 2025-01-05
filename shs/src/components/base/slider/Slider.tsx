@@ -1,11 +1,23 @@
-
-import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
+import { useState, useEffect, FC } from "react";
+import { Link } from "react-router-dom";
 
 import "./Slider.scss";
 
-const Slider = ({ images, autoSlideInterval = 3000 }) => {
+interface SliderImageProps {
+  src: string;
+  alt: string;
+  link?: string | null;
+}
+
+export interface SliderProps {
+  images: SliderImageProps[];
+  autoSlideInterval?: number;
+}
+
+export const Slider: FC<SliderProps> = ({
+  images,
+  autoSlideInterval = 3000,
+}) => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = images.length;
 
@@ -17,12 +29,12 @@ const Slider = ({ images, autoSlideInterval = 3000 }) => {
     return () => clearInterval(interval);
   }, [autoSlideInterval, totalSlides]);
 
-  const handleNavigation = (slideNumber) => {
+  const handleNavigation = (slideNumber: number) => {
     setCurrentSlide(slideNumber);
   };
 
   return (
-      <div className="slider_main">
+    <div className="slider_main">
       <div className="slider_content">
         <div className="slides">
           {images.map((image, index) => (
@@ -30,7 +42,7 @@ const Slider = ({ images, autoSlideInterval = 3000 }) => {
               key={index}
               className={`slide ${currentSlide === index + 1 ? "active" : ""}`}
             >
-              <Link to={image.link}>
+              <Link to={image?.link || ""}>
                 <img src={image.src} alt={image.alt} />
               </Link>
             </div>
@@ -49,16 +61,3 @@ const Slider = ({ images, autoSlideInterval = 3000 }) => {
     </div>
   );
 };
-
-Slider.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  autoSlideInterval: PropTypes.number,
-};
-
-
-export default Slider;

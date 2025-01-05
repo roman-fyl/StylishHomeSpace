@@ -1,0 +1,19 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint","json"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "react/react-in-jsx-scope": "off"
+    },
+    
+    "overrides": [
+      {
+        "files": ["*.json"],
+        "parser": "eslint-plugin-json"
+      }
+    ]
+  }

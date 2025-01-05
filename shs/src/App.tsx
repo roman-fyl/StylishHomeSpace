@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Provider, useSelector, useDispatch } from "react-redux";
-import store from "./store/stores/store";
+
 import { getFromLocalStorage } from "./components/LocalStorage/getFromLocalStorage";
 import { getSessionNumber } from "./components/Sessions/getSessionNumber";
 import { setSessionId } from "./store/actions/sessionActions";
 import { updateCustomer } from "./store/reducers/customerSlice";
 import { loadContent } from "./store/reducers/contentSlice";
 
-import ScrollToTop from "./components/ScrollToTop";
 import Layout from "./Layout";
 import HomePage from "./components/HomePage/HomePage";
 import AboutUs from "./components/Pages/AboutUs";
@@ -38,16 +37,18 @@ import SearchPage from "./components/SearchPage/SearchPage";
 import CartComponent from "./components/CartComponent/CartComponent";
 import Rebates from "./components/Rebates/Rebates";
 import RebatePage from "./components/Rebates/RebatePage";
-import DashBoard from "../src/admin/DashBoard/DashBoard";
-
+import DashBoard from "./admin/DashBoard/DashBoard";
 
 import "./App.scss";
+import { store } from "store";
+import { ScrollToTop } from "components/base";
 
-const App = () => {
+
+const App: FC = () => {
   const dispatch = useDispatch();
-  const sessionId = useSelector((state) => state.session.sessionId);
-  const customer = useSelector((state) => state.customer.customer);
-  const content = useSelector((state) => state.content.pagesContent);
+  const sessionId = useSelector((state: any) => state.session.sessionId);
+  const customer = useSelector((state: any) => state.customer.customer);
+  const content = useSelector((state: any) => state.content.pagesContent);
 
   useEffect(() => {
     dispatch(loadContent());
@@ -88,40 +89,43 @@ const App = () => {
       <Layout>
         <Routes>
           <Route path="/dashboard/*" element={<DashBoard />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-conditions" element={<TermsConditions />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/faqs" element={<FAQs />} />
-          <Route path="/warranty" element={<Warranty />} />
-          <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
-          <Route
-            path="/shipping-information"
-            element={<ShippingInformation />}
-          />
-          <Route path="/order-tracking" element={<OrderTracking />} />
-          <Route path="/my-account" element={<MyAccount />} />
-          <Route path="/loyalty-program" element={<LoyaltyProgram />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route
-            path="/sign-up-professional"
-            element={<SignUpProfessional />}
-          />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/special-offers" element={<SpecialOffers />} />
-          <Route path="/financing" element={<Financing />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/payment-options" element={<PaymentOptions />} />
-          <Route path="/why-buy-from-us" element={<WhyBuyFromUs />} />
-          <Route path="/success" element={<ThankYouPage />} />
           <Route path="/item/:skuText" element={<ProductPage />} />
           <Route path="/category/:categoryName" element={<CategoryPage />} />
           <Route path="/rebate/:idN" element={<RebatePage />} />
           <Route path="/brand/:brandName" element={<BrandPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/cart" element={<CartComponent />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/order-tracking" element={<OrderTracking />} />
+          <Route path="/my-account" element={<MyAccount />} />
+          <Route path="/loyalty-program" element={<LoyaltyProgram />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/special-offers" element={<SpecialOffers />} />
+          <Route path="/success" element={<ThankYouPage />} />
+
+          <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
+          <Route path="/warranty" element={<Warranty />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/financing" element={<Financing />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/payment-options" element={<PaymentOptions />} />
+          <Route path="/why-buy-from-us" element={<WhyBuyFromUs />} />
           <Route path="/rebates" element={<Rebates />} />
+
+          <Route
+            path="/sign-up-professional"
+            element={<SignUpProfessional />}
+          />
+
+          <Route
+            path="/shipping-information"
+            element={<ShippingInformation />}
+          />
         </Routes>
       </Layout>
     </Router>

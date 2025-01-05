@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import data from "../../assets/db/items.json";
 
@@ -7,12 +7,12 @@ import ItemSection from "../ItemSection/ItemSection";
 
 import "./CategoryPage.scss";
 
-function getFeaturesProducts(products) {
+function getFeaturesProducts(products: any[]): any[] {
   const featuresSet = new Set(
     products
       .flatMap((product) => product.description?.options || [])
       .filter((option) => option.option === "Features")
-      .flatMap((option) => option.meanings.map((feature) => feature.value))
+      .flatMap((option) => option.meanings.map((feature: any) => feature.value))
   );
 
   return [...featuresSet];
@@ -35,8 +35,8 @@ function getFeaturesProducts(products) {
 //   return groupedArray;
 // }
 
-function getGroupedProducts(products) {
-  return products.reduce((acc, product) => {
+function getGroupedProducts(products: any):Record<string, string[]> {
+  return products.reduce((acc: any[], product: any) => {
     if (!acc[product.subCategory]) {
       acc[product.subCategory] = [];
     }
@@ -47,7 +47,18 @@ function getGroupedProducts(products) {
   }, {});
 }
 
-const CategoryPage = ({
+export interface CategoryPageProps {
+  group?: string | null;
+  subject?: string | null;
+  brand?: string | null;
+  category?: string | null;
+  smartFeatures?: string | null;
+  subCategory?: string | null;
+  subType?: string | null;
+  color?: string | null;
+}
+
+const CategoryPage: FC<CategoryPageProps> = ({
   group = null,
   subject = null,
   brand = null,
@@ -58,12 +69,16 @@ const CategoryPage = ({
   color = null,
 }) => {
   const { categoryName } = useParams();
-  const [products, setProducts] = useState([]);
-  const [error, setError] = useState(null);
-  const [uniqueFeatures, setUniqueFeatures] = useState([]);
-  const [groupedProducts, setGroupedProducts] = useState({});
+  const [products, setProducts] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [uniqueFeatures, setUniqueFeatures] = useState<any[]>([]);
+  const [groupedProducts, setGroupedProducts] = useState<Record<string, any>>(
+    {}
+  );
 
-  const generateQueryParams = (additionalParams = {}) => {
+  const generateQueryParams = (
+    additionalParams = {} as Record<string, unknown>
+  ) => {
     const params = new URLSearchParams();
 
     if (group) params.set("groups", group);
@@ -74,19 +89,23 @@ const CategoryPage = ({
     if (subType) params.set("subTypes", subType);
     if (color) params.set("colors", color);
 
-    Object.keys(additionalParams).forEach((key) => {
-      if (additionalParams[key]) {
-        params.set(key, additionalParams[key]);
-      }
-    });
+    const keys = Object.keys(additionalParams);
+
+    if (keys.length) {
+      keys.forEach((key: string) => {
+        const itemValue = additionalParams[key] as string;
+        if (itemValue) {
+          params.set(key, itemValue);
+        }
+      });
+    }
 
     console.log(params);
     return params.toString();
   };
 
   useEffect(() => {
-
-    document.title = categoryName.toUpperCase();
+    document.title = `${categoryName}`?.toUpperCase();
 
     if (Array.isArray(data)) {
       const filteredProducts = data.filter(
@@ -94,8 +113,8 @@ const CategoryPage = ({
           product?.category?.toLowerCase() === `${categoryName}`.toLowerCase()
       );
       if (filteredProducts.length) {
-        setProducts(filteredProducts);
-        setUniqueFeatures(getFeaturesProducts(filteredProducts));
+        setProducts(filteredProducts as any);
+        setUniqueFeatures(getFeaturesProducts(filteredProducts) as any[]);
         setGroupedProducts(getGroupedProducts(filteredProducts));
       } else {
         setError("No products found for this category.");
@@ -279,18 +298,20 @@ const CategoryPage = ({
                 >
                   {subCategory}
                   <ul>
-                    {groupedProducts[subCategory].map((subType, idx) => (
-                      <li key={idx}>
-                        <Link
-                          to={`/search?${generateQueryParams({
-                            subCategories: subCategory,
-                            subTypes: subType,
-                          })}`}
-                        >
-                          {subType}
-                        </Link>
-                      </li>
-                    ))}
+                    {groupedProducts[subCategory].map(
+                      (subType: any, idx: number) => (
+                        <li key={idx}>
+                          <Link
+                            to={`/search?${generateQueryParams({
+                              subCategories: subCategory,
+                              subTypes: subType,
+                            })}`}
+                          >
+                            {subType}
+                          </Link>
+                        </li>
+                      )
+                    )}
                   </ul>
                 </Link>
               </li>

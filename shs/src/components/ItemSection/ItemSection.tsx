@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import { useState, FC } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ItemCard from "../../hooks/itemCard";
-import "./ItemSection.scss";
 import data from "../../assets/db/items.json";
 
-const ItemSection = ({
+import "./ItemSection.scss";
+
+export interface ItemSectionProps {
+  group?: string | null;
+  subject?: string | null;
+  brand?: string | null;
+  category?: string | null;
+  smartfeatures?: string | null;
+  subCategory?: string | null;
+  subType?: string | null;
+  viewbutton?: boolean;
+}
+
+const ItemSection: FC<ItemSectionProps> = ({
   group = null,
   subject = null,
   brand = null,
@@ -16,10 +28,9 @@ const ItemSection = ({
   viewbutton = false,
 }) => {
   const [displayedItemCount, setDisplayedItemCount] = useState(6);
-  const sessionId = useSelector((state) => state.session.sessionId);
+  const sessionId = useSelector((state: any) => state.session.sessionId);
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   let filteredData = [...data];
 
@@ -42,16 +53,15 @@ const ItemSection = ({
   }
 
   if (category) {
-    filteredData = filteredData.filter((item) => item.category?.toLowerCase() === category.toLowerCase());
+    filteredData = filteredData.filter(
+      (item) => item.category?.toLowerCase() === category.toLowerCase()
+    );
   }
 
-  const handleClick = (event) => {
-    const group = event.target.dataset.group;
-    const category = event.target.dataset.category;
-    const brand = event.target.dataset.brand;
-    const smartFeatures = event.target.dataset.smartFeatures;
-    const subCategory = event.target.dataset.subcategory;
-    const subType = event.target.dataset.subtype;
+  const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
+    const target = event.target as HTMLSpanElement;
+    const { group, category, brand, smartFeatures, subCategory, subType } =
+      target.dataset;
 
     const params = new URLSearchParams();
 
