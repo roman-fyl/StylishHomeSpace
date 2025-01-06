@@ -1,12 +1,12 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import DashBoardLayout from './DashBoardLayout';
-import ProductsManagement from './ProductsManagement';
-import DashBoardHome from './DashBoardHome';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import DashBoardLayout from "./DashBoardLayout";
+import ProductsManagement from "./ProductsManagement";
+import DashBoardHome from "./DashBoardHome";
 import EditItem from "./EditItem";
 import EditRebate from "./EditRebate";
 
-import RebatesManagement from './RebatesManagement';
+import RebatesManagement from "./RebatesManagement";
 import "./DashBoard.scss";
 
 const DashBoard = () => {

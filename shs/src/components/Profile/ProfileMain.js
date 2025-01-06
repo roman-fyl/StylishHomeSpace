@@ -7,7 +7,12 @@ const ProfileMain = () => {
 
   const sessionId = useSelector((state) => state.session.sessionId);
   const customer = useSelector((state) => state.customer.customer || []);
-  const firstCustomer = customer.find(value => value.firstName)
+  const firstCustomer = customer.find(value => value.firstName);
+
+
+  if(!firstCustomer) {
+    return null
+  }
   const customer_firstName = firstCustomer.firstName || "No data";
   const customer_lastName = firstCustomer.lastName || "No data";
   const customer_email = firstCustomer.email || "No data";

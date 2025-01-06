@@ -10,8 +10,13 @@ const ProfileOrderHistory = () => {
   const sessionId = useSelector((state) => state.session.sessionId);
   const customer = useSelector((state) => state.customer.customer || []);
   const firstCustomer = customer.find(value => value.firstName);
-  const customer_streetAddress = firstCustomer.address || "No data";
   const [orderHistory, setOrderHistory] = useState(null)
+
+  if(!firstCustomer) {
+    return null
+  }
+  const customer_streetAddress = firstCustomer.address || "No data";
+ 
 
 
   return (
