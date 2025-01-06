@@ -35,7 +35,7 @@ const ItemSection: FC<ItemSectionProps> = ({
   let filteredData = [...data];
 
   // Extract query parameters from the URL if not explicitly passed as props
-  const queryParams = new URLSearchParams(location.search);
+  const queryParams = new URLSearchParams(location?.search);
   const urlCategory = queryParams.get("category");
   const urlGroup = queryParams.get("group");
   const urlBrand = queryParams.get("brand");
@@ -54,7 +54,7 @@ const ItemSection: FC<ItemSectionProps> = ({
 
   if (category) {
     filteredData = filteredData.filter(
-      (item) => item.category?.toLowerCase() === category.toLowerCase()
+      (item) => item?.category?.toLowerCase() === `${category}`.toLowerCase()
     );
   }
 
