@@ -18,7 +18,6 @@ import LoyaltyProgram from "./components/Pages/LoyaltyProgram";
 import MyAccount from "./components/Pages/MyAccount";
 import OrderTracking from "./components/Pages/OrderTracking";
 import PaymentOptions from "./components/Pages/PaymentOptions";
-import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import ReturnsExchanges from "./components/Pages/ReturnsExchanges";
 import Services from "./components/Pages/Services";
 import ShippingInformation from "./components/Pages/ShippingInformation";
@@ -42,7 +41,8 @@ import DashBoard from "./admin/DashBoard/DashBoard";
 import "./App.scss";
 import { store } from "store";
 import { ScrollToTop } from "components/base";
-
+import { PrivacyPolicy } from "components/Pages";
+import { AppRoutes } from "routes";
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -104,13 +104,13 @@ const App: FC = () => {
           <Route path="/special-offers" element={<SpecialOffers />} />
           <Route path="/success" element={<ThankYouPage />} />
 
-          <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
+          {/* <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
           <Route path="/warranty" element={<Warranty />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/faqs" element={<FAQs />} /> */}
           <Route path="/financing" element={<Financing />} />
           <Route path="/services" element={<Services />} />
           <Route path="/payment-options" element={<PaymentOptions />} />
@@ -126,6 +126,8 @@ const App: FC = () => {
             path="/shipping-information"
             element={<ShippingInformation />}
           />
+
+          <Route path="*" element={<AppRoutes />} />
         </Routes>
       </Layout>
     </Router>
