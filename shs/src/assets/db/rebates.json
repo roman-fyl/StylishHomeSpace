@@ -40,7 +40,7 @@
     "rebateMainImage": "../db/rebatesbanners/frigidaire-professional-bmsm-upto1000.png",
     "rebateFile": "../db/rebatesfiles/FP_RebateForm_BMSM_7.111-10.16.pdf",
     "startDate": "2024-01-01T00:00:00Z",
-    "endDate": "2025-01-01T00:00:00Z",
+    "endDate": "2025-11-01T00:00:00Z",
     "items": [
       "X2dj1",
       "X2dj11",
@@ -70,7 +70,7 @@
     "rebateMainImage": "",
     "rebateFile": "../db/rebatesfiles/FisherPaykel_KitchenApplianceRebateUpTo15.pdf",
     "startDate": "2024-01-01T00:00:00Z",
-    "endDate": "2025-01-01T00:00:00Z",
+    "endDate": "2025-12-01T00:00:00Z",
     "items": [
       "X2dj20",
       "X2dj21",
